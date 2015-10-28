@@ -12,8 +12,8 @@ Router.configure({
   // the data it's expecting is present
   waitOn: function() {
     return [
-      Meteor.subscribe('publicLists'),
-      Meteor.subscribe('privateLists')
+      Meteor.subscribe('lists/public'),
+      Meteor.subscribe('lists/private')
     ];
   }
 });
@@ -44,6 +44,8 @@ Router.route('listsShow', {
       // Handle for launch screen defined in app-body.js
       dataReadyHold.release();
     }
+
+    this.next();
   },
   data: function () {
     return Lists.findOne(this.params._id);
