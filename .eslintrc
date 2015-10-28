@@ -1,0 +1,18 @@
+/* Galaxy's Javascript linting configuration (Meteor)
+ *
+ * Documentation on rules can be found at:
+ * http://eslint.org/docs/rules/ <- Optionally append the rulename
+ *
+*/
+
+{
+  "extends": [".eslintrc-meteor"],
+  "env": {},
+  "rules": {
+
+/**
+  * App Specific Overrides
+  */
+
+  }
+}
