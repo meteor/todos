@@ -7,7 +7,15 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   // TODO: remove session, iron-router?
-  api.use(['ecmascript', 'templating', 'less', 'underscore', 'session', 'launch-screen', 'iron:router@1.0.12']);
+  api.use([
+    'ecmascript',
+    'templating',
+    'less',
+    'underscore',
+    'session',
+    'launch-screen',
+    'iron:router@1.0.12'
+  ]);
   api.addFiles([
     'todos-item.html',
     'todos-item.js',
@@ -21,8 +29,18 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('ecmascript');
-  api.use('tinytest');
-  api.use('lists-show');
+  api.use([
+    'ecmascript',
+    'lists-show',
+    'practicalmeteor:mocha@2.1.0_5',
+    'factory',
+    'stub-collections',
+    'todos',
+    'lists',
+    'underscore',
+    'templating',
+    'tracker',
+    'jquery'
+  ]);
   api.addFiles('lists-show-tests.js', 'client');
 });

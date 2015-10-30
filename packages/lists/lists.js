@@ -1,5 +1,5 @@
 /* global Lists:true */
-/* global SimpleSchema */
+/* global SimpleSchema Factory faker */
 
 Lists = new Mongo.Collection('lists');
 
@@ -17,7 +17,7 @@ Lists.schema = new SimpleSchema({
       return nextName;
     }
   },
-
+  incompleteCount: {type: Number}
 });
 
 Lists.attachSchema(Lists.schema);
@@ -35,3 +35,8 @@ if (Meteor.isServer) {
     return Lists.find({userId: this.userId});
   });
 }
+
+Factory.define('list', Lists, {
+  name: () => faker.lorem.sentence(),
+  incompleteCount: 0
+});
