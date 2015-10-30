@@ -14,13 +14,17 @@ Package.onUse(function(api) {
     'underscore',
     'session',
     'launch-screen',
-    'iron:router@1.0.12'
+    'iron:router@1.0.12',
+    'lists',
+    'todos'
   ]);
   api.addFiles([
     'todos-item.html',
     'todos-item.js',
     'lists-show.html',
     'lists-show.js',
+    'lists-show-page.html',
+    'lists-show-page.js',
     'lists-show.import.less'
   ], 'client');
 

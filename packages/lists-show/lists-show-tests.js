@@ -1,8 +1,11 @@
+/* eslint-env mocha */
+/* global Todos Lists Factory chai */
+
 // This is just copied from iron:layout. There's probably a package that does this
 const StubCollections = Package['stub-collections'] && Package['stub-collections'].StubCollections;
 
-var withDiv = function (callback) {
-  var el = document.createElement('div');
+const withDiv = function(callback) {
+  const el = document.createElement('div');
   document.body.appendChild(el);
   try {
     callback(el);
@@ -11,8 +14,8 @@ var withDiv = function (callback) {
   }
 };
 
-var withRenderedTemplate = function (template, data, callback) {
-  withDiv(function (el) {
+const withRenderedTemplate = function(template, data, callback) {
+  withDiv((el) => {
     template = _.isString(template) ? Template[template] : template;
     Blaze.renderWithData(template, data, el);
     Deps.flush();
@@ -22,7 +25,7 @@ var withRenderedTemplate = function (template, data, callback) {
 
 describe('todosItem', () => {
   beforeEach(() => {
-    StubCollections.stub(Todos, Lists);
+    StubCollections.stub([Todos, Lists]);
   });
 
   afterEach(() => {
@@ -32,28 +35,35 @@ describe('todosItem', () => {
   it('renders correctly with simple data', () => {
     const todo = Factory.create('todo');
     withRenderedTemplate('todosItem', todo, el => {
-      console.log(el);
       chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
     });
   });
 });
 
-// describe('listsShow', () => {
-//   beforeEach(() => {
-//     StubCollections.stub(Todos, Lists);
-//   });
+describe('listsShow', () => {
+  beforeEach(() => {
+    StubCollections.stub([Todos, Lists]);
+  });
 
-//   afterEach(() => {
-//     StubCollections.restore();
-//   });
+  afterEach(() => {
+    StubCollections.restore();
+  });
 
-//   it('renders correctly with simple data', () => {
-//     const list = Factory.create('list');
-//     const todos = _.times(3, () => Factory.create('todo', {listId: list._id}));
+  it('renders correctly with simple data', () => {
+    const list = Factory.create('list');
+    const todos = _.times(3, () => Factory.create('todo', {listId: list._id}));
 
-//     withRenderedTemplate('listsShow', list, el => {
-//       console.log(el);
-//       chai.assert.equal($(el).text(), 'foo');
-//     });
-//   });
-// });
+    const data = {
+      list,
+      todosReady: true
+    };
+
+    withRenderedTemplate('listsShow', data, el => {
+      const todosText = todos.map(t => t.text);
+      const renderedText = $(el).find('.list-items input[type=text]')
+        .map((i, e) => $(e).val())
+        .toArray();
+      chai.assert.deepEqual(renderedText, todosText.reverse());
+    });
+  });
+});
