@@ -1,37 +1,25 @@
-Router.configure({
-  // we use the  appBody template to define the layout for the entire app
-  layoutTemplate: 'appBody',
+/* global FlowRouter BlazeLayout */
 
-  // the appNotFound template is used for unknown routes and missing lists
-  notFoundTemplate: 'appNotFound',
+FlowRouter.route('/join', {action: () => {
+  BlazeLayout.render('appBody', {main: 'join'});
+}});
 
-  // show the appLoading template whilst the subscriptions below load their data
-  loadingTemplate: 'appLoading',
+FlowRouter.route('/signin', {action: () => {
+  BlazeLayout.render('appBody', {main: 'signin'});
+}});
 
-  // wait on the following subscriptions before rendering the page to ensure
-  // the data it's expecting is present
-  waitOn: function() {
-    return [
-      Meteor.subscribe('lists/public'),
-      Meteor.subscribe('lists/private')
-    ];
+FlowRouter.route('/lists/:_id', {action: () => {
+  BlazeLayout.render('appBody', {main: 'listsShowPage'});
+}});
+
+FlowRouter.route('/', {action: () => {
+  // TODO: use an "appRedirector template"
+  FlowRouter.go('listsShow', Lists.findOne());
+}});
+
+// the appNotFound template is used for unknown routes and missing lists
+FlowRouter.notFound = {
+  action() {
+    BlazeLayout.render('appBody', {main: 'appNotFound'});
   }
-});
-
-if (Meteor.isClient) {
-  // Show the loading screen on desktop
-  Router.onBeforeAction('loading', {except: ['join', 'signin']});
-  Router.onBeforeAction('dataNotFound', {except: ['join', 'signin']});
-}
-
-Router.route('join');
-Router.route('signin');
-
-Router.route('listsShowPage', {path: '/lists/:_id'});
-
-Router.route('home', {
-  path: '/',
-  action: function() {
-    Router.go('listsShow', Lists.findOne());
-  }
-});
+};

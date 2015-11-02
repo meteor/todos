@@ -56,9 +56,14 @@
     <div class="content-overlay"></div>
 
     <div id="content-container">
-      {{#each thisArray}}
-        {{> yield}}
-      {{/each}}
+      {{! todo -- resolve p->p transition issue this was solving}}
+      {{! #each thisArray}}
+
+      {{#if Template.subscriptionsReady}}
+        {{> Template.dynamic template=main}}
+      {{else}}
+        {{> appLoading}}
+      {{/if}}
     </div>
   </div>
 </template>

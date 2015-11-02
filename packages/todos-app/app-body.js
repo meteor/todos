@@ -32,6 +32,11 @@ Meteor.startup(function () {
   }, CONNECTION_ISSUE_TIMEOUT);
 });
 
+Template.appBody.onCreated(function() {
+  this.subscribe('lists/public');
+  this.subscribe('lists/private');
+});
+
 Template.appBody.onRendered(function() {
   this.find('#content-container')._uihooks = {
     insertElement: function(node, next) {

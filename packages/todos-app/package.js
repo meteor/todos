@@ -8,7 +8,15 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   // For now, switch to FR in a sec
   // TODO: remove session
-  api.use(['ecmascript', 'templating', 'less', 'iron:router@1.0.12', 'session', 'launch-screen']);
+  api.use([
+    'ecmascript',
+    'templating',
+    'less',
+    'kadira:flow-router@2.7.0',
+    'kadira:blaze-layout@2.2.0',
+    'session',
+    'launch-screen'
+  ]);
   api.addFiles([
     'head.html',
     'loading.html',
