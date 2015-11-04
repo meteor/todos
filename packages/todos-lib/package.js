@@ -20,6 +20,7 @@ Package.onUse(function(api) {
     'aldeed:collection2@2.5.0',
     'factory',
     'reactive-dict',
-    'underscore'
+    'underscore',
+    'touchwipe',
   ]);
 });
