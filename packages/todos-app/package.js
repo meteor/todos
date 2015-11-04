@@ -9,18 +9,10 @@ Package.onUse(function(api) {
   // For now, switch to FR in a sec
   // TODO: remove session
   api.use([
-    'ecmascript',
-    'templating',
-    'less',
-    'kadira:flow-router@2.7.0',
-    'kadira:blaze-layout@2.2.0',
-    'session',
-    'launch-screen',
-    'arillo:flow-router-helpers@0.4.5',
-    'zimme:active-route@2.3.0',
-    'lists',
-    'reactive-dict'
+    'todos-lib',
+    'lists'
   ]);
+
   api.addFiles([
     'head.html',
     'loading.html',
