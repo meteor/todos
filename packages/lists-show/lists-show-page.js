@@ -18,6 +18,8 @@ Template.listsShowPage.onCreated(function() {
   }
 
   // XXX: FR
+  // XXX as I understand, we don't want this to be reactive because we might
+  // want to animate between pages?
   this.listId = FlowRouter.getParam('_id');
   this.subscribe('todos', this.listId);
 
@@ -31,7 +33,7 @@ Template.listsShowPage.onCreated(function() {
 
 Template.listsShowPage.helpers({
   list: function() {
-    const template = Template.instance();
-    return Lists.findOne(template.listId);
+    const instance = Template.instance();
+    return Lists.findOne(instance.listId);
   }
 });

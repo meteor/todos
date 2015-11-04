@@ -7,7 +7,7 @@ Lists.schema = new SimpleSchema({
   name: {
     type: String,
     // Calculate a default name for a list in the form of 'List A'
-    autoValue: () => {
+    autoValue() {
       let nextLetter = 'A', nextName = `List ${nextLetter}`;
       while (Lists.findOne({name: nextName})) {
         // not going to be too smart here, can go past Z
@@ -23,11 +23,11 @@ Lists.schema = new SimpleSchema({
 Lists.attachSchema(Lists.schema);
 
 if (Meteor.isServer) {
-  Meteor.publish('lists/public', () => {
+  Meteor.publish('lists/public', function {
     return Lists.find({userId: {$exists: false}});
   });
 
-  Meteor.publish('lists/private', function() {
+  Meteor.publish('lists/private', function () {
     if (!this.userId) {
       return this.ready();
     }
@@ -37,6 +37,8 @@ if (Meteor.isServer) {
 }
 
 Factory.define('list', Lists, {
-  name: () => faker.lorem.sentence(),
+  name() {
+    return faker.lorem.sentence()
+  },
   incompleteCount: 0
 });
