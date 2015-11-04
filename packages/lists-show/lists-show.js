@@ -36,7 +36,11 @@ var editList = function(list, template) {
 
 var saveList = function(list, template) {
   Session.set(EDITING_KEY, false);
-  Lists.update(list._id, {$set: {name: template.$('[name=name]').val()}});
+
+  Lists.methods.updateName.call({
+    listId: list._id,
+    newName: template.$('[name=name]').val()
+  });
 }
 
 var deleteList = function(list) {
@@ -47,13 +51,11 @@ var deleteList = function(list) {
 
   var message = "Are you sure you want to delete the list " + list.name + "?";
   if (confirm(message)) {
-    // we must remove each item individually from the client
-    Todos.find({listId: list._id}).forEach(function(todo) {
-      Todos.remove(todo._id);
+    Lists.methods.remove.call({
+      listId: list._id
     });
-    Lists.remove(list._id);
 
-    Router.go('home');
+    FlowRouter.go('home');
     return true;
   } else {
     return false;
@@ -93,12 +95,12 @@ Template.listsShow.events({
   'blur input[type=text]'(event, template) {
     // if we are still editing (we haven't just clicked the cancel button)
     if (Session.get(EDITING_KEY))
-      saveList(this, template);
+      saveList(this.list, template);
   },
 
   'submit .js-edit-form'(event, template) {
     event.preventDefault();
-    saveList(this, template);
+    saveList(this.list, template);
   },
 
   // handle mousedown otherwise the blur handler above will swallow the click
@@ -110,26 +112,26 @@ Template.listsShow.events({
 
   'change .list-edit'(event, template) {
     if ($(event.target).val() === 'edit') {
-      editList(this, template);
+      editList(this.list, template);
     } else if ($(event.target).val() === 'delete') {
-      deleteList(this, template);
+      deleteList(this.list, template);
     } else {
-      toggleListPrivacy(this, template);
+      toggleListPrivacy(this.list, template);
     }
 
     event.target.selectedIndex = 0;
   },
 
   'click .js-edit-list'(event, template) {
-    editList(this, template);
+    editList(this.list, template);
   },
 
   'click .js-toggle-list-privacy'(event, template) {
-    toggleListPrivacy(this, template);
+    toggleListPrivacy(this.list, template);
   },
 
   'click .js-delete-list'(event, template) {
-    deleteList(this, template);
+    deleteList(this.list, template);
   },
 
   'click .js-todo-add'(event, template) {
@@ -144,12 +146,12 @@ Template.listsShow.events({
       return;
 
     Todos.insert({
-      listId: this._id,
+      listId: this.list._id,
       text: $input.val(),
       checked: false,
       createdAt: new Date()
     });
-    Lists.update(this._id, {$inc: {incompleteCount: 1}});
+    Lists.update(this.list._id, {$inc: {incompleteCount: 1}});
     $input.val('');
   }
 });

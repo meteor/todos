@@ -8,6 +8,11 @@ Lists.schema = new SimpleSchema({
     type: String,
     // Calculate a default name for a list in the form of 'List A'
     autoValue() {
+      if (this.isSet) {
+        // Don't override a manually set name
+        return;
+      }
+
       let nextLetter = 'A', nextName = `List ${nextLetter}`;
       while (Lists.findOne({name: nextName})) {
         // not going to be too smart here, can go past Z

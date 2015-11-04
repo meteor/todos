@@ -23,5 +23,6 @@ Package.onUse(function(api) {
     'underscore',
     'touchwipe',
     'less-imports',
+    'method'
   ]);
 });

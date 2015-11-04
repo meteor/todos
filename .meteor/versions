@@ -54,6 +54,7 @@ localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
+method@0.0.0
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
