@@ -10,7 +10,8 @@ Package.onUse(function(api) {
   // TODO: remove session
   api.use([
     'todos-lib',
-    'lists'
+    'lists',
+    'less-globals',
   ]);
 
   api.addFiles([

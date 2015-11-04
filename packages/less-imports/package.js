@@ -8,7 +8,6 @@ Package.onUse(function(api) {
   api.use('less');
 
   api.addFiles([
-    'reset.less',
     'imports.import.less',
     'imports/helpers.import.less',
     'imports/lesshat.import.less',
