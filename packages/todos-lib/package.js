@@ -22,6 +22,6 @@ Package.onUse(function(api) {
     'reactive-dict',
     'underscore',
     'touchwipe',
-    'less-util',
+    'less-imports',
   ]);
 });
