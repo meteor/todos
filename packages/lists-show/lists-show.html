@@ -5,15 +5,22 @@
         <form class="js-edit-form list-edit-form">
           <input type="text" name="name" value="{{name}}">
           <div class="nav-group right">
-            <a href="#" class="js-cancel nav-item"><span class="icon-close js-cancel" title="Cancel"></span></a>
+            <a href="#" class="js-cancel nav-item">
+              <span class="icon-close js-cancel" title="Cancel"></span>
+            </a>
           </div>
         </form>
       {{else}}
         <div class="nav-group">
-          <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
+          <a href="#" class="js-menu nav-item">
+            <span class="icon-list-unordered" title="Show menu"></span>
+          </a>
         </div>
 
-        <h1 class="js-edit-list title-page"><span class="title-wrapper">{{list.name}}</span> <span class="count-list">{{list.incompleteCount}}</span></h1>
+        <h1 class="js-edit-list title-page">
+          <span class="title-wrapper">{{list.name}}</span>
+          <span class="count-list">{{list.incompleteCount}}</span>
+        </h1>
 
         <div class="nav-group right">
           <div class="nav-item options-mobile">

@@ -1,7 +1,7 @@
 /* global Todos:true */
 /* global SimpleSchema Factory faker */
 
-Todos = new Mongo.Collection('todos');
+Todos = new Mongo.Collection('Todos');
 
 Todos.schema = new SimpleSchema({
   listId: {type: String, regEx: SimpleSchema.RegEx.Id},
@@ -21,6 +21,7 @@ if (Meteor.isServer) {
   });
 }
 
+// TODO This factory has a name - do we have a code style for this?
 Factory.define('todo', Todos, {
   listId: () => Factory.get('list'),
   text: () => faker.lorem.sentence(),
