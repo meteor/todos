@@ -12,7 +12,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('ecmascript');
+  api.use('todos-lib');
   api.use('tinytest');
   api.use('todos');
   api.addFiles('todos-tests.js');

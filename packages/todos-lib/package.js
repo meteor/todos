@@ -19,6 +19,7 @@ Package.onUse(function(api) {
     'zimme:active-route@2.3.0',
     'aldeed:collection2@2.5.0',
     'factory',
-    'reactive-dict'
+    'reactive-dict',
+    'underscore'
   ]);
 });

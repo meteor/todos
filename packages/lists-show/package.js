@@ -6,18 +6,13 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  // TODO: remove session, iron-router?
+
   api.use([
-    'ecmascript',
-    'templating',
-    'less',
-    'underscore',
-    'session',
-    'launch-screen',
-    'kadira:flow-router@2.7.0',
+    'todos-lib',
     'lists',
     'todos'
   ]);
+
   api.addFiles([
     'todos-item.html',
     'todos-item.js',
