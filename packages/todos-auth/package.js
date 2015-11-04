@@ -18,7 +18,7 @@ Package.onUse(function(api) {
     'auth-join.js',
     'auth-signin.html',
     'auth-signin.js',
-    'auth.import.less'
+    'auth.less'
   ], 'client');
 });
 

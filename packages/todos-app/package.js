@@ -16,9 +16,9 @@ Package.onUse(function(api) {
   api.addFiles([
     'head.html',
     'loading.html',
-    'loading.import.less',
+    'loading.less',
     'app-not-found.html',
-    'app-not-found.import.less',
+    'app-not-found.less',
     'app-body.html',
     'app-body.js',
     'root-redirector.html',

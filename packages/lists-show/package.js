@@ -20,7 +20,7 @@ Package.onUse(function(api) {
     'lists-show.js',
     'lists-show-page.html',
     'lists-show-page.js',
-    'lists-show.import.less'
+    'lists-show.less'
   ], 'client');
 
   // UGGGH. Get rid of this ASAP!
