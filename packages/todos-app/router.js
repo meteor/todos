@@ -1,21 +1,32 @@
 /* global FlowRouter BlazeLayout */
 
-FlowRouter.route('/join', {action: () => {
-  BlazeLayout.render('appBody', {main: 'join'});
-}});
+FlowRouter.route('/join', {
+  name: 'join',
+  action: () => {
+    BlazeLayout.render('appBody', {main: 'join'});
+  }
+});
 
-FlowRouter.route('/signin', {action: () => {
-  BlazeLayout.render('appBody', {main: 'signin'});
-}});
+FlowRouter.route('/signin', {
+  name: 'signin',
+  action: () => {
+    BlazeLayout.render('appBody', {main: 'signin'});
+  }
+});
 
-FlowRouter.route('/lists/:_id', {action: () => {
-  BlazeLayout.render('appBody', {main: 'listsShowPage'});
-}});
+FlowRouter.route('/lists/:_id', {
+  name: 'listsShow',
+  action: () => {
+    BlazeLayout.render('appBody', {main: 'listsShowPage'});
+  }
+});
 
-FlowRouter.route('/', {action: () => {
-  // TODO: use an "appRedirector template"
-  FlowRouter.go('listsShow', Lists.findOne());
-}});
+FlowRouter.route('/', {
+  name: 'root',
+  action: () => {
+    BlazeLayout.render('appBody', {main: 'rootRedirector'});
+  }
+});
 
 // the appNotFound template is used for unknown routes and missing lists
 FlowRouter.notFound = {

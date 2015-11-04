@@ -1,0 +1,3 @@
+[submodule "packages/flow-router-helpers"]
+	path = packages/flow-router-helpers
+	url = https://github.com/tmeasday/meteor-flow-router-helpers.git

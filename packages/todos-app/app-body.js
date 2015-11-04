@@ -24,8 +24,9 @@ Meteor.startup(function () {
   // Only show the connection error box if it has been 5 seconds since
   // the app started
   setTimeout(function () {
+    // FIXME:
     // Launch screen handle created in lib/router.js
-    dataReadyHold.release();
+    // dataReadyHold.release();
 
     // Show the connection error box
     Session.set(SHOW_CONNECTION_ISSUE_KEY, true);
@@ -81,11 +82,9 @@ Template.appBody.helpers({
   lists: function() {
     return Lists.find();
   },
-  activeListClass: function() {
-    var current = Router.current();
-    if (current.route.name === 'listsShow' && current.params._id === this._id) {
-      return 'active';
-    }
+  activeListClass: function(list) {
+    const active = ActiveRoute.name('listsShow') && FlowRouter.getParam('_id') === list._id;
+    return active && 'active';
   },
   connected: function() {
     if (Session.get(SHOW_CONNECTION_ISSUE_KEY)) {

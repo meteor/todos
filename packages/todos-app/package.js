@@ -15,7 +15,9 @@ Package.onUse(function(api) {
     'kadira:flow-router@2.7.0',
     'kadira:blaze-layout@2.2.0',
     'session',
-    'launch-screen'
+    'launch-screen',
+    'arillo:flow-router-helpers@0.4.5',
+    'zimme:active-route@2.3.0'
   ]);
   api.addFiles([
     'head.html',
@@ -25,6 +27,8 @@ Package.onUse(function(api) {
     'app-not-found.import.less',
     'app-body.html',
     'app-body.js',
+    'root-redirector.html',
+    'root-redirector.js',
     'router.js'
   ], 'client');
 });

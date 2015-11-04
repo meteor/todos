@@ -26,15 +26,16 @@
       <div class="list-todos">
         <a class="js-new-list link-list-new"><span class="icon-plus"></span>New List</a>
 
-        {{#each lists}}
-          <a href="{{pathFor 'listsShow'}}" class="list-todo {{activeListClass}}" title="{{name}}">
-            {{#if userId}}
+        {{#each list in lists}}
+          <a href="{{pathFor 'listsShow' _id=list._id}}" title="{{list.name}}"
+              class="list-todo {{activeListClass list}}">
+            {{#if list.userId}}
               <span class="icon-lock"></span>
             {{/if}}
-            {{#if incompleteCount}}
-              <span class="count-list">{{incompleteCount}}</span>
+            {{#if list.incompleteCount}}
+              <span class="count-list">{{list.incompleteCount}}</span>
             {{/if}}
-            {{name}}
+            {{list.name}}
           </a>
         {{/each}}
 

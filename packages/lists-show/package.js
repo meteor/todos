@@ -14,7 +14,7 @@ Package.onUse(function(api) {
     'underscore',
     'session',
     'launch-screen',
-    'iron:router@1.0.12',
+    'kadira:flow-router@2.7.0',
     'lists',
     'todos'
   ]);

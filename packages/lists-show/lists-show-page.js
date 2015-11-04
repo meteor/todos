@@ -18,7 +18,7 @@ Template.listsShowPage.onCreated(function() {
   }
 
   // XXX: FR
-  this.listId = Router.current().params._id;
+  this.listId = FlowRouter.getParam('_id');
   this.subscribe('todos', this.listId);
 
   this.autorun(() => {
