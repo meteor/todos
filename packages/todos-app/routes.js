@@ -22,7 +22,7 @@ FlowRouter.route('/lists/:_id', {
 });
 
 FlowRouter.route('/', {
-  name: 'root',
+  name: 'home',
   action: () => {
     BlazeLayout.render('appBody', {main: 'rootRedirector'});
   }
