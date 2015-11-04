@@ -36,6 +36,13 @@ Meteor.startup(function () {
 Template.appBody.onCreated(function() {
   this.subscribe('lists/public');
   this.subscribe('lists/private');
+
+  this.state = new ReactiveDict('app.body');
+  this.state.setDefault({
+    menuOpen: false,
+    userMenuOpen: false,
+    showConnectionIssue: false
+  });
 });
 
 Template.appBody.onRendered(function() {
@@ -67,7 +74,8 @@ Template.appBody.helpers({
     return [this];
   },
   menuOpen() {
-    return Session.get(MENU_KEY) && 'menu-open';
+    const instance = Template.instance();
+    return instance.state.get('menuOpen') && 'menu-open';
   },
   cordova() {
     return Meteor.isCordova && 'cordova';
@@ -77,7 +85,8 @@ Template.appBody.helpers({
     return email.substring(0, email.indexOf('@'));
   },
   userMenuOpen() {
-    return Session.get(USER_MENU_KEY);
+    const instance = Template.instance();
+    return instance.state.get('userMenuOpen');
   },
   lists() {
     return Lists.find();
@@ -89,7 +98,8 @@ Template.appBody.helpers({
     return active && 'active';
   },
   connected() {
-    if (Session.get(SHOW_CONNECTION_ISSUE_KEY)) {
+    const instance = Template.instance();
+    if (instance.state.get('showConnectionIssue')) {
       return Meteor.status().connected;
     } else {
       return true;
@@ -98,23 +108,23 @@ Template.appBody.helpers({
 });
 
 Template.appBody.events({
-  'click .js-menu'() {
-    Session.set(MENU_KEY, ! Session.get(MENU_KEY));
+  'click .js-menu'(event, instance) {
+    instance.state.set('menuOpen', !instance.state.get('menuOpen'));
   },
 
-  'click .content-overlay'(event) {
-    Session.set(MENU_KEY, false);
+  'click .content-overlay'(event, instance) {
+    instance.state.set('menuOpen', false);
     event.preventDefault();
   },
 
-  'click .js-user-menu'(event) {
-    Session.set(USER_MENU_KEY, ! Session.get(USER_MENU_KEY));
+  'click .js-user-menu'(event, instance) {
+    instance.state.set('userMenuOpen', !instance.state.get('userMenuOpen'));
     // stop the menu from closing
     event.stopImmediatePropagation();
   },
 
-  'click #menu a'() {
-    Session.set(MENU_KEY, false);
+  'click #menu a'(event, instance) {
+    instance.state.set('menuOpen', false);
   },
 
   'click .js-logout'() {

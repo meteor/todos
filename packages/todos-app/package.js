@@ -18,7 +18,8 @@ Package.onUse(function(api) {
     'launch-screen',
     'arillo:flow-router-helpers@0.4.5',
     'zimme:active-route@2.3.0',
-    'lists'
+    'lists',
+    'reactive-dict'
   ]);
   api.addFiles([
     'head.html',
