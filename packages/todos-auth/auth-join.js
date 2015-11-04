@@ -5,16 +5,16 @@ Template.join.onCreated(function() {
 });
 
 Template.join.helpers({
-  errorMessages: function() {
+  errorMessages() {
     return _.values(Session.get(ERRORS_KEY));
   },
-  errorClass: function(key) {
+  errorClass(key) {
     return Session.get(ERRORS_KEY)[key] && 'error';
   }
 });
 
 Template.join.events({
-  'submit': function(event, template) {
+  'submit'(event, template) {
     event.preventDefault();
     var email = template.$('[name=email]').val();
     var password = template.$('[name=password]').val();

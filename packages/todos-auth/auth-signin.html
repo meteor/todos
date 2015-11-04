@@ -2,14 +2,16 @@
   <div class="page auth">
     <nav>
       <div class="nav-group">
-        <a href="#" class="js-menu nav-item"><span class="icon-list-unordered"></span></a>
+        <a href="#" class="js-menu nav-item">
+          <span class="icon-list-unordered"></span>
+        </a>
       </div>
     </nav>
 
     <div class="content-scrollable">
       <div class="wrapper-auth">
         <h1 class="title-auth">Sign In.</h1>
-        <p class="subtitle-auth" >Signing in allows you to view private lists</p>
+        <p class="subtitle-auth">Signing in allows you to view private lists</p>
 
         <form>
           {{#if errorMessages}}
@@ -34,7 +36,9 @@
         </form>
       </div>
 
-      <a href="{{pathFor 'join'}}" class="link-auth-alt">Need an account? Join Now.</a>
+      <a href="{{pathFor 'join'}}" class="link-auth-alt">
+        Need an account? Join Now.
+      </a>
     </div>
   </div>
 </template>
