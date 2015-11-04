@@ -23,7 +23,7 @@ Lists.schema = new SimpleSchema({
 Lists.attachSchema(Lists.schema);
 
 if (Meteor.isServer) {
-  Meteor.publish('lists/public', function {
+  Meteor.publish('lists/public', function () {
     return Lists.find({userId: {$exists: false}});
   });
 
