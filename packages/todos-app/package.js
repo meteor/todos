@@ -30,7 +30,7 @@ Package.onUse(function(api) {
     'app-body.js',
     'root-redirector.html',
     'root-redirector.js',
-    'router.js'
+    'routes.js'
   ], 'client');
 });
 
