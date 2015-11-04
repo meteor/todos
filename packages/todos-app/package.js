@@ -17,7 +17,8 @@ Package.onUse(function(api) {
     'session',
     'launch-screen',
     'arillo:flow-router-helpers@0.4.5',
-    'zimme:active-route@2.3.0'
+    'zimme:active-route@2.3.0',
+    'lists'
   ]);
   api.addFiles([
     'head.html',

@@ -3,13 +3,13 @@ Session.setDefault(EDITING_KEY, false);
 
 Template.listsShow.onRendered(function() {
   this.find('.js-title-nav')._uihooks = {
-    insertElement: function(node, next) {
+    insertElement(node, next) {
       $(node)
         .hide()
         .insertBefore(next)
         .fadeIn();
     },
-    removeElement: function(node) {
+    removeElement(node) {
       $(node).fadeOut(function() {
         this.remove();
       });
@@ -18,10 +18,10 @@ Template.listsShow.onRendered(function() {
 });
 
 Template.listsShow.helpers({
-  editing: function() {
+  editing() {
     return Session.get(EDITING_KEY);
   },
-  todos: function(listId) {
+  todos(listId) {
     return Todos.find({listId: listId}, {sort: {createdAt : -1}});
   }
 });
@@ -78,11 +78,11 @@ var toggleListPrivacy = function(list) {
 };
 
 Template.listsShow.events({
-  'click .js-cancel': function() {
+  'click .js-cancel'() {
     Session.set(EDITING_KEY, false);
   },
 
-  'keydown input[type=text]': function(event) {
+  'keydown input[type=text]'(event) {
     // ESC
     if (27 === event.which) {
       event.preventDefault();
@@ -90,25 +90,25 @@ Template.listsShow.events({
     }
   },
 
-  'blur input[type=text]': function(event, template) {
+  'blur input[type=text]'(event, template) {
     // if we are still editing (we haven't just clicked the cancel button)
     if (Session.get(EDITING_KEY))
       saveList(this, template);
   },
 
-  'submit .js-edit-form': function(event, template) {
+  'submit .js-edit-form'(event, template) {
     event.preventDefault();
     saveList(this, template);
   },
 
   // handle mousedown otherwise the blur handler above will swallow the click
   // on iOS, we still require the click event so handle both
-  'mousedown .js-cancel, click .js-cancel': function(event) {
+  'mousedown .js-cancel, click .js-cancel'(event) {
     event.preventDefault();
     Session.set(EDITING_KEY, false);
   },
 
-  'change .list-edit': function(event, template) {
+  'change .list-edit'(event, template) {
     if ($(event.target).val() === 'edit') {
       editList(this, template);
     } else if ($(event.target).val() === 'delete') {
@@ -120,23 +120,23 @@ Template.listsShow.events({
     event.target.selectedIndex = 0;
   },
 
-  'click .js-edit-list': function(event, template) {
+  'click .js-edit-list'(event, template) {
     editList(this, template);
   },
 
-  'click .js-toggle-list-privacy': function(event, template) {
+  'click .js-toggle-list-privacy'(event, template) {
     toggleListPrivacy(this, template);
   },
 
-  'click .js-delete-list': function(event, template) {
+  'click .js-delete-list'(event, template) {
     deleteList(this, template);
   },
 
-  'click .js-todo-add': function(event, template) {
+  'click .js-todo-add'(event, template) {
     template.$('.js-todo-new input').focus();
   },
 
-  'submit .js-todo-new': function(event) {
+  'submit .js-todo-new'(event) {
     event.preventDefault();
 
     var $input = $(event.target).find('[type=text]');

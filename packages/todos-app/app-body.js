@@ -12,10 +12,10 @@ var CONNECTION_ISSUE_TIMEOUT = 5000;
 Meteor.startup(function () {
   // set up a swipe left / right handler
   $(document.body).touchwipe({
-    wipeLeft: function () {
+    wipeLeft() {
       Session.set(MENU_KEY, false);
     },
-    wipeRight: function () {
+    wipeRight() {
       Session.set(MENU_KEY, true);
     },
     preventDefaultEvents: false
@@ -40,7 +40,7 @@ Template.appBody.onCreated(function() {
 
 Template.appBody.onRendered(function() {
   this.find('#content-container')._uihooks = {
-    insertElement: function(node, next) {
+    insertElement(node, next) {
       $(node)
         .hide()
         .insertBefore(next)
@@ -50,7 +50,7 @@ Template.appBody.onRendered(function() {
           }
         });
     },
-    removeElement: function(node) {
+    removeElement(node) {
       $(node).fadeOut(function() {
         $(this).remove();
       });
@@ -63,30 +63,32 @@ Template.appBody.helpers({
   // removed and a new copy is added when changing lists, which is
   // important for animation purposes. #each looks at the _id property of it's
   // items to know when to insert a new item and when to update an old one.
-  thisArray: function() {
+  thisArray() {
     return [this];
   },
-  menuOpen: function() {
+  menuOpen() {
     return Session.get(MENU_KEY) && 'menu-open';
   },
-  cordova: function() {
+  cordova() {
     return Meteor.isCordova && 'cordova';
   },
-  emailLocalPart: function() {
+  emailLocalPart() {
     var email = Meteor.user().emails[0].address;
     return email.substring(0, email.indexOf('@'));
   },
-  userMenuOpen: function() {
+  userMenuOpen() {
     return Session.get(USER_MENU_KEY);
   },
-  lists: function() {
+  lists() {
     return Lists.find();
   },
-  activeListClass: function(list) {
-    const active = ActiveRoute.name('listsShow') && FlowRouter.getParam('_id') === list._id;
+  activeListClass(list) {
+    const active = ActiveRoute.name('listsShow')
+      && FlowRouter.getParam('_id') === list._id;
+
     return active && 'active';
   },
-  connected: function() {
+  connected() {
     if (Session.get(SHOW_CONNECTION_ISSUE_KEY)) {
       return Meteor.status().connected;
     } else {
@@ -96,26 +98,26 @@ Template.appBody.helpers({
 });
 
 Template.appBody.events({
-  'click .js-menu': function() {
+  'click .js-menu'() {
     Session.set(MENU_KEY, ! Session.get(MENU_KEY));
   },
 
-  'click .content-overlay': function(event) {
+  'click .content-overlay'(event) {
     Session.set(MENU_KEY, false);
     event.preventDefault();
   },
 
-  'click .js-user-menu': function(event) {
+  'click .js-user-menu'(event) {
     Session.set(USER_MENU_KEY, ! Session.get(USER_MENU_KEY));
     // stop the menu from closing
     event.stopImmediatePropagation();
   },
 
-  'click #menu a': function() {
+  'click #menu a'() {
     Session.set(MENU_KEY, false);
   },
 
-  'click .js-logout': function() {
+  'click .js-logout'() {
     Meteor.logout();
 
     // if we are on a private list, we'll need to go to a public one
@@ -125,7 +127,7 @@ Template.appBody.events({
     }
   },
 
-  'click .js-new-list': function() {
+  'click .js-new-list'() {
     var list = {name: Lists.defaultName(), incompleteCount: 0};
     list._id = Lists.insert(list);
 

@@ -1,7 +1,7 @@
 /* global Lists:true */
 /* global SimpleSchema Factory faker */
 
-Lists = new Mongo.Collection('lists');
+Lists = new Mongo.Collection('Lists');
 
 Lists.schema = new SimpleSchema({
   name: {

@@ -1,6 +1,5 @@
 <template name="appBody">
   <div id="container" class="{{menuOpen}} {{cordova}}">
-
     <section id="menu">
       {{#if currentUser}}
         <div class="btns-group-vertical">
@@ -10,6 +9,7 @@
               {{else}}
               <span class="icon-arrow-down"></span>
             {{/if}}
+
             {{emailLocalPart}}
           </a>
           {{#if userMenuOpen}}
@@ -24,7 +24,10 @@
       {{/if}}
 
       <div class="list-todos">
-        <a class="js-new-list link-list-new"><span class="icon-plus"></span>New List</a>
+        <a class="js-new-list link-list-new">
+          <span class="icon-plus"></span>
+          New List
+        </a>
 
         {{#each list in lists}}
           <a href="{{pathFor 'listsShow' _id=list._id}}" title="{{list.name}}"
@@ -32,13 +35,14 @@
             {{#if list.userId}}
               <span class="icon-lock"></span>
             {{/if}}
+
             {{#if list.incompleteCount}}
               <span class="count-list">{{list.incompleteCount}}</span>
             {{/if}}
+
             {{list.name}}
           </a>
         {{/each}}
-
       </div>
     </section>
 
