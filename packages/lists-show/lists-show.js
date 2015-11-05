@@ -57,6 +57,7 @@ Template.listsShow.events({
     Session.set(EDITING_KEY, false);
   },
 
+  // This is for the mobile dropdown
   'change .list-edit'(event, template) {
     if ($(event.target).val() === 'edit') {
       editList(this.list, template);
