@@ -141,9 +141,11 @@ Template.appBody.events({
   },
 
   'click .js-new-list'() {
-    var list = {name: Lists.defaultName(), incompleteCount: 0};
-    list._id = Lists.insert(list);
+    const listId = Lists.methods.insert.call();
 
-    FlowRouter.go('listsShow', list);
+    console.log(listId);
+
+    // Doesn't work since the above doesn't return anything
+    FlowRouter.go('listsShow', { _id: listId });
   }
 });

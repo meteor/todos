@@ -1,5 +1,21 @@
 Lists.methods = {};
 
+Lists.methods.insert = new Method({
+  name: 'Lists.methods.insert',
+  validate() {
+    // XXX how do I validate that this shouldn't take any arguments?
+  },
+  run() {
+    const list = {
+      name: generateListName(),
+      incompleteCount: 0
+    };
+
+    // XXX How are you supposed to get the ID on the client side again?
+    return Lists.insert(list);
+  }
+})
+
 Lists.methods.makePrivate = new Method({
   name: 'Lists.methods.makePrivate',
   validate({ listId }) {
@@ -77,3 +93,15 @@ Lists.methods.remove = new Method({
     Lists.remove(listId);
   }
 });
+
+function generateListName() {
+  let nextLetter = 'A', nextName = `List ${nextLetter}`;
+
+  while (Lists.findOne({name: nextName})) {
+    // not going to be too smart here, can go past Z
+    nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
+    nextName = `List ${nextLetter}`;
+  }
+
+  return nextName; // eslint-disable-line consistent-return
+}

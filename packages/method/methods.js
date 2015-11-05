@@ -29,7 +29,11 @@ Method = class Method {
   }
 
   call(args, callback) {
-    Meteor.call(this.name, args, callback);
+    const options = {
+      returnStubValue: true
+    };
+
+    return Meteor.apply(this.name, [args], options, callback);
   }
 
   _execute(methodInvocation, args) {
