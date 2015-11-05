@@ -6,10 +6,24 @@
 Method = class Method {
   constructor({
     name,
+    schema,
     validate,
     run,
   }) {
     check(name, String);
+    check(schema, Match.Optional(SimpleSchema));
+
+    if (schema) {
+      if (validate) {
+        // Make sure people don't pass schema and validate
+        throw new Error('Validate is overriden by schema.');
+      }
+
+      validate = (args) => {
+        validateAgainstSimpleSchema(args, schema);
+      }
+    }
+
     check(validate, Function);
     check(run, Function);
 
@@ -46,4 +60,18 @@ perhaps you meant to throw an error?`);
 
     return this.run.bind(methodInvocation)(args);
   }
+};
+
+function validateAgainstSimpleSchema(obj, ss) {
+  const validationContext = ss.newContext();
+  const isValid = validationContext.validate(obj);
+
+  if (isValid) {
+    // All good!
+    return;
+  }
+
+  const validationError = new Error('validation-failed');
+  validationError.keys = validationContext.invalidKeys();
+  throw validationError;
 }

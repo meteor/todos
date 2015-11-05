@@ -1,5 +1,9 @@
 Lists.methods = {};
 
+const LIST_ID_ONLY = new SimpleSchema({
+  listId: { type: String }
+});
+
 Lists.methods.insert = new Method({
   name: 'Lists.methods.insert',
   validate() {
@@ -17,9 +21,7 @@ Lists.methods.insert = new Method({
 
 Lists.methods.makePrivate = new Method({
   name: 'Lists.methods.makePrivate',
-  validate({ listId }) {
-    check(listId, String);
-  },
+  schema: LIST_ID_ONLY,
   run({ listId }) {
     if (!this.userId) {
       throw new Meteor.Error('Lists.methods.makePrivate.notLoggedIn',
@@ -41,9 +43,7 @@ Lists.methods.makePrivate = new Method({
 
 Lists.methods.makePublic = new Method({
   name: 'Lists.methods.makePublic',
-  validate({ listId }) {
-    check(listId, String);
-  },
+  schema: LIST_ID_ONLY,
   run({ listId }) {
     if (!this.userId) {
       throw new Meteor.Error('Lists.methods.makePublic.notLoggedIn',
@@ -63,10 +63,10 @@ Lists.methods.makePublic = new Method({
 
 Lists.methods.updateName = new Method({
   name: 'Lists.methods.updateName',
-  validate({ listId, newName }) {
-    check(listId, String);
-    check(newName, String);
-  },
+  schema: new SimpleSchema({
+    listId: { type: String },
+    newName: { type: String }
+  }),
   run({ listId, newName }) {
     Lists.update(listId, {
       $set: {name: newName}
@@ -76,9 +76,7 @@ Lists.methods.updateName = new Method({
 
 Lists.methods.remove = new Method({
   name: 'Lists.methods.remove',
-  validate({ listId }) {
-    check(listId, String);
-  },
+  schema: LIST_ID_ONLY,
   run({ listId }) {
     const list = Lists.findOne(listId);
 

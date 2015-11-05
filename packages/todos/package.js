@@ -7,7 +7,10 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
   api.use('todos-lib');
-  api.addFiles('todos.js');
+  api.addFiles([
+    'todos.js',
+    'methods.js'
+  ]);
   api.export('Todos');
 });
 
@@ -17,5 +20,6 @@ Package.onTest(function(api) {
     'practicalmeteor:mocha@2.1.0_5',
     'todos'
   ]);
+
   api.addFiles('todos-tests.js', 'server');
 });

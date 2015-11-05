@@ -9,7 +9,8 @@ Package.onUse(function(api) {
     'ecmascript',
     'check',
     'ddp',
-    'underscore'
+    'underscore',
+    'aldeed:simple-schema'
   ]);
   api.addFiles('methods.js');
   api.export('Method');
