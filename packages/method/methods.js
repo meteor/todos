@@ -1,19 +1,21 @@
+// TODO
+// 1. Need a way to share data between authorize and run, in case you need to
+// load a particular document
+// 2. Need to figure out how the client stub should behave when error is thrown
+
 Method = class Method {
   constructor({
     name,
     validate,
-    authorize,
     run,
   }) {
     check(name, String);
     check(validate, Function);
-    check(authorize, Function);
     check(run, Function);
 
     _.extend(this, {
       name,
       validate,
-      authorize,
       run,
     });
 
@@ -35,13 +37,6 @@ Method = class Method {
 
     if (typeof validateResult !== 'undefined') {
       throw new Error(`Returning from validate doesn't do anything; \
-perhaps you meant to throw an error?`);
-    }
-
-    const authorizeResult = this.authorize.bind(methodInvocation)(args);
-
-    if (typeof authorizeResult !== 'undefined') {
-      throw new Error(`Returning from authorize doesn't do anything; \
 perhaps you meant to throw an error?`);
     }
 

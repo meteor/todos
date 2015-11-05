@@ -1,28 +1,16 @@
 /* global Lists:true */
 /* global SimpleSchema Factory faker */
 
-Lists = new Mongo.Collection('Lists');
+Lists = new Mongo.Collection('Lists', {
+  transform(listDoc) {
+    return new ListModel(listDoc);
+  }
+});
 
 Lists.schema = new SimpleSchema({
-  name: {
-    type: String,
-    // Calculate a default name for a list in the form of 'List A'
-    autoValue() {
-      if (this.isSet) {
-        // Don't override a manually set name
-        return;
-      }
-
-      let nextLetter = 'A', nextName = `List ${nextLetter}`;
-      while (Lists.findOne({name: nextName})) {
-        // not going to be too smart here, can go past Z
-        nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
-        nextName = `List ${nextLetter}`;
-      }
-      return nextName; // eslint-disable-line consistent-return
-    }
-  },
-  incompleteCount: {type: Number, defaultValue: 0}
+  name: { type: String },
+  incompleteCount: {type: Number, defaultValue: 0},
+  userId: { type: String, optional: true }
 });
 
 Lists.attachSchema(Lists.schema);
@@ -43,3 +31,19 @@ if (Meteor.isServer) {
 
 Factory.define('list', Lists, {});
 Factory.define('list', Lists, {});
+
+class ListModel {
+  constructor(listDoc) {
+    _.extend(this, listDoc);
+  }
+
+  // A list is considered to be private if it has a userId set
+  isPrivate() {
+    return !! this.userId;
+  }
+
+  isLastPublicList() {
+    const publicListCount = Lists.find({userId: {$exists: false}}).count();
+    return !this.isPrivate() && publicListCount === 1;
+  }
+}

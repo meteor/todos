@@ -44,17 +44,16 @@ var saveList = function(list, template) {
 }
 
 var deleteList = function(list) {
-  // ensure the last public list cannot be deleted.
-  if (! list.userId && Lists.find({userId: {$exists: false}}).count() === 1) {
-    return alert("Sorry, you cannot delete the final public list!");
-  }
+  const message = `Are you sure you want to delete the list ${list.name}?`;
 
-  var message = "Are you sure you want to delete the list " + list.name + "?";
   if (confirm(message)) {
     Lists.methods.remove.call({
       listId: list._id
     });
 
+    // XXX should this be optimistic?
+    // We need some way of calling this only if the client-side validation
+    // passes
     FlowRouter.go('home');
     return true;
   } else {
@@ -62,20 +61,11 @@ var deleteList = function(list) {
   }
 };
 
-var toggleListPrivacy = function(list) {
-  if (! Meteor.user()) {
-    return alert("Please sign in or create an account to make private lists.");
-  }
-
+function toggleListPrivacy(list) {
   if (list.userId) {
-    Lists.update(list._id, {$unset: {userId: true}});
+    Lists.methods.makePublic.call({ listId: list._id });
   } else {
-    // ensure the last public list cannot be made private
-    if (Lists.find({userId: {$exists: false}}).count() === 1) {
-      return alert("Sorry, you cannot make the final public list private!");
-    }
-
-    Lists.update(list._id, {$set: {userId: Meteor.userId()}});
+    Lists.methods.makePrivate.call({ listId: list._id });
   }
 };
 
