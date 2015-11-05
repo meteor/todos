@@ -15,8 +15,7 @@ Package.onTest(function(api) {
   api.use([
     'todos-lib',
     'practicalmeteor:mocha@2.1.0_5',
-    'todos',
-    'lists'
+    'todos'
   ]);
   api.addFiles('todos-tests.js', 'server');
 });

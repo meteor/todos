@@ -19,20 +19,20 @@ Lists.schema = new SimpleSchema({
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
         nextName = `List ${nextLetter}`;
       }
-      return nextName;
+      return nextName; // eslint-disable-line consistent-return
     }
   },
-  incompleteCount: {type: Number}
+  incompleteCount: {type: Number, defaultValue: 0}
 });
 
 Lists.attachSchema(Lists.schema);
 
 if (Meteor.isServer) {
-  Meteor.publish('lists/public', function () {
+  Meteor.publish('lists/public', function() {
     return Lists.find({userId: {$exists: false}});
   });
 
-  Meteor.publish('lists/private', function () {
+  Meteor.publish('lists/private', function() {
     if (!this.userId) {
       return this.ready();
     }
@@ -41,9 +41,5 @@ if (Meteor.isServer) {
   });
 }
 
-Factory.define('list', Lists, {
-  name() {
-    return faker.lorem.sentence()
-  },
-  incompleteCount: 0
-});
+Factory.define('list', Lists, {});
+Factory.define('list', Lists, {});

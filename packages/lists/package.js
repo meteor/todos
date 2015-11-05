@@ -13,8 +13,12 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('todos-lib');
-  api.use('tinytest');
-  api.use('lists');
-  api.addFiles('lists-tests.js');
+  api.use([
+    'todos-lib',
+    'practicalmeteor:mocha@2.1.0_5',
+    'lists',
+    'underscore',
+    'publication-collector'
+  ]);
+  api.addFiles('lists-tests.js', 'server');
 });
