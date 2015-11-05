@@ -135,13 +135,11 @@ Template.listsShow.events({
     if (! $input.val())
       return;
 
-    Todos.insert({
+    Todos.methods.insert.call({
       listId: this.list._id,
-      text: $input.val(),
-      checked: false,
-      createdAt: new Date()
+      text: $input.val()
     });
-    Lists.update(this.list._id, {$inc: {incompleteCount: 1}});
+
     $input.val('');
   }
 });
