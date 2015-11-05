@@ -29,6 +29,38 @@ Todos.methods.insert = new Method({
   }
 });
 
+Todos.methods.setCheckedStatus = new Method({
+  name: 'Todos.methods.makeChecked',
+  schema: new SimpleSchema({
+    todoId: { type: String },
+    newCheckedStatus: { type: Boolean }
+  }),
+  run({ todoId }) {
+    const todo = Todos.findOne(todoId);
+
+    if (todo.checked === newCheckedStatus) {
+      // The status is already what we want, let's not do any extra work
+      return;
+    }
+
+    const list = todo.getList();
+
+    if (list.isPrivate() && list.userId !== this.userId) {
+      throw new Meteor.Error('Todos.methods.setCheckedStatus.unauthorized',
+        'Cannot edit checked status in a private list that is not yours');
+    }
+
+    Todos.update(todoId, {$set: {
+      checked: newCheckedStatus
+    }});
+
+    const incAmount = newCheckedStatus ? 1 : -1;
+    Lists.update(todo.listId, {
+      $inc: { incompleteCount: incAmount }
+    });
+  }
+});
+
 Todos.methods.updateText = new Method({
   name: 'Todos.methods.updateText',
   schema: new SimpleSchema({
