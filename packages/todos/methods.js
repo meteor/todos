@@ -27,4 +27,27 @@ Todos.methods.insert = new Method({
       $inc: { incompleteCount: 1 }
     });
   }
+});
+
+Todos.methods.updateText = new Method({
+  name: 'Todos.methods.updateText',
+  schema: new SimpleSchema({
+    todoId: { type: String },
+    newText: { type: String }
+  }),
+  run({ todoId, newText }) {
+    // This is complex auth stuff - perhaps denormalizing a userId onto todos
+    // would be correct here?
+    const todo = Todos.findOne(todoId);
+    const list = todo.getList();
+
+    if (list.isPrivate() && list.userId !== this.userId) {
+      throw new Meteor.Error('Todos.methods.updateText.unauthorized',
+        'Cannot edit todos in a private list that is not yours');
+    }
+
+    Todos.update(todoId, {
+      $set: { text: newText }
+    });
+  }
 })

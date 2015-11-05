@@ -1,7 +1,11 @@
 /* global Todos:true */
 /* global SimpleSchema Factory faker */
 
-Todos = new Mongo.Collection('Todos');
+Todos = new Mongo.Collection('Todos', {
+  transform(todoDoc) {
+    return new TodoModel(todoDoc);
+  }
+});
 
 Todos.schema = new SimpleSchema({
   listId: {
@@ -45,3 +49,13 @@ Factory.define('todo', Todos, {
   text: () => faker.lorem.sentence(),
   createdAt: () => new Date()
 });
+
+class TodoModel {
+  constructor(todoDoc) {
+    _.extend(this, todoDoc);
+  }
+
+  getList() {
+    return Lists.findOne(this.listId);
+  }
+}
