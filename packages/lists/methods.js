@@ -11,7 +11,6 @@ Lists.methods.insert = new Method({
       incompleteCount: 0
     };
 
-    // XXX How are you supposed to get the ID on the client side again?
     return Lists.insert(list);
   }
 });
