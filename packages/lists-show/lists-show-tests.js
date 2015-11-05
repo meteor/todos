@@ -51,7 +51,13 @@ describe('listsShow', () => {
 
   it('renders correctly with simple data', () => {
     const list = Factory.create('list');
-    const todos = _.times(3, () => Factory.create('todo', {listId: list._id}));
+    const timestamp = new Date();
+    const todos = _.times(3, (i) => {
+      return Factory.create('todo', {
+        listId: list._id,
+        createdAt: new Date(timestamp - (3 - i))
+      });
+    });
 
     const data = {
       list,
@@ -59,11 +65,11 @@ describe('listsShow', () => {
     };
 
     withRenderedTemplate('listsShow', data, el => {
-      const todosText = todos.map(t => t.text);
+      const todosText = todos.map(t => t.text).reverse();
       const renderedText = $(el).find('.list-items input[type=text]')
         .map((i, e) => $(e).val())
         .toArray();
-      chai.assert.deepEqual(renderedText, todosText.reverse());
+      chai.assert.deepEqual(renderedText, todosText);
     });
   });
 });

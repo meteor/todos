@@ -28,9 +28,9 @@ Package.onUse(function(api) {
   ], 'client');
 });
 
-Package.onTest(function(api) {
-  api.use('todos-lib');
-  api.use('tinytest');
-  api.use('todos-app');
-  api.addFiles('todos-app-tests.js');
-});
+// Package.onTest(function(api) {
+//   api.use('todos-lib');
+//   api.use('tinytest');
+//   api.use('todos-app');
+//   api.addFiles('todos-app-tests.js');
+// });

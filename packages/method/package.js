@@ -15,9 +15,9 @@ Package.onUse(function(api) {
   api.export('Method');
 });
 
-Package.onTest(function(api) {
-  api.use('ecmascript');
-  api.use('tinytest');
-  api.use('methods');
-  api.addFiles('methods-tests.js');
-});
+// Package.onTest(function(api) {
+//   api.use('ecmascript');
+//   api.use('tinytest');
+//   api.use('methods');
+//   api.addFiles('methods-tests.js');
+// });
