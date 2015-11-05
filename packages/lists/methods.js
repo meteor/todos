@@ -6,9 +6,7 @@ const LIST_ID_ONLY = new SimpleSchema({
 
 Lists.methods.insert = new Method({
   name: 'Lists.methods.insert',
-  validate() {
-    // XXX how do I validate that this shouldn't take any arguments?
-  },
+  schema: new SimpleSchema({}),
   run() {
     const list = {
       name: generateListName(),
