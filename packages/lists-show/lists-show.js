@@ -26,49 +26,6 @@ Template.listsShow.helpers({
   }
 });
 
-var editList = function(list, template) {
-  Session.set(EDITING_KEY, true);
-
-  // force the template to redraw based on the reactive change
-  Tracker.flush();
-  template.$('.js-edit-form input[type=text]').focus();
-};
-
-var saveList = function(list, template) {
-  Session.set(EDITING_KEY, false);
-
-  Lists.methods.updateName.call({
-    listId: list._id,
-    newName: template.$('[name=name]').val()
-  });
-}
-
-var deleteList = function(list) {
-  const message = `Are you sure you want to delete the list ${list.name}?`;
-
-  if (confirm(message)) {
-    Lists.methods.remove.call({
-      listId: list._id
-    });
-
-    // XXX should this be optimistic?
-    // We need some way of calling this only if the client-side validation
-    // passes
-    FlowRouter.go('home');
-    return true;
-  } else {
-    return false;
-  }
-};
-
-function toggleListPrivacy(list) {
-  if (list.userId) {
-    Lists.methods.makePublic.call({ listId: list._id });
-  } else {
-    Lists.methods.makePrivate.call({ listId: list._id });
-  }
-};
-
 Template.listsShow.events({
   'click .js-cancel'() {
     Session.set(EDITING_KEY, false);
@@ -143,3 +100,46 @@ Template.listsShow.events({
     $input.val('');
   }
 });
+
+function editList(list, template) {
+  Session.set(EDITING_KEY, true);
+
+  // force the template to redraw based on the reactive change
+  Tracker.flush();
+  template.$('.js-edit-form input[type=text]').focus();
+};
+
+function saveList(list, template) {
+  Session.set(EDITING_KEY, false);
+
+  Lists.methods.updateName.call({
+    listId: list._id,
+    newName: template.$('[name=name]').val()
+  });
+}
+
+function deleteList(list) {
+  const message = `Are you sure you want to delete the list ${list.name}?`;
+
+  if (confirm(message)) {
+    Lists.methods.remove.call({
+      listId: list._id
+    });
+
+    // XXX should this be optimistic?
+    // We need some way of calling this only if the client-side validation
+    // passes
+    FlowRouter.go('home');
+    return true;
+  } else {
+    return false;
+  }
+};
+
+function toggleListPrivacy(list) {
+  if (list.userId) {
+    Lists.methods.makePublic.call({ listId: list._id });
+  } else {
+    Lists.methods.makePrivate.call({ listId: list._id });
+  }
+};
