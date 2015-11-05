@@ -50,4 +50,28 @@ Todos.methods.updateText = new Method({
       $set: { text: newText }
     });
   }
-})
+});
+
+Todos.methods.remove = new Method({
+  name: 'Todos.methods.remove',
+  schema: new SimpleSchema({
+    todoId: { type: String }
+  }),
+  run({ todoId }) {
+    const todo = Todos.findOne(todoId);
+    const list = todo.getList();
+
+    if (list.isPrivate() && list.userId !== this.userId) {
+      throw new Meteor.Error('Todos.methods.remove.unauthorized',
+        'Cannot remove todos in a private list that is not yours');
+    }
+
+    Todos.remove(todoId);
+
+    if (! todo.checked) {
+      Lists.update(todo.listId, {
+        $inc: {incompleteCount: -1}
+      });
+    }
+  }
+});
