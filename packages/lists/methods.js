@@ -14,7 +14,7 @@ Lists.methods.insert = new Method({
     // XXX How are you supposed to get the ID on the client side again?
     return Lists.insert(list);
   }
-})
+});
 
 Lists.methods.makePrivate = new Method({
   name: 'Lists.methods.makePrivate',
