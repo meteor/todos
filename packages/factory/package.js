@@ -12,13 +12,12 @@ Package.onUse(function(api) {
     'random',
     'ecmascript'
   ]);
-
   api.imply(['dfischer:faker', 'random']);
   api.addFiles(['factory.js', 'dataset.js', 'factory-api.js']);
   api.export('Factory');
 });
 
 Package.onTest(function(api) {
-  api.use(['tinytest', 'factory', 'underscore']);
+  api.use(['ecmascript', 'tinytest', 'factory', 'underscore']);
   api.addFiles('factory-tests.js', 'server');
 });

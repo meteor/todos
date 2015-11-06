@@ -12,24 +12,37 @@ describe('lists', () => {
 
   describe('publications', () => {
     describe('lists/public', () => {
+      const userId = Random.id();
+
+      // TODO -- make a `listWithTodos` factory
+      const createList = (props = {}) => {
+        const list = Factory.create('list', props);
+        _.times(3, () => {
+          Factory.create('todo', {listId: list._id});
+        });
+      };
+
       before(() => {
         Lists.remove({});
-        _.times(3, () => {
-          // TODO -- make a `listWithTodos` factory
-          const list = Factory.create('list');
-          _.times(3, () => {
-            Factory.create('todo', {listId: list._id});
-          });
-        });
+        _.times(3, () => createList());
+        _.times(2, () => createList({userId}));
+        _.times(2, () => createList({userId: Random.id()}));
       });
 
       it('sends all public lists', (done) => {
         const collector = new PublicationCollector();
-        collector.on('ready', (collections) => {
+        collector.collect('lists/public', (collections) => {
           chai.assert.equal(collections.Lists.length, 3);
           done();
         });
-        collector.collect('lists/public');
+      });
+
+      it('sends all owned lists', (done) => {
+        const collector = new PublicationCollector({userId});
+        collector.collect('lists/private', (collections) => {
+          chai.assert.equal(collections.Lists.length, 2);
+          done();
+        });
       });
     });
   });

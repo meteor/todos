@@ -17,7 +17,11 @@ Meteor._inherits(PublicationCollector, EventEmitter);
 
 _.extend(PublicationCollector.prototype, {
   collect(name, ...args) {
-    const handler = Meteor.server.publish_handlers['lists/public'];
+    if (_.isFunction(args[args.length - 1])) {
+      this.on('ready', args.pop());
+    }
+
+    const handler = Meteor.server.publish_handlers[name];
     const result = handler.call(this, ...args);
 
     // TODO -- we should check that result has _publishCursor? What does _runHandler do?
@@ -31,17 +35,17 @@ _.extend(PublicationCollector.prototype, {
     check(collection, String);
     check(id, String);
 
-    self._ensureCollectionInRes(collection);
+    this._ensureCollectionInRes(collection);
 
     // Make sure to ignore the _id in fields
     const addedDocument = _.extend({_id: id}, _.omit(fields, "_id"));
-    self.responseData[collection][id] = addedDocument;
+    this.responseData[collection][id] = addedDocument;
   },
   changed(collection, id, fields) {
     check(collection, String);
     check(id, String);
 
-    self._ensureCollectionInRes(collection);
+    this._ensureCollectionInRes(collection);
 
     const existingDocument = this.responseData[collection][id];
     const fieldsNoId = _.omit(fields, "_id");
@@ -58,16 +62,16 @@ _.extend(PublicationCollector.prototype, {
     check(collection, String);
     check(id, String);
 
-    self._ensureCollectionInRes(collection);
+    this._ensureCollectionInRes(collection);
 
-    delete self.responseData[collection][id];
+    delete this.responseData[collection][id];
 
-    if (_.isEmpty(self.responseData[collection])) {
-      delete self.responseData[collection];
+    if (_.isEmpty(this.responseData[collection])) {
+      delete this.responseData[collection];
     }
   },
   ready() {
-    this.emit("ready", this._generateResponse());
+    this.emit('ready', this._generateResponse());
   },
   onStop() {
     // no-op in HTTP
@@ -81,7 +85,7 @@ _.extend(PublicationCollector.prototype, {
   _generateResponse() {
     const output = {};
 
-    this.responseData.forEach((documents, collectionName) => {
+    _.forEach(this.responseData, (documents, collectionName) => {
       output[collectionName] = _.values(documents);
     });
 

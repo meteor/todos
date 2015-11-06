@@ -19,11 +19,8 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use([
-    'todos-lib',
-    'practicalmeteor:mocha@2.1.0_5',
-    'lists',
-    'underscore',
-    'publication-collector'
+    'todos-test-lib',
+    'lists'
   ]);
   api.addFiles('lists-tests.js', 'server');
 });
