@@ -27,7 +27,6 @@ Package.onUse(function(api) {
     'blaze-html-templates',
     'reactive-dict',
     'session',
-
   ]);
 
   // Routing
