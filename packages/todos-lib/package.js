@@ -17,7 +17,7 @@ Package.onUse(function(api) {
   api.imply([
     'mongo',
     'aldeed:collection2@2.5.0',
-    'dburles:collection-helpers@1.0.4'
+    'dburles:collection-helpers@1.0.4',
   ]);
 
   // Client-side libraries
@@ -27,6 +27,7 @@ Package.onUse(function(api) {
     'blaze-html-templates',
     'reactive-dict',
     'session',
+    'aldeed:template-extension@3.4.3',
   ]);
 
   // Routing
@@ -57,6 +58,8 @@ Package.onUse(function(api) {
   // Accounts
   api.imply([
     'accounts-password',
+    'useraccounts:unstyled@1.12.4',
+    'useraccounts:flow-routing@1.12.4',
   ]);
 
   // DDP

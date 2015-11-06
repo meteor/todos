@@ -1,18 +1,4 @@
-/* global FlowRouter BlazeLayout */
-
-FlowRouter.route('/join', {
-  name: 'join',
-  action: () => {
-    BlazeLayout.render('appBody', {main: 'join'});
-  }
-});
-
-FlowRouter.route('/signin', {
-  name: 'signin',
-  action: () => {
-    BlazeLayout.render('appBody', {main: 'signin'});
-  }
-});
+/* global FlowRouter BlazeLayout AccountsTemplates */
 
 FlowRouter.route('/lists/:_id', {
   name: 'listsShow',
@@ -34,3 +20,13 @@ FlowRouter.notFound = {
     BlazeLayout.render('appBody', {main: 'appNotFound'});
   }
 };
+
+AccountsTemplates.configureRoute('signIn', {
+    name: 'signin',
+    path: '/signin'
+});
+
+AccountsTemplates.configureRoute('signUp', {
+    name: 'join',
+    path: '/join'
+});

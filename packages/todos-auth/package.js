@@ -8,10 +8,8 @@ Package.onUse(function(api) {
   api.use('todos-lib');
 
   api.addFiles([
-    'auth-join.html',
-    'auth-join.js',
-    'auth-signin.html',
-    'auth-signin.js',
+    'auth.html',
+    'auth.js',
     'auth.less'
   ], 'client');
 });

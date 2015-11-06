@@ -27,9 +27,19 @@
     }
 
     form {
-      .input-symbol {
+      .input {
         margin-bottom: 1px;
         width: 100%;
+        display: block;
+
+        input {
+          width: 100%;
+          padding: .75rem;
+        }
+      }
+
+      label {
+        display: none;
       }
 
       .btn-primary {
@@ -56,7 +66,7 @@
     }
   }
 
-  .link-auth-alt {
+  .at-signup-link, .at-signin-link {
     .font-s1;
     .position(absolute, auto, 0, 1em, 0);
     color: @color-medium;

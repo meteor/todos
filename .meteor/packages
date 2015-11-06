@@ -6,3 +6,5 @@
 
 meteor-base   # Packages every Meteor app needs to have
 todos-main    # The entry point for the app, requires all other packages
+
+jquery        # Necessary until https://github.com/meteor-useraccounts/core/pull/574 gets merged
