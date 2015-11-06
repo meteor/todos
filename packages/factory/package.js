@@ -6,7 +6,13 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
-  api.use(['underscore', 'minimongo', 'random']);
+  api.use([
+    'underscore',
+    'minimongo',
+    'random',
+    'ecmascript'
+  ]);
+
   api.imply(['dfischer:faker', 'random']);
   api.addFiles(['factory.js', 'dataset.js', 'factory-api.js']);
   api.export('Factory');
