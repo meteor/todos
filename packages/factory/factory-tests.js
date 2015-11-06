@@ -22,7 +22,7 @@ Tinytest.add('Factory - Build - Basic build lets you set _id', function(test) {
 
 
 Tinytest.add('Factory - Define - AfterBuild hook', function(test) {
-  var result;
+  let result;
 
   Factory.define('author', Authors, {
     name: 'John Smith'
@@ -30,7 +30,7 @@ Tinytest.add('Factory - Define - AfterBuild hook', function(test) {
     result = doc;
   });
 
-  var author = Factory.create('author');
+  const author = Factory.create('author');
   test.equal(author.name, 'John Smith');
   test.equal(result.name, 'John Smith');
 });
@@ -45,8 +45,8 @@ Tinytest.add('Factory - Compile - AfterBuild hook that builds', function(test) {
     });
   });
 
-  var dataset = Factory.compile('authorWithFriends');
-  var author = dataset.getTargetDoc();
+  const dataset = Factory.compile('authorWithFriends');
+  const author = dataset.getTargetDoc();
   test.equal(author.friendIds.length, 2);
   test.equal(dataset.documents.authors.length, 3);
 });
@@ -60,7 +60,7 @@ Tinytest.add('Factory - Create - After hook that builds', function(test) {
     });
   });
 
-  var author = Factory.create('authorWithFriends');
+  const author = Factory.create('authorWithFriends');
   test.equal(author.friendIds.length, 2);
   test.isTrue(!!Authors.findOne(author.friendIds[0]));
 });
@@ -173,8 +173,8 @@ Tinytest.add('Factory - Build - Extend - With attributes (check that we do not m
       test: 'testing!'
     }));
 
-    var authorOne = Factory.build('authorOne');
-    var author = Factory.build('author');
+    const authorOne = Factory.build('authorOne');
+    const author = Factory.build('author');
 
     test.equal(authorOne.name, 'John Smith');
     test.equal(authorOne.test, 'testing!');
@@ -195,7 +195,7 @@ Tinytest.add('Factory - Build - Extend - Parent with relationship', function(tes
 
   Factory.define('bookOne', Books, Factory.extend('book'));
 
-  var bookOne = Factory.create('bookOne');
+  const bookOne = Factory.create('bookOne');
 
   test.equal(bookOne.name, 'A book');
 });
@@ -216,7 +216,7 @@ Tinytest.add('Factory - Build - Extend - Parent with relationship - Extra attrib
       name: 'A better book'
     }));
 
-    var bookOne = Factory.create('bookOne');
+    const bookOne = Factory.create('bookOne');
 
     test.equal(bookOne.name, 'A better book');
     // same year as parent
@@ -229,7 +229,7 @@ Tinytest.add('Factory - Create - Basic', function(test) {
     name: 'John Smith'
   });
 
-  var author = Factory.create('author');
+  const author = Factory.create('author');
 
   test.equal(author.name, 'John Smith');
 });
@@ -246,7 +246,7 @@ Tinytest.add('Factory - Create - Relationship', function(test) {
   });
 
   Authors.remove({});
-  var book = Factory.create('book');
+  const book = Factory.create('book');
 
   test.equal(Authors.findOne(book.authorId).name, 'John Smith');
 });
@@ -264,7 +264,7 @@ Tinytest.add('Factory - Create - Relationship - return a Factory from function',
     year: 2014
   });
 
-  var book = Factory.create('book');
+  const book = Factory.create('book');
 
   test.equal(Authors.findOne(book.authorId).name, 'John Smith');
 });
@@ -283,7 +283,7 @@ Tinytest.add('Factory - Create - Relationship - return a Factory from deep funct
       year: 2014
     });
 
-    var book = Factory.create('book');
+    const book = Factory.create('book');
 
     test.equal(Authors.findOne(book.good.authorId).name, 'John Smith');
   }
@@ -305,7 +305,7 @@ Tinytest.add('Factory - Create - Relationship - return a Factory from deep funct
       year: 2014
     });
 
-    var book = Factory.create('book');
+    const book = Factory.create('book');
 
     test.equal(Authors.findOne(book.good.authorId).name, 'John Smith');
   }
@@ -322,9 +322,9 @@ Tinytest.add('Factory - Create - Relationship - return a Factory from deep funct
 //     }
 //   });
 //
-//   var author = Factory.build('author');
+//   const author = Factory.build('author');
 //   test.equal(author.email, 'person1@example.com');
-//   var author2 = Factory.build('author');
+//   const author2 = Factory.build('author');
 //   test.equal(author2.email, 'person2@example.com');
 // });
 
@@ -340,13 +340,13 @@ Tinytest.add('Factory - Create - Relationship - return a Factory from deep funct
 //     }
 //   });
 //
-//   var author = Factory.create('author');
+//   const author = Factory.create('author');
 //   test.equal(author.email, 'person1@example.com');
-//   var foundAuthor = Authors.find({email: 'person1@example.com'}).count();
+//   const foundAuthor = Authors.find({email: 'person1@example.com'}).count();
 //   test.equal(foundAuthor, 1);
 //
-//   var author2 = Factory.create('author');
+//   const author2 = Factory.create('author');
 //   test.equal(author2.email, 'person2@example.com');
-//   var foundAuthor2 = Authors.find({email: 'person2@example.com'}).count();
+//   const foundAuthor2 = Authors.find({email: 'person2@example.com'}).count();
 //   test.equal(foundAuthor2, 1);
 // });

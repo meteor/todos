@@ -1,6 +1,9 @@
+/* global listFadeInHold:true dataReadyHold:true */
+/* global LaunchScreen FlowRouter Lists */
+
 // Track if this is the first time the list template is rendered
-var firstRender = true;
-var listRenderHold = LaunchScreen.hold();
+let firstRender = true;
+const listRenderHold = LaunchScreen.hold();
 listFadeInHold = null;
 // Keep showing the launch screen on mobile devices until we have loaded
 // the app's data

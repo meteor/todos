@@ -1,3 +1,5 @@
+/* global Lists SimpleSchema Method Todos */
+
 Lists.methods = {};
 
 const LIST_ID_ONLY = new SimpleSchema({

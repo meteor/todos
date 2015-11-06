@@ -1,3 +1,6 @@
+/* global Method:true */
+/* global SimpleSchema */
+
 // TODO
 // 1. Need a way to share data between authorize and run, in case you need to
 // load a particular document
@@ -21,7 +24,7 @@ Method = class Method {
 
       validate = (args) => {
         validateAgainstSimpleSchema(args, schema);
-      }
+      };
     }
 
     check(validate, Function);

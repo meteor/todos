@@ -1,22 +1,22 @@
 /* global Factory */
 
-var Dataset = function() {
+function Dataset() {
   this.documents = {};
   this.collections = {};
-};
+}
 
 _.extend(Dataset.prototype, {
-  add: function(nameOrFactory, properties, opts) {
-    var options = opts || {};
+  add(nameOrFactory, properties, opts) {
+    const options = opts || {};
 
-    var factory;
+    let factory;
     if (_.isString(nameOrFactory)) {
       factory = Factory.get(nameOrFactory);
     } else {
       factory = nameOrFactory;
     }
 
-    var doc = factory.build(this, properties, _.pick(options || {}, 'noRelations'));
+    let doc = factory.build(this, properties, _.pick(options || {}, 'noRelations'));
     if (options && options.target) {
       // We need to apply the transform from the collection as we aren't inserting anywhere
       if (factory.collection._transform) {
@@ -29,8 +29,8 @@ _.extend(Dataset.prototype, {
     return doc;
   },
 
-  addDocument: function(document, collection) {
-    var collectionName = collection._name;
+  addDocument(document, collection) {
+    const collectionName = collection._name;
 
     if (!this.documents[collectionName]) {
       this.documents[collectionName] = [];
@@ -40,8 +40,8 @@ _.extend(Dataset.prototype, {
     this.documents[collectionName].push(document);
   },
 
-  createAll: function() {
-    var self = this;
+  createAll() {
+    const self = this;
 
     _.each(self.documents, function(docs, collectionName) {
       _.each(docs, function(doc) {
@@ -50,7 +50,7 @@ _.extend(Dataset.prototype, {
     });
   },
 
-  get: function(collectionName, id) {
+  get(collectionName, id) {
     // XXX: this could be a lot more efficient if we used a collection from the beginning
     const doc = _.find(this.documents[collectionName], function(d) { return d._id === id; });
     const transform = this.collections[collectionName]._transform;
@@ -60,14 +60,14 @@ _.extend(Dataset.prototype, {
     return doc;
   },
 
-  getTargetDoc: function() {
+  getTargetDoc() {
     return this.get(this.targetDocCollection._name, this.targetDocId);
   },
 
-  getAsCollection: function(collectionName) {
+  getAsCollection(collectionName) {
     // NOTE: this should be something more featured like StubCollections.stubCollection
     //  as it should clone the schema etc also. Maybe it doesn't matter...
-    var collection = new Mongo.Collection(null, {
+    const collection = new Mongo.Collection(null, {
       transform: this.collections[collectionName]._transform
     });
 
@@ -78,8 +78,8 @@ _.extend(Dataset.prototype, {
     return collection;
   },
 
-  getAsCursor: function(collectionName) {
-    var collection = this.getAsCollection(collectionName);
+  getAsCursor(collectionName) {
+    const collection = this.getAsCollection(collectionName);
     return collection.find();
   }
 });

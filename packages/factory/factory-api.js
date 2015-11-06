@@ -3,9 +3,9 @@
 Factory._factories = {};
 
 Factory.get = function(name) {
-  var factory = Factory._factories[name];
+  const factory = Factory._factories[name];
   if (!factory) {
-    throw new Meteor.Error('No factory defined named "' + name + '"');
+    throw new Meteor.Error(`No factory defined named ${name}`);
   }
   return factory;
 };
@@ -17,20 +17,20 @@ Factory.define = function(name, collection, properties) {
 
 
 Factory.create = function(name, properties) {
-  var dataset = Factory.compile(name, properties);
+  const dataset = Factory.compile(name, properties);
   dataset.createAll();
   return dataset.targetDocCollection.findOne(dataset.targetDocId);
 };
 
 Factory.compile = function(name, properties, options) {
-  var dataset = new Factory.Dataset();
-  var factory = Factory.get(name);
+  const dataset = new Factory.Dataset();
+  const factory = Factory.get(name);
   dataset.add(factory, properties, _.extend({target: true}, options));
   return dataset;
 };
 
 Factory.build = function(name, properties) {
-  var dataset = Factory.compile(name, properties, {noRelations: true});
+  const dataset = Factory.compile(name, properties, {noRelations: true});
   return dataset.getTargetDoc();
 };
 

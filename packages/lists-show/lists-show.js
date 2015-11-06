@@ -1,4 +1,6 @@
-var EDITING_KEY = 'editingList';
+/* global Todos Lists FlowRouter */
+
+const EDITING_KEY = 'editingList';
 Session.setDefault(EDITING_KEY, false);
 
 Template.listsShow.onRendered(function() {
@@ -22,7 +24,7 @@ Template.listsShow.helpers({
     return Session.get(EDITING_KEY);
   },
   todos(listId) {
-    return Todos.find({listId: listId}, {sort: {createdAt : -1}});
+    return Todos.find({ listId: listId }, { sort: { createdAt: -1 } });
   }
 });
 
@@ -33,7 +35,7 @@ Template.listsShow.events({
 
   'keydown input[type=text]'(event) {
     // ESC
-    if (27 === event.which) {
+    if (event.which === 27) {
       event.preventDefault();
       $(event.target).blur();
     }
@@ -41,8 +43,9 @@ Template.listsShow.events({
 
   'blur input[type=text]'(event, template) {
     // if we are still editing (we haven't just clicked the cancel button)
-    if (Session.get(EDITING_KEY))
+    if (Session.get(EDITING_KEY)) {
       saveList(this.list, template);
+    }
   },
 
   'submit .js-edit-form'(event, template) {
@@ -89,9 +92,10 @@ Template.listsShow.events({
   'submit .js-todo-new'(event) {
     event.preventDefault();
 
-    var $input = $(event.target).find('[type=text]');
-    if (! $input.val())
+    const $input = $(event.target).find('[type=text]');
+    if (!$input.val()) {
       return;
+    }
 
     Todos.methods.insert.call({
       listId: this.list._id,
@@ -108,7 +112,7 @@ function editList(list, template) {
   // force the template to redraw based on the reactive change
   Tracker.flush();
   template.$('.js-edit-form input[type=text]').focus();
-};
+}
 
 function saveList(list, template) {
   Session.set(EDITING_KEY, false);
@@ -132,10 +136,10 @@ function deleteList(list) {
     // passes
     FlowRouter.go('home');
     return true;
-  } else {
-    return false;
   }
-};
+
+  return false;
+}
 
 function toggleListPrivacy(list) {
   if (list.userId) {
@@ -143,4 +147,4 @@ function toggleListPrivacy(list) {
   } else {
     Lists.methods.makePrivate.call({ listId: list._id });
   }
-};
+}
