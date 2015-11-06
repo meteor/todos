@@ -64,7 +64,7 @@ Lists.methods.updateName = new Method({
   }),
   run({ listId, newName }) {
     Lists.update(listId, {
-      $set: {name: newName}
+      $set: { name: newName }
     });
   }
 });

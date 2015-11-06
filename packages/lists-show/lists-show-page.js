@@ -4,15 +4,18 @@
 // Track if this is the first time the list template is rendered
 let firstRender = true;
 const listRenderHold = LaunchScreen.hold();
+listRenderHold.release(); // XXX
 listFadeInHold = null;
 // Keep showing the launch screen on mobile devices until we have loaded
 // the app's data
 dataReadyHold = LaunchScreen.hold();
+dataReadyHold.release(); // XXX
 
 Template.listsShowPage.onCreated(function() {
   if (firstRender) {
     // Released in app-body.js
     listFadeInHold = LaunchScreen.hold();
+    listFadeInHold.release(); // XXX
 
     // Handle for launch screen defined in app-body.js
     listRenderHold.release();

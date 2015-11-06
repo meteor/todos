@@ -1,8 +1,5 @@
 /* global Lists ActiveRoute FlowRouter listFadeInHold */
 
-const MENU_KEY = 'menuOpen';
-Session.setDefault(MENU_KEY, false);
-
 const USER_MENU_KEY = 'userMenuOpen';
 Session.setDefault(USER_MENU_KEY, false);
 
@@ -12,17 +9,6 @@ Session.setDefault(SHOW_CONNECTION_ISSUE_KEY, false);
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
 Meteor.startup(() => {
-  // set up a swipe left / right handler
-  $(document.body).touchwipe({
-    wipeLeft() {
-      Session.set(MENU_KEY, false);
-    },
-    wipeRight() {
-      Session.set(MENU_KEY, true);
-    },
-    preventDefaultEvents: false
-  });
-
   // Only show the connection error box if it has been 5 seconds since
   // the app started
   setTimeout(() => {
@@ -106,6 +92,14 @@ Template.appBody.helpers({
     }
 
     return true;
+  },
+  templateGestures: {
+    'swipeleft .cordova'(event, instance) {
+      instance.state.set('menuOpen', false);
+    },
+    'swiperight .cordova'(event, instance) {
+      instance.state.set('menuOpen', true);
+    }
   }
 });
 

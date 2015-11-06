@@ -18,6 +18,7 @@ caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.1.0
+chriswessels:hammer@4.0.2
 coffeescript@1.0.11
 cosmos:browserify@0.5.1
 dburles:collection-helpers@1.0.4
@@ -92,7 +93,6 @@ todos@0.0.1
 todos-auth@0.0.1
 todos-lib@0.0.0
 todos-main@0.0.1
-touchwipe@0.0.0
 tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4

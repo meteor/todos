@@ -40,8 +40,8 @@ Package.onUse(function(api) {
 
   // Mobile stuff
   api.imply([
-    'touchwipe',
     'mobile-experience',
+    'chriswessels:hammer@4.0.2'
   ]);
 
   // CSS
