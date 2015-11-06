@@ -24,7 +24,7 @@ Template.listsShowPage.onCreated(function() {
   // XXX as I understand, we don't want this to be reactive because we might
   // want to animate between pages?
   this.listId = FlowRouter.getParam('_id');
-  this.subscribe('todos', this.listId);
+  this.subscribe('list/todos', this.listId);
 
   this.autorun(() => {
     if (this.subscriptionsReady()) {
