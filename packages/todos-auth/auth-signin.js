@@ -1,4 +1,6 @@
-var ERRORS_KEY = 'signinErrors';
+/* global FlowRouter */
+
+const ERRORS_KEY = 'signinErrors';
 
 Template.signin.onCreated(function() {
   Session.set(ERRORS_KEY, {});
@@ -17,16 +19,16 @@ Template.signin.events({
   'submit'(event, template) {
     event.preventDefault();
 
-    var email = template.$('[name=email]').val();
-    var password = template.$('[name=password]').val();
+    const email = template.$('[name=email]').val();
+    const password = template.$('[name=password]').val();
 
-    var errors = {};
+    const errors = {};
 
-    if (! email) {
+    if (!email) {
       errors.email = 'Email is required';
     }
 
-    if (! password) {
+    if (!password) {
       errors.password = 'Password is required';
     }
 

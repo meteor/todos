@@ -4,7 +4,7 @@ Package.describe({
   summary: 'Todo collection'
 });
 
-Package.onUse(function(api) {
+Package.onUse(function (api) {
   api.use('todos-lib');
 
   api.addFiles([
@@ -17,7 +17,7 @@ Package.onUse(function(api) {
   api.export('Todos');
 });
 
-Package.onTest(function(api) {
+Package.onTest(function (api) {
   api.use([
     'todos-lib',
     'practicalmeteor:mocha@2.1.0_5',

@@ -13,7 +13,8 @@ Todos = new TodosCollection('Todos');
 Todos.schema = new SimpleSchema({
   listId: {
     type: String,
-    regEx: SimpleSchema.RegEx.Id
+    regEx: SimpleSchema.RegEx.Id,
+    denyUpdate: true
   },
   text: {
     type: String,

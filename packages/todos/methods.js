@@ -1,3 +1,5 @@
+/* global Todos Lists SimpleSchema Method */
+
 Todos.methods = {};
 
 Todos.methods.insert = new Method({
@@ -35,7 +37,7 @@ Todos.methods.setCheckedStatus = new Method({
     todoId: { type: String },
     newCheckedStatus: { type: Boolean }
   }),
-  run({ todoId }) {
+  run({ todoId, newCheckedStatus }) {
     const todo = Todos.findOne(todoId);
 
     if (todo.checked === newCheckedStatus) {
@@ -100,7 +102,7 @@ Todos.methods.remove = new Method({
 
     Todos.remove(todoId);
 
-    if (! todo.checked) {
+    if (!todo.checked) {
       Lists.update(todo.listId, {
         $inc: {incompleteCount: -1}
       });

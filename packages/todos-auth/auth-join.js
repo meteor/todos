@@ -1,4 +1,6 @@
-var ERRORS_KEY = 'joinErrors';
+/* global FlowRouter */
+
+const ERRORS_KEY = 'joinErrors';
 
 Template.join.onCreated(function() {
   Session.set(ERRORS_KEY, {});
@@ -16,17 +18,17 @@ Template.join.helpers({
 Template.join.events({
   'submit'(event, template) {
     event.preventDefault();
-    var email = template.$('[name=email]').val();
-    var password = template.$('[name=password]').val();
-    var confirm = template.$('[name=confirm]').val();
+    const email = template.$('[name=email]').val();
+    const password = template.$('[name=password]').val();
+    const confirm = template.$('[name=confirm]').val();
 
-    var errors = {};
+    const errors = {};
 
-    if (! email) {
+    if (!email) {
       errors.email = 'Email required';
     }
 
-    if (! password) {
+    if (!password) {
       errors.password = 'Password required';
     }
 

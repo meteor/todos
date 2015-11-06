@@ -15,10 +15,3 @@ Package.onUse(function(api) {
     'auth.less'
   ], 'client');
 });
-
-Package.onTest(function(api) {
-  api.use('ecmascript');
-  api.use('tinytest');
-  api.use('todos-auth');
-  api.addFiles('todos-auth-tests.js');
-});
