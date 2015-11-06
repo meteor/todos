@@ -9,7 +9,7 @@
 
   // Style
   .title-caps;
-  .transition( all 200ms ease-in );
+  transition: all 200ms ease-in;
   color: @color-empty;
   display: inline-block;
   position: relative;
@@ -27,7 +27,7 @@
   }
 
   &[class*="secondary"] {
-    .transition( all 300ms ease-in );
+    transition: all 300ms ease-in;
     box-shadow: lighten(#517096, 5%) 0 0 0 1px inset;
     color: @color-empty;
 
@@ -42,13 +42,13 @@
 }
 
 .btns-group {
-  .display(flex);
-  .flex-wrap(wrap);
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
 
   [class*="btn-"] {
     .ellipsized;
-    .flex(1);
+    flex: 1;
 
     & + [class*="btn-"] { margin-left: -1px; }
   }

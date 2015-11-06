@@ -1,23 +1,23 @@
 @import '{less-imports}/imports.import.less';
 
 @-webkit-keyframes spin {
-  0% { .transform(rotate(0deg)); }
-  100% { .transform(rotate(359deg)); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
 }
 @keyframes spin {
-  0% { .transform(rotate(0deg)); }
-  100% { .transform(rotate(359deg)); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
 }
 
 
 // Notification message (e.g., when unable to connect)
 .notifications {
   .position(absolute, auto, auto, 10px, 50%, 280px);
-  .transform(translate3d(-50%, 0, 0));
+  transform: translate3d(-50%, 0, 0);
   z-index: 1;
 
   @media screen and (min-width: 40em) {
-    .transform(translate3d(0, 0, 0));
+    transform: translate3d(0, 0, 0);
     bottom: auto;
     right: 1rem;
     top: 1rem;
@@ -35,7 +35,7 @@
 
     .icon-sync {
       .position(absolute, 30%, auto, auto, 1rem);
-      .animation(spin 2s infinite linear);
+      animation: spin 2s infinite linear;
       color: @color-empty;
       font-size: 1.5em;
     }

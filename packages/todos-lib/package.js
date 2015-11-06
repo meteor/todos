@@ -8,7 +8,6 @@ Package.onUse(function(api) {
   api.imply([
     'ecmascript',
     'es5-shim',
-    'standard-minifiers',
     'underscore',
     'check',
   ]);

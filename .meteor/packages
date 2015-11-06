@@ -8,3 +8,7 @@ meteor-base   # Packages every Meteor app needs to have
 todos-main    # The entry point for the app, requires all other packages
 
 jquery        # Necessary until https://github.com/meteor-useraccounts/core/pull/574 gets merged
+juliancwirko:postcss  # Needs to be at app level until we support configuring minifiers: https://github.com/meteor/meteor/issues/5512
+
+
+npm-container

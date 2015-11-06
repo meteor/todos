@@ -11,7 +11,6 @@ Package.onUse(function(api) {
   api.addFiles([
     'imports.import.less',
     'imports/helpers.import.less',
-    'imports/lesshat.import.less',
     'imports/fontface.import.less',
     'imports/text.import.less',
     'imports/typography.import.less',
