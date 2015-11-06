@@ -11,24 +11,25 @@ describe('lists', () => {
   });
 
   describe('publications', () => {
-    describe('lists/public', () => {
-      const userId = Random.id();
+    const userId = Random.id();
 
-      // TODO -- make a `listWithTodos` factory
-      const createList = (props = {}) => {
-        const list = Factory.create('list', props);
-        _.times(3, () => {
-          Factory.create('todo', {listId: list._id});
-        });
-      };
-
-      before(() => {
-        Lists.remove({});
-        _.times(3, () => createList());
-        _.times(2, () => createList({userId}));
-        _.times(2, () => createList({userId: Random.id()}));
+    // TODO -- make a `listWithTodos` factory
+    const createList = (props = {}) => {
+      const list = Factory.create('list', props);
+      _.times(3, () => {
+        Factory.create('todo', {listId: list._id});
       });
+    };
 
+    before(() => {
+      Lists.remove({});
+      _.times(3, () => createList());
+      _.times(2, () => createList({userId}));
+      _.times(2, () => createList({userId: Random.id()}));
+    });
+
+
+    describe('lists/public', () => {
       it('sends all public lists', (done) => {
         const collector = new PublicationCollector();
         collector.collect('lists/public', (collections) => {
@@ -36,7 +37,9 @@ describe('lists', () => {
           done();
         });
       });
+    });
 
+    describe('lists/private', () => {
       it('sends all owned lists', (done) => {
         const collector = new PublicationCollector({userId});
         collector.collect('lists/private', (collections) => {
