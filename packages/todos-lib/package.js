@@ -1,6 +1,5 @@
 Package.describe({
   name: 'todos-lib',
-  // Brief, one-line summary of the package.
   summary: 'Common dependencies of all app packages'
 });
 
