@@ -1,7 +1,63 @@
-/* global Todos Lists FlowRouter */
+/* global Todos Lists FlowRouter Tracker */
 
-const EDITING_KEY = 'editingList';
-Session.setDefault(EDITING_KEY, false);
+Template.listsShow.onCreated(function() {
+  // TODO -- figure out how to make this check work with the todo being a "Document"
+  // check(this.data, new SimpleSchema({
+  //   list: {blackbox: true},
+  //   todosReady: {type: Boolean}
+  // }));
+
+  this.state = new ReactiveDict(`list.${this.data.list._id}`);
+  this.state.setDefault({
+    editing: false,
+    editingTodo: false
+  });
+
+  this.saveList = () => {
+    this.state.set('editing', false);
+
+    Lists.methods.updateName.call({
+      listId: this.data.list._id,
+      newName: this.$('[name=name]').val()
+    });
+  };
+
+  this.editList = () => {
+    this.state.set('editing', true);
+
+    // force the template to redraw based on the reactive change
+    Tracker.flush();
+    this.$('.js-edit-form input[type=text]').focus();
+  };
+
+  this.deleteList = () => {
+    const list = this.data.list;
+    const message = `Are you sure you want to delete the list ${list.name}?`;
+
+    if (confirm(message)) {
+      Lists.methods.remove.call({
+        listId: list._id
+      });
+
+      // XXX should this be optimistic?
+      // We need some way of calling this only if the client-side validation
+      // passes
+      FlowRouter.go('home');
+      return true;
+    }
+
+    return false;
+  };
+
+  this.toggleListPrivacy = () => {
+    const list = this.data.list;
+    if (list.userId) {
+      Lists.methods.makePublic.call({ listId: list._id });
+    } else {
+      Lists.methods.makePrivate.call({ listId: list._id });
+    }
+  };
+});
 
 Template.listsShow.onRendered(function() {
   this.find('.js-title-nav')._uihooks = {
@@ -20,17 +76,24 @@ Template.listsShow.onRendered(function() {
 });
 
 Template.listsShow.helpers({
-  editing() {
-    return Session.get(EDITING_KEY);
-  },
   todos(listId) {
-    return Todos.find({ listId: listId }, { sort: { createdAt: -1 } });
+    return Todos.find({listId: listId}, {sort: {createdAt: -1}});
+  },
+  todoArgs(todo) {
+    const instance = Template.instance();
+    return {
+      todo,
+      editing: instance.state.equals('editingTodo', todo._id),
+      onEdit(doEdit) {
+        instance.state.set('editingTodo', doEdit ? todo._id : false);
+      }
+    };
   }
 });
 
 Template.listsShow.events({
-  'click .js-cancel'() {
-    Session.set(EDITING_KEY, false);
+  'click .js-cancel'(event, instance) {
+    instance.state.set('editing', false);
   },
 
   'keydown input[type=text]'(event) {
@@ -41,52 +104,52 @@ Template.listsShow.events({
     }
   },
 
-  'blur input[type=text]'(event, template) {
+  'blur input[type=text]'(event, instance) {
     // if we are still editing (we haven't just clicked the cancel button)
-    if (Session.get(EDITING_KEY)) {
-      saveList(this.list, template);
+    if (instance.state.get('editing')) {
+      instance.saveList();
     }
   },
 
-  'submit .js-edit-form'(event, template) {
+  'submit .js-edit-form'(event, instance) {
     event.preventDefault();
-    saveList(this.list, template);
+    instance.saveList();
   },
 
   // handle mousedown otherwise the blur handler above will swallow the click
   // on iOS, we still require the click event so handle both
-  'mousedown .js-cancel, click .js-cancel'(event) {
+  'mousedown .js-cancel, click .js-cancel'(event, instance) {
     event.preventDefault();
-    Session.set(EDITING_KEY, false);
+    instance.state.set('editing', false);
   },
 
   // This is for the mobile dropdown
-  'change .list-edit'(event, template) {
+  'change .list-edit'(event, instance) {
     if ($(event.target).val() === 'edit') {
-      editList(this.list, template);
+      instance.editList();
     } else if ($(event.target).val() === 'delete') {
-      deleteList(this.list, template);
+      instance.deleteList();
     } else {
-      toggleListPrivacy(this.list, template);
+      instance.toggleListPrivacy();
     }
 
     event.target.selectedIndex = 0;
   },
 
-  'click .js-edit-list'(event, template) {
-    editList(this.list, template);
+  'click .js-edit-list'(event, instance) {
+    instance.editList();
   },
 
-  'click .js-toggle-list-privacy'(event, template) {
-    toggleListPrivacy(this.list, template);
+  'click .js-toggle-list-privacy'(event, instance) {
+    instance.toggleListPrivacy();
   },
 
-  'click .js-delete-list'(event, template) {
-    deleteList(this.list, template);
+  'click .js-delete-list'(event, instance) {
+    instance.deleteList();
   },
 
-  'click .js-todo-add'(event, template) {
-    template.$('.js-todo-new input').focus();
+  'click .js-todo-add'(event, instance) {
+    instance.$('.js-todo-new input').focus();
   },
 
   'submit .js-todo-new'(event) {
@@ -105,46 +168,3 @@ Template.listsShow.events({
     $input.val('');
   }
 });
-
-function editList(list, template) {
-  Session.set(EDITING_KEY, true);
-
-  // force the template to redraw based on the reactive change
-  Tracker.flush();
-  template.$('.js-edit-form input[type=text]').focus();
-}
-
-function saveList(list, template) {
-  Session.set(EDITING_KEY, false);
-
-  Lists.methods.updateName.call({
-    listId: list._id,
-    newName: template.$('[name=name]').val()
-  });
-}
-
-function deleteList(list) {
-  const message = `Are you sure you want to delete the list ${list.name}?`;
-
-  if (confirm(message)) {
-    Lists.methods.remove.call({
-      listId: list._id
-    });
-
-    // XXX should this be optimistic?
-    // We need some way of calling this only if the client-side validation
-    // passes
-    FlowRouter.go('home');
-    return true;
-  }
-
-  return false;
-}
-
-function toggleListPrivacy(list) {
-  if (list.userId) {
-    Lists.methods.makePublic.call({ listId: list._id });
-  } else {
-    Lists.methods.makePrivate.call({ listId: list._id });
-  }
-}

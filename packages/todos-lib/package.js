@@ -25,6 +25,7 @@ Package.onUse(function(api) {
     'tracker',
     'jquery',
     'blaze-html-templates',
+    'blaze-helpers',
     'reactive-dict',
     'session',
     'aldeed:template-extension@3.4.3',

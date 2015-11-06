@@ -1,13 +1,20 @@
-/* global Todos */
+/* global Todos SimpleSchema */
 
-const EDITING_KEY = 'EDITING_TODO_ID';
+Template.todosItem.onCreated(function() {
+  // TODO -- figure out how to make this check work with the todo being a "Document"
+  // check(this.data, new SimpleSchema({
+  //   todo: {blackbox: true},
+  //   editing: {type: Boolean, optional: true},
+  //   onEdit: {type: Function}
+  // }));
+});
 
 Template.todosItem.helpers({
   checkedClass() {
-    return this.checked && 'checked';
+    return this.todo.checked && 'checked';
   },
   editingClass() {
-    return Session.equals(EDITING_KEY, this._id) && 'editing';
+    return this.editing && 'editing';
   }
 });
 
@@ -22,12 +29,12 @@ Template.todosItem.events({
   },
 
   'focus input[type=text]'() {
-    Session.set(EDITING_KEY, this._id);
+    this.onEdit(true);
   },
 
   'blur input[type=text]'() {
-    if (Session.equals(EDITING_KEY, this._id)) {
-      Session.set(EDITING_KEY, null);
+    if (this.editing) {
+      this.onEdit(false);
     }
   },
 

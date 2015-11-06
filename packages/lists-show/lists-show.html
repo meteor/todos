@@ -1,7 +1,7 @@
 <template name="listsShow">
   <div class="page lists-show">
     <nav class="js-title-nav">
-      {{#if editing}}
+      {{#if instance.state.get 'editing'}}
         <form class="js-edit-form list-edit-form">
           <input type="text" name="name" value="{{name}}">
           <div class="nav-group right">
@@ -63,8 +63,8 @@
         {{#with list._id}} {{! Establish new data context with only the '_id'
                             field. This way, when the 'incompleteCount' field
                             changes, we don't re-render the list contents }}
-          {{#each todos this}}
-            {{> todosItem}}
+          {{#each todo in (todos this)}}
+            {{> todosItem (todoArgs todo)}}
           {{else}}
             <div class="wrapper-message">
               <div class="title-message">No tasks here</div>

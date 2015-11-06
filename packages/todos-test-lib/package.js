@@ -10,6 +10,8 @@ Package.onUse(function(api) {
     'check',
     'practicalmeteor:mocha@2.1.0_5',
     'publication-collector',
-    'factory'
+    'factory',
+    'stub-collections',
+    'tracker'
   ]);
 });

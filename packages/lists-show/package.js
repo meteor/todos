@@ -28,18 +28,18 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use([
-    'ecmascript',
+    'todos-test-lib',
     'lists-show',
     'practicalmeteor:mocha@2.1.0_5',
-    'factory',
-    'stub-collections',
     'todos',
     'lists',
-    'underscore',
     'templating',
-    'tracker',
     'jquery'
   ]);
 
-  api.addFiles('lists-show-tests.js', 'client');
+  api.addFiles([
+    'test-helpers.js',
+    'lists-show-tests.js',
+    'todos-item-tests.js'
+  ], 'client');
 });
