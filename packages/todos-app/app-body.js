@@ -1,15 +1,17 @@
-var MENU_KEY = 'menuOpen';
+/* global Lists ActiveRoute FlowRouter listFadeInHold */
+
+const MENU_KEY = 'menuOpen';
 Session.setDefault(MENU_KEY, false);
 
-var USER_MENU_KEY = 'userMenuOpen';
+const USER_MENU_KEY = 'userMenuOpen';
 Session.setDefault(USER_MENU_KEY, false);
 
-var SHOW_CONNECTION_ISSUE_KEY = 'showConnectionIssue';
+const SHOW_CONNECTION_ISSUE_KEY = 'showConnectionIssue';
 Session.setDefault(SHOW_CONNECTION_ISSUE_KEY, false);
 
-var CONNECTION_ISSUE_TIMEOUT = 5000;
+const CONNECTION_ISSUE_TIMEOUT = 5000;
 
-Meteor.startup(function () {
+Meteor.startup(() => {
   // set up a swipe left / right handler
   $(document.body).touchwipe({
     wipeLeft() {
@@ -23,7 +25,7 @@ Meteor.startup(function () {
 
   // Only show the connection error box if it has been 5 seconds since
   // the app started
-  setTimeout(function () {
+  setTimeout(() => {
     // FIXME:
     // Launch screen handle created in lib/router.js
     // dataReadyHold.release();
@@ -51,7 +53,7 @@ Template.appBody.onRendered(function() {
       $(node)
         .hide()
         .insertBefore(next)
-        .fadeIn(function () {
+        .fadeIn(function() {
           if (listFadeInHold) {
             listFadeInHold.release();
           }
@@ -81,7 +83,7 @@ Template.appBody.helpers({
     return Meteor.isCordova && 'cordova';
   },
   emailLocalPart() {
-    var email = Meteor.user().emails[0].address;
+    const email = Meteor.user().emails[0].address;
     return email.substring(0, email.indexOf('@'));
   },
   userMenuOpen() {
@@ -101,9 +103,9 @@ Template.appBody.helpers({
     const instance = Template.instance();
     if (instance.state.get('showConnectionIssue')) {
       return Meteor.status().connected;
-    } else {
-      return true;
     }
+
+    return true;
   }
 });
 

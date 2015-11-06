@@ -1,4 +1,4 @@
-/* global Lists */
+/* global Lists Todos */
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {
@@ -43,7 +43,7 @@ Meteor.startup(() => {
       }
     ];
 
-    const timestamp = (new Date()).getTime();
+    let timestamp = (new Date()).getTime();
 
     data.forEach((list) => {
       const listId = Lists.insert({

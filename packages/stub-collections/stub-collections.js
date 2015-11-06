@@ -26,7 +26,7 @@ StubCollections = {
     [].concat(collections).forEach((collection) => {
       if (!StubCollections._pairs[collection._name]) {
         const options = {transform: collection._transform};
-        
+
         const pair = {
           localCollection: new collection.constructor(null, options),
           collection

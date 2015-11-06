@@ -1,6 +1,7 @@
 const StubCollections = Package['stub-collections'] && Package['stub-collections'].StubCollections;
 
-var Items = new Mongo.Collection('Items');
+const Items = new Mongo.Collection('Items');
+
 // Uggh, these kind of shenagigans are exactly why we need stub collections
 if (Meteor.isServer) {
   Items.remove({});

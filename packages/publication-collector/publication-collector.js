@@ -1,6 +1,6 @@
 /* global PublicationCollector:true */
 
-var EventEmitter = Npm.require("events").EventEmitter;
+const EventEmitter = Npm.require("events").EventEmitter;
 
 // This file describes something like Subscription in
 // meteor/meteor/packages/ddp/livedata_server.js, but instead of sending
@@ -27,40 +27,34 @@ _.extend(PublicationCollector.prototype, {
       this.ready();
     }
   },
-  added: function (collection, id, fields) {
-    var self = this;
-    
+  added(collection, id, fields) {
     check(collection, String);
     check(id, String);
 
     self._ensureCollectionInRes(collection);
 
     // Make sure to ignore the _id in fields
-    var addedDocument = _.extend({_id: id}, _.omit(fields, "_id"));
+    const addedDocument = _.extend({_id: id}, _.omit(fields, "_id"));
     self.responseData[collection][id] = addedDocument;
   },
-  changed: function (collection, id, fields) {
-    var self = this;
-
+  changed(collection, id, fields) {
     check(collection, String);
     check(id, String);
 
     self._ensureCollectionInRes(collection);
 
-    var existingDocument = this.responseData[collection][id];
-    var fieldsNoId = _.omit(fields, "_id");
+    const existingDocument = this.responseData[collection][id];
+    const fieldsNoId = _.omit(fields, "_id");
     _.extend(existingDocument, fieldsNoId);
 
     // Delete all keys that were undefined in fields (except _id)
-    _.each(fields, function (value, key) {
+    fields.forEach((value, key) => {
       if (value === undefined) {
         delete existingDocument[key];
       }
     });
   },
-  removed: function (collection, id) {
-    var self = this;
-
+  removed(collection, id) {
     check(collection, String);
     check(id, String);
 
@@ -72,23 +66,22 @@ _.extend(PublicationCollector.prototype, {
       delete self.responseData[collection];
     }
   },
-  ready: function () {
-    console.log('emitting')
+  ready() {
     this.emit("ready", this._generateResponse());
   },
-  onStop: function () {
+  onStop() {
     // no-op in HTTP
   },
-  error: function (error) {
+  error(error) {
     throw error;
   },
-  _ensureCollectionInRes: function (collection) {
+  _ensureCollectionInRes(collection) {
     this.responseData[collection] = this.responseData[collection] || {};
   },
-  _generateResponse: function () {
-    var output = {};
+  _generateResponse() {
+    const output = {};
 
-    _.each(this.responseData, function (documents, collectionName) {
+    this.responseData.forEach((documents, collectionName) => {
       output[collectionName] = _.values(documents);
     });
 
