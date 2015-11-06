@@ -1,13 +1,10 @@
 Package.describe({
   name: 'todos-main',
   version: '0.0.1',
-  summary: 'Base Layouts and Styles for the Todos app'
+  summary: 'Entry point for the Todos app'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-  // For now, switch to FR in a sec
-  // TODO: remove session
   api.use([
     'todos-lib',
     'lists',
@@ -34,10 +31,3 @@ Package.onUse(function(api) {
     'bootstrap.js'
   ], 'server');
 });
-
-// Package.onTest(function(api) {
-//   api.use('todos-lib');
-//   api.use('tinytest');
-//   api.use('todos-app');
-//   api.addFiles('todos-app-tests.js');
-// });
