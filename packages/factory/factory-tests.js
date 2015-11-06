@@ -1,8 +1,8 @@
 /* global Authors:true, Books:true */
 /* global Factory */
 
-Authors = new Meteor.Collection('authors');
-Books = new Meteor.Collection('books');
+Authors = new Meteor.Collection('authors-factory');
+Books = new Meteor.Collection('books-factory');
 
 Tinytest.add('Factory - Build - Basic build works', function(test) {
   Factory.define('author', Authors, {
