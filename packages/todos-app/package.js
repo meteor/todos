@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'todos-app',
+  name: 'todos-main',
   version: '0.0.1',
   summary: 'Base Layouts and Styles for the Todos app'
 });
@@ -11,6 +11,9 @@ Package.onUse(function(api) {
   api.use([
     'todos-lib',
     'lists',
+    'lists-show',
+    'todos',
+    'todos-auth',
     'less-globals',
   ]);
 
@@ -26,6 +29,10 @@ Package.onUse(function(api) {
     'root-redirector.js',
     'routes.js'
   ], 'client');
+
+  api.addFiles([
+    'bootstrap.js'
+  ], 'server');
 });
 
 // Package.onTest(function(api) {

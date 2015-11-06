@@ -7,22 +7,63 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
 
+  // Language stuff
   api.imply([
     'ecmascript',
+    'es5-shim',
+    'standard-minifiers',
+    'underscore',
+    'check',
+  ]);
+
+  // Collections
+  api.imply([
+    'mongo',
+    'aldeed:collection2@2.5.0',
+  ]);
+
+  // Client-side libraries
+  api.imply([
+    'tracker',
+    'jquery',
     'blaze-html-templates',
-    'less',
+    'reactive-dict',
+    'session',
+
+  ]);
+
+  // Routing
+  api.imply([
     'kadira:flow-router@2.7.0',
     'kadira:blaze-layout@2.2.0',
-    'session',
-    'launch-screen',
     'arillo:flow-router-helpers@0.4.5',
     'zimme:active-route@2.3.0',
-    'aldeed:collection2@2.5.0',
-    'factory',
-    'reactive-dict',
-    'underscore',
+  ]);
+
+  // Mobile stuff
+  api.imply([
     'touchwipe',
+    'mobile-experience',
+  ]);
+
+  // CSS
+  api.imply([
+    'less',
     'less-imports',
-    'method'
+  ]);
+
+  // Testing setup
+  api.imply([
+    'factory',
+  ]);
+
+  // Accounts
+  api.imply([
+    'accounts-password',
+  ]);
+
+  // DDP
+  api.imply([
+    'method',
   ]);
 });
