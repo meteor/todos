@@ -5,10 +5,9 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
+  api.use('todos-lib');
 
   api.use([
-    'todos-lib',
     'lists',
     'todos'
   ]);
@@ -41,5 +40,6 @@ Package.onTest(function(api) {
     'tracker',
     'jquery'
   ]);
+
   api.addFiles('lists-show-tests.js', 'client');
 });

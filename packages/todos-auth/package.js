@@ -5,14 +5,8 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-  api.use([
-    'ecmascript',
-    'templating',
-    'less',
-    'kadira:flow-router@2.7.0',
-    'arillo:flow-router-helpers@0.4.5'
-  ]);
+  api.use('todos-lib');
+
   api.addFiles([
     'auth-join.html',
     'auth-join.js',

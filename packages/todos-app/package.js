@@ -5,8 +5,9 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
+  api.use('todos-lib');
+
   api.use([
-    'todos-lib',
     'lists',
     'lists-show',
     'todos',

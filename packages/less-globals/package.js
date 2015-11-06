@@ -4,9 +4,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-
-  api.use('less');
+  api.use('todos-lib');
 
   api.addFiles([
     // Reset goes first
