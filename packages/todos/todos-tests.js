@@ -4,7 +4,6 @@
 const assert = chai.assert;
 
 describe('todos', () => {
-
   it('builds correctly from factory', () => {
     const todo = Factory.create('todo');
     assert.typeOf(todo, 'object');

@@ -18,6 +18,7 @@ Package.onUse(function(api) {
   api.imply([
     'mongo',
     'aldeed:collection2@2.5.0',
+    'dburles:collection-helpers@1.0.4'
   ]);
 
   // Client-side libraries

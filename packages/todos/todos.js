@@ -1,11 +1,14 @@
 /* global Todos:true */
-/* global SimpleSchema Factory faker */
+/* global SimpleSchema Factory faker Lists */
 
-Todos = new Mongo.Collection('Todos', {
-  transform(todoDoc) {
-    return new TodoModel(todoDoc);
+class TodosCollection extends Mongo.Collection {
+  insert(doc) {
+    doc.createdAt = doc.createdAt || new Date();
+    return super(doc);
   }
-});
+}
+
+Todos = new TodosCollection('Todos');
 
 Todos.schema = new SimpleSchema({
   listId: {
@@ -18,12 +21,7 @@ Todos.schema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
-    denyUpdate: true,
-    autoValue: () => {
-      if (this.isInsert) {
-        return new Date();
-      }
-    }
+    denyUpdate: true
   },
   checked: {
     type: Boolean,
@@ -32,14 +30,6 @@ Todos.schema = new SimpleSchema({
 });
 
 Todos.attachSchema(Todos.schema);
-
-if (Meteor.isServer) {
-  Meteor.publish('todos', (listId) => {
-    check(listId, String);
-
-    return Todos.find({listId: listId});
-  });
-}
 
 // TODO This factory has a name - do we have a code style for this?
 //   - usually I've used the singular, sometimes you have more than one though, like
@@ -50,12 +40,8 @@ Factory.define('todo', Todos, {
   createdAt: () => new Date()
 });
 
-class TodoModel {
-  constructor(todoDoc) {
-    _.extend(this, todoDoc);
-  }
-
+Todos.helpers({
   getList() {
     return Lists.findOne(this.listId);
   }
-}
+});

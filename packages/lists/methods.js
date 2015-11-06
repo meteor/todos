@@ -8,12 +8,7 @@ Lists.methods.insert = new Method({
   name: 'Lists.methods.insert',
   schema: new SimpleSchema({}),
   run() {
-    const list = {
-      name: generateListName(),
-      incompleteCount: 0
-    };
-
-    return Lists.insert(list);
+    return Lists.insert({});
   }
 });
 
@@ -88,15 +83,3 @@ Lists.methods.remove = new Method({
     Lists.remove(listId);
   }
 });
-
-function generateListName() {
-  let nextLetter = 'A', nextName = `List ${nextLetter}`;
-
-  while (Lists.findOne({name: nextName})) {
-    // not going to be too smart here, can go past Z
-    nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
-    nextName = `List ${nextLetter}`;
-  }
-
-  return nextName; // eslint-disable-line consistent-return
-}
