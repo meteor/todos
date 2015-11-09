@@ -1,11 +1,5 @@
 /* global Lists ActiveRoute FlowRouter listFadeInHold */
 
-const USER_MENU_KEY = 'userMenuOpen';
-Session.setDefault(USER_MENU_KEY, false);
-
-const SHOW_CONNECTION_ISSUE_KEY = 'showConnectionIssue';
-Session.setDefault(SHOW_CONNECTION_ISSUE_KEY, false);
-
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
 Meteor.startup(() => {
