@@ -62,14 +62,13 @@
       <div class="content-overlay"></div>
 
       <div id="content-container">
-        {{! todo -- resolve p->p transition issue this was solving}}
-        {{! #each thisArray}}
-
-        {{#if Template.subscriptionsReady}}
-          {{> Template.dynamic template=main}}
-        {{else}}
-          {{> appLoading}}
-        {{/if}}
+        {{#momentum plugin="fade"}}
+          {{#if Template.subscriptionsReady}}
+            {{> Template.dynamic template=main}}
+          {{else}}
+            {{> appLoading}}
+          {{/if}}
+        {{/momentum}}
       </div>
     </div>
   {{/HammerTouchArea}}

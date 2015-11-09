@@ -33,25 +33,6 @@ Template.appBody.onCreated(function() {
   });
 });
 
-Template.appBody.onRendered(function() {
-  this.find('#content-container')._uihooks = {
-    insertElement(node, next) {
-      // XXX we should not do an animation on first render. We used to have a
-      // launch screen hold for this, but it's silly to wait for the animation to
-      // finish if we could just not have it in the first place
-      $(node)
-        .hide()
-        .insertBefore(next)
-        .fadeIn();
-    },
-    removeElement(node) {
-      $(node).fadeOut(function() {
-        $(this).remove();
-      });
-    }
-  };
-});
-
 Template.appBody.helpers({
   // We use #each on an array of one item so that the "list" template is
   // removed and a new copy is added when changing lists, which is

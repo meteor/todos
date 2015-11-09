@@ -7,7 +7,9 @@ Template.listsShow.onCreated(function() {
   //   todosReady: {type: Boolean}
   // }));
 
-  this.state = new ReactiveDict(`list.${this.data.list._id}`);
+  // TODO -- do we want this pattern to actually work?
+  // this.state = new ReactiveDict(`list.${this.data.list._id}`);
+  this.state = new ReactiveDict();
   this.state.setDefault({
     editing: false,
     editingTodo: false
@@ -27,7 +29,11 @@ Template.listsShow.onCreated(function() {
 
     // force the template to redraw based on the reactive change
     Tracker.flush();
-    this.$('.js-edit-form input[type=text]').focus();
+    // TODO -- I think velocity introduces a timeout before actually setting opacity on the
+    //   element, so I can't focus it for a moment.
+    Meteor.setTimeout(() => {
+      this.$('.js-edit-form input[type=text]').focus();
+    });
   };
 
   this.deleteList = () => {
@@ -55,22 +61,6 @@ Template.listsShow.onCreated(function() {
       Lists.methods.makePublic.call({ listId: list._id });
     } else {
       Lists.methods.makePrivate.call({ listId: list._id });
-    }
-  };
-});
-
-Template.listsShow.onRendered(function() {
-  this.find('.js-title-nav')._uihooks = {
-    insertElement(node, next) {
-      $(node)
-        .hide()
-        .insertBefore(next)
-        .fadeIn();
-    },
-    removeElement(node) {
-      $(node).fadeOut(function() {
-        this.remove();
-      });
     }
   };
 });

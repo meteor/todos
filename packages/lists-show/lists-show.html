@@ -1,55 +1,57 @@
 <template name="listsShow">
   <div class="page lists-show">
     <nav class="js-title-nav">
-      {{#if instance.state.get 'editing'}}
-        <form class="js-edit-form list-edit-form">
-          <input type="text" name="name" value="{{name}}">
+      {{#momentum plugin="fade"}}
+        {{#if instance.state.get 'editing'}}
+          <form class="js-edit-form list-edit-form">
+            <input type="text" name="name" value="{{name}}">
+            <div class="nav-group right">
+              <a href="#" class="js-cancel nav-item">
+                <span class="icon-close js-cancel" title="Cancel"></span>
+              </a>
+            </div>
+          </form>
+        {{else}}
+          <div class="nav-group">
+            <a href="#" class="js-menu nav-item">
+              <span class="icon-list-unordered" title="Show menu"></span>
+            </a>
+          </div>
+
+          <h1 class="js-edit-list title-page">
+            <span class="title-wrapper">{{list.name}}</span>
+            <span class="count-list">{{list.incompleteCount}}</span>
+          </h1>
+
           <div class="nav-group right">
-            <a href="#" class="js-cancel nav-item">
-              <span class="icon-close js-cancel" title="Cancel"></span>
-            </a>
-          </div>
-        </form>
-      {{else}}
-        <div class="nav-group">
-          <a href="#" class="js-menu nav-item">
-            <span class="icon-list-unordered" title="Show menu"></span>
-          </a>
-        </div>
+            <div class="nav-item options-mobile">
+              <select class="list-edit">
+                <option disabled selected>Select an action</option>
+                {{#if list.userId}}
+                  <option value="public">Make Public</option>
+                {{else}}
+                  <option value="private">Make Private</option>
+                {{/if}}
+                <option value="delete">Delete</option>
+              </select>
+              <span class="icon-cog"></span>
+            </div>
+            <div class="options-web">
+              <a class="js-toggle-list-privacy nav-item">
+                {{#if list.userId}}
+                  <span class="icon-lock" title="Make list public"></span>
+                {{else}}
+                  <span class="icon-unlock" title="Make list private"></span>
+                {{/if}}
+              </a>
 
-        <h1 class="js-edit-list title-page">
-          <span class="title-wrapper">{{list.name}}</span>
-          <span class="count-list">{{list.incompleteCount}}</span>
-        </h1>
-
-        <div class="nav-group right">
-          <div class="nav-item options-mobile">
-            <select class="list-edit">
-              <option disabled selected>Select an action</option>
-              {{#if list.userId}}
-                <option value="public">Make Public</option>
-              {{else}}
-                <option value="private">Make Private</option>
-              {{/if}}
-              <option value="delete">Delete</option>
-            </select>
-            <span class="icon-cog"></span>
+              <a class="js-delete-list nav-item">
+                <span class="icon-trash" title="Delete list"></span>
+              </a>
+            </div>
           </div>
-          <div class="options-web">
-            <a class="js-toggle-list-privacy nav-item">
-              {{#if list.userId}}
-                <span class="icon-lock" title="Make list public"></span>
-              {{else}}
-                <span class="icon-unlock" title="Make list private"></span>
-              {{/if}}
-            </a>
-
-            <a class="js-delete-list nav-item">
-              <span class="icon-trash" title="Delete list"></span>
-            </a>
-          </div>
-        </div>
-      {{/if}}
+        {{/if}}
+      {{/momentum}}
 
       <form class="js-todo-new todo-new input-symbol">
         <input type="text" placeholder="Type to add new tasks">

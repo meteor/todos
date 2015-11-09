@@ -1,3 +1,5 @@
 <template name="listsShowPage">
-  {{> listsShow todosReady=Template.subscriptionsReady list=list}}
+  {{#each listIdArray}}
+    {{> listsShow todosReady=Template.subscriptionsReady list=list}}
+  {{/each}}
 </template>

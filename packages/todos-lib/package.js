@@ -28,6 +28,7 @@ Package.onUse(function(api) {
     'reactive-dict',
     'session',
     'aldeed:template-extension@3.4.3',
+    'percolate:momentum@0.7.2'
   ]);
 
   // Routing

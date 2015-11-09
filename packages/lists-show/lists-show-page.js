@@ -1,11 +1,11 @@
 /* global FlowRouter Lists AppLaunchScreenHolds */
 
 Template.listsShowPage.onCreated(function() {
-  // XXX: FR
-  // XXX as I understand, we don't want this to be reactive because we might
-  // want to animate between pages?
-  this.listId = FlowRouter.getParam('_id');
-  this.subscribe('list/todos', this.listId);
+  this.state = new ReactiveDict();
+  this.autorun(() => {
+    this.state.set('listId', FlowRouter.getParam('_id'));
+    this.subscribe('list/todos', this.state.get('listId'));
+  });
 });
 
 Template.listsShowPage.onRendered(function() {
@@ -18,8 +18,12 @@ Template.listsShowPage.onRendered(function() {
 });
 
 Template.listsShowPage.helpers({
-  list: function() {
+  listIdArray() {
     const instance = Template.instance();
-    return Lists.findOne(instance.listId);
+    return [{_id: instance.state.get('listId')}];
+  },
+  list() {
+    const instance = Template.instance();
+    return Lists.findOne(instance.state.get('listId'));
   }
 });
