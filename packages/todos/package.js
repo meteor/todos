@@ -1,7 +1,8 @@
 Package.describe({
   name: 'todos',
   version: '0.0.1',
-  summary: 'Todo collection'
+  summary: 'Todo collection',
+  documentation: null,
 });
 
 Package.onUse(function (api) {

@@ -1,6 +1,7 @@
 Package.describe({
   name: 'less-globals',
   summary: 'Global CSS styles that are eagerly included',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

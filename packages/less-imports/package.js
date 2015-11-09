@@ -1,6 +1,7 @@
 Package.describe({
   name: 'less-imports',
   summary: 'LESS variables and mixins used throughout the app',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

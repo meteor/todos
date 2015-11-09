@@ -1,7 +1,8 @@
 Package.describe({
   name: 'factory',
   version: '1.0.0',
-  summary: 'Factories for Meteor'
+  summary: 'Factories for Meteor',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

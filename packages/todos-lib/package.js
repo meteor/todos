@@ -1,6 +1,7 @@
 Package.describe({
   name: 'todos-lib',
-  summary: 'Common dependencies of all app packages'
+  summary: 'Common dependencies of all app packages',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

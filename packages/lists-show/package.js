@@ -1,7 +1,8 @@
 Package.describe({
   name: 'lists-show',
   version: '0.0.1',
-  summary: 'Render a single list and it\'s todos'
+  summary: 'Render a single list and its todos',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

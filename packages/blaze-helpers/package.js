@@ -1,7 +1,8 @@
 Package.describe({
   name: 'blaze-helpers',
   version: '0.0.1',
-  summary: 'Simple helpers to make reusable blaze components'
+  summary: 'Simple helpers to make reusable blaze components',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

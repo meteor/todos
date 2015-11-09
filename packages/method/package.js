@@ -1,6 +1,7 @@
 Package.describe({
   name: 'method',
-  summary: '',
+  summary: 'A simple wrapper for Meteor.methods',
+  documentation: null,
 });
 
 Package.onUse(function(api) {

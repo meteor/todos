@@ -1,6 +1,7 @@
 Package.describe({
   name: 'todos-test-lib',
-  summary: 'Common dependencies of all app tests'
+  summary: 'Common dependencies of all app tests',
+  documentation: null,
 });
 
 Package.onUse(function(api) {
