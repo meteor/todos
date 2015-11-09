@@ -4,3 +4,6 @@
 [submodule "packages/collection2"]
 	path = packages/collection2
 	url = https://github.com/tmeasday/meteor-collection2
+[submodule "packages/mocha-core"]
+	path = packages/mocha-core
+	url = https://github.com/tmeasday/meteor-mocha-core.git
