@@ -1,4 +1,4 @@
-/* global FlowRouter Lists AppLaunchScreenHolds */
+/* global FlowRouter Lists AppLaunchScreen */
 
 Template.listsShowPage.onCreated(function() {
   this.state = new ReactiveDict();
@@ -12,7 +12,7 @@ Template.listsShowPage.onRendered(function() {
   this.autorun(() => {
     if (this.subscriptionsReady()) {
       // Handle for launch screen defined in app-body.js
-      AppLaunchScreenHolds.listRender.release();
+      AppLaunchScreen.listRender.release();
     }
   });
 });

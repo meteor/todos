@@ -8,5 +8,5 @@ Package.onUse(function(api) {
 
   api.addFiles('app-launch-screen.js');
 
-  api.export('AppLaunchScreenHolds');
+  api.export('AppLaunchScreen');
 });

@@ -1,7 +1,7 @@
-/* global AppLaunchScreenHolds:true */
+/* global AppLaunchScreen:true */
 /* global LaunchScreen */
 
-AppLaunchScreenHolds = {
+AppLaunchScreen = {
   // Should be released once the initial list template page is done rendering
   listRender: LaunchScreen.hold(),
 };
