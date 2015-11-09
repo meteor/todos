@@ -26,6 +26,7 @@ Package.onUse(function(api) {
     'blaze-html-templates',
     'blaze-helpers',
     'reactive-dict',
+    'reactive-var',
     'session',
     'aldeed:template-extension@3.4.3',
     'percolate:momentum@0.7.2'

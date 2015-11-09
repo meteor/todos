@@ -2,6 +2,9 @@
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
+// A store which is local to this file?
+const showConnectionIssue = new ReactiveVar(false);
+
 Meteor.startup(() => {
   // Only show the connection error box if it has been 5 seconds since
   // the app started
@@ -11,7 +14,7 @@ Meteor.startup(() => {
     // dataReadyHold.release();
 
     // Show the connection error box
-    Session.set(SHOW_CONNECTION_ISSUE_KEY, true);
+    showConnectionIssue.set(true);
   }, CONNECTION_ISSUE_TIMEOUT);
 });
 
@@ -22,8 +25,7 @@ Template.appBody.onCreated(function() {
   this.state = new ReactiveDict('app.body');
   this.state.setDefault({
     menuOpen: false,
-    userMenuOpen: false,
-    showConnectionIssue: false
+    userMenuOpen: false
   });
 });
 
@@ -60,8 +62,7 @@ Template.appBody.helpers({
     return active && 'active';
   },
   connected() {
-    const instance = Template.instance();
-    if (instance.state.get('showConnectionIssue')) {
+    if (showConnectionIssue.get()) {
       return Meteor.status().connected;
     }
 
