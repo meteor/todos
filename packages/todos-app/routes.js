@@ -30,3 +30,5 @@ AccountsTemplates.configureRoute('signUp', {
   name: 'join',
   path: '/join'
 });
+
+AccountsTemplates.configureRoute('resetPwd');
