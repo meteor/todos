@@ -5,7 +5,7 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
-  api.use('todos-lib');
+  api.use(['todos-lib', 'lists']);
 
   api.addFiles([
     'todos.js',

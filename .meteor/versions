@@ -28,6 +28,7 @@ ddp-client@1.2.1
 ddp-common@1.2.2
 ddp-rate-limiter@1.0.0
 ddp-server@1.2.2
+denormalizer@0.0.1
 deps@1.0.9
 dfischer:faker@1.0.8
 diff-sequence@1.0.1

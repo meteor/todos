@@ -5,7 +5,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use('todos-lib');
+  api.use(['todos-lib', 'denormalizer']);
 
   api.addFiles([
     'lists.js',
@@ -20,7 +20,8 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use([
     'todos-test-lib',
-    'lists'
+    'lists',
+    'todos'
   ]);
   api.addFiles('lists-tests.js', 'server');
 });

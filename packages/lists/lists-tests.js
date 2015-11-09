@@ -1,13 +1,27 @@
 /* eslint-env mocha */
-/* globals chai Factory Lists PublicationCollector */
+/* globals chai Factory Lists PublicationCollector Todos */
 
 const assert = chai.assert;
 
 describe('lists', () => {
-  it('builds correctly from factory', () => {
-    const list = Factory.create('list');
-    assert.typeOf(list, 'object');
-    assert.match(list.name, /List /);
+  describe('mutators', () => {
+    it('builds correctly from factory', () => {
+      const list = Factory.create('list');
+      assert.typeOf(list, 'object');
+      assert.match(list.name, /List /);
+    });
+    it('updates todos when userId changes', () => {
+      const list = Factory.create('list');
+      const todo = Factory.create('todo', {listId: list._id});
+      assert.isUndefined(Todos.findOne(todo._id).userId);
+
+      const userId = Random.id();
+      Lists.update(list._id, {$set: {userId}});
+      assert.equal(Todos.findOne(todo._id).userId, userId);
+
+      Lists.update(list._id, {$unset: {userId}});
+      assert.isUndefined(Todos.findOne(todo._id).userId);
+    });
   });
 
   describe('publications', () => {

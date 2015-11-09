@@ -4,12 +4,19 @@
 const assert = chai.assert;
 
 describe('todos', () => {
-  it('builds correctly from factory', () => {
-    const todo = Factory.create('todo');
-    assert.typeOf(todo, 'object');
-    assert.typeOf(todo.createdAt, 'date');
+  describe('mutators', () => {
+    it('builds correctly from factory', () => {
+      const todo = Factory.create('todo');
+      assert.typeOf(todo, 'object');
+      assert.typeOf(todo.createdAt, 'date');
+    });
+    it('gets userId from source list', () => {
+      const userId = Random.id();
+      const list = Factory.create('list', {userId});
+      const todo = Factory.create('todo', {listId: list._id});
+      assert.equal(Todos.findOne(todo._id).userId, userId);
+    });
   });
-
 
   it('leaves createdAt on update', () => {
     const createdAt = new Date(new Date() - 1000);

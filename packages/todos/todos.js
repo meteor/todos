@@ -4,7 +4,12 @@
 class TodosCollection extends Mongo.Collection {
   insert(doc) {
     doc.createdAt = doc.createdAt || new Date();
+    Lists.userIdDenormalizer.insert(doc);
     return super(doc);
+  }
+  update(selector, modifier) {
+    Lists.userIdDenormalizer.update(selector, modifier);
+    super(selector, modifier);
   }
 }
 
@@ -15,6 +20,11 @@ Todos.schema = new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id,
     denyUpdate: true
+  },
+  userId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: true
   },
   text: {
     type: String,
