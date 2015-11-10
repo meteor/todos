@@ -21,6 +21,8 @@ Template.listsShow.onCreated(function() {
     Lists.methods.updateName.call({
       listId: this.data.list._id,
       newName: this.$('[name=name]').val()
+    }, (err) => {
+      alert(err.error); // XXX i18n
     });
   };
 
@@ -43,11 +45,13 @@ Template.listsShow.onCreated(function() {
     if (confirm(message)) {
       Lists.methods.remove.call({
         listId: list._id
+      }, (err) => {
+        // At this point, we have already redirected home as if the list was
+        // successfully deleted, but we should at least warn the user their list
+        // could not be deleted
+        alert(err.error); // XXX i18n!
       });
 
-      // XXX should this be optimistic?
-      // We need some way of calling this only if the client-side validation
-      // passes
       FlowRouter.go('home');
       return true;
     }
@@ -58,9 +62,13 @@ Template.listsShow.onCreated(function() {
   this.toggleListPrivacy = () => {
     const list = this.data.list;
     if (list.userId) {
-      Lists.methods.makePublic.call({ listId: list._id });
+      Lists.methods.makePublic.call({ listId: list._id }, (err) => {
+        alert(err.error); // XXX i18n
+      });
     } else {
-      Lists.methods.makePrivate.call({ listId: list._id });
+      Lists.methods.makePrivate.call({ listId: list._id }, (err) => {
+        alert(err.error); // XXX i18n
+      });
     }
   };
 });
@@ -153,6 +161,8 @@ Template.listsShow.events({
     Todos.methods.insert.call({
       listId: this.list._id,
       text: $input.val()
+    }, (err) => {
+      alert(err.error); // XXX i18n
     });
 
     $input.val('');

@@ -53,6 +53,8 @@ Template.todosItem.events({
     Todos.methods.updateText.call({
       todoId: this._id,
       newText: event.target.value
+    }, (err) => {
+      alert(err.error); // XXX i18n
     });
   }, 300),
 
@@ -61,6 +63,8 @@ Template.todosItem.events({
   'mousedown .js-delete-item, click .js-delete-item'() {
     Todos.methods.remove.call({
       todoId: this._id
+    }, (err) => {
+      alert(err.error); // XXX i18n
     });
   }
 });

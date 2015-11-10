@@ -46,6 +46,12 @@ Method = class Method {
   }
 
   call(args, callback) {
+    // Accept calling with just a callback
+    if (_.isFunction(args)) {
+      callback = args;
+      args = {};
+    }
+
     const options = {
       returnStubValue: true
     };
