@@ -31,3 +31,9 @@ The Meteor Todos team
 // `
 //   }
 };
+
+// This goes with the reset password route to tell the accounts-password email system to put the
+// right link in the reset password email.
+Accounts.urls.resetPassword = (token) => {
+  return `${Meteor.absoluteUrl()}reset-password/${token}`;
+};

@@ -32,6 +32,7 @@ denormalizer@0.0.1
 deps@1.0.9
 dfischer:faker@1.0.8
 diff-sequence@1.0.1
+east5th:package-scan@0.0.4
 ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
@@ -94,7 +95,7 @@ srp@1.0.4
 templating@1.1.5
 templating-tools@1.0.0
 todos@0.0.1
-todos-auth@0.0.1
+todos-auth@0.0.0
 todos-lib@0.0.0
 todos-main@0.0.1
 tracker@1.0.9

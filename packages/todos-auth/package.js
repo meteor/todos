@@ -1,6 +1,5 @@
 Package.describe({
   name: 'todos-auth',
-  version: '0.0.1',
   summary: 'Authentication Templates for Todos App',
   documentation: null,
 });
@@ -9,12 +8,16 @@ Package.onUse(function(api) {
   api.use('todos-lib');
 
   api.addFiles([
-    'auth.html',
-    'auth.js',
-    'auth.less'
+    'accounts-templates.html',
+    'accounts-templates.js',
+    'accounts-templates.less'
   ], 'client');
 
   api.addFiles([
-    'email.js',
+    'reset-password-email.js',
   ], 'server');
+
+  api.addFiles([
+    'deny-profile.js',
+  ]);
 });
