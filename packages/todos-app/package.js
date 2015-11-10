@@ -32,4 +32,8 @@ Package.onUse(function(api) {
   api.addFiles([
     'bootstrap.js'
   ], 'server');
+
+  api.addAssets([
+    'img/logo-todos.svg',
+  ], 'client');
 });
