@@ -8,7 +8,9 @@ Accounts.emailTemplates.resetPassword = {
   text(user, url) {
     return `Hello!
 
-Here is a link to reset your password on Meteor Todos: ${url}
+Click the link below to reset your password on Meteor Todos.
+
+${url}
 
 If you didn't request this email, please ignore it.
 
