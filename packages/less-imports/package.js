@@ -17,4 +17,15 @@ Package.onUse(function(api) {
     'imports/typography.import.less',
     'imports/variables.import.less',
   ]);
+
+  api.addAssets([
+    'font/OpenSans-Light-webfont.eot',
+    'font/OpenSans-Light-webfont.svg',
+    'font/OpenSans-Light-webfont.ttf',
+    'font/OpenSans-Light-webfont.woff',
+    'font/OpenSans-Regular-webfont.eot',
+    'font/OpenSans-Regular-webfont.svg',
+    'font/OpenSans-Regular-webfont.ttf',
+    'font/OpenSans-Regular-webfont.woff',
+  ], 'client');
 });
