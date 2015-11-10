@@ -105,7 +105,7 @@ Template.appBody.events({
   },
 
   'click .js-new-list'() {
-    const listId = Lists.methods.insert.call((err) {
+    const listId = Lists.methods.insert.call((err) => {
       if (err) {
         // At this point, we have already redirected to the new list page, but
         // for some reason the list didn't get created. This should almost never
