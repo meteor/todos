@@ -24,4 +24,11 @@ Package.onUse(function(api) {
     'nav.less',
     'notification.less',
   ]);
+
+  api.addAssets([
+    'icon/todos.eot',
+    'icon/todos.svg',
+    'icon/todos.ttf',
+    'icon/todos.woff',
+  ], 'client');
 });
