@@ -13,4 +13,8 @@ Package.onUse(function(api) {
     'auth.js',
     'auth.less'
   ], 'client');
+
+  api.addFiles([
+    'email.js',
+  ], 'server');
 });
