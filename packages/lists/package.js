@@ -14,6 +14,7 @@ Package.onUse(function(api) {
   ]);
 
   api.addFiles('publications.js', 'server');
+  api.addFiles('i18n/en.i18n.json');
 
   api.export('Lists');
 });

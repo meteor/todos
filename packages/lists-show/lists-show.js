@@ -1,4 +1,4 @@
-/* global Todos Lists FlowRouter Tracker */
+/* global Todos Lists FlowRouter Tracker TodosLib */
 
 Template.listsShow.onCreated(function() {
   // TODO -- figure out how to make this check work with the todo being a "Document"
@@ -47,7 +47,7 @@ Template.listsShow.onCreated(function() {
         // At this point, we have already redirected home as if the list was
         // successfully deleted, but we should at least warn the user their list
         // could not be deleted
-        err && alert(err.error); // XXX i18n!
+        TodosLib.showError(err);
       });
 
       FlowRouter.go('home');

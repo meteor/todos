@@ -70,4 +70,19 @@ Package.onUse(function(api) {
   api.imply([
     'method',
   ]);
+
+  // i18n
+  api.imply([
+    'tap:i18n@1.7.0'
+  ]);
+
+  // App libs
+  api.use([
+    // TODO -- I need to add this because of a bug in tap:18n I guess?
+    'templating',
+    'tap:i18n@1.7.0'
+  ]);
+  api.addFiles('package-tap.i18n');
+  api.addFiles('client.js', 'client');
+  api.export('TodosLib');
 });

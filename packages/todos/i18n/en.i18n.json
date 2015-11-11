@@ -1,0 +1,9 @@
+{
+  "Todos": {
+    "methods": {
+      "setCheckedStatus": {
+        "unauthorized": "tester"
+      }
+    }
+  }
+}

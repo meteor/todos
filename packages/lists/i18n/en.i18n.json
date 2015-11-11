@@ -1,0 +1,9 @@
+{
+  "Lists": {
+    "methods": {
+      "remove": {
+        "lastPublicList": "Cannot delete the last public list."
+      }
+    }
+  }
+}
