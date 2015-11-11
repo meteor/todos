@@ -32,6 +32,14 @@ class ListsCollection extends Mongo.Collection {
 }
 
 Lists = new ListsCollection('Lists');
+
+// Deny all client-side updates since we will be using methods to manage this collection
+Lists.deny({
+  insert() { return true },
+  update() { return true },
+  remove() { return true },
+});
+
 Lists.userIdDenormalizer = userIdDenormalizer;
 
 Lists.schema = new SimpleSchema({

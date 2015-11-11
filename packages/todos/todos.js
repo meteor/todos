@@ -15,6 +15,13 @@ class TodosCollection extends Mongo.Collection {
 
 Todos = new TodosCollection('Todos');
 
+// Deny all client-side updates since we will be using methods to manage this collection
+Todos.deny({
+  insert() { return true },
+  update() { return true },
+  remove() { return true },
+});
+
 Todos.schema = new SimpleSchema({
   listId: {
     type: String,
