@@ -47,7 +47,7 @@ Template.listsShow.onCreated(function() {
         // At this point, we have already redirected home as if the list was
         // successfully deleted, but we should at least warn the user their list
         // could not be deleted
-        alert(err.error); // XXX i18n!
+        err && alert(err.error); // XXX i18n!
       });
 
       FlowRouter.go('home');
