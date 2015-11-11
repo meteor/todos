@@ -110,8 +110,8 @@ Todos.methods.remove = new Method({
   }
 });
 
+// Get list of all method names on Todos
 const TODOS_METHODS = _.pluck(Todos.methods, 'name');
-console.log(TODOS_METHODS);
 
 // Only allow 5 todos operations per connection per second
 DDPRateLimiter.addRule({
