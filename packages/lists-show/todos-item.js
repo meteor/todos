@@ -22,8 +22,8 @@ Template.todosItem.events({
   'change [type=checkbox]'(event) {
     const checked = $(event.target).is(':checked');
 
-    Todos.methods.setCheckedStatus({
-      todoId: this._id,
+    Todos.methods.setCheckedStatus.call({
+      todoId: this.todo._id,
       newCheckedStatus: checked
     });
   },
@@ -51,7 +51,7 @@ Template.todosItem.events({
   // every 300ms)
   'keyup input[type=text]': _.throttle(function(event) {
     Todos.methods.updateText.call({
-      todoId: this._id,
+      todoId: this.todo._id,
       newText: event.target.value
     }, (err) => {
       alert(err.error); // XXX i18n
@@ -62,7 +62,7 @@ Template.todosItem.events({
   // on iOS, we still require the click event so handle both
   'mousedown .js-delete-item, click .js-delete-item'() {
     Todos.methods.remove.call({
-      todoId: this._id
+      todoId: this.todo._id
     }, (err) => {
       alert(err.error); // XXX i18n
     });

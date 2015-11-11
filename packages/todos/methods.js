@@ -56,7 +56,7 @@ Todos.methods.setCheckedStatus = new Method({
       checked: newCheckedStatus
     }});
 
-    const incAmount = newCheckedStatus ? 1 : -1;
+    const incAmount = newCheckedStatus ? -1 : 1;
     Lists.update(todo.listId, {
       $inc: { incompleteCount: incAmount }
     });
