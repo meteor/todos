@@ -63,7 +63,12 @@ Method = class Method {
       throwStubExceptions: true
     };
 
-    return Meteor.apply(this.name, [args], options, callback);
+    try {
+      return Meteor.apply(this.name, [args], options, callback);
+    } catch (err) {
+      // Get errors from the stub in the same way as from the server-side method
+      callback(err);
+    }
   }
 
   _execute(methodInvocation, args) {

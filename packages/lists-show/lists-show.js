@@ -20,7 +20,7 @@ Template.listsShow.onCreated(function() {
       listId: this.data.list._id,
       newName: this.$('[name=name]').val()
     }, (err) => {
-      alert(err.error); // XXX i18n
+      err && alert(err.error); // XXX i18n
     });
   };
 
@@ -61,11 +61,11 @@ Template.listsShow.onCreated(function() {
     const list = this.data.list;
     if (list.userId) {
       Lists.methods.makePublic.call({ listId: list._id }, (err) => {
-        alert(err.error); // XXX i18n
+        err && alert(err.error); // XXX i18n
       });
     } else {
       Lists.methods.makePrivate.call({ listId: list._id }, (err) => {
-        alert(err.error); // XXX i18n
+        err && alert(err.error); // XXX i18n
       });
     }
   };
@@ -160,7 +160,7 @@ Template.listsShow.events({
       listId: this.list._id,
       text: $input.val()
     }, (err) => {
-      alert(err.error); // XXX i18n
+      err && alert(err.error); // XXX i18n
     });
 
     $input.val('');

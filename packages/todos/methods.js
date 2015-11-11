@@ -109,3 +109,16 @@ Todos.methods.remove = new Method({
     }
   }
 });
+
+const TODOS_METHODS = _.pluck(Todos.methods, 'name');
+console.log(TODOS_METHODS);
+
+// Only allow 5 todos operations per connection per second
+DDPRateLimiter.addRule({
+  name(name) {
+    return _.contains(TODOS_METHODS, name);
+  },
+
+  // Rate limit per connection ID
+  connectionId() { return true; }
+}, 5, 1000);
