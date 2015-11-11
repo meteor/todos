@@ -22,7 +22,7 @@ Template.appBody.onCreated(function() {
   this.subscribe('lists/public');
   this.subscribe('lists/private');
 
-  this.state = new ReactiveDict('app.body');
+  this.state = new ReactiveDict();
   this.state.setDefault({
     menuOpen: false,
     userMenuOpen: false

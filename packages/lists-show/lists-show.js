@@ -7,8 +7,6 @@ Template.listsShow.onCreated(function() {
   //   todosReady: {type: Boolean}
   // }));
 
-  // TODO -- do we want this pattern to actually work?
-  // this.state = new ReactiveDict(`list.${this.data.list._id}`);
   this.state = new ReactiveDict();
   this.state.setDefault({
     editing: false,
