@@ -65,6 +65,7 @@ Package.onUse(function(api) {
     'accounts-password',
     'useraccounts:unstyled@1.12.4',
     'useraccounts:flow-routing@1.12.4',
+    'ddp-rate-limiter',
   ]);
 
   // DDP

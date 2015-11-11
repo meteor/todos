@@ -18,6 +18,6 @@ Package.onUse(function(api) {
   ], 'server');
 
   api.addFiles([
-    'deny-profile.js',
+    'security.js',
   ]);
 });
