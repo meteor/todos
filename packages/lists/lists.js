@@ -1,7 +1,6 @@
 /* global Lists:true */
 /* global SimpleSchema Factory faker Denormalizer Todos */
 
-
 // Not sure where the best spot to put this is
 const userIdDenormalizer = new Denormalizer({
   source: () => Lists,
@@ -26,9 +25,9 @@ class ListsCollection extends Mongo.Collection {
 
     return super(list);
   }
-  update(selector, modifier) {
-    userIdDenormalizer.sourceUpdate(selector, modifier);
-    super(selector, modifier);
+  remove(selector) {
+    Package.todos.Todos.remove({listId: selector});
+    return super(selector);
   }
 }
 

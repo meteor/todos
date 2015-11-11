@@ -12,16 +12,22 @@ We should look at https://atmospherejs.com/jeanfredrik/denormalize and see if we
 xDenormalizer = new Denormalizer({
   source: () => A,
   target: () => B,
-  field: 'x'
+  field: 'x',
+  foreignKey: 'aId'
 });
 
-A = new Collection2('A', {
-  update(selector, modifier) {
-    // updates all dependent Bs if x is changing
-    xDenormalizer.sourceUpdate(selector, modifier);
-    super(selector, modifier);
-  }
-});
+// This would be nice, but requires quite a complex implementation of `sourceUpdate` to get right.
+// A = new Collection2('A', {
+//   update(selector, modifier) {
+//    // updates all dependent Bs if x is changing
+//    xDenormalizer.sourceUpdate(selector, modifier);
+//    super(selector, modifier);
+//  }
+//});
+
+// Instead, whenever updating A[field], ensure you call one of `xDenormalizer.[un]set()`:
+A.update(selector, {$set: {[field]: fieldValue}});
+xDenormalizer.set(selector, fieldValue);
 
 B = new Collection2('B', {
   insert(doc) {

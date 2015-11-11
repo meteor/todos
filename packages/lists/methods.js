@@ -33,6 +33,7 @@ Lists.methods.makePrivate = new Method({
     Lists.update(listId, {
       $set: { userId: this.userId }
     });
+    Lists.userIdDenormalizer.set(listId, this.userId);
   }
 });
 
@@ -53,6 +54,7 @@ Lists.methods.makePublic = new Method({
     }, {
       $unset: { userId: true }
     });
+    Lists.userIdDenormalizer.unset(listId);
   }
 });
 
@@ -81,7 +83,6 @@ Lists.methods.remove = new Method({
         'Cannot delete the last public list.');
     }
 
-    Todos.remove({listId: listId});
     Lists.remove(listId);
   }
 });

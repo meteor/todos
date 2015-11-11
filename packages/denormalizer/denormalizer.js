@@ -19,22 +19,16 @@ Denormalizer = class {
   update(selector, modifier) { // eslint-disable-line
     // NOT YET IMPLEMENTED (we don't do this in todos)
   }
-  sourceUpdate(selector, modifier) {
-    // NOTE: assumes modifier is only going to $set, and selector is always an _id
-    if (modifier.$set && modifier.$set[this.field]) {
-      if (typeof selector !== 'string') {
-        throw new Error("NOT IMPLEMENTED: can't denormalize non-_id updates");
-      }
-      const update = {
-        [this.field]: modifier.$set[this.field]
-      };
-      this.target().update({[this.foreignKey]: selector}, {$set: update});
+  updateTargetValues(selector, modifier) {
+    if (typeof selector !== 'string') {
+      throw new Error("NOT IMPLEMENTED: can't denormalize non-_id updates");
     }
-    if (modifier.$unset && modifier.$unset[this.field]) {
-      if (typeof selector !== 'string') {
-        throw new Error("NOT IMPLEMENTED: can't denormalize non-_id updates");
-      }
-      this.target().update({[this.foreignKey]: selector}, {$unset: {[this.field]: true}});
-    }
+    this.target().update({[this.foreignKey]: selector}, modifier);
+  }
+  set(selector, value) {
+    this.updateTargetValues(selector, {$set: {[this.field]: value}});
+  }
+  unset(selector) {
+    this.updateTargetValues(selector, {$unset: {[this.field]: true}});
   }
 };
