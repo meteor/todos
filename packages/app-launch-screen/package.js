@@ -7,7 +7,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.use('todos-lib');
 
-  api.addFiles('app-launch-screen.js');
+  api.addFiles('app-launch-screen.js', 'client');
 
   api.export('AppLaunchScreen');
 });

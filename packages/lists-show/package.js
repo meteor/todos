@@ -10,7 +10,8 @@ Package.onUse(function(api) {
 
   api.use([
     'lists',
-    'todos'
+    'todos',
+    'app-launch-screen'
   ]);
 
   api.addFiles([
