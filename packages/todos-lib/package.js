@@ -18,7 +18,8 @@ Package.onUse(function(api) {
     'mongo',
     'aldeed:collection2@2.5.0',
     'dburles:collection-helpers@1.0.4',
-    'denormalizer'
+    'denormalizer',
+    'validation-error'
   ]);
 
   // Client-side libraries
