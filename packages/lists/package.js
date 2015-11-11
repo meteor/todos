@@ -6,7 +6,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use(['todos-lib', 'denormalizer']);
+  api.use(['todos-lib']);
 
   api.addFiles([
     'lists.js',
