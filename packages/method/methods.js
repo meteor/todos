@@ -1,5 +1,5 @@
 /* global Method:true */
-/* global SimpleSchema */
+/* global SimpleSchema ValidationError */
 
 // TODO
 // 1. Need a way to share data between authorize and run, in case you need to
@@ -80,7 +80,5 @@ function validateAgainstSimpleSchema(obj, ss) {
     return;
   }
 
-  const validationError = new Error('validation-failed');
-  validationError.keys = validationContext.invalidKeys();
-  throw validationError;
+  throw new ValidationError(validationContext.invalidKeys());
 }

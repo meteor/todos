@@ -11,7 +11,8 @@ Package.onUse(function(api) {
     'check',
     'ddp',
     'underscore',
-    'aldeed:simple-schema'
+    'aldeed:simple-schema',
+    'validation-error'
   ]);
   api.addFiles('methods.js');
   api.export('Method');
