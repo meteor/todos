@@ -53,7 +53,14 @@ Method = class Method {
     }
 
     const options = {
-      returnStubValue: true
+      // Make it possible to get the ID of an inserted item
+      returnStubValue: true,
+
+      // Don't call the server method if the client stub throws an error, so that we don't end
+      // up doing validations twice
+      // XXX needs option to disable, in cases where the client might have incomplete information to
+      // make a decision
+      throwStubExceptions: true
     };
 
     return Meteor.apply(this.name, [args], options, callback);
