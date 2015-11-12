@@ -135,10 +135,52 @@ describe('lists', () => {
         const otherUserMethodInvocation = { userId: Random.id() };
 
         // Shouldn't do anything
-        Lists.methods.makePublic._execute(otherUserMethodInvocation, args);
+        assert.throws(() => {
+          Lists.methods.makePublic._execute(otherUserMethodInvocation, args);
+        }, Meteor.Error, /Lists.methods.makePublic.accessDenied/);
 
         // Make sure things are still private
         assertListAndTodoArePrivate();
+      });
+    });
+
+    describe('Lists.methods.updateName', () => {
+      it('changes the name, but not if you don\'t have permission', () => {
+        Lists.methods.updateName._execute({}, {
+          listId,
+          newName: "new name"
+        });
+
+        assert.equal(Lists.findOne(listId).name, "new name");
+
+        // Make the list private
+        Lists.methods.makePrivate._execute({ userId }, { listId });
+
+        // Works if the owner changes the name
+        Lists.methods.updateName._execute({ userId }, {
+          listId,
+          newName: "new name 2"
+        });
+
+        assert.equal(Lists.findOne(listId).name, "new name 2");
+
+        // Throws if another user, or logged out user, tries to change the name
+        assert.throws(() => {
+          Lists.methods.updateName._execute({ userId: Random.id() }, {
+            listId,
+            newName: "new name 3"
+          });
+        }, Meteor.Error, /Lists.methods.updateName.accessDenied/);
+
+        assert.throws(() => {
+          Lists.methods.updateName._execute({}, {
+            listId,
+            newName: "new name 3"
+          });
+        }, Meteor.Error, /Lists.methods.updateName.accessDenied/);
+
+        // Confirm name didn't change
+        assert.equal(Lists.findOne(listId).name, "new name 2");
       });
     });
 
@@ -159,6 +201,7 @@ describe('lists', () => {
     describe('rate limiting', () => {
       it('does not allow more than 5 operations rapidly', () => {
         const connection = DDP.connect(Meteor.absoluteUrl());
+
         _.times(5, () => {
           connection.call(Lists.methods.insert.name, {});
         });
@@ -166,6 +209,8 @@ describe('lists', () => {
         assert.throws(() => {
           connection.call(Lists.methods.insert.name, {});
         }, Meteor.Error, /too-many-requests/);
+
+        connection.disconnect();
       });
     });
   });

@@ -60,5 +60,12 @@ Lists.helpers({
   isLastPublicList() {
     const publicListCount = Lists.find({userId: {$exists: false}}).count();
     return !this.isPrivate() && publicListCount === 1;
+  },
+  editableBy(userId) {
+    if (!this.userId) {
+      return true;
+    }
+
+    return this.userId === userId;
   }
 });

@@ -47,12 +47,16 @@ Lists.methods.makePublic = new Method({
         'Must be logged in.');
     }
 
-    // Put both the list ID and the user ID in the selector instead of loading
-    // the list from the DB. This way the security check is atomic.
-    const numUpdated = Lists.update({
-      _id: listId,
-      userId: this.userId,
-    }, {
+    const list = Lists.findOne(listId);
+
+    if (!list.editableBy(this.userId)) {
+      throw new Meteor.Error('Lists.methods.makePublic.accessDenied',
+        'You don\'t have permission to edit this list.');
+    }
+
+    // XXX the security check above is not atomic, so in theory a race condition could
+    // result in exposing private data
+    const numUpdated = Lists.update(listId, {
       $unset: { userId: true }
     });
 
@@ -70,6 +74,16 @@ Lists.methods.updateName = new Method({
     newName: { type: String }
   }),
   run({ listId, newName }) {
+    const list = Lists.findOne(listId);
+
+    if (!list.editableBy(this.userId)) {
+      throw new Meteor.Error('Lists.methods.updateName.accessDenied',
+        'You don\'t have permission to edit this list.');
+    }
+
+    // XXX the security check above is not atomic, so in theory a race condition could
+    // result in exposing private data
+
     Lists.update(listId, {
       $set: { name: newName }
     });
