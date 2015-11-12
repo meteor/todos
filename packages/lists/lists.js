@@ -2,11 +2,19 @@
 /* global SimpleSchema Factory faker Denormalizer Todos */
 
 // Not sure where the best spot to put this is
-const userIdDenormalizer = new Denormalizer({
+const userIdDenormalizer = new Denormalizer.Property({
   source: () => Lists,
   // TODO - can't depend as will lead to circular dep -- single collections package?
   target: () => Package.todos.Todos,
   field: 'userId',
+  foreignKey: 'listId'
+});
+
+const incompleteCountDenormalizer = new Denormalizer.Count({
+  source: () => Lists,
+  // TODO - can't depend as will lead to circular dep -- single collections package?
+  target: () => Package.todos.Todos,
+  field: 'incompleteCount',
   foreignKey: 'listId'
 });
 
@@ -41,6 +49,7 @@ Lists.deny({
 });
 
 Lists.userIdDenormalizer = userIdDenormalizer;
+Lists.incompleteCountDenormalizer = incompleteCountDenormalizer;
 
 Lists.schema = new SimpleSchema({
   name: { type: String },

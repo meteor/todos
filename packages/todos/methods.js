@@ -24,13 +24,8 @@ Todos.methods.insert = new Method({
     };
 
     Lists.userIdDenormalizer.insert(todo);
+    Lists.incompleteCountDenormalizer.insert(todo);
     Todos.insert(todo);
-
-    // XXX should this just get the incomplete count from a query? otherwise
-    // it could become off-by-one forever...
-    Lists.update(listId, {
-      $inc: { incompleteCount: 1 }
-    });
   }
 });
 
@@ -59,10 +54,7 @@ Todos.methods.setCheckedStatus = new Method({
       checked: newCheckedStatus
     }});
 
-    const incAmount = newCheckedStatus ? -1 : 1;
-    Lists.update(todo.listId, {
-      $inc: { incompleteCount: incAmount }
-    });
+    Lists.incompleteCountDenormalizer.inc(todo.listId, newCheckedStatus ? -1 : 1);
   }
 });
 
@@ -106,9 +98,7 @@ Todos.methods.remove = new Method({
     Todos.remove(todoId);
 
     if (!todo.checked) {
-      Lists.update(todo.listId, {
-        $inc: {incompleteCount: -1}
-      });
+      Lists.incompleteCountDenormalizer.remove(todo);
     }
   }
 });
