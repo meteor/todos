@@ -41,6 +41,7 @@ email@1.0.8
 es5-shim@4.1.14
 factory@1.0.0
 fastclick@1.0.7
+force-ssl@1.0.6
 geojson-utils@1.0.4
 hot-code-push@1.0.0
 html-tools@1.0.5
