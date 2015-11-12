@@ -71,6 +71,7 @@ Package.onUse(function(api) {
   api.imply([
     'ddp-rate-limiter',
     'force-ssl',
+    'audit-argument-checks',
   ]);
 
   // DDP

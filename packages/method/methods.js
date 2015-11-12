@@ -39,6 +39,9 @@ Method = class Method {
     const method = this;
     Meteor.methods({
       [name](args) {
+        // Silence audit-argument-checks since arguments are always checked when using this package,
+        // we just use SimpleSchema instead of check
+        check(args, Match.Any);
         const methodInvocation = this;
         return method._execute(methodInvocation, args);
       }
