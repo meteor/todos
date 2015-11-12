@@ -72,6 +72,7 @@ Package.onUse(function(api) {
     'ddp-rate-limiter',
     'force-ssl',
     'audit-argument-checks',
+    'browser-policy',
   ]);
 
   // DDP
