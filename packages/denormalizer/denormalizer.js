@@ -23,7 +23,7 @@ Denormalizer = class {
     if (typeof selector !== 'string') {
       throw new Error("NOT IMPLEMENTED: can't denormalize non-_id updates");
     }
-    this.target().update({[this.foreignKey]: selector}, modifier);
+    this.target().update({[this.foreignKey]: selector}, modifier, {multi: true});
   }
   set(selector, value) {
     this.updateTargetValues(selector, {$set: {[this.field]: value}});

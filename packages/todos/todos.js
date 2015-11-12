@@ -2,14 +2,10 @@
 /* global SimpleSchema Factory faker Lists */
 
 class TodosCollection extends Mongo.Collection {
-  insert(doc) {
+  insert(doc, callback) {
     doc.createdAt = doc.createdAt || new Date();
     Lists.userIdDenormalizer.insert(doc);
-    return super(doc);
-  }
-  update(selector, modifier) {
-    Lists.userIdDenormalizer.update(selector, modifier);
-    super(selector, modifier);
+    return super(doc, callback);
   }
 }
 

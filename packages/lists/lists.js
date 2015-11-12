@@ -11,7 +11,7 @@ const userIdDenormalizer = new Denormalizer({
 });
 
 class ListsCollection extends Mongo.Collection {
-  insert(list) {
+  insert(list, callback) {
     if (!list.name) {
       let nextLetter = 'A';
       list.name = `List ${nextLetter}`;
@@ -23,11 +23,11 @@ class ListsCollection extends Mongo.Collection {
       }
     }
 
-    return super(list);
+    return super(list, callback);
   }
-  remove(selector) {
+  remove(selector, callback) {
     Package.todos.Todos.remove({listId: selector});
-    return super(selector);
+    return super(selector, callback);
   }
 }
 
