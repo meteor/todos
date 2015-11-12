@@ -10,7 +10,8 @@ describe('todos', () => {
       assert.typeOf(todo, 'object');
       assert.typeOf(todo.createdAt, 'date');
     });
-    it('gets userId from source list', () => {
+    // TODO -- move this to a method test
+    it.skip('gets userId from source list', () => {
       const userId = Random.id();
       const list = Factory.create('list', {userId});
       const todo = Factory.create('todo', {listId: list._id});
