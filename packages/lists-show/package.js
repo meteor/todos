@@ -32,7 +32,6 @@ Package.onTest(function(api) {
   api.use([
     'todos-test-lib',
     'lists-show',
-    'practicalmeteor:mocha@2.1.0_5',
     'todos',
     'lists',
     'templating',
