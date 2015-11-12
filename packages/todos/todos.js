@@ -4,7 +4,6 @@
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
     doc.createdAt = doc.createdAt || new Date();
-    Lists.userIdDenormalizer.insert(doc);
     return super(doc, callback);
   }
 }

@@ -16,12 +16,15 @@ Todos.methods.insert = new Method({
         'Cannot add todos to a private list that is not yours');
     }
 
-    Todos.insert({
+    const todo = {
       listId,
       text,
       checked: false,
       createdAt: new Date()
-    });
+    };
+
+    Lists.userIdDenormalizer.insert(todo);
+    Todos.insert(todo);
 
     // XXX should this just get the incomplete count from a query? otherwise
     // it could become off-by-one forever...
