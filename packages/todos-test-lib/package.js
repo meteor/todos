@@ -6,14 +6,12 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.imply([
-    'ecmascript',
-    'underscore',
-    'check',
+    'todos-lib',
     'mike:mocha-package@0.5.9',
     'practicalmeteor:chai@2.1.0_1',
     'publication-collector',
     'factory',
     'stub-collections',
-    'tracker'
+    'ddp',
   ]);
 });

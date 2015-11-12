@@ -69,17 +69,16 @@ describe('lists', () => {
 
       // Generate a 'user'
       userId = Random.id();
-      console.log("cleaning");
     });
 
-    function assertListAndTodoArePrivate() {
-      assert.equal(Lists.findOne(listId).userId, userId);
-      assert.isTrue(Lists.findOne(listId).isPrivate());
-      assert.equal(Todos.findOne(todoId).userId, userId);
-      assert.isTrue(Todos.findOne(todoId).editableBy(userId));
-    }
-
     describe('Lists.methods.makePrivate / makePublic', () => {
+      function assertListAndTodoArePrivate() {
+        assert.equal(Lists.findOne(listId).userId, userId);
+        assert.isTrue(Lists.findOne(listId).isPrivate());
+        assert.equal(Todos.findOne(todoId).userId, userId);
+        assert.isTrue(Todos.findOne(todoId).editableBy(userId));
+      }
+
       it('makes a list private and updates the todos', () => {
         // Check initial state is public
         assert.isUndefined(Todos.findOne(todoId).userId);
@@ -140,6 +139,33 @@ describe('lists', () => {
 
         // Make sure things are still private
         assertListAndTodoArePrivate();
+      });
+    });
+
+    describe('Lists.methods.remove', () => {
+      it('does not delete the last public list', () => {
+        const methodInvocation = { userId };
+
+        // Works fine
+        Lists.methods.remove._execute(methodInvocation, { listId: otherListId });
+
+        // Should throw because it is the last public list
+        assert.throws(() => {
+          Lists.methods.remove._execute(methodInvocation, { listId });
+        }, Meteor.Error, /Lists.methods.remove.lastPublicList/);
+      });
+    });
+
+    describe('rate limiting', () => {
+      it('does not allow more than 5 operations rapidly', () => {
+        const connection = DDP.connect(Meteor.absoluteUrl());
+        _.times(5, () => {
+          connection.call(Lists.methods.insert.name, {});
+        });
+
+        assert.throws(() => {
+          connection.call(Lists.methods.insert.name, {});
+        }, Meteor.Error, /too-many-requests/);
       });
     });
   });
