@@ -1,4 +1,4 @@
-/* global Todos Lists SimpleSchema Method */
+/* global Todos Lists SimpleSchema Method DDPRateLimiter */
 
 Todos.methods = {};
 
@@ -48,9 +48,7 @@ Todos.methods.setCheckedStatus = new Method({
       return;
     }
 
-    const list = todo.getList();
-
-    if (list.isPrivate() && list.userId !== this.userId) {
+    if (!todo.editableBy(this.userId)) {
       throw new Meteor.Error('Todos.methods.setCheckedStatus.unauthorized',
         'Cannot edit checked status in a private list that is not yours');
     }
@@ -76,9 +74,8 @@ Todos.methods.updateText = new Method({
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
     // would be correct here?
     const todo = Todos.findOne(todoId);
-    const list = todo.getList();
 
-    if (list.isPrivate() && list.userId !== this.userId) {
+    if (!todo.editableBy(this.userId)) {
       throw new Meteor.Error('Todos.methods.updateText.unauthorized',
         'Cannot edit todos in a private list that is not yours');
     }
@@ -96,9 +93,8 @@ Todos.methods.remove = new Method({
   }),
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
-    const list = todo.getList();
 
-    if (list.isPrivate() && list.userId !== this.userId) {
+    if (!todo.editableBy(this.userId)) {
       throw new Meteor.Error('Todos.methods.remove.unauthorized',
         'Cannot remove todos in a private list that is not yours');
     }
