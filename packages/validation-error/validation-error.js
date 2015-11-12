@@ -5,8 +5,7 @@
 const errorSchema = new SimpleSchema({
   name: {type: String},
   type: {type: String},
-  // I suspect we might want to make this more general -- details: {type: Object, blackbox: true}
-  value: {type: String, optional: true}
+  details: {type: Object, blackbox: true, optional: true}
 });
 const errorsSchema = new SimpleSchema({
   errors: {type: [errorSchema]}

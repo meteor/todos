@@ -92,5 +92,6 @@ function validateAgainstSimpleSchema(obj, ss) {
     return;
   }
 
-  throw new ValidationError(validationContext.invalidKeys());
+  const {name, type, value} = validationContext.invalidKeys();
+  throw new ValidationError({name, type, details: {value}});
 }
