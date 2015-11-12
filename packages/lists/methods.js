@@ -96,6 +96,14 @@ Lists.methods.remove = new Method({
   run({ listId }) {
     const list = Lists.findOne(listId);
 
+    if (!list.editableBy(this.userId)) {
+      throw new Meteor.Error('Lists.methods.remove.accessDenied',
+        'You don\'t have permission to remove this list.');
+    }
+
+    // XXX the security check above is not atomic, so in theory a race condition could
+    // result in exposing private data
+
     if (list.isLastPublicList()) {
       // XXX what's our error i18n strategy here?
       throw new Meteor.Error('Lists.methods.remove.lastPublicList',

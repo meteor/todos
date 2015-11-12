@@ -196,6 +196,20 @@ describe('lists', () => {
           Lists.methods.remove._execute(methodInvocation, { listId });
         }, Meteor.Error, /Lists.methods.remove.lastPublicList/);
       });
+
+      it('does not delete a private list you don\'t own', () => {
+        // Make the list private
+        Lists.methods.makePrivate._execute({ userId }, { listId });
+
+        // Throws if another user, or logged out user, tries to delete the list
+        assert.throws(() => {
+          Lists.methods.remove._execute({ userId: Random.id() }, { listId });
+        }, Meteor.Error, /Lists.methods.remove.accessDenied/);
+
+        assert.throws(() => {
+          Lists.methods.remove._execute({}, { listId });
+        }, Meteor.Error, /Lists.methods.remove.accessDenied/);
+      });
     });
 
     describe('rate limiting', () => {
