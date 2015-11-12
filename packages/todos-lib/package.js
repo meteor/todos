@@ -1,5 +1,4 @@
 Package.describe({
-  name: 'todos-lib',
   summary: 'Common dependencies of all app packages',
   documentation: null,
 });
@@ -70,9 +69,10 @@ Package.onUse(function(api) {
   // Security
   api.imply([
     'ddp-rate-limiter',
-    'force-ssl',
     'audit-argument-checks',
-    'browser-policy',
+
+    // Production only package with some more security
+    'app-prod-security',
   ]);
 
   // DDP

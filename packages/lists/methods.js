@@ -33,6 +33,7 @@ Lists.methods.makePrivate = new Method({
     Lists.update(listId, {
       $set: { userId: this.userId }
     });
+
     Lists.userIdDenormalizer.set(listId, this.userId);
   }
 });
@@ -48,13 +49,17 @@ Lists.methods.makePublic = new Method({
 
     // Put both the list ID and the user ID in the selector instead of loading
     // the list from the DB. This way the security check is atomic.
-    Lists.update({
+    const numUpdated = Lists.update({
       _id: listId,
       userId: this.userId,
     }, {
       $unset: { userId: true }
     });
-    Lists.userIdDenormalizer.unset(listId);
+
+    if (numUpdated) {
+      // Only denormalize if the list was actually updated
+      Lists.userIdDenormalizer.unset(listId);
+    }
   }
 });
 

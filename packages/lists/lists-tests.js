@@ -10,18 +10,6 @@ describe('lists', () => {
       assert.typeOf(list, 'object');
       assert.match(list.name, /List /);
     });
-    it('updates todos when userId changes', () => {
-      const list = Factory.create('list');
-      const todo = Factory.create('todo', {listId: list._id});
-      assert.isUndefined(Todos.findOne(todo._id).userId);
-
-      const userId = Random.id();
-      Lists.update(list._id, {$set: {userId}});
-      assert.equal(Todos.findOne(todo._id).userId, userId);
-
-      Lists.update(list._id, {$unset: {userId}});
-      assert.isUndefined(Todos.findOne(todo._id).userId);
-    });
   });
 
   describe('publications', () => {
@@ -60,6 +48,98 @@ describe('lists', () => {
           chai.assert.equal(collections.Lists.length, 2);
           done();
         });
+      });
+    });
+  });
+
+  describe('methods', () => {
+    let listId, todoId, otherListId, userId;
+
+    beforeEach(() => {
+      // Clear
+      Lists.remove({});
+      Todos.remove({});
+
+      // Create a list and a todo in that list
+      listId = Factory.create('list')._id;
+      todoId = Factory.create('todo', { listId })._id;
+
+      // Create throwaway list, since the last public list can't be made private
+      otherListId = Factory.create('list')._id;
+
+      // Generate a 'user'
+      userId = Random.id();
+      console.log("cleaning");
+    });
+
+    function assertListAndTodoArePrivate() {
+      assert.equal(Lists.findOne(listId).userId, userId);
+      assert.isTrue(Lists.findOne(listId).isPrivate());
+      assert.equal(Todos.findOne(todoId).userId, userId);
+      assert.isTrue(Todos.findOne(todoId).editableBy(userId));
+    }
+
+    describe('Lists.methods.makePrivate / makePublic', () => {
+      it('makes a list private and updates the todos', () => {
+        // Check initial state is public
+        assert.isUndefined(Todos.findOne(todoId).userId);
+        assert.isFalse(Lists.findOne(listId).isPrivate());
+
+        // Set up method arguments and context
+        const methodInvocation = { userId };
+        const args = { listId };
+
+        // Making the list private adds userId to the todo
+        Lists.methods.makePrivate._execute(methodInvocation, args);
+        assertListAndTodoArePrivate();
+
+        // Making the list public removes it
+        Lists.methods.makePublic._execute(methodInvocation, args);
+        assert.isUndefined(Todos.findOne(todoId).userId);
+        assert.isTrue(Todos.findOne(todoId).editableBy(userId));
+      });
+
+      it('only works if you are logged in', () => {
+        // Set up method arguments and context
+        const methodInvocation = { };
+        const args = { listId };
+
+        assert.throws(() => {
+          Lists.methods.makePrivate._execute(methodInvocation, args);
+        }, Meteor.Error, /Lists.methods.makePrivate.notLoggedIn/);
+
+        assert.throws(() => {
+          Lists.methods.makePublic._execute(methodInvocation, args);
+        }, Meteor.Error, /Lists.methods.makePublic.notLoggedIn/);
+      });
+
+      it('only works if it\'s not the last public list', () => {
+        // Remove other list, now we're the last public list
+        Lists.remove(otherListId);
+
+        // Set up method arguments and context
+        const methodInvocation = { userId };
+        const args = { listId };
+
+        assert.throws(() => {
+          Lists.methods.makePrivate._execute(methodInvocation, args);
+        }, Meteor.Error, /Lists.methods.makePrivate.lastPublicList/);
+      });
+
+      it('only makes the list public if you made it private', () => {
+        // Set up method arguments and context
+        const methodInvocation = { userId };
+        const args = { listId };
+
+        Lists.methods.makePrivate._execute(methodInvocation, args);
+
+        const otherUserMethodInvocation = { userId: Random.id() };
+
+        // Shouldn't do anything
+        Lists.methods.makePublic._execute(otherUserMethodInvocation, args);
+
+        // Make sure things are still private
+        assertListAndTodoArePrivate();
       });
     });
   });
