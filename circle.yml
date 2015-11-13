@@ -6,7 +6,7 @@ machine:
     version: 0.10.40
   pre:
     - curl https://install.meteor.com | /bin/sh
-    - npm install spacejam
+    - npm install -g spacejam
 test:
   override:
     - spacejam test-packages --driver-package practicalmeteor:mocha-console-reporter
