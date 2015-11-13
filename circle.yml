@@ -1,0 +1,12 @@
+checkout:
+  post:
+    - git submodule update --init
+machine:
+  node:
+    version: 0.10.40
+  pre:
+    - curl https://install.meteor.com | /bin/sh
+    - npm install spacejam
+test:
+  override:
+    - spacejam test-packages
