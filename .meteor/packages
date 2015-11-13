@@ -14,4 +14,4 @@ juliancwirko:postcss  # Needs to be at app level until we support configuring mi
 npm-container # Necessary for PostCSS
 
 east5th:package-scan
-audit-arguments-checks # needs to be the app level due to test packages failing
+audit-argument-checks # needs to be the app level due to test packages failing
