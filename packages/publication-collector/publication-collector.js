@@ -52,7 +52,7 @@ _.extend(PublicationCollector.prototype, {
     _.extend(existingDocument, fieldsNoId);
 
     // Delete all keys that were undefined in fields (except _id)
-    fields.forEach((value, key) => {
+    _.forEach(fields, (value, key) => {
       if (value === undefined) {
         delete existingDocument[key];
       }
