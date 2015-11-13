@@ -9,4 +9,4 @@ machine:
     - npm install spacejam
 test:
   override:
-    - spacejam test-packages
+    - spacejam test-packages --driver-package practicalmeteor:mocha-console-reporter

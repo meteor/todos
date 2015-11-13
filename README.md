@@ -3,7 +3,7 @@
 To run the tests:
 
 ```bash
-meteor test-packages --driver-package respondly:test-reporter
+meteor test-packages --driver-package practicalmeteor:mocha
 ```
 
 ### Scripts

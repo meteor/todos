@@ -7,7 +7,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.imply([
     'todos-lib',
-    'mike:mocha-package@0.5.9',
+    'practicalmeteor:mocha@2.1.0_5',
     'practicalmeteor:chai@2.1.0_1',
     'publication-collector',
     'factory',

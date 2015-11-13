@@ -69,7 +69,6 @@ Package.onUse(function(api) {
   // Security
   api.imply([
     'ddp-rate-limiter',
-    'audit-argument-checks',
 
     // Production only package with some more security
     'app-prod-security',
