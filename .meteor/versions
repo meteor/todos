@@ -67,6 +67,7 @@ lists-show@0.0.1
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
+mdg:validation-error@0.0.1
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:async@1.0.0
@@ -113,7 +114,6 @@ url@1.0.5
 useraccounts:core@1.12.4
 useraccounts:flow-routing@1.12.4
 useraccounts:unstyled@1.12.4
-validation-error@0.0.1
 webapp@1.2.3
 webapp-hashing@1.0.5
 zimme:active-route@2.3.2

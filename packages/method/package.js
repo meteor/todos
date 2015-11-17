@@ -12,7 +12,7 @@ Package.onUse(function(api) {
     'ddp',
     'underscore',
     'aldeed:simple-schema',
-    'validation-error'
+    'mdg:validation-error'
   ]);
   api.addFiles('methods.js');
   api.export('Method');

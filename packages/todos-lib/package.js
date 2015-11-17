@@ -18,7 +18,7 @@ Package.onUse(function(api) {
     'aldeed:collection2@2.5.0',
     'dburles:collection-helpers@1.0.4',
     'denormalizer',
-    'validation-error'
+    'mdg:validation-error'
   ]);
 
   // Client-side libraries

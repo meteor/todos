@@ -7,3 +7,6 @@
 [submodule "packages/mocha-core"]
 	path = packages/mocha-core
 	url = https://github.com/tmeasday/meteor-mocha-core.git
+[submodule "packages/validation-error"]
+	path = packages/validation-error
+	url = https://github.com/tmeasday/validation-error.git
