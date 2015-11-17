@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/meteor/todos.svg?style=svg)](https://circleci.com/gh/meteor/todos)
+
 ### Tests
 
 To run the tests:
