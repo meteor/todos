@@ -16,7 +16,7 @@ class ListsCollection extends Mongo.Collection {
       let nextLetter = 'A';
       list.name = `List ${nextLetter}`;
 
-      while (Lists.findOne({name: list.name})) {
+      while (!!this.findOne({name: list.name})) {
         // not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
         list.name = `List ${nextLetter}`;
