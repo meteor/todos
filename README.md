@@ -21,7 +21,7 @@ packagecheck
 To lint:
 
 ```bash
-npm install -g eslint
+npm install -g eslint babel-eslint
 eslint .
 ```
 
