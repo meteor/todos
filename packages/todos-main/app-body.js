@@ -46,7 +46,10 @@ Template.appBody.helpers({
     return instance.state.get('userMenuOpen');
   },
   lists() {
-    return Lists.find();
+    return Lists.find({$or: [
+      {userId: {$exists: false}},
+      {userId: Meteor.userId()}
+    ]});
   },
   activeListClass(list) {
     const active = ActiveRoute.name('listsShow')
