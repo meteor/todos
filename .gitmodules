@@ -9,7 +9,7 @@
 	url = https://github.com/tmeasday/meteor-mocha-core.git
 [submodule "packages/validation-error"]
 	path = packages/validation-error
-	url = https://github.com/tmeasday/validation-error.git
+	url = https://github.com/meteor/validation-error.git
 [submodule "packages/method"]
 	path = packages/method
 	url = https://github.com/meteor/method
