@@ -99,6 +99,7 @@ session@1.1.1
 sha@1.0.4
 simple:json-routes@1.0.4
 simple:rest@0.2.3
+simple:rest-accounts-password@1.0.1
 softwarerero:accounts-t9n@1.1.6
 spacebars@1.0.7
 spacebars-compiler@1.0.7

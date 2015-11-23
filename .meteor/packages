@@ -17,3 +17,4 @@ east5th:package-scan
 audit-argument-checks # needs to be the app level due to test packages failing
 
 check # this is here for simple-rest's sake https://github.com/stubailo/meteor-rest/issues/70
+simple:rest-accounts-password
