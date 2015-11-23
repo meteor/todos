@@ -10,6 +10,7 @@ Package.onUse(function(api) {
     'es5-shim',
     'underscore',
     'check',
+    'simple:rest@0.2.3'
   ]);
 
   // Collections
