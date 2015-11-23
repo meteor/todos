@@ -23,11 +23,6 @@ Todos.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
     denyUpdate: true
   },
-  userId: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    optional: true
-  },
   text: {
     type: String,
     max: 100

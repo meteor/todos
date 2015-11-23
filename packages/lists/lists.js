@@ -1,15 +1,6 @@
 /* global Lists:true */
 /* global SimpleSchema Factory faker Denormalizer Todos */
 
-// Not sure where the best spot to put this is
-const userIdDenormalizer = new Denormalizer({
-  source: () => Lists,
-  // TODO - can't depend as will lead to circular dep -- single collections package?
-  target: () => Package.todos.Todos,
-  field: 'userId',
-  foreignKey: 'listId'
-});
-
 class ListsCollection extends Mongo.Collection {
   insert(list, callback) {
     if (!list.name) {
@@ -39,8 +30,6 @@ Lists.deny({
   update() { return true; },
   remove() { return true; },
 });
-
-Lists.userIdDenormalizer = userIdDenormalizer;
 
 Lists.schema = new SimpleSchema({
   name: { type: String },

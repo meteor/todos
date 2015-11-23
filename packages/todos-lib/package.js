@@ -19,7 +19,8 @@ Package.onUse(function(api) {
     'aldeed:collection2@2.5.0',
     'dburles:collection-helpers@1.0.4',
     'denormalizer',
-    'mdg:validation-error'
+    'mdg:validation-error',
+    'reywood:publish-composite@1.4.2'
   ]);
 
   // Client-side libraries
