@@ -79,6 +79,6 @@ Package.onUse(function(api) {
 
   // DDP
   api.imply([
-    'method',
+    'mdg:method',
   ]);
 });
