@@ -75,13 +75,12 @@ describe('lists', () => {
       function assertListAndTodoArePrivate() {
         assert.equal(Lists.findOne(listId).userId, userId);
         assert.isTrue(Lists.findOne(listId).isPrivate());
-        assert.equal(Todos.findOne(todoId).userId, userId);
         assert.isTrue(Todos.findOne(todoId).editableBy(userId));
+        assert.isFalse(Todos.findOne(todoId).editableBy(Random.id()));
       }
 
       it('makes a list private and updates the todos', () => {
         // Check initial state is public
-        assert.isUndefined(Todos.findOne(todoId).userId);
         assert.isFalse(Lists.findOne(listId).isPrivate());
 
         // Set up method arguments and context
