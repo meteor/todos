@@ -73,7 +73,7 @@ Template.listsShow.onCreated(function() {
 
 Template.listsShow.helpers({
   todos(listId) {
-    return Todos.find({listId: listId}, {sort: {createdAt: -1}});
+    return Lists.findOne(listId).todos();
   },
   todoArgs(todo) {
     const instance = Template.instance();

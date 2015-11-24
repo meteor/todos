@@ -35,9 +35,9 @@ Lists = new ListsCollection('Lists');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny({
-  insert() { return true },
-  update() { return true },
-  remove() { return true },
+  insert() { return true; },
+  update() { return true; },
+  remove() { return true; },
 });
 
 Lists.userIdDenormalizer = userIdDenormalizer;
@@ -67,5 +67,8 @@ Lists.helpers({
     }
 
     return this.userId === userId;
+  },
+  todos() {
+    return Package.todos.Todos.find({listId: this._id}, {sort: {createdAt: -1}});
   }
 });
