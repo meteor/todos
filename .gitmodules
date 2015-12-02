@@ -10,6 +10,3 @@
 [submodule "packages/validation-error"]
 	path = packages/validation-error
 	url = https://github.com/meteor/validation-error.git
-[submodule "packages/method"]
-	path = packages/method
-	url = https://github.com/meteor/method

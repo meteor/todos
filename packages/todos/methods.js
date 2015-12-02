@@ -2,12 +2,12 @@
 
 Todos.methods = {};
 
-Todos.methods.insert = new Method({
+Todos.methods.insert = new ValidatedMethod({
   name: 'Todos.methods.insert',
-  schema: new SimpleSchema({
+  validate: new SimpleSchema({
     listId: { type: String },
     text: { type: String }
-  }),
+  }).validator(),
   run({ listId, text }) {
     const list = Lists.findOne(listId);
 
@@ -34,12 +34,12 @@ Todos.methods.insert = new Method({
   }
 });
 
-Todos.methods.setCheckedStatus = new Method({
+Todos.methods.setCheckedStatus = new ValidatedMethod({
   name: 'Todos.methods.makeChecked',
-  schema: new SimpleSchema({
+  validate: new SimpleSchema({
     todoId: { type: String },
     newCheckedStatus: { type: Boolean }
-  }),
+  }).validator(),
   run({ todoId, newCheckedStatus }) {
     const todo = Todos.findOne(todoId);
 
@@ -64,12 +64,12 @@ Todos.methods.setCheckedStatus = new Method({
   }
 });
 
-Todos.methods.updateText = new Method({
+Todos.methods.updateText = new ValidatedMethod({
   name: 'Todos.methods.updateText',
-  schema: new SimpleSchema({
+  validate: new SimpleSchema({
     todoId: { type: String },
     newText: { type: String }
-  }),
+  }).validator(),
   run({ todoId, newText }) {
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
     // would be correct here?
@@ -86,11 +86,11 @@ Todos.methods.updateText = new Method({
   }
 });
 
-Todos.methods.remove = new Method({
+Todos.methods.remove = new ValidatedMethod({
   name: 'Todos.methods.remove',
-  schema: new SimpleSchema({
+  validate: new SimpleSchema({
     todoId: { type: String }
-  }),
+  }).validator(),
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
 

@@ -79,6 +79,7 @@ Package.onUse(function(api) {
 
   // DDP
   api.imply([
-    'mdg:method',
+    'mdg:validated-method@0.2.0',
+    'aldeed:simple-schema@1.4.0',
   ]);
 });

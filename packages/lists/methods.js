@@ -4,19 +4,19 @@ Lists.methods = {};
 
 const LIST_ID_ONLY = new SimpleSchema({
   listId: { type: String }
-});
+}).validator();
 
-Lists.methods.insert = new Method({
+Lists.methods.insert = new ValidatedMethod({
   name: 'Lists.methods.insert',
-  schema: new SimpleSchema({}),
+  validate: new SimpleSchema({}).validator(),
   run() {
     return Lists.insert({});
   }
 });
 
-Lists.methods.makePrivate = new Method({
+Lists.methods.makePrivate = new ValidatedMethod({
   name: 'Lists.methods.makePrivate',
-  schema: LIST_ID_ONLY,
+  validate: LIST_ID_ONLY,
   run({ listId }) {
     if (!this.userId) {
       throw new Meteor.Error('Lists.methods.makePrivate.notLoggedIn',
@@ -38,9 +38,9 @@ Lists.methods.makePrivate = new Method({
   }
 });
 
-Lists.methods.makePublic = new Method({
+Lists.methods.makePublic = new ValidatedMethod({
   name: 'Lists.methods.makePublic',
-  schema: LIST_ID_ONLY,
+  validate: LIST_ID_ONLY,
   run({ listId }) {
     if (!this.userId) {
       throw new Meteor.Error('Lists.methods.makePublic.notLoggedIn',
@@ -67,12 +67,12 @@ Lists.methods.makePublic = new Method({
   }
 });
 
-Lists.methods.updateName = new Method({
+Lists.methods.updateName = new ValidatedMethod({
   name: 'Lists.methods.updateName',
-  schema: new SimpleSchema({
+  validate: new SimpleSchema({
     listId: { type: String },
     newName: { type: String }
-  }),
+  }).validator(),
   run({ listId, newName }) {
     const list = Lists.findOne(listId);
 
@@ -90,9 +90,9 @@ Lists.methods.updateName = new Method({
   }
 });
 
-Lists.methods.remove = new Method({
+Lists.methods.remove = new ValidatedMethod({
   name: 'Lists.methods.remove',
-  schema: LIST_ID_ONLY,
+  validate: LIST_ID_ONLY,
   run({ listId }) {
     const list = Lists.findOne(listId);
 
