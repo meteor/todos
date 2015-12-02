@@ -2,14 +2,14 @@
 
 FlowRouter.route('/lists/:_id', {
   name: 'listsShow',
-  action: () => {
+  action() {
     BlazeLayout.render('appBody', {main: 'listsShowPage'});
   }
 });
 
 FlowRouter.route('/', {
   name: 'home',
-  action: () => {
+  action() {
     BlazeLayout.render('appBody', {main: 'rootRedirector'});
   }
 });
