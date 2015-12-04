@@ -74,9 +74,6 @@ Template.listsShow.onCreated(function() {
 });
 
 Template.listsShow.helpers({
-  todos(listId) {
-    return Lists.findOne(listId).todos();
-  },
   todoArgs(todo) {
     const instance = Template.instance();
     return {

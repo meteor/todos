@@ -24,7 +24,21 @@ Template.listsShowPage.helpers({
   // items to know when to insert a new item and when to update an old one.
   listArray() {
     const instance = Template.instance();
-    const list = Lists.findOne(instance.getListId());
+    const list = Lists.findOne(instance.getListId(), {fields: {_id: true}});
     return list ? [list] : [];
+  },
+  // We pass `list` (which contains the full list, with all fields, as oppposed the record
+  // with _id only from above, because we want to control reactivity. When you check a todo
+  // item, the `list.incompleteCount` changes. If we didn't do this the entire list would
+  // re-render whenever you checked and item. By isolating the reactiviy on the list
+  // to the area that cares about it, we stop it from happening.
+  getFullList(listIdOnly) {
+    // XXX: I've no idea why I need to return a function that returns a function here.
+    //   I think a refactor is in order
+    return () => {
+      return () => {
+        return Lists.findOne(listIdOnly._id);
+      };
+    };
   }
 });
