@@ -26,6 +26,6 @@ Template.listsShowPage.helpers({
   listArray() {
     const instance = Template.instance();
     const list = Lists.findOne(instance.state.get('listId'));
-    return [list];
+    return list ? [list] : [];
   }
 });
