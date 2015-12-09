@@ -29,12 +29,12 @@ Template.todosItem.events({
   },
 
   'focus input[type=text]'() {
-    this.onEdit(true);
+    this.onEditingChange(true);
   },
 
   'blur input[type=text]'() {
     if (this.editing) {
-      this.onEdit(false);
+      this.onEditingChange(false);
     }
   },
 

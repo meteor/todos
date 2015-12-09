@@ -80,8 +80,8 @@ Template.listsShow.helpers({
     return {
       todo,
       editing: instance.state.equals('editingTodo', todo._id),
-      onEdit(doEdit) {
-        instance.state.set('editingTodo', doEdit ? todo._id : false);
+      onEditingChange(editing) {
+        instance.state.set('editingTodo', editing ? todo._id : false);
       }
     };
   }

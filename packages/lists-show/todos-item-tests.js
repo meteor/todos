@@ -15,7 +15,7 @@ describe('todosItem', () => {
     const todo = Factory.create('todo', {checked: false});
     const data = {
       todo,
-      onEdit: () => {}
+      onEditingChange: () => {}
     };
 
     withRenderedTemplate('todosItem', data, el => {
@@ -29,7 +29,7 @@ describe('todosItem', () => {
     const todo = Factory.create('todo', {checked: true});
     const data = {
       todo,
-      onEdit: () => {}
+      onEditingChange: () => {}
     };
 
     withRenderedTemplate('todosItem', data, el => {
@@ -43,7 +43,7 @@ describe('todosItem', () => {
     const data = {
       todo,
       editing: true,
-      onEdit: () => {}
+      onEditingChange: () => {}
     };
 
     withRenderedTemplate('todosItem', data, el => {
