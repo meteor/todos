@@ -22,7 +22,9 @@ Template.listsShow.onCreated(function() {
       listId: this.data.list._id,
       newName: this.$('[name=name]').val()
     }, (err) => {
-      err && alert(err.error); // XXX i18n
+      // Ignore the error - there's nothing useful we can do in the UI
+      // here. In particular this case happens if you try to save with
+      // an empty list name.
     });
   };
 

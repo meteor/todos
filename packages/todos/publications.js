@@ -1,7 +1,7 @@
 /* global Todos, Lists */
 /* eslint-disable prefer-arrow-callback */
 
-Meteor.publishComposite('list/todos', function(listId) {
+Meteor.publishComposite('Todos.inList', function(listId) {
   check(listId, String);
 
   const userId = this.userId;

@@ -1,11 +1,11 @@
 /* globals Lists */
 /* eslint-disable prefer-arrow-callback */
 
-Meteor.publish('lists/public', function() {
+Meteor.publish('Lists.public', function() {
   return Lists.find({userId: {$exists: false}});
 });
 
-Meteor.publish('lists/private', function() {
+Meteor.publish('Lists.private', function() {
   if (!this.userId) {
     return this.ready();
   }

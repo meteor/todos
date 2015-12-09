@@ -19,8 +19,8 @@ Meteor.startup(() => {
 });
 
 Template.appBody.onCreated(function() {
-  this.subscribe('lists/public');
-  this.subscribe('lists/private');
+  this.subscribe('Lists.public');
+  this.subscribe('Lists.private');
 
   this.state = new ReactiveDict();
   this.state.setDefault({
