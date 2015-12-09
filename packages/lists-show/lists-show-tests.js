@@ -24,7 +24,8 @@ describe('listsShow', () => {
 
     const data = {
       list,
-      todosReady: true
+      todosReady: true,
+      todos: list.todos()
     };
 
     withRenderedTemplate('listsShow', data, el => {
