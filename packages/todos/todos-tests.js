@@ -39,10 +39,10 @@ describe('todos', () => {
       });
     });
 
-    describe('list/todos', () => {
+    describe('Todos.inList', () => {
       it('sends all todos for a public list', (done) => {
         const collector = new PublicationCollector();
-        collector.collect('list/todos', publicList._id, (collections) => {
+        collector.collect('Todos.inList', { listId: publicList._id }, (collections) => {
           chai.assert.equal(collections.Todos.length, 3);
           done();
         });
@@ -50,7 +50,7 @@ describe('todos', () => {
 
       it('sends all todos for a public list when logged in', (done) => {
         const collector = new PublicationCollector({userId});
-        collector.collect('list/todos', publicList._id, (collections) => {
+        collector.collect('Todos.inList', { listId: publicList._id }, (collections) => {
           chai.assert.equal(collections.Todos.length, 3);
           done();
         });
@@ -58,7 +58,7 @@ describe('todos', () => {
 
       it('sends all todos for a private list when logged in as owner', (done) => {
         const collector = new PublicationCollector({userId});
-        collector.collect('list/todos', privateList._id, (collections) => {
+        collector.collect('Todos.inList', { listId: privateList._id }, (collections) => {
           chai.assert.equal(collections.Todos.length, 3);
           done();
         });
@@ -66,7 +66,7 @@ describe('todos', () => {
 
       it('sends no todos for a private list when not logged in', (done) => {
         const collector = new PublicationCollector();
-        collector.collect('list/todos', privateList._id, (collections) => {
+        collector.collect('Todos.inList', { listId: privateList._id }, (collections) => {
           chai.assert.isUndefined(collections.Todos);
           done();
         });
@@ -74,7 +74,7 @@ describe('todos', () => {
 
       it('sends no todos for a private list when logged in as another user', (done) => {
         const collector = new PublicationCollector({userId: Random.id()});
-        collector.collect('list/todos', privateList._id, (collections) => {
+        collector.collect('Todos.inList', { listId: privateList._id }, (collections) => {
           chai.assert.isUndefined(collections.Todos);
           done();
         });
