@@ -10,13 +10,6 @@ describe('todos', () => {
       assert.typeOf(todo, 'object');
       assert.typeOf(todo.createdAt, 'date');
     });
-    // TODO -- move this to a method test
-    it.skip('gets userId from source list', () => {
-      const userId = Random.id();
-      const list = Factory.create('list', {userId});
-      const todo = Factory.create('todo', {listId: list._id});
-      assert.equal(Todos.findOne(todo._id).userId, userId);
-    });
   });
 
   it('leaves createdAt on update', () => {
