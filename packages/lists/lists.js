@@ -39,6 +39,15 @@ Lists.schema = new SimpleSchema({
 
 Lists.attachSchema(Lists.schema);
 
+// This represents the keys from Lists objects that should be published
+// to the client. If we add secret properties to List objects, don't list
+// them here to keep them private to the server.
+Lists.publicFields = {
+  name: 1,
+  incompleteCount: 1,
+  userId: 1
+};
+
 Factory.define('list', Lists, {});
 
 Lists.helpers({

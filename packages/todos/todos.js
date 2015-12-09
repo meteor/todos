@@ -39,6 +39,16 @@ Todos.schema = new SimpleSchema({
 
 Todos.attachSchema(Todos.schema);
 
+// This represents the keys from Lists objects that should be published
+// to the client. If we add secret properties to List objects, don't list
+// them here to keep them private to the server.
+Todos.publicFields = {
+  listId: 1,
+  text: 1,
+  createdAt: 1,
+  checked: 1
+};
+
 // TODO This factory has a name - do we have a code style for this?
 //   - usually I've used the singular, sometimes you have more than one though, like
 //   'todo', 'emptyTodo', 'checkedTodo'
