@@ -1,11 +1,10 @@
 /* global FlowRouter Lists AppLaunchScreen */
 
 Template.listsShowPage.onCreated(function() {
-  this.state = new ReactiveDict();
+  this.getListId = () => FlowRouter.getParam('_id');
+
   this.autorun(() => {
-    const listId = FlowRouter.getParam('_id');
-    this.state.set({listId});
-    this.subscribe('list/todos', listId);
+    this.subscribe('list/todos', this.getListId());
   });
 });
 
@@ -25,7 +24,7 @@ Template.listsShowPage.helpers({
   // items to know when to insert a new item and when to update an old one.
   listArray() {
     const instance = Template.instance();
-    const list = Lists.findOne(instance.state.get('listId'));
+    const list = Lists.findOne(instance.getListId());
     return list ? [list] : [];
   }
 });
