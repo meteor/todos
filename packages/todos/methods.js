@@ -23,7 +23,6 @@ Todos.methods.insert = new ValidatedMethod({
       createdAt: new Date()
     };
 
-    Lists.userIdDenormalizer.insert(todo);
     Todos.insert(todo);
 
     // XXX should this just get the incomplete count from a query? otherwise

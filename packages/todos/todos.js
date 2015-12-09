@@ -23,11 +23,6 @@ Todos.schema = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Id,
     denyUpdate: true
   },
-  userId: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    optional: true
-  },
   text: {
     type: String,
     max: 100
@@ -54,16 +49,10 @@ Factory.define('todo', Todos, {
 });
 
 Todos.helpers({
-  getList() {
+  list() {
     return Lists.findOne(this.listId);
   },
   editableBy(userId) {
-    if (! this.userId) {
-      // This todo is in a public list
-      return true;
-    }
-
-    // This todo is in a private list, but the list is owned by the relevant user
-    return this.userId === userId;
+    return this.list().editableBy(userId);
   }
 });

@@ -33,8 +33,6 @@ Lists.methods.makePrivate = new ValidatedMethod({
     Lists.update(listId, {
       $set: { userId: this.userId }
     });
-
-    Lists.userIdDenormalizer.set(listId, this.userId);
   }
 });
 
@@ -56,14 +54,9 @@ Lists.methods.makePublic = new ValidatedMethod({
 
     // XXX the security check above is not atomic, so in theory a race condition could
     // result in exposing private data
-    const numUpdated = Lists.update(listId, {
+    Lists.update(listId, {
       $unset: { userId: true }
     });
-
-    if (numUpdated) {
-      // Only denormalize if the list was actually updated
-      Lists.userIdDenormalizer.unset(listId);
-    }
   }
 });
 

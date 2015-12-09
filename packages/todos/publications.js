@@ -1,28 +1,23 @@
-/* global Todos */
+/* global Todos, Lists */
 /* eslint-disable prefer-arrow-callback */
 
-Meteor.publish('list/todos', function(listId) {
+Meteor.publishComposite('list/todos', function(listId) {
   check(listId, String);
 
-  const publicTodosSelector = {
-    listId: listId,
-    userId: { $exists: false }
+  const userId = this.userId;
+  return {
+    find() {
+      const query = {
+        _id: listId,
+        $or: [{userId: {$exists: false}}, {userId}]
+      };
+
+      return Lists.find(query);
+    },
+    children: [{
+      find(list) {
+        return Todos.find({listId: list._id});
+      }
+    }]
   };
-
-  if (! this.userId) {
-    // If we aren't logged in, only return public todo items
-    return Todos.find(publicTodosSelector);
-  }
-
-  const privateTodosSelector = {
-    listId: listId,
-    userId: this.userId
-  };
-
-  // We need to make sure that you can only get todos that are in a public list, or in a list that
-  // belongs to the current user, so we need to use Mongo $or.
-  return Todos.find({ $or: [
-    publicTodosSelector,
-    privateTodosSelector
-  ]});
 });
