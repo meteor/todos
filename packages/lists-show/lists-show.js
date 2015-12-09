@@ -1,11 +1,13 @@
 /* global Todos Lists FlowRouter Tracker */
 
 Template.listsShow.onCreated(function() {
-  // TODO -- figure out how to make this check work with the todo being a "Document"
-  // check(this.data, new SimpleSchema({
-  //   list: {blackbox: true},
-  //   todosReady: {type: Boolean}
-  // }));
+  this.autorun(() => {
+    new SimpleSchema({
+      list: {type: Lists._helpers},
+      todosReady: {type: Boolean},
+      todos: {type: Mongo.Cursor}
+    }).validate(Template.currentData());
+  });
 
   this.state = new ReactiveDict();
   this.state.setDefault({

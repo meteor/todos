@@ -1,12 +1,13 @@
 /* global Todos SimpleSchema */
 
 Template.todosItem.onCreated(function() {
-  // TODO -- figure out how to make this check work with the todo being a "Document"
-  // check(this.data, new SimpleSchema({
-  //   todo: {blackbox: true},
-  //   editing: {type: Boolean, optional: true},
-  //   onEdit: {type: Function}
-  // }));
+  this.autorun(() => {
+    new SimpleSchema({
+      todo: {type: Todos._helpers},
+      editing: {type: Boolean, optional: true},
+      onEditingChange: {type: Function}
+    }).validate(Template.currentData());
+  });
 });
 
 Template.todosItem.helpers({
