@@ -111,12 +111,14 @@ Todos.methods.remove = new ValidatedMethod({
 // Get list of all method names on Todos
 const TODOS_METHODS = _.pluck(Todos.methods, 'name');
 
-// Only allow 5 todos operations per connection per second
-DDPRateLimiter.addRule({
-  name(name) {
-    return _.contains(TODOS_METHODS, name);
-  },
+if (Meteor.isServer) {
+  // Only allow 5 todos operations per connection per second
+  DDPRateLimiter.addRule({
+    name(name) {
+      return _.contains(TODOS_METHODS, name);
+    },
 
-  // Rate limit per connection ID
-  connectionId() { return true; }
-}, 5, 1000);
+    // Rate limit per connection ID
+    connectionId() { return true; }
+  }, 5, 1000);
+}

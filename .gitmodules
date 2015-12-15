@@ -10,3 +10,9 @@
 [submodule "packages/validation-error"]
 	path = packages/validation-error
 	url = https://github.com/meteor/validation-error.git
+[submodule "packages/postcss"]
+	path = packages/postcss
+	url = https://github.com/juliancwirko/meteor-postcss
+[submodule "packages/momentum"]
+	path = packages/momentum
+	url = https://github.com/percolatestudio/meteor-momentum.git
