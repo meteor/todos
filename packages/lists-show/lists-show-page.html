@@ -1,7 +1,6 @@
 <template name="listsShowPage">
-  {{#each listIdOnly in listArray}}
-    {{> listsShow todosReady=Template.subscriptionsReady
-      list=(getFullList listIdOnly) todos=listIdOnly.todos}}
+  {{#each listId in listIdArray}}
+    {{> listsShow (listArgs listId)}}
   {{else}}
     {{> appNotFound}}
   {{/each}}

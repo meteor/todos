@@ -3,7 +3,7 @@
 Template.listsShow.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
-      list: {type: Lists._helpers},
+      list: {type: Function},
       todosReady: {type: Boolean},
       todos: {type: Mongo.Cursor}
     }).validate(Template.currentData());
