@@ -4,7 +4,19 @@
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
     doc.createdAt = doc.createdAt || new Date();
-    return super(doc, callback);
+    const result = super(doc, callback);
+    Todos.incompleteCountDenormalizer.afterInsertTodo(doc);
+    return result;
+  }
+  update(selector, modifier) {
+    const result = super(selector, modifier);
+    Todos.incompleteCountDenormalizer.afterUpdateTodo(selector, modifier);
+    return result;
+  }
+  remove(selector) {
+    const result = super(selector);
+    Todos.incompleteCountDenormalizer.afterRemoveTodo(selector);
+    return result;
   }
 }
 
@@ -12,9 +24,9 @@ Todos = new TodosCollection('Todos');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({
-  insert() { return true },
-  update() { return true },
-  remove() { return true },
+  insert() { return true; },
+  update() { return true; },
+  remove() { return true; },
 });
 
 Todos.schema = new SimpleSchema({

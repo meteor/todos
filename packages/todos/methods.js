@@ -24,12 +24,6 @@ Todos.methods.insert = new ValidatedMethod({
     };
 
     Todos.insert(todo);
-
-    // XXX should this just get the incomplete count from a query? otherwise
-    // it could become off-by-one forever...
-    Lists.update(listId, {
-      $inc: { incompleteCount: 1 }
-    });
   }
 });
 
@@ -55,11 +49,6 @@ Todos.methods.setCheckedStatus = new ValidatedMethod({
     Todos.update(todoId, {$set: {
       checked: newCheckedStatus
     }});
-
-    const incAmount = newCheckedStatus ? -1 : 1;
-    Lists.update(todo.listId, {
-      $inc: { incompleteCount: incAmount }
-    });
   }
 });
 
@@ -99,12 +88,6 @@ Todos.methods.remove = new ValidatedMethod({
     }
 
     Todos.remove(todoId);
-
-    if (!todo.checked) {
-      Lists.update(todo.listId, {
-        $inc: {incompleteCount: -1}
-      });
-    }
   }
 });
 

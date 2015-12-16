@@ -10,6 +10,7 @@ Package.onUse(function (api) {
 
   api.addFiles([
     'todos.js',
+    'incompleteCountDenormalizer.js',
     'methods.js',
   ]);
 
