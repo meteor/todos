@@ -1,7 +1,10 @@
 /* global Todos, Lists */
 /* eslint-disable prefer-arrow-callback */
 
-Meteor.publishComposite('Todos.inList', function({ listId }) {
+Meteor.publishComposite('Todos.inList', function(arg) {
+  check(arg, {listId: String})
+  const {listId} = arg;
+
   new SimpleSchema({
     listId: {type: String}
   }).validate({ listId });
