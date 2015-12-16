@@ -51,7 +51,7 @@ Template.listsShow.onCreated(function() {
         // At this point, we have already redirected home as if the list was
         // successfully deleted, but we should at least warn the user their list
         // could not be deleted
-        err && alert(err.error); // XXX i18n!
+        err && alert(err.error); // translate this string after #59
       });
 
       FlowRouter.go('home');
@@ -65,11 +65,11 @@ Template.listsShow.onCreated(function() {
     const list = this.data.list;
     if (list.userId) {
       Lists.methods.makePublic.call({ listId: list._id }, (err) => {
-        err && alert(err.error); // XXX i18n
+        err && alert(err.error); // translate this string after #59
       });
     } else {
       Lists.methods.makePrivate.call({ listId: list._id }, (err) => {
-        err && alert(err.error); // XXX i18n
+        err && alert(err.error); // translate this string after #59
       });
     }
   };
@@ -164,7 +164,7 @@ Template.listsShow.events({
       listId: this.list._id,
       text: $input.val()
     }, (err) => {
-      err && alert(err.error); // XXX i18n
+      err && alert(err.error); // translate this string after #59
     });
 
     $input.val('');

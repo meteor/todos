@@ -55,7 +55,7 @@ Template.todosItem.events({
       todoId: this.todo._id,
       newText: event.target.value
     }, (err) => {
-      err && alert(err.error); // XXX i18n
+      err && alert(err.error); // translate this string after #59
     });
   }, 300),
 
@@ -65,7 +65,7 @@ Template.todosItem.events({
     Todos.methods.remove.call({
       todoId: this.todo._id
     }, (err) => {
-      err && alert(err.error); // XXX i18n
+      err && alert(err.error); // translate this string after #59
     });
   }
 });

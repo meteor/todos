@@ -98,7 +98,6 @@ Lists.methods.remove = new ValidatedMethod({
     // result in exposing private data
 
     if (list.isLastPublicList()) {
-      // XXX what's our error i18n strategy here?
       throw new Meteor.Error('Lists.methods.remove.lastPublicList',
         'Cannot delete the last public list.');
     }
