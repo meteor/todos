@@ -14,8 +14,9 @@ class TodosCollection extends Mongo.Collection {
     return result;
   }
   remove(selector) {
+    const todo = Todos.findOne(selector);
     const result = super(selector);
-    Todos.incompleteCountDenormalizer.afterRemoveTodo(selector);
+    Todos.incompleteCountDenormalizer.afterRemoveTodo(todo);
     return result;
   }
 }

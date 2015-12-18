@@ -21,7 +21,7 @@ Todos.incompleteCountDenormalizer = {
       this._updateListFromTodo(selector);
     }
   },
-  afterRemoveTodo(selector) {
-    this._updateListFromTodo(selector);
+  afterRemoveTodo(todo) {
+    this._updateList(todo.listId);
   }
 };
