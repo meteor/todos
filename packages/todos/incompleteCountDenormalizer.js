@@ -8,9 +8,10 @@ Todos.incompleteCountDenormalizer = {
 
     Lists.update(listId, {$set: {incompleteCount}});
   },
-  _updateListFromTodo(selector) {
-    const listId = Todos.findOne(selector, {fields: {listId: 1}}).listId;
-    this._updateList(listId);
+  _updateListFromTodos(selector) {
+    Todos.find(selector, {fields: {listId: 1}}).forEach(todo => {
+      this._updateList(todo.listId);
+    });
   },
   afterInsertTodo(todo) {
     this._updateList(todo.listId);
@@ -18,10 +19,10 @@ Todos.incompleteCountDenormalizer = {
   afterUpdateTodo(selector, modifier) {
     // We can only deal with $set modifiers, but that's all we do in this app
     if (_.has(modifier.$set, 'checked')) {
-      this._updateListFromTodo(selector);
+      this._updateListFromTodos(selector);
     }
   },
-  afterRemoveTodo(todo) {
-    this._updateList(todo.listId);
+  afterRemoveTodos(todos) {
+    todos.forEach(todo => this._updateList(todo.listId));
   }
 };
