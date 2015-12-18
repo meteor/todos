@@ -1,7 +1,7 @@
-/* global Todos, Lists */
+/* global Todos, Lists, SimpleSchema */
 /* eslint-disable prefer-arrow-callback */
 
-Meteor.publishComposite('Todos.inList', function({ listId }) {
+Meteor.publishComposite('Todos.inList', function(listId) {
   new SimpleSchema({
     listId: {type: String}
   }).validate({ listId });
