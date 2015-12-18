@@ -17,6 +17,9 @@ Todos.incompleteCountDenormalizer = {
     this._updateList(todo.listId);
   },
   afterUpdateTodo(selector, modifier) {
+    // We only support very limited operations on todos
+    check(modifier, {$set: Object});
+
     // We can only deal with $set modifiers, but that's all we do in this app
     if (_.has(modifier.$set, 'checked')) {
       this._updateListFromTodos(selector);
