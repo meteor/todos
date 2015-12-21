@@ -23,7 +23,7 @@ describe('listsShow', () => {
     });
 
     const data = {
-      list,
+      list: () => list,
       todosReady: true,
       todos: list.todos()
     };

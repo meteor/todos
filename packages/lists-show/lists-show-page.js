@@ -20,11 +20,27 @@ Template.listsShowPage.onRendered(function() {
 Template.listsShowPage.helpers({
   // We use #each on an array of one item so that the "list" template is
   // removed and a new copy is added when changing lists, which is
-  // important for animation purposes. #each looks at the _id property of it's
-  // items to know when to insert a new item and when to update an old one.
-  listArray() {
+  // important for animation purposes.
+  listIdArray() {
     const instance = Template.instance();
-    const list = Lists.findOne(instance.getListId());
-    return list ? [list] : [];
+    const listId = instance.getListId();
+    return listId ? [listId] : [];
+  },
+  listArgs(listId) {
+    const instance = Template.instance();
+    return {
+      todosReady: instance.subscriptionsReady(),
+      // We pass `list` (which contains the full list, with all fields, as a function
+      // because we want to control reactivity. When you check a todo item, the
+      // `list.incompleteCount` changes. If we didn't do this the entire list would
+      // re-render whenever you checked an item. By isolating the reactiviy on the list
+      // to the area that cares about it, we stop it from happening.
+      list() {
+        return Lists.findOne(listId);
+      },
+      // By finding the list with only the `_id` field set, we don't create a dependency on the
+      // `list.incompleteCount`, and avoid re-rendering the todos when it changes
+      todos: Lists.findOne(listId, {fields: {_id: true}}).todos()
+    };
   }
 });

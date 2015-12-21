@@ -62,18 +62,14 @@
 
     <div class="content-scrollable list-items">
       {{#if todosReady}}
-        {{#with list._id}} {{! Establish new data context with only the '_id'
-                            field. This way, when the 'incompleteCount' field
-                            changes, we don't re-render the list contents }}
-          {{#each todo in (todos this)}}
-            {{> todosItem (todoArgs todo)}}
-          {{else}}
-            <div class="wrapper-message">
-              <div class="title-message">No tasks here</div>
-              <div class="subtitle-message">Add new tasks using the field above</div>
-            </div>
-          {{/each}}
-        {{/with}}
+        {{#each todo in todos}}
+          {{> todosItem (todoArgs todo)}}
+        {{else}}
+          <div class="wrapper-message">
+            <div class="title-message">No tasks here</div>
+            <div class="subtitle-message">Add new tasks using the field above</div>
+          </div>
+        {{/each}}
       {{else}}
           <div class="wrapper-message">
             <div class="title-message">Loading tasks...</div>
