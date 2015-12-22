@@ -19,12 +19,13 @@ Template.listsShow.onCreated(function() {
     this.state.set('editing', false);
 
     Lists.methods.updateName.call({
-      listId: this.data.list._id,
+      listId: this.data.list()._id,
       newName: this.$('[name=name]').val()
     }, (err) => {
       // Ignore the error - there's nothing useful we can do in the UI
       // here. In particular this case happens if you try to save with
       // an empty list name.
+      err && console.error(err);
     });
   };
 
@@ -41,7 +42,7 @@ Template.listsShow.onCreated(function() {
   };
 
   this.deleteList = () => {
-    const list = this.data.list;
+    const list = this.data.list();
     const message = `Are you sure you want to delete the list ${list.name}?`;
 
     if (confirm(message)) {
@@ -62,7 +63,7 @@ Template.listsShow.onCreated(function() {
   };
 
   this.toggleListPrivacy = () => {
-    const list = this.data.list;
+    const list = this.data.list();
     if (list.userId) {
       Lists.methods.makePublic.call({ listId: list._id }, (err) => {
         err && alert(err.error); // translate this string after #59
@@ -158,7 +159,7 @@ Template.listsShow.events({
     }
 
     Todos.methods.insert.call({
-      listId: this.list._id,
+      listId: this.list()._id,
       text: $input.val()
     }, (err) => {
       err && alert(err.error); // translate this string after #59
