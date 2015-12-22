@@ -18,6 +18,7 @@ Package.onUse(function(api) {
   ], 'server');
 
   api.addFiles([
+    'useraccounts-configuration.js',
     'security.js',
   ]);
 });

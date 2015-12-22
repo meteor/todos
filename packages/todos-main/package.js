@@ -25,9 +25,12 @@ Package.onUse(function(api) {
     'app-body.html',
     'app-body.js',
     'root-redirector.html',
-    'root-redirector.js',
-    'routes.js'
+    'root-redirector.js'
   ], 'client');
+
+  api.addFiles([
+    'routes.js'
+  ]);
 
   api.addFiles([
     'bootstrap.js'
