@@ -113,7 +113,7 @@ Template.App_body.events({
         // At this point, we have already redirected to the new list page, but
         // for some reason the list didn't get created. This should almost never
         // happen, but it's good to handle it anyway.
-        FlowRouter.go('home');
+        FlowRouter.go('App.home');
         alert('Could not create list.');
       }
     });

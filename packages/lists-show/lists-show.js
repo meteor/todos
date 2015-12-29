@@ -55,7 +55,7 @@ Template.Lists_show.onCreated(function() {
         err && alert(err.error); // translate this string after #59
       });
 
-      FlowRouter.go('home');
+      FlowRouter.go('App.home');
       return true;
     }
 
