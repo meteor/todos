@@ -1,6 +1,6 @@
 /* global FlowRouter Lists AppLaunchScreen */
 
-Template.listsShowPage.onCreated(function() {
+Template.Lists_show_page.onCreated(function() {
   this.getListId = () => FlowRouter.getParam('_id');
 
   this.autorun(() => {
@@ -8,7 +8,7 @@ Template.listsShowPage.onCreated(function() {
   });
 });
 
-Template.listsShowPage.onRendered(function() {
+Template.Lists_show_page.onRendered(function() {
   this.autorun(() => {
     if (this.subscriptionsReady()) {
       // Handle for launch screen defined in app-body.js
@@ -17,7 +17,7 @@ Template.listsShowPage.onRendered(function() {
   });
 });
 
-Template.listsShowPage.helpers({
+Template.Lists_show_page.helpers({
   // We use #each on an array of one item so that the "list" template is
   // removed and a new copy is added when changing lists, which is
   // important for animation purposes.

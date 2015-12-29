@@ -2,7 +2,7 @@
 /* global Todos Lists Factory chai withRenderedTemplate */
 const StubCollections = Package['stub-collections'] && Package['stub-collections'].StubCollections;
 
-describe('todosItem', () => {
+describe('Todos_item', () => {
   beforeEach(() => {
     StubCollections.stub([Todos, Lists]);
   });
@@ -18,7 +18,7 @@ describe('todosItem', () => {
       onEditingChange: () => {}
     };
 
-    withRenderedTemplate('todosItem', data, el => {
+    withRenderedTemplate('Todos_item', data, el => {
       chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
       chai.assert.equal($(el).find('.list-item.checked').length, 0);
       chai.assert.equal($(el).find('.list-item.editing').length, 0);
@@ -32,7 +32,7 @@ describe('todosItem', () => {
       onEditingChange: () => {}
     };
 
-    withRenderedTemplate('todosItem', data, el => {
+    withRenderedTemplate('Todos_item', data, el => {
       chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
       chai.assert.equal($(el).find('.list-item.checked').length, 1);
     });
@@ -46,7 +46,7 @@ describe('todosItem', () => {
       onEditingChange: () => {}
     };
 
-    withRenderedTemplate('todosItem', data, el => {
+    withRenderedTemplate('Todos_item', data, el => {
       chai.assert.equal($(el).find('input[type=text]').val(), todo.text);
       chai.assert.equal($(el).find('.list-item.editing').length, 1);
     });

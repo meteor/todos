@@ -3,7 +3,7 @@
 
 const StubCollections = Package['stub-collections'] && Package['stub-collections'].StubCollections;
 
-describe('listsShow', () => {
+describe('Lists_show', () => {
   beforeEach(() => {
     StubCollections.stub([Todos, Lists]);
   });
@@ -28,7 +28,7 @@ describe('listsShow', () => {
       todos: list.todos()
     };
 
-    withRenderedTemplate('listsShow', data, el => {
+    withRenderedTemplate('Lists_show', data, el => {
       const todosText = todos.map(t => t.text).reverse();
       const renderedText = $(el).find('.list-items input[type=text]')
         .map((i, e) => $(e).val())

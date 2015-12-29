@@ -1,4 +1,4 @@
-<template name="appBody">
+<template name="App_body">
   {{#HammerTouchArea gestureMap=templateGestures}}
     <div id="container" class="{{menuOpen}} {{cordova}}">
       <section id="menu">
@@ -31,7 +31,7 @@
           </a>
 
           {{#each list in lists}}
-            <a href="{{pathFor 'listsShow' _id=list._id}}" title="{{list.name}}"
+            <a href="{{pathFor 'Lists.show' _id=list._id}}" title="{{list.name}}"
                 class="list-todo {{activeListClass list}}">
               {{#if list.userId}}
                 <span class="icon-lock"></span>
@@ -66,7 +66,7 @@
           {{#if Template.subscriptionsReady}}
             {{> Template.dynamic template=main}}
           {{else}}
-            {{> appLoading}}
+            {{> App_loading}}
           {{/if}}
         {{/momentum}}
       </div>

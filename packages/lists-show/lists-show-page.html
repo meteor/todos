@@ -1,7 +1,7 @@
-<template name="listsShowPage">
+<template name="Lists_show_page">
   {{#each listId in listIdArray}}
-    {{> listsShow (listArgs listId)}}
+    {{> Lists_show (listArgs listId)}}
   {{else}}
-    {{> appNotFound}}
+    {{> App_notFound}}
   {{/each}}
 </template>

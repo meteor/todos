@@ -18,7 +18,7 @@ Meteor.startup(() => {
   }, CONNECTION_ISSUE_TIMEOUT);
 });
 
-Template.appBody.onCreated(function() {
+Template.App_body.onCreated(function() {
   this.subscribe('Lists.public');
   this.subscribe('Lists.private');
 
@@ -29,7 +29,7 @@ Template.appBody.onCreated(function() {
   });
 });
 
-Template.appBody.helpers({
+Template.App_body.helpers({
   menuOpen() {
     const instance = Template.instance();
     return instance.state.get('menuOpen') && 'menu-open';
@@ -52,7 +52,7 @@ Template.appBody.helpers({
     ]});
   },
   activeListClass(list) {
-    const active = ActiveRoute.name('listsShow')
+    const active = ActiveRoute.name('Lists.show')
       && FlowRouter.getParam('_id') === list._id;
 
     return active && 'active';
@@ -74,7 +74,7 @@ Template.appBody.helpers({
   }
 });
 
-Template.appBody.events({
+Template.App_body.events({
   'click .js-menu'(event, instance) {
     instance.state.set('menuOpen', !instance.state.get('menuOpen'));
   },
@@ -98,11 +98,11 @@ Template.appBody.events({
     Meteor.logout();
 
     // if we are on a private list, we'll need to go to a public one
-    if (ActiveRoute.name('listsShow')) {
+    if (ActiveRoute.name('Lists.show')) {
       // TODO -- test this code path
       const list = Lists.findOne(FlowRouter.getParam('_id'));
       if (list.userId) {
-        FlowRouter.go('listsShow', Lists.findOne({userId: {$exists: false}}));
+        FlowRouter.go('Lists.show', Lists.findOne({userId: {$exists: false}}));
       }
     }
   },
@@ -118,6 +118,6 @@ Template.appBody.events({
       }
     });
 
-    FlowRouter.go('listsShow', { _id: listId });
+    FlowRouter.go('Lists.show', { _id: listId });
   }
 });

@@ -1,6 +1,6 @@
 /* global Todos SimpleSchema */
 
-Template.todosItem.onCreated(function() {
+Template.Todos_item.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
       todo: {type: Todos._helpers},
@@ -10,16 +10,16 @@ Template.todosItem.onCreated(function() {
   });
 });
 
-Template.todosItem.helpers({
-  checkedClass() {
-    return this.todo.checked && 'checked';
+Template.Todos_item.helpers({
+  checkedClass(todo) {
+    return todo.checked && 'checked';
   },
-  editingClass() {
-    return this.editing && 'editing';
+  editingClass(editing) {
+    return editing && 'editing';
   }
 });
 
-Template.todosItem.events({
+Template.Todos_item.events({
   'change [type=checkbox]'(event) {
     const checked = $(event.target).is(':checked');
 

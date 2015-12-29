@@ -1,6 +1,6 @@
 /* global Todos Lists FlowRouter Tracker */
 
-Template.listsShow.onCreated(function() {
+Template.Lists_show.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
       list: {type: Function},
@@ -76,7 +76,7 @@ Template.listsShow.onCreated(function() {
   };
 });
 
-Template.listsShow.helpers({
+Template.Lists_show.helpers({
   todoArgs(todo) {
     const instance = Template.instance();
     return {
@@ -89,7 +89,7 @@ Template.listsShow.helpers({
   }
 });
 
-Template.listsShow.events({
+Template.Lists_show.events({
   'click .js-cancel'(event, instance) {
     instance.state.set('editing', false);
   },

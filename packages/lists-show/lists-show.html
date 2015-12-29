@@ -1,4 +1,4 @@
-<template name="listsShow">
+<template name="Lists_show">
   <div class="page lists-show">
     <nav class="js-title-nav">
       {{#momentum plugin="fade"}}
@@ -63,7 +63,7 @@
     <div class="content-scrollable list-items">
       {{#if todosReady}}
         {{#each todo in todos}}
-          {{> todosItem (todoArgs todo)}}
+          {{> Todos_item (todoArgs todo)}}
         {{else}}
           <div class="wrapper-message">
             <div class="title-message">No tasks here</div>

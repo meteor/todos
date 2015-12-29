@@ -10,8 +10,8 @@ AccountsTemplates.configure({
       signUp: "Join",
     }
   },
-  defaultTemplate: 'authPage',
-  defaultLayout: 'appBody',
+  defaultTemplate: 'Auth_page',
+  defaultLayout: 'App_body',
   defaultContentRegion: 'main',
   defaultLayoutRegions: {}
 });

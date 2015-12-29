@@ -1,23 +1,23 @@
 /* global FlowRouter BlazeLayout AccountsTemplates */
 
 FlowRouter.route('/lists/:_id', {
-  name: 'listsShow',
+  name: 'Lists.show',
   action() {
-    BlazeLayout.render('appBody', {main: 'listsShowPage'});
+    BlazeLayout.render('App_body', {main: 'Lists_show_page'});
   }
 });
 
 FlowRouter.route('/', {
   name: 'home',
   action() {
-    BlazeLayout.render('appBody', {main: 'rootRedirector'});
+    BlazeLayout.render('App_body', {main: 'app_rootRedirector'});
   }
 });
 
-// the appNotFound template is used for unknown routes and missing lists
+// the App_notFound template is used for unknown routes and missing lists
 FlowRouter.notFound = {
   action() {
-    BlazeLayout.render('appBody', {main: 'appNotFound'});
+    BlazeLayout.render('App_body', {main: 'App_notFound'});
   }
 };
 
