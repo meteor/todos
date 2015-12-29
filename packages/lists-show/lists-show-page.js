@@ -28,6 +28,10 @@ Template.Lists_show_page.helpers({
   },
   listArgs(listId) {
     const instance = Template.instance();
+    // By finding the list with only the `_id` field set, we don't create a dependency on the
+    // `list.incompleteCount`, and avoid re-rendering the todos when it changes
+    const list = Lists.findOne(listId, {fields: {_id: true}});
+    const todos = list && list.todos();
     return {
       todosReady: instance.subscriptionsReady(),
       // We pass `list` (which contains the full list, with all fields, as a function
@@ -38,9 +42,7 @@ Template.Lists_show_page.helpers({
       list() {
         return Lists.findOne(listId);
       },
-      // By finding the list with only the `_id` field set, we don't create a dependency on the
-      // `list.incompleteCount`, and avoid re-rendering the todos when it changes
-      todos: Lists.findOne(listId, {fields: {_id: true}}).todos()
+      todos
     };
   }
 });
