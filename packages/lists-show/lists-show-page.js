@@ -24,7 +24,7 @@ Template.Lists_show_page.helpers({
   listIdArray() {
     const instance = Template.instance();
     const listId = instance.getListId();
-    return listId ? [listId] : [];
+    return Lists.findOne(listId) ? [listId] : [];
   },
   listArgs(listId) {
     const instance = Template.instance();
