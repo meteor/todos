@@ -11,17 +11,11 @@ Package.onUse(function(api) {
   api.use([
     'lists',
     'todos',
-    'app-launch-screen'
   ]);
 
   api.addFiles([
     'todos-item.html',
     'todos-item.js',
-    'lists-show.html',
-    'lists-show.js',
-    'lists-show-page.html',
-    'lists-show-page.js',
-    'lists-show.less'
   ], 'client');
 
   // UGGGH. Get rid of this ASAP!
@@ -40,7 +34,6 @@ Package.onTest(function(api) {
 
   api.addFiles([
     'test-helpers.js',
-    'lists-show-tests.js',
     'todos-item-tests.js'
   ], 'client');
 });

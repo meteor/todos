@@ -1,5 +1,7 @@
 /* global FlowRouter BlazeLayout AccountsTemplates */
 
+import './pages/lists-show-page.js';
+
 FlowRouter.route('/lists/:_id', {
   name: 'Lists.show',
   action() {

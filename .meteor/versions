@@ -4,7 +4,6 @@ aldeed:collection2@2.5.0
 aldeed:simple-schema@1.4.0
 aldeed:template-extension@3.4.3
 allow-deny@1.0.1-modules.2
-app-launch-screen@0.0.0
 app-prod-security@0.0.0
 arillo:flow-router-helpers@0.4.5
 autoupdate@1.2.5-modules.2
@@ -39,7 +38,6 @@ denormalizer@0.0.1
 deps@1.0.9
 dfischer:faker@1.0.8
 diff-sequence@1.0.2-modules.2
-east5th:package-scan@0.0.4
 ecmascript@0.3.1-modules.2
 ecmascript-runtime@0.2.7-modules.2
 ejson@1.0.8-modules.2

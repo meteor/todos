@@ -1,5 +1,7 @@
 /* global FlowRouter Lists AppLaunchScreen */
 
+import { listRenderHold } from '../launch-screen.js';
+
 Template.Lists_show_page.onCreated(function() {
   this.getListId = () => FlowRouter.getParam('_id');
 
@@ -11,8 +13,7 @@ Template.Lists_show_page.onCreated(function() {
 Template.Lists_show_page.onRendered(function() {
   this.autorun(() => {
     if (this.subscriptionsReady()) {
-      // Handle for launch screen defined in app-body.js
-      AppLaunchScreen.listRender.release();
+      listRenderHold.release();
     }
   });
 });

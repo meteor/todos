@@ -16,6 +16,14 @@ Package.onUse(function(api) {
     'less-globals',
   ]);
 
+  api.imply([
+    'lists',
+    'lists-show',
+    'todos',
+    'todos-auth',
+    'less-globals',
+  ]);
+
   api.addFiles([
     'head.html',
     'loading.html',
@@ -27,10 +35,6 @@ Package.onUse(function(api) {
     'root-redirector.html',
     'root-redirector.js'
   ], 'client');
-
-  api.addFiles([
-    'routes.js'
-  ]);
 
   api.addFiles([
     'bootstrap.js'
