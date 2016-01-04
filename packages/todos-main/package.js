@@ -6,11 +6,8 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.use('todos-lib');
-
   api.use([
     'lists',
-    'lists-show',
     'todos',
     'todos-auth',
     'less-globals',
@@ -18,29 +15,8 @@ Package.onUse(function(api) {
 
   api.imply([
     'lists',
-    'lists-show',
     'todos',
     'todos-auth',
     'less-globals',
   ]);
-
-  api.addFiles([
-    'head.html',
-    'loading.html',
-    'loading.less',
-    'app-not-found.html',
-    'app-not-found.less',
-    'app-body.html',
-    'app-body.js',
-    'root-redirector.html',
-    'root-redirector.js'
-  ], 'client');
-
-  api.addFiles([
-    'bootstrap.js'
-  ], 'server');
-
-  api.addAssets([
-    'img/logo-todos.svg',
-  ], 'client');
 });
