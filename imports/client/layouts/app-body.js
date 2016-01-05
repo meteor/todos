@@ -1,9 +1,9 @@
-/* global Lists ActiveRoute FlowRouter listFadeInHold */
-
 import './app-body.html';
 
 import Lists from '../../api/lists/lists.js';
 import { insert } from '../../api/lists/methods.js';
+import { ActiveRoute } from 'zimme:active-route';
+import { FlowRouter } from 'kadira:flow-router';
 
 import '../components/loading.js';
 

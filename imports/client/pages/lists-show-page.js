@@ -1,5 +1,3 @@
-/* global FlowRouter Lists AppLaunchScreen */
-
 import { listRenderHold } from '../launch-screen.js';
 import './lists-show-page.html';
 
@@ -8,6 +6,7 @@ import './app-not-found.js';
 import '../components/lists-show.js';
 
 import Lists from '../../api/lists/lists.js';
+import { FlowRouter } from 'kadira:flow-router';
 
 Template.Lists_show_page.onCreated(function() {
   this.getListId = () => FlowRouter.getParam('_id');

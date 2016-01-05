@@ -1,6 +1,6 @@
-/* global Todos SimpleSchema */
-
 import './todos-item.html';
+import { SimpleSchema } from 'aldeed:simple-schema';
+import Todos from '../../api/todos/todos.js';
 
 import {
   setCheckedStatus,

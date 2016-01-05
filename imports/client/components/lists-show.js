@@ -1,5 +1,3 @@
-/* global FlowRouter Tracker SimpleSchema */
-
 import './lists-show.html';
 
 // Component used in the template
@@ -16,6 +14,8 @@ import {
   insert,
 } from '../../api/todos/methods.js';
 
+import { FlowRouter } from 'kadira:flow-router';
+import { SimpleSchema } from 'aldeed:simple-schema';
 
 Template.Lists_show.onCreated(function() {
   this.autorun(() => {

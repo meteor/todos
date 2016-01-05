@@ -1,6 +1,8 @@
-/* global SimpleSchema Factory faker Lists */
-
 import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
+import { SimpleSchema } from 'aldeed:simple-schema';
+import { Factory } from 'factory';
+import { faker } from 'dfischer:faker';
+import Lists from '../lists/lists.js';
 
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
