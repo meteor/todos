@@ -1,4 +1,4 @@
-/* global Todos Lists FlowRouter Tracker */
+/* global FlowRouter Tracker SimpleSchema */
 
 import './lists-show.html';
 

@@ -1,6 +1,3 @@
-// Test-only file
-return;
-
 /* eslint-env mocha */
 /* global Todos Lists Factory chai withRenderedTemplate */
 const StubCollections = Package['stub-collections'] && Package['stub-collections'].StubCollections;

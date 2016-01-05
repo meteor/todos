@@ -3,7 +3,6 @@
 import './app-body.html';
 
 import Lists from '../../api/lists/lists.js';
-import Todos from '../../api/todos/todos.js';
 import { insert } from '../../api/lists/methods.js';
 
 import '../components/loading.js';

@@ -147,10 +147,10 @@ describe('lists', () => {
       it('changes the name, but not if you don\'t have permission', () => {
         Lists.methods.updateName._execute({}, {
           listId,
-          newName: "new name"
+          newName: 'new name'
         });
 
-        assert.equal(Lists.findOne(listId).name, "new name");
+        assert.equal(Lists.findOne(listId).name, 'new name');
 
         // Make the list private
         Lists.methods.makePrivate._execute({ userId }, { listId });
@@ -158,28 +158,28 @@ describe('lists', () => {
         // Works if the owner changes the name
         Lists.methods.updateName._execute({ userId }, {
           listId,
-          newName: "new name 2"
+          newName: 'new name 2'
         });
 
-        assert.equal(Lists.findOne(listId).name, "new name 2");
+        assert.equal(Lists.findOne(listId).name, 'new name 2');
 
         // Throws if another user, or logged out user, tries to change the name
         assert.throws(() => {
           Lists.methods.updateName._execute({ userId: Random.id() }, {
             listId,
-            newName: "new name 3"
+            newName: 'new name 3'
           });
         }, Meteor.Error, /Lists.methods.updateName.accessDenied/);
 
         assert.throws(() => {
           Lists.methods.updateName._execute({}, {
             listId,
-            newName: "new name 3"
+            newName: 'new name 3'
           });
         }, Meteor.Error, /Lists.methods.updateName.accessDenied/);
 
         // Confirm name didn't change
-        assert.equal(Lists.findOne(listId).name, "new name 2");
+        assert.equal(Lists.findOne(listId).name, 'new name 2');
       });
     });
 

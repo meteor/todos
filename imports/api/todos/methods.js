@@ -1,4 +1,4 @@
-/* global Todos Lists SimpleSchema Method DDPRateLimiter */
+/* global ValidatedMethod SimpleSchema Method DDPRateLimiter */
 
 import Todos from './todos.js';
 import Lists from '../lists/lists.js';

@@ -100,7 +100,7 @@
     "no-sparse-arrays": 2,           // http://eslint.org/docs/rules/no-sparse-arrays
     "no-undef": 2,                   // http://eslint.org/docs/rules/no-undef
     "no-unreachable": 2,             // http://eslint.org/docs/rules/no-unreachable
-    "quote-props": [1, "as-needed"], // http://eslint.org/docs/rules/quote-props
+    "quote-props": [0, "as-needed"], // http://eslint.org/docs/rules/quote-props
     "use-isnan": 2,                  // http://eslint.org/docs/rules/use-isnan
 
 /**

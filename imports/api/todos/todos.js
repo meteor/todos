@@ -15,14 +15,16 @@ class TodosCollection extends Mongo.Collection {
     return result;
   }
   remove(selector) {
-    const todos = Todos.find(selector).fetch();
+    const todos = this.find(selector).fetch();
     const result = super(selector);
     incompleteCountDenormalizer.afterRemoveTodos(todos);
     return result;
   }
 }
 
-export default Todos = new TodosCollection('Todos');
+const Todos = new TodosCollection('Todos');
+
+export default Todos;
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({
