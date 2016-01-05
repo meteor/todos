@@ -1,19 +1,79 @@
-# Meteor packages used by this project, one per line.
+# Meteor packages used by this project one per line.
 # Check this file (and the other files in this directory) into your repository.
 #
-# 'meteor add' and 'meteor remove' will edit this file for you,
+# 'meteor add' and 'meteor remove' will edit this file for you
 # but you can also edit it by hand.
 
 meteor-base   # Packages every Meteor app needs to have
-todos-main    # The entry point for the app, requires all other packages
 crosswalk     # Modify mobile build to use Chromium instead of default Android web view
-
-jquery        # Necessary until https://github.com/meteor-useraccounts/core/pull/574 gets merged
 
 juliancwirko:postcss  # Needs to be at app level until we support configuring minifiers: https://github.com/meteor/meteor/issues/5512
 npm-container # Necessary for PostCSS
 
-east5th:package-scan
-
-check # this is here for simple-rest's sake https://github.com/stubailo/meteor-rest/issues/70
 simple:rest-accounts-password
+
+
+ecmascript
+es5-shim
+underscore
+check
+simple:rest
+
+
+
+mongo
+aldeed:collection2
+dburles:collection-helpers
+denormalizer
+mdg:validation-error
+reywood:publish-composite
+
+
+
+tracker
+jquery
+blaze-html-templates
+blaze-helpers
+reactive-dict
+reactive-var
+session
+aldeed:template-extension
+percolate:momentum
+
+
+
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+zimme:active-route
+
+
+
+mobile-experience
+chriswessels:hammer
+
+
+
+less
+
+
+
+factory
+
+
+
+accounts-password
+useraccounts:unstyled
+useraccounts:flow-routing
+softwarerero:accounts-t9n
+
+
+
+ddp-rate-limiter
+
+app-prod-security
+
+
+
+mdg:validated-method
+aldeed:simple-schema

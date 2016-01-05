@@ -4,7 +4,6 @@ aldeed:collection2@2.5.0
 aldeed:simple-schema@1.4.0
 aldeed:template-extension@3.4.3
 allow-deny@1.0.1-modules.2
-app-launch-screen@0.0.0
 app-prod-security@0.0.0
 arillo:flow-router-helpers@0.4.5
 autoupdate@1.2.5-modules.2
@@ -39,7 +38,6 @@ denormalizer@0.0.1
 deps@1.0.9
 dfischer:faker@1.0.8
 diff-sequence@1.0.2-modules.2
-east5th:package-scan@0.0.4
 ecmascript@0.3.1-modules.2
 ecmascript-runtime@0.2.7-modules.2
 ejson@1.0.8-modules.2
@@ -60,10 +58,6 @@ kadira:blaze-layout@2.2.0
 kadira:flow-router@2.7.0
 launch-screen@1.0.5-modules.2
 less@2.5.2-modules.2
-less-globals@0.0.0
-less-imports@0.0.0
-lists@0.0.1
-lists-show@0.0.1
 livedata@1.0.15
 localstorage@1.0.6-modules.2
 logging@1.0.9-modules.2
@@ -111,10 +105,6 @@ spacebars-compiler@1.0.8-modules.2
 srp@1.0.5-modules.2
 templating@1.1.6-modules.2
 templating-tools@1.0.1-modules.2
-todos@0.0.1
-todos-auth@0.0.0
-todos-lib@0.0.0
-todos-main@0.0.1
 tracker@1.0.10-modules.2
 ui@1.0.8
 underscore@1.0.5-modules.2
