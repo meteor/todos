@@ -1,5 +1,5 @@
-import Todos from './todos.js';
-import Lists from '../lists/lists.js';
+import { Todos } from './todos.js';
+import { Lists } from '../lists/lists.js';
 import ValidatedMethod from 'mdg:validated-method';
 import SimpleSchema from 'aldeed:simple-schema';
 import DDPRateLimiter from 'ddp-rate-limiter';

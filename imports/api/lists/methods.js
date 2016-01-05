@@ -1,6 +1,7 @@
-/* global ValidatedMethod SimpleSchema DDPRateLimiter */
-
-import Lists from './lists.js';
+import ValidatedMethod from 'mdg:validated-method';
+import SimpleSchema from 'aldeed:simple-schema';
+import DDPRateLimiter from 'ddp-rate-limiter';
+import { Lists } from './lists.js';
 
 const LIST_ID_ONLY = new SimpleSchema({
   listId: { type: String }

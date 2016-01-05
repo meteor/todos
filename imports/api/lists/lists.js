@@ -1,7 +1,6 @@
-/* global Lists:true */
-/* global SimpleSchema Factory faker Denormalizer Todos */
-
-import Todos from '../todos/todos.js';
+import { SimpleSchema } from 'aldeed:simple-schema';
+import { Factory } from 'factory';
+import { Todos } from '../todos/todos.js';
 
 class ListsCollection extends Mongo.Collection {
   insert(list, callback) {
@@ -24,7 +23,7 @@ class ListsCollection extends Mongo.Collection {
   }
 }
 
-export default Lists = new ListsCollection('Lists');
+export const Lists = new ListsCollection('Lists');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny({

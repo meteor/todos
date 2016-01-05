@@ -2,7 +2,7 @@ import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 import { SimpleSchema } from 'aldeed:simple-schema';
 import { Factory } from 'factory';
 import { faker } from 'dfischer:faker';
-import Lists from '../lists/lists.js';
+import { Lists } from '../lists/lists.js';
 
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
@@ -24,9 +24,7 @@ class TodosCollection extends Mongo.Collection {
   }
 }
 
-const Todos = new TodosCollection('Todos');
-
-export default Todos;
+export const Todos = new TodosCollection('Todos');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({

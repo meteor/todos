@@ -5,7 +5,7 @@ import './lists-show-page.html';
 import './app-not-found.js';
 import '../components/lists-show.js';
 
-import Lists from '../../api/lists/lists.js';
+import { Lists } from '../../api/lists/lists.js';
 import { FlowRouter } from 'kadira:flow-router';
 
 Template.Lists_show_page.onCreated(function() {

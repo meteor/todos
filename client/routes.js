@@ -1,4 +1,6 @@
-/* global FlowRouter BlazeLayout AccountsTemplates */
+import { FlowRouter } from 'kadira:flow-router';
+import { BlazeLayout } from 'kadira:blaze-layout';
+import { AccountsTemplates } from 'useraccounts:core';
 
 // This file needs to load first, so that useraccounts:core doesn't complain when we define
 // a forgotPwd route

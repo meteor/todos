@@ -1,5 +1,5 @@
 import { FlowRouter } from 'kadira:flow-router';
-import Lists from '../../api/lists/lists.js';
+import { Lists } from '../../api/lists/lists.js';
 
 import './root-redirector.html';
 

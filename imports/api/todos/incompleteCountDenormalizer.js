@@ -1,5 +1,5 @@
-import Todos from './todos.js';
-import Lists from '../lists/lists.js';
+import { Todos } from './todos.js';
+import { Lists } from '../lists/lists.js';
 
 const incompleteCountDenormalizer = {
   _updateList(listId) {
