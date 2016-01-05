@@ -53,7 +53,6 @@ Package.onUse(function(api) {
   // CSS
   api.imply([
     'less',
-    'less-imports',
   ]);
 
   // Testing setup

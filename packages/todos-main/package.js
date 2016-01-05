@@ -9,14 +9,10 @@ Package.onUse(function(api) {
   api.use([
     'lists',
     'todos',
-    'todos-auth',
-    'less-globals',
   ]);
 
   api.imply([
     'lists',
     'todos',
-    'todos-auth',
-    'less-globals',
   ]);
 });
