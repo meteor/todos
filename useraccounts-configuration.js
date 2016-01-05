@@ -1,13 +1,15 @@
+import { AccountsTemplates } from 'useraccounts:core';
+
 AccountsTemplates.configure({
   showForgotPasswordLink: true,
   texts: {
     errors: {
-      loginForbidden: "Incorrect username or password",
-      pwdMismatch: "Passwords don't match",
+      loginForbidden: 'Incorrect username or password',
+      pwdMismatch: 'Passwords don\'t match',
     },
     title: {
-      signIn: "Sign In",
-      signUp: "Join",
+      signIn: 'Sign In',
+      signUp: 'Join',
     }
   },
   defaultTemplate: 'Auth_page',

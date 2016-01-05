@@ -1,9 +1,9 @@
-Accounts.emailTemplates.siteName = "Meteor Guide Todos Example";
-Accounts.emailTemplates.from = "Meteor Todos Accounts <accounts@example.com>";
+Accounts.emailTemplates.siteName = 'Meteor Guide Todos Example';
+Accounts.emailTemplates.from = 'Meteor Todos Accounts <accounts@example.com>';
 
 Accounts.emailTemplates.resetPassword = {
-  subject(user) {
-    return "Reset your password on Meteor Todos";
+  subject() {
+    return 'Reset your password on Meteor Todos';
   },
   text(user, url) {
     return `Hello!
@@ -16,7 +16,7 @@ If you didn't request this email, please ignore it.
 
 Thanks,
 The Meteor Todos team
-`
+`;
   },
 //   html(user, url) {
 //     return `
