@@ -1,5 +1,7 @@
 /* global Todos SimpleSchema */
 
+import './todos-item.html';
+
 Template.Todos_item.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({

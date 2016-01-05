@@ -1,6 +1,3 @@
-// Tests don't work right now
-return;
-
 /* eslint-env mocha */
 /* global Todos Lists Factory chai withRenderedTemplate */
 

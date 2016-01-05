@@ -1,5 +1,3 @@
-console.log("wat")
-
 AccountsTemplates.configure({
   showForgotPasswordLink: true,
   texts: {
@@ -17,4 +15,3 @@ AccountsTemplates.configure({
   defaultContentRegion: 'main',
   defaultLayoutRegions: {}
 });
-console.log("wat")

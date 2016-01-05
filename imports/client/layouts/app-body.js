@@ -1,5 +1,9 @@
 /* global Lists ActiveRoute FlowRouter listFadeInHold */
 
+import './app-body.html';
+
+import '../components/loading.js';
+
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
 // A store which is local to this file?

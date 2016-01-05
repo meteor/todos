@@ -1,5 +1,15 @@
 /* global FlowRouter BlazeLayout AccountsTemplates */
 
+// This file needs to load first, so that useraccounts:core doesn't complain when we define
+// a forgotPwd route
+import '../useraccounts-configuration.js';
+
+// Import to load these templates
+import '../imports/client/layouts/app-body.js';
+import '../imports/client/pages/root-redirector.js';
+import '../imports/client/pages/lists-show-page.js';
+import '../imports/client/pages/app-not-found.js';
+
 FlowRouter.route('/lists/:_id', {
   name: 'Lists.show',
   action() {

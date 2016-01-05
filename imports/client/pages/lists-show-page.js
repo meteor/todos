@@ -1,6 +1,11 @@
 /* global FlowRouter Lists AppLaunchScreen */
 
 import { listRenderHold } from '../launch-screen.js';
+import './lists-show-page.html';
+
+// Components used inside the template
+import './app-not-found.js';
+import '../components/lists-show.js';
 
 Template.Lists_show_page.onCreated(function() {
   this.getListId = () => FlowRouter.getParam('_id');

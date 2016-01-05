@@ -1,6 +1,3 @@
-// no tests right now
-return;
-
 // TODO -- this should probably be some kind of test package that people use
 /* global withRenderedTemplate:true */
 

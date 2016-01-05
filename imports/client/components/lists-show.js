@@ -1,5 +1,10 @@
 /* global Todos Lists FlowRouter Tracker */
 
+import './lists-show.html';
+
+// Component used in the template
+import './todos-item.js';
+
 Template.Lists_show.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
