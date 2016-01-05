@@ -1,6 +1,8 @@
 /* globals Lists */
 /* eslint-disable prefer-arrow-callback */
 
+import Lists from './lists.js';
+
 Meteor.publish('Lists.public', function() {
   return Lists.find({
     userId: {$exists: false}

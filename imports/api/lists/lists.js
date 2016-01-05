@@ -1,6 +1,8 @@
 /* global Lists:true */
 /* global SimpleSchema Factory faker Denormalizer Todos */
 
+import Todos from '../todos/todos.js';
+
 class ListsCollection extends Mongo.Collection {
   insert(list, callback) {
     if (!list.name) {
@@ -17,12 +19,12 @@ class ListsCollection extends Mongo.Collection {
     return super(list, callback);
   }
   remove(selector, callback) {
-    Package.todos.Todos.remove({listId: selector});
+    Todos.remove({listId: selector});
     return super(selector, callback);
   }
 }
 
-Lists = new ListsCollection('Lists');
+export default Lists = new ListsCollection('Lists');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny({
@@ -67,6 +69,6 @@ Lists.helpers({
     return this.userId === userId;
   },
   todos() {
-    return Package.todos.Todos.find({listId: this._id}, {sort: {createdAt: -1}});
+    return Todos.find({listId: this._id}, {sort: {createdAt: -1}});
   }
 });

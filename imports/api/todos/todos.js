@@ -1,27 +1,28 @@
-/* global Todos:true */
 /* global SimpleSchema Factory faker Lists */
+
+import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
     doc.createdAt = doc.createdAt || new Date();
     const result = super(doc, callback);
-    Todos.incompleteCountDenormalizer.afterInsertTodo(doc);
+    incompleteCountDenormalizer.afterInsertTodo(doc);
     return result;
   }
   update(selector, modifier) {
     const result = super(selector, modifier);
-    Todos.incompleteCountDenormalizer.afterUpdateTodo(selector, modifier);
+    incompleteCountDenormalizer.afterUpdateTodo(selector, modifier);
     return result;
   }
   remove(selector) {
     const todos = Todos.find(selector).fetch();
     const result = super(selector);
-    Todos.incompleteCountDenormalizer.afterRemoveTodos(todos);
+    incompleteCountDenormalizer.afterRemoveTodos(todos);
     return result;
   }
 }
 
-Todos = new TodosCollection('Todos');
+export default Todos = new TodosCollection('Todos');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({

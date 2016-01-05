@@ -1,8 +1,9 @@
 /* global Todos Lists SimpleSchema Method DDPRateLimiter */
 
-Todos.methods = {};
+import Todos from './todos.js';
+import Lists from '../lists/lists.js';
 
-Todos.methods.insert = new ValidatedMethod({
+export const insert = new ValidatedMethod({
   name: 'Todos.methods.insert',
   validate: new SimpleSchema({
     listId: { type: String },
@@ -27,7 +28,7 @@ Todos.methods.insert = new ValidatedMethod({
   }
 });
 
-Todos.methods.setCheckedStatus = new ValidatedMethod({
+export const setCheckedStatus = new ValidatedMethod({
   name: 'Todos.methods.makeChecked',
   validate: new SimpleSchema({
     todoId: { type: String },
@@ -52,7 +53,7 @@ Todos.methods.setCheckedStatus = new ValidatedMethod({
   }
 });
 
-Todos.methods.updateText = new ValidatedMethod({
+export const updateText = new ValidatedMethod({
   name: 'Todos.methods.updateText',
   validate: new SimpleSchema({
     todoId: { type: String },
@@ -74,7 +75,7 @@ Todos.methods.updateText = new ValidatedMethod({
   }
 });
 
-Todos.methods.remove = new ValidatedMethod({
+export const remove = new ValidatedMethod({
   name: 'Todos.methods.remove',
   validate: new SimpleSchema({
     todoId: { type: String }
@@ -92,7 +93,12 @@ Todos.methods.remove = new ValidatedMethod({
 });
 
 // Get list of all method names on Todos
-const TODOS_METHODS = _.pluck(Todos.methods, 'name');
+const TODOS_METHODS = _.pluck([
+  insert,
+  setCheckedStatus,
+  updateText,
+  remove,
+], 'name');
 
 if (Meteor.isServer) {
   // Only allow 5 todos operations per connection per second

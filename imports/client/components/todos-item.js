@@ -2,6 +2,12 @@
 
 import './todos-item.html';
 
+import {
+  setCheckedStatus,
+  updateText,
+  remove,
+} from '../../api/todos/methods.js';
+
 Template.Todos_item.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
@@ -25,7 +31,7 @@ Template.Todos_item.events({
   'change [type=checkbox]'(event) {
     const checked = $(event.target).is(':checked');
 
-    Todos.methods.setCheckedStatus.call({
+    setCheckedStatus.call({
       todoId: this.todo._id,
       newCheckedStatus: checked
     });
@@ -53,7 +59,7 @@ Template.Todos_item.events({
   // we don't flood the server with updates (handles the event at most once
   // every 300ms)
   'keyup input[type=text]': _.throttle(function(event) {
-    Todos.methods.updateText.call({
+    updateText.call({
       todoId: this.todo._id,
       newText: event.target.value
     }, (err) => {
@@ -64,7 +70,7 @@ Template.Todos_item.events({
   // handle mousedown otherwise the blur handler above will swallow the click
   // on iOS, we still require the click event so handle both
   'mousedown .js-delete-item, click .js-delete-item'() {
-    Todos.methods.remove.call({
+    remove.call({
       todoId: this.todo._id
     }, (err) => {
       err && alert(err.error); // translate this string after #59

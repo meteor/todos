@@ -58,7 +58,6 @@ kadira:blaze-layout@2.2.0
 kadira:flow-router@2.7.0
 launch-screen@1.0.5-modules.2
 less@2.5.2-modules.2
-lists@0.0.1
 livedata@1.0.15
 localstorage@1.0.6-modules.2
 logging@1.0.9-modules.2
@@ -106,9 +105,6 @@ spacebars-compiler@1.0.8-modules.2
 srp@1.0.5-modules.2
 templating@1.1.6-modules.2
 templating-tools@1.0.1-modules.2
-todos@0.0.1
-todos-lib@0.0.0
-todos-main@0.0.1
 tracker@1.0.10-modules.2
 ui@1.0.8
 underscore@1.0.5-modules.2

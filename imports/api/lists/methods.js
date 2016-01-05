@@ -1,12 +1,12 @@
 /* global Lists SimpleSchema Method Todos */
 
-Lists.methods = {};
+import Lists from './lists.js';
 
 const LIST_ID_ONLY = new SimpleSchema({
   listId: { type: String }
 }).validator();
 
-Lists.methods.insert = new ValidatedMethod({
+export const insert = new ValidatedMethod({
   name: 'Lists.methods.insert',
   validate: new SimpleSchema({}).validator(),
   run() {
@@ -14,7 +14,7 @@ Lists.methods.insert = new ValidatedMethod({
   }
 });
 
-Lists.methods.makePrivate = new ValidatedMethod({
+export const makePrivate = new ValidatedMethod({
   name: 'Lists.methods.makePrivate',
   validate: LIST_ID_ONLY,
   run({ listId }) {
@@ -36,7 +36,7 @@ Lists.methods.makePrivate = new ValidatedMethod({
   }
 });
 
-Lists.methods.makePublic = new ValidatedMethod({
+export const makePublic = new ValidatedMethod({
   name: 'Lists.methods.makePublic',
   validate: LIST_ID_ONLY,
   run({ listId }) {
@@ -60,7 +60,7 @@ Lists.methods.makePublic = new ValidatedMethod({
   }
 });
 
-Lists.methods.updateName = new ValidatedMethod({
+export const updateName = new ValidatedMethod({
   name: 'Lists.methods.updateName',
   validate: new SimpleSchema({
     listId: { type: String },
@@ -83,7 +83,7 @@ Lists.methods.updateName = new ValidatedMethod({
   }
 });
 
-Lists.methods.remove = new ValidatedMethod({
+export const remove = new ValidatedMethod({
   name: 'Lists.methods.remove',
   validate: LIST_ID_ONLY,
   run({ listId }) {
@@ -107,7 +107,13 @@ Lists.methods.remove = new ValidatedMethod({
 });
 
 // Get list of all method names on Lists
-const LISTS_METHODS = _.pluck(Lists.methods, 'name');
+const LISTS_METHODS = _.pluck([
+  insert,
+  makePublic,
+  makePrivate,
+  updateName,
+  remove
+], 'name');
 
 if (Meteor.isServer) {
   // Only allow 5 list operations per connection per second

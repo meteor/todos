@@ -1,6 +1,9 @@
 /* global Todos, Lists, SimpleSchema */
 /* eslint-disable prefer-arrow-callback */
 
+import Todos from './todos.js';
+import Lists from '../lists/lists.js';
+
 Meteor.publishComposite('Todos.inList', function(listId) {
   new SimpleSchema({
     listId: {type: String}

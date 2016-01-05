@@ -2,6 +2,10 @@
 
 import './app-body.html';
 
+import Lists from '../../api/lists/lists.js';
+import Todos from '../../api/todos/todos.js';
+import { insert } from '../../api/lists/methods.js';
+
 import '../components/loading.js';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
@@ -112,7 +116,7 @@ Template.App_body.events({
   },
 
   'click .js-new-list'() {
-    const listId = Lists.methods.insert.call((err) => {
+    const listId = insert.call((err) => {
       if (err) {
         // At this point, we have already redirected to the new list page, but
         // for some reason the list didn't get created. This should almost never

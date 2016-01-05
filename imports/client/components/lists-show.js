@@ -5,6 +5,18 @@ import './lists-show.html';
 // Component used in the template
 import './todos-item.js';
 
+import {
+  updateName,
+  makePublic,
+  makePrivate,
+  remove,
+} from '../../api/lists/methods.js';
+
+import {
+  insert,
+} from '../../api/todos/methods.js';
+
+
 Template.Lists_show.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
@@ -23,7 +35,7 @@ Template.Lists_show.onCreated(function() {
   this.saveList = () => {
     this.state.set('editing', false);
 
-    Lists.methods.updateName.call({
+    updateName.call({
       listId: this.data.list()._id,
       newName: this.$('[name=name]').val()
     }, (err) => {
@@ -51,7 +63,7 @@ Template.Lists_show.onCreated(function() {
     const message = `Are you sure you want to delete the list ${list.name}?`;
 
     if (confirm(message)) {
-      Lists.methods.remove.call({
+      remove.call({
         listId: list._id
       }, (err) => {
         // At this point, we have already redirected home as if the list was
@@ -70,11 +82,11 @@ Template.Lists_show.onCreated(function() {
   this.toggleListPrivacy = () => {
     const list = this.data.list();
     if (list.userId) {
-      Lists.methods.makePublic.call({ listId: list._id }, (err) => {
+      makePublic.call({ listId: list._id }, (err) => {
         err && alert(err.error); // translate this string after #59
       });
     } else {
-      Lists.methods.makePrivate.call({ listId: list._id }, (err) => {
+      makePrivate.call({ listId: list._id }, (err) => {
         err && alert(err.error); // translate this string after #59
       });
     }
@@ -163,7 +175,7 @@ Template.Lists_show.events({
       return;
     }
 
-    Todos.methods.insert.call({
+    insert.call({
       listId: this.list()._id,
       text: $input.val()
     }, (err) => {

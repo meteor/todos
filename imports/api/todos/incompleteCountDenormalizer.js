@@ -1,5 +1,7 @@
-/* globals Lists, Todos */
-Todos.incompleteCountDenormalizer = {
+import Todos from './todos.js';
+import Lists from '../lists/lists.js';
+
+export default incompleteCountDenormalizer = {
   _updateList(listId) {
     // Recalculate the correct incomplete count direct from MongoDB
     const incompleteCount = Todos.find({
