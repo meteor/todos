@@ -10,6 +10,9 @@ import '../imports/client/pages/root-redirector.js';
 import '../imports/client/pages/lists-show-page.js';
 import '../imports/client/pages/app-not-found.js';
 
+// Import to override accounts templates
+import '../imports/client/accounts/accounts-templates.js';
+
 FlowRouter.route('/lists/:_id', {
   name: 'Lists.show',
   action() {

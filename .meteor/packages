@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-base   # Packages every Meteor app needs to have
-todos-main    # The entry point for the app requires all other packages
 crosswalk     # Modify mobile build to use Chromium instead of default Android web view
 
 juliancwirko:postcss  # Needs to be at app level until we support configuring minifiers: https://github.com/meteor/meteor/issues/5512
@@ -78,3 +77,7 @@ app-prod-security
 
 mdg:validated-method
 aldeed:simple-schema
+
+
+lists
+todos
