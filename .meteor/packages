@@ -11,24 +11,16 @@ juliancwirko:postcss  # Needs to be at app level until we support configuring mi
 npm-container # Necessary for PostCSS
 
 simple:rest-accounts-password
-
-
 ecmascript
 es5-shim
 underscore
 check
 simple:rest
-
-
-
 mongo
 aldeed:collection2
 dburles:collection-helpers
-denormalizer
 mdg:validation-error
 reywood:publish-composite
-
-
 
 tracker
 jquery
@@ -39,8 +31,6 @@ reactive-var
 session
 aldeed:template-extension
 percolate:momentum
-
-
 
 kadira:flow-router
 kadira:blaze-layout
