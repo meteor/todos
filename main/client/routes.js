@@ -7,13 +7,13 @@ import { AccountsTemplates } from 'useraccounts:core';
 import '../useraccounts-configuration.js';
 
 // Import to load these templates
-import '../imports/client/layouts/app-body.js';
-import '../imports/client/pages/root-redirector.js';
-import '../imports/client/pages/lists-show-page.js';
-import '../imports/client/pages/app-not-found.js';
+import '../../imports/client/layouts/app-body.js';
+import '../../imports/client/pages/root-redirector.js';
+import '../../imports/client/pages/lists-show-page.js';
+import '../../imports/client/pages/app-not-found.js';
 
 // Import to override accounts templates
-import '../imports/client/accounts/accounts-templates.js';
+import '../../imports/client/accounts/accounts-templates.js';
 
 FlowRouter.route('/lists/:_id', {
   name: 'Lists.show',
