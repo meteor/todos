@@ -1,3 +1,7 @@
+// This version of the Todos example app doesn't run tests yet, since some of that functionality
+// will be improved in Meteor 1.3. Hence, we are going to ignore this file.
+return;
+
 /* eslint-env mocha */
 /* global Todos Lists Factory chai withRenderedTemplate */
 
