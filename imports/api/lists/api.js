@@ -1,2 +1,5 @@
 import './methods.js';
-import './publications.js';
+
+if (Meteor.isServer) {
+  import './server/publications.js';
+}

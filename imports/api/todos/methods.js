@@ -1,8 +1,8 @@
 import { Todos } from './todos.js';
 import { Lists } from '../lists/lists.js';
-import ValidatedMethod from 'mdg:validated-method';
-import SimpleSchema from 'aldeed:simple-schema';
-import DDPRateLimiter from 'ddp-rate-limiter';
+import { ValidatedMethod } from 'mdg:validated-method';
+import { SimpleSchema } from 'aldeed:simple-schema';
+import { DDPRateLimiter } from 'ddp-rate-limiter';
 
 export const insert = new ValidatedMethod({
   name: 'Todos.methods.insert',
