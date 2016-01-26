@@ -1,4 +1,4 @@
-import { AccountsTemplates } from 'useraccounts:core';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 AccountsTemplates.configure({
   showForgotPasswordLink: true,

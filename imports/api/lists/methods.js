@@ -1,6 +1,6 @@
-import { ValidatedMethod } from 'mdg:validated-method';
-import { SimpleSchema } from 'aldeed:simple-schema';
-import { DDPRateLimiter } from 'ddp-rate-limiter';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 import { Lists } from './lists.js';
 
 const LIST_ID_ONLY = new SimpleSchema({

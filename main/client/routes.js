@@ -1,6 +1,6 @@
-import { FlowRouter } from 'kadira:flow-router';
-import { BlazeLayout } from 'kadira:blaze-layout';
-import { AccountsTemplates } from 'useraccounts:core';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 // This file needs to load first, so that useraccounts:core doesn't complain when we define
 // a forgotPwd route

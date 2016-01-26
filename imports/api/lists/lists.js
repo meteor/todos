@@ -1,5 +1,5 @@
-import { SimpleSchema } from 'aldeed:simple-schema';
-import { Factory } from 'factory';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Factory } from 'meteor/factory';
 import { Todos } from '../todos/todos.js';
 
 class ListsCollection extends Mongo.Collection {

@@ -14,8 +14,8 @@ import {
   insert,
 } from '../../api/todos/methods.js';
 
-import { FlowRouter } from 'kadira:flow-router';
-import { SimpleSchema } from 'aldeed:simple-schema';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 Template.Lists_show.onCreated(function() {
   this.autorun(() => {

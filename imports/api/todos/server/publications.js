@@ -2,7 +2,7 @@
 
 import { Todos } from '../todos.js';
 import { Lists } from '../../lists/lists.js';
-import { SimpleSchema } from 'aldeed:simple-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 Meteor.publishComposite('Todos.inList', function(listId) {
   new SimpleSchema({
@@ -29,7 +29,10 @@ Meteor.publishComposite('Todos.inList', function(listId) {
 
     children: [{
       find(list) {
-        return Todos.find({ listId: list._id }, { fields: Todos.publicFields });
+        return Todos.find({ listId: list._id }, {
+          fields: Todos.publicFields,
+          limit: 2
+        });
       }
     }]
   };

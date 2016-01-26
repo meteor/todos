@@ -1,5 +1,5 @@
 import './todos-item.html';
-import { SimpleSchema } from 'aldeed:simple-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Todos } from '../../api/todos/todos.js';
 
 import {
