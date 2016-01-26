@@ -83,7 +83,9 @@ observe-sequence@1.0.8-modules.2
 ordered-dict@1.0.4
 percolate:momentum@0.7.2
 percolate:velocityjs@1.1.0
+practicalmeteor:mocha@2.1.0_7
 promise@0.5.2-modules.2
+publication-collector@0.0.1
 random@1.0.6-modules.2
 rate-limit@1.0.1-modules.2
 reactive-dict@1.1.4-modules.2
