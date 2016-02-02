@@ -4,8 +4,7 @@
 import { Factory } from 'meteor/factory';
 import { Todos } from './todos.js';
 import { PublicationCollector } from 'meteor/publication-collector';
-
-const assert = chai.assert;
+import { chai, assert, expect, should } from 'meteor/practicalmeteor:chai';
 
 describe('todos', () => {
   describe('mutators', () => {
