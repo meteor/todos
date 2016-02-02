@@ -1,5 +1,4 @@
 /* eslint-env mocha */
-/* globals chai Factory Lists Todos PublicationCollector */
 
 import { Factory } from 'meteor/factory';
 import { Todos } from './todos.js';

@@ -1,11 +1,11 @@
-// This version of the Todos example app doesn't run tests yet, since some of that functionality
-// will be improved in Meteor 1.3. Hence, we are going to ignore this file.
-return;
-
 /* eslint-env mocha */
-/* globals chai Factory Lists PublicationCollector Todos */
 
-const assert = chai.assert;
+import { Factory } from 'meteor/factory';
+import { Lists } from './lists.js';
+import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
+import { Todos } from '../todos/todos.js';
+import { PublicationCollector } from 'meteor/publication-collector';
+import { chai, assert } from 'meteor/practicalmeteor:chai';
 
 describe('lists', () => {
   describe('mutators', () => {
@@ -75,7 +75,7 @@ describe('lists', () => {
       userId = Random.id();
     });
 
-    describe('Lists.methods.makePrivate / makePublic', () => {
+    describe('makePrivate / makePublic', () => {
       function assertListAndTodoArePrivate() {
         assert.equal(Lists.findOne(listId).userId, userId);
         assert.isTrue(Lists.findOne(listId).isPrivate());
@@ -92,11 +92,11 @@ describe('lists', () => {
         const args = { listId };
 
         // Making the list private adds userId to the todo
-        Lists.methods.makePrivate._execute(methodInvocation, args);
+        makePrivate._execute(methodInvocation, args);
         assertListAndTodoArePrivate();
 
         // Making the list public removes it
-        Lists.methods.makePublic._execute(methodInvocation, args);
+        makePublic._execute(methodInvocation, args);
         assert.isUndefined(Todos.findOne(todoId).userId);
         assert.isTrue(Todos.findOne(todoId).editableBy(userId));
       });
@@ -107,11 +107,11 @@ describe('lists', () => {
         const args = { listId };
 
         assert.throws(() => {
-          Lists.methods.makePrivate._execute(methodInvocation, args);
+          makePrivate._execute(methodInvocation, args);
         }, Meteor.Error, /Lists.methods.makePrivate.notLoggedIn/);
 
         assert.throws(() => {
-          Lists.methods.makePublic._execute(methodInvocation, args);
+          makePublic._execute(methodInvocation, args);
         }, Meteor.Error, /Lists.methods.makePublic.notLoggedIn/);
       });
 
@@ -124,7 +124,7 @@ describe('lists', () => {
         const args = { listId };
 
         assert.throws(() => {
-          Lists.methods.makePrivate._execute(methodInvocation, args);
+          makePrivate._execute(methodInvocation, args);
         }, Meteor.Error, /Lists.methods.makePrivate.lastPublicList/);
       });
 
@@ -133,13 +133,13 @@ describe('lists', () => {
         const methodInvocation = { userId };
         const args = { listId };
 
-        Lists.methods.makePrivate._execute(methodInvocation, args);
+        makePrivate._execute(methodInvocation, args);
 
         const otherUserMethodInvocation = { userId: Random.id() };
 
         // Shouldn't do anything
         assert.throws(() => {
-          Lists.methods.makePublic._execute(otherUserMethodInvocation, args);
+          makePublic._execute(otherUserMethodInvocation, args);
         }, Meteor.Error, /Lists.methods.makePublic.accessDenied/);
 
         // Make sure things are still private
@@ -147,9 +147,9 @@ describe('lists', () => {
       });
     });
 
-    describe('Lists.methods.updateName', () => {
+    describe('updateName', () => {
       it('changes the name, but not if you don\'t have permission', () => {
-        Lists.methods.updateName._execute({}, {
+        updateName._execute({}, {
           listId,
           newName: 'new name'
         });
@@ -157,10 +157,10 @@ describe('lists', () => {
         assert.equal(Lists.findOne(listId).name, 'new name');
 
         // Make the list private
-        Lists.methods.makePrivate._execute({ userId }, { listId });
+        makePrivate._execute({ userId }, { listId });
 
         // Works if the owner changes the name
-        Lists.methods.updateName._execute({ userId }, {
+        updateName._execute({ userId }, {
           listId,
           newName: 'new name 2'
         });
@@ -169,14 +169,14 @@ describe('lists', () => {
 
         // Throws if another user, or logged out user, tries to change the name
         assert.throws(() => {
-          Lists.methods.updateName._execute({ userId: Random.id() }, {
+          updateName._execute({ userId: Random.id() }, {
             listId,
             newName: 'new name 3'
           });
         }, Meteor.Error, /Lists.methods.updateName.accessDenied/);
 
         assert.throws(() => {
-          Lists.methods.updateName._execute({}, {
+          updateName._execute({}, {
             listId,
             newName: 'new name 3'
           });
@@ -187,30 +187,30 @@ describe('lists', () => {
       });
     });
 
-    describe('Lists.methods.remove', () => {
+    describe('remove', () => {
       it('does not delete the last public list', () => {
         const methodInvocation = { userId };
 
         // Works fine
-        Lists.methods.remove._execute(methodInvocation, { listId: otherListId });
+        remove._execute(methodInvocation, { listId: otherListId });
 
         // Should throw because it is the last public list
         assert.throws(() => {
-          Lists.methods.remove._execute(methodInvocation, { listId });
+          remove._execute(methodInvocation, { listId });
         }, Meteor.Error, /Lists.methods.remove.lastPublicList/);
       });
 
       it('does not delete a private list you don\'t own', () => {
         // Make the list private
-        Lists.methods.makePrivate._execute({ userId }, { listId });
+        makePrivate._execute({ userId }, { listId });
 
         // Throws if another user, or logged out user, tries to delete the list
         assert.throws(() => {
-          Lists.methods.remove._execute({ userId: Random.id() }, { listId });
+          remove._execute({ userId: Random.id() }, { listId });
         }, Meteor.Error, /Lists.methods.remove.accessDenied/);
 
         assert.throws(() => {
-          Lists.methods.remove._execute({}, { listId });
+          remove._execute({}, { listId });
         }, Meteor.Error, /Lists.methods.remove.accessDenied/);
       });
     });
@@ -220,11 +220,11 @@ describe('lists', () => {
         const connection = DDP.connect(Meteor.absoluteUrl());
 
         _.times(5, () => {
-          connection.call(Lists.methods.insert.name, {});
+          connection.call(insert.name, {});
         });
 
         assert.throws(() => {
-          connection.call(Lists.methods.insert.name, {});
+          connection.call(insert.name, {});
         }, Meteor.Error, /too-many-requests/);
 
         connection.disconnect();
