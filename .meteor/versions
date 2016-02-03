@@ -83,7 +83,11 @@ observe-sequence@1.0.8-modules.2
 ordered-dict@1.0.4
 percolate:momentum@0.7.2
 percolate:velocityjs@1.1.0
+practicalmeteor:chai@2.1.0_1
+practicalmeteor:loglevel@1.2.0_2
 practicalmeteor:mocha@2.1.0_7
+practicalmeteor:mocha-core@0.1.4
+practicalmeteor:sinon@1.14.1_2
 promise@0.5.2-modules.2
 publication-collector@0.0.1
 random@1.0.6-modules.2
@@ -104,6 +108,7 @@ softwarerero:accounts-t9n@1.1.7
 spacebars@1.0.8-modules.2
 spacebars-compiler@1.0.8-modules.2
 srp@1.0.5-modules.2
+stub-collections@0.0.1
 templating@1.1.6-modules.2
 templating-tools@1.0.1-modules.2
 tracker@1.0.10-modules.2

@@ -1,11 +1,11 @@
-// This version of the Todos example app doesn't run tests yet, since some of that functionality
-// will be improved in Meteor 1.3. Hence, we are going to ignore this file.
-return;
-
 /* eslint-env mocha */
-/* global Todos Lists Factory chai withRenderedTemplate */
 
-const StubCollections = Package['stub-collections'] && Package['stub-collections'].StubCollections;
+import { Factory } from 'meteor/factory';
+import { Todos } from '../../api/todos/todos.js';
+import { Lists } from '../../api/lists/lists.js';
+import { chai } from 'meteor/practicalmeteor:chai';
+import { withRenderedTemplate } from './test-helpers.js';
+import { StubCollections } from 'meteor/stub-collections';
 
 describe('Lists_show', () => {
   beforeEach(() => {
