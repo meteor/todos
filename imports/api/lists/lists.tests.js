@@ -6,6 +6,7 @@ import { insert, makePublic, makePrivate, updateName, remove } from './methods.j
 import { Todos } from '../todos/todos.js';
 import { PublicationCollector } from 'meteor/publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
+import { Random } from 'meteor/random';
 
 describe('lists', () => {
   describe('mutators', () => {

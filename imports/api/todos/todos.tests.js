@@ -4,6 +4,7 @@ import { Factory } from 'meteor/factory';
 import { Todos } from './todos.js';
 import { PublicationCollector } from 'meteor/publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
+import { Random } from 'meteor/random';
 
 describe('todos', () => {
   describe('mutators', () => {
