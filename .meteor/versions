@@ -52,7 +52,7 @@ htmljs@1.0.6-modules.6
 http@1.1.2-modules.6
 id-map@1.0.4
 jquery@1.11.5-modules.6
-juliancwirko:postcss@0.2.5
+juliancwirko:postcss@1.0.0-beta.1
 kadira:blaze-layout@2.2.0
 kadira:flow-router@2.7.0
 launch-screen@1.0.5-modules.6
@@ -66,9 +66,7 @@ meteor@1.1.11-modules.6
 meteor-base@1.0.1
 meteor-env-dev@0.0.1-modules.6
 meteor-env-prod@0.0.1-modules.6
-meteorhacks:async@1.0.0
-meteorhacks:npm@1.5.0
-minifiers@1.1.7
+minifiers-css@1.1.8-modules.6
 minifiers-js@1.1.8-modules.6
 minimongo@1.0.11-modules.6
 mobile-experience@1.0.1
@@ -78,7 +76,6 @@ modules-runtime@0.5.0-modules.6
 mongo@1.1.4-modules.6
 mongo-id@1.0.1
 npm-bcrypt@0.7.8_2
-npm-container@1.2.0
 npm-mongo@1.4.40-modules.6
 observe-sequence@1.0.8-modules.6
 ordered-dict@1.0.4
@@ -103,6 +100,7 @@ softwarerero:accounts-t9n@1.1.7
 spacebars@1.0.8-modules.6
 spacebars-compiler@1.0.8-modules.6
 srp@1.0.5-modules.6
+standard-minifiers-js@1.0.3-modules.6
 templating@1.1.6-modules.6
 templating-tools@1.0.1-modules.6
 tracker@1.0.10-modules.6
