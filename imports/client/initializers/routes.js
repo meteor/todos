@@ -2,18 +2,14 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { AccountsTemplates } from 'meteor/useraccounts:core';
 
-// This file needs to load first, so that useraccounts:core doesn't complain when we define
-// a forgotPwd route
-import '../useraccounts-configuration.js';
-
 // Import to load these templates
-import '../../imports/client/layouts/app-body.js';
-import '../../imports/client/pages/root-redirector.js';
-import '../../imports/client/pages/lists-show-page.js';
-import '../../imports/client/pages/app-not-found.js';
+import '../../ui/layouts/app-body.js';
+import '../../ui/pages/root-redirector.js';
+import '../../ui/pages/lists-show-page.js';
+import '../../ui/pages/app-not-found.js';
 
 // Import to override accounts templates
-import '../../imports/client/accounts/accounts-templates.js';
+import '../../ui/accounts/accounts-templates.js';
 
 FlowRouter.route('/lists/:_id', {
   name: 'Lists.show',

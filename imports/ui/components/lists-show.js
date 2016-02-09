@@ -185,3 +185,5 @@ Template.Lists_show.events({
     $input.val('');
   }
 });
+
+console.log('right here 10')
