@@ -1,2 +1,2 @@
-import '../imports/client/initializers/useraccounts-configuration.js';
-import '../imports/client/initializers/routes.js';
+import '../imports/startup/client/useraccounts-configuration.js';
+import '../imports/startup/client/routes.js';
