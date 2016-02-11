@@ -9,4 +9,4 @@ import '../imports/startup/server/security.js';
 
 // This defines all the collections, publications and methods that the application provides
 // as an API to the client.
-import '../imports/api/api.js';
+import '../imports/startup/server/register-api.js';
