@@ -8,7 +8,6 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "meteor": true,
     "node": true,
   },
   "ecmaFeatures": {

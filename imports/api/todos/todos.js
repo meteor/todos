@@ -1,10 +1,11 @@
+import { Collection } from 'meteor/mongo';
 import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/factory';
 import { faker } from 'meteor/dfischer:faker';
 import { Lists } from '../lists/lists.js';
 
-class TodosCollection extends Mongo.Collection {
+class TodosCollection extends Collection {
   insert(doc, callback) {
     doc.createdAt = doc.createdAt || new Date();
     const result = super.insert(doc, callback);
