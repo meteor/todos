@@ -7,18 +7,18 @@ import { Lists } from '../lists/lists.js';
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
     doc.createdAt = doc.createdAt || new Date();
-    const result = super(doc, callback);
+    const result = super.insert(doc, callback);
     incompleteCountDenormalizer.afterInsertTodo(doc);
     return result;
   }
   update(selector, modifier) {
-    const result = super(selector, modifier);
+    const result = super.update(selector, modifier);
     incompleteCountDenormalizer.afterUpdateTodo(selector, modifier);
     return result;
   }
   remove(selector) {
     const todos = this.find(selector).fetch();
-    const result = super(selector);
+    const result = super.remove(selector);
     incompleteCountDenormalizer.afterRemoveTodos(todos);
     return result;
   }

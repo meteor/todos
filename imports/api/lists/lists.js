@@ -15,11 +15,11 @@ class ListsCollection extends Mongo.Collection {
       }
     }
 
-    return super(list, callback);
+    return super.insert(list, callback);
   }
   remove(selector, callback) {
     Todos.remove({listId: selector});
-    return super(selector, callback);
+    return super.remove(selector, callback);
   }
 }
 

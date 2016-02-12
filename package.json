@@ -1,5 +1,10 @@
 {
-  "dependencies": {
-    "faker": "^3.0.1"
+  "devDependencies": {
+    "autoprefixer": "^6.3.1"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {"browsers": ["last 2 versions"]}
+    }
   }
 }

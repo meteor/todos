@@ -7,8 +7,8 @@
 meteor-base   # Packages every Meteor app needs to have
 crosswalk     # Modify mobile build to use Chromium instead of default Android web view
 
-juliancwirko:postcss  # Needs to be at app level until we support configuring minifiers: https://github.com/meteor/meteor/issues/5512
-npm-container # Necessary for PostCSS
+juliancwirko:postcss@1.0.0-beta.1
+standard-minifiers-js
 
 simple:rest-accounts-password
 ecmascript
