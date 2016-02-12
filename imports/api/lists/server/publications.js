@@ -1,8 +1,9 @@
 /* eslint-disable prefer-arrow-callback */
 
+import { MeteorServer } from 'meteor/ddp-server';
 import { Lists } from '../lists.js';
 
-Meteor.publish('Lists.public', function() {
+MeteorServer.publish('Lists.public', function() {
   return Lists.find({
     userId: {$exists: false}
   }, {
@@ -10,7 +11,7 @@ Meteor.publish('Lists.public', function() {
   });
 });
 
-Meteor.publish('Lists.private', function() {
+MeteorServer.publish('Lists.private', function() {
   if (!this.userId) {
     return this.ready();
   }

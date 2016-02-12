@@ -1,3 +1,9 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { Cursor } from 'meteor/mongo';
+import { ReactiveDict } from 'meteor/reactive-dict';
+import { Tracker } from 'meteor/tracker';
+import { $ } from 'meteor/jquery';
 import './lists-show.html';
 
 // Component used in the template
@@ -22,7 +28,7 @@ Template.Lists_show.onCreated(function() {
     new SimpleSchema({
       list: {type: Function},
       todosReady: {type: Boolean},
-      todos: {type: Mongo.Cursor}
+      todos: {type: Cursor}
     }).validate(Template.currentData());
   });
 
@@ -185,5 +191,3 @@ Template.Lists_show.events({
     $input.val('');
   }
 });
-
-console.log('right here 10')

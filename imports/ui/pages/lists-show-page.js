@@ -1,3 +1,5 @@
+import { Template } from 'meteor/templating';
+
 import { listRenderHold } from '../launch-screen.js';
 import './lists-show-page.html';
 

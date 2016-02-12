@@ -1,6 +1,10 @@
-import './todos-item.html';
+import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Todos } from '../../api/todos/todos.js';
+import { $ } from 'meteor/jquery';
+import { _ } from 'meteor/underscore';
+
+import './todos-item.html';
 
 import {
   setCheckedStatus,

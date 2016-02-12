@@ -1,7 +1,9 @@
-Accounts.emailTemplates.siteName = 'Meteor Guide Todos Example';
-Accounts.emailTemplates.from = 'Meteor Todos Accounts <accounts@example.com>';
+import { AccountsPassword } from 'meteor/accounts-password';
 
-Accounts.emailTemplates.resetPassword = {
+AccountsPassword.emailTemplates.siteName = 'Meteor Guide Todos Example';
+AccountsPassword.emailTemplates.from = 'Meteor Todos Accounts <accounts@example.com>';
+
+AccountsPassword.emailTemplates.resetPassword = {
   subject() {
     return 'Reset your password on Meteor Todos';
   },

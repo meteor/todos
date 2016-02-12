@@ -1,3 +1,5 @@
+/* globals App */
+
 App.info({
   name: 'Todos',
   description: 'A simple todo list app built in Meteor.',

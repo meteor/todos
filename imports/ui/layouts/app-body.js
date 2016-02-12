@@ -1,9 +1,15 @@
 import './app-body.html';
 
+import { Meteor } from 'meteor/meteor';
+import { MeteorConnection } from 'meteor/ddp-client';
 import { Lists } from '../../api/lists/lists.js';
 import { insert } from '../../api/lists/methods.js';
 import { ActiveRoute } from 'meteor/zimme:active-route';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { ReactiveDict } from 'meteor/reactive-dict';
+import { Template } from 'meteor/templating';
+import { Accounts } from 'meteor/accounts-base';
 
 import '../components/loading.js';
 
@@ -45,7 +51,7 @@ Template.App_body.helpers({
     return Meteor.isCordova && 'cordova';
   },
   emailLocalPart() {
-    const email = Meteor.user().emails[0].address;
+    const email = Accounts.user().emails[0].address;
     return email.substring(0, email.indexOf('@'));
   },
   userMenuOpen() {
@@ -55,7 +61,7 @@ Template.App_body.helpers({
   lists() {
     return Lists.find({$or: [
       {userId: {$exists: false}},
-      {userId: Meteor.userId()}
+      {userId: Accounts.userId()}
     ]});
   },
   activeListClass(list) {
@@ -66,7 +72,7 @@ Template.App_body.helpers({
   },
   connected() {
     if (showConnectionIssue.get()) {
-      return Meteor.status().connected;
+      return MeteorConnection.status().connected;
     }
 
     return true;
@@ -102,7 +108,7 @@ Template.App_body.events({
   },
 
   'click .js-logout'() {
-    Meteor.logout();
+    Accounts.logout();
 
     // if we are on a private list, we'll need to go to a public one
     if (ActiveRoute.name('Lists.show')) {

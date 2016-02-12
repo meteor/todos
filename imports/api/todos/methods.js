@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 import { Todos } from './todos.js';
 import { Lists } from '../lists/lists.js';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
