@@ -8,6 +8,8 @@ import {
   remove,
 } from '../../api/todos/methods.js';
 
+import { handleError } from '../lib/errors.js';
+
 Template.Todos_item.onCreated(function() {
   this.autorun(() => {
     new SimpleSchema({
@@ -62,9 +64,7 @@ Template.Todos_item.events({
     updateText.call({
       todoId: this.todo._id,
       newText: event.target.value
-    }, (err) => {
-      err && alert(err.error); // translate this string after #59
-    });
+    }, handleError);
   }, 300),
 
   // handle mousedown otherwise the blur handler above will swallow the click
@@ -72,8 +72,6 @@ Template.Todos_item.events({
   'mousedown .js-delete-item, click .js-delete-item'() {
     remove.call({
       todoId: this.todo._id
-    }, (err) => {
-      err && alert(err.error); // translate this string after #59
-    });
+    }, handleError);
   }
 });
