@@ -12,7 +12,7 @@ Template.Lists_show_page.onCreated(function () {
   this.getListId = () => FlowRouter.getParam('_id');
 
   this.autorun(() => {
-    this.subscribe('Todos.inList', this.getListId());
+    this.subscribe('todos.inList', this.getListId());
   });
 });
 

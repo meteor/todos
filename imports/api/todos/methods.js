@@ -5,7 +5,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
 export const insert = new ValidatedMethod({
-  name: 'Todos.methods.insert',
+  name: 'todos.insert',
   validate: new SimpleSchema({
     listId: { type: String },
     text: { type: String },
@@ -30,7 +30,7 @@ export const insert = new ValidatedMethod({
 });
 
 export const setCheckedStatus = new ValidatedMethod({
-  name: 'Todos.methods.makeChecked',
+  name: 'todos.makeChecked',
   validate: new SimpleSchema({
     todoId: { type: String },
     newCheckedStatus: { type: Boolean },
@@ -55,7 +55,7 @@ export const setCheckedStatus = new ValidatedMethod({
 });
 
 export const updateText = new ValidatedMethod({
-  name: 'Todos.methods.updateText',
+  name: 'todos.updateText',
   validate: new SimpleSchema({
     todoId: { type: String },
     newText: { type: String },
@@ -77,7 +77,7 @@ export const updateText = new ValidatedMethod({
 });
 
 export const remove = new ValidatedMethod({
-  name: 'Todos.methods.remove',
+  name: 'todos.remove',
   validate: new SimpleSchema({
     todoId: { type: String },
   }).validator(),

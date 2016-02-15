@@ -4,7 +4,7 @@ import { Todos } from '../todos.js';
 import { Lists } from '../../lists/lists.js';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-Meteor.publishComposite('Todos.inList', function (listId) {
+Meteor.publishComposite('todos.inList', function (listId) {
   new SimpleSchema({
     listId: { type: String },
   }).validate({ listId });

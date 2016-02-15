@@ -46,20 +46,20 @@ describe('lists', () => {
     });
 
 
-    describe('Lists.public', () => {
+    describe('lists.public', () => {
       it('sends all public lists', (done) => {
         const collector = new PublicationCollector();
-        collector.collect('Lists.public', (collections) => {
+        collector.collect('lists.public', (collections) => {
           chai.assert.equal(collections.Lists.length, 3);
           done();
         });
       });
     });
 
-    describe('Lists.private', () => {
+    describe('lists.private', () => {
       it('sends all owned lists', (done) => {
         const collector = new PublicationCollector({userId});
-        collector.collect('Lists.private', (collections) => {
+        collector.collect('lists.private', (collections) => {
           chai.assert.equal(collections.Lists.length, 2);
           done();
         });

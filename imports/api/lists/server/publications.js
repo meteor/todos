@@ -2,7 +2,7 @@
 
 import { Lists } from '../lists.js';
 
-Meteor.publish('Lists.public', function () {
+Meteor.publish('lists.public', function () {
   return Lists.find({
     userId: { $exists: false },
   }, {
@@ -10,7 +10,7 @@ Meteor.publish('Lists.public', function () {
   });
 });
 
-Meteor.publish('Lists.private', function () {
+Meteor.publish('lists.private', function () {
   if (!this.userId) {
     return this.ready();
   }
