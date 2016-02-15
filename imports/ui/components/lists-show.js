@@ -20,19 +20,19 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-Template.Lists_show.onCreated(function() {
+Template.Lists_show.onCreated(function () {
   this.autorun(() => {
     new SimpleSchema({
-      list: {type: Function},
-      todosReady: {type: Boolean},
-      todos: {type: Mongo.Cursor}
+      list: { type: Function },
+      todosReady: { type: Boolean },
+      todos: { type: Mongo.Cursor },
     }).validate(Template.currentData());
   });
 
   this.state = new ReactiveDict();
   this.state.setDefault({
     editing: false,
-    editingTodo: false
+    editingTodo: false,
   });
 
   this.saveList = () => {
@@ -40,7 +40,7 @@ Template.Lists_show.onCreated(function() {
 
     updateName.call({
       listId: this.data.list()._id,
-      newName: this.$('[name=name]').val()
+      newName: this.$('[name=name]').val(),
     }, displayError);
   };
 
@@ -62,7 +62,7 @@ Template.Lists_show.onCreated(function() {
 
     if (confirm(message)) {
       remove.call({
-        listId: list._id
+        listId: list._id,
       }, displayError);
 
       FlowRouter.go('App.home');
@@ -90,9 +90,9 @@ Template.Lists_show.helpers({
       editing: instance.state.equals('editingTodo', todo._id),
       onEditingChange(editing) {
         instance.state.set('editingTodo', editing ? todo._id : false);
-      }
+      },
     };
-  }
+  },
 });
 
 Template.Lists_show.events({
@@ -129,15 +129,16 @@ Template.Lists_show.events({
 
   // This is for the mobile dropdown
   'change .list-edit'(event, instance) {
-    if ($(event.target).val() === 'edit') {
+    const target = event.target;
+    if ($(target).val() === 'edit') {
       instance.editList();
-    } else if ($(event.target).val() === 'delete') {
+    } else if ($(target).val() === 'delete') {
       instance.deleteList();
     } else {
       instance.toggleListPrivacy();
     }
 
-    event.target.selectedIndex = 0;
+    target.selectedIndex = 0;
   },
 
   'click .js-edit-list'(event, instance) {
@@ -166,9 +167,9 @@ Template.Lists_show.events({
 
     insert.call({
       listId: this.list()._id,
-      text: $input.val()
+      text: $input.val(),
     }, displayError);
 
     $input.val('');
-  }
+  },
 });

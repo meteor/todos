@@ -4,21 +4,22 @@ import { Todos } from '../todos/todos.js';
 
 class ListsCollection extends Mongo.Collection {
   insert(list, callback) {
-    if (!list.name) {
+    const ourList = list;
+    if (!ourList.name) {
       let nextLetter = 'A';
-      list.name = `List ${nextLetter}`;
+      ourList.name = `List ${nextLetter}`;
 
-      while (!!this.findOne({name: list.name})) {
+      while (!!this.findOne({ name: ourList.name })) {
         // not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
-        list.name = `List ${nextLetter}`;
+        ourList.name = `List ${nextLetter}`;
       }
     }
 
-    return super.insert(list, callback);
+    return super.insert(ourList, callback);
   }
   remove(selector, callback) {
-    Todos.remove({listId: selector});
+    Todos.remove({ listId: selector });
     return super.remove(selector, callback);
   }
 }
@@ -34,8 +35,8 @@ Lists.deny({
 
 Lists.schema = new SimpleSchema({
   name: { type: String },
-  incompleteCount: {type: Number, defaultValue: 0},
-  userId: { type: String, regEx: SimpleSchema.RegEx.Id, optional: true }
+  incompleteCount: { type: Number, defaultValue: 0 },
+  userId: { type: String, regEx: SimpleSchema.RegEx.Id, optional: true },
 });
 
 Lists.attachSchema(Lists.schema);
@@ -46,7 +47,7 @@ Lists.attachSchema(Lists.schema);
 Lists.publicFields = {
   name: 1,
   incompleteCount: 1,
-  userId: 1
+  userId: 1,
 };
 
 Factory.define('list', Lists, {});
@@ -57,7 +58,7 @@ Lists.helpers({
     return !!this.userId;
   },
   isLastPublicList() {
-    const publicListCount = Lists.find({userId: {$exists: false}}).count();
+    const publicListCount = Lists.find({ userId: { $exists: false } }).count();
     return !this.isPrivate() && publicListCount === 1;
   },
   editableBy(userId) {
@@ -68,6 +69,6 @@ Lists.helpers({
     return this.userId === userId;
   },
   todos() {
-    return Todos.find({listId: this._id}, {sort: {createdAt: -1}});
-  }
+    return Todos.find({ listId: this._id }, { sort: { createdAt: -1 } });
+  },
 });

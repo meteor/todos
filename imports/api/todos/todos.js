@@ -6,9 +6,10 @@ import { Lists } from '../lists/lists.js';
 
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
-    doc.createdAt = doc.createdAt || new Date();
-    const result = super.insert(doc, callback);
-    incompleteCountDenormalizer.afterInsertTodo(doc);
+    const ourDoc = doc;
+    ourDoc.createdAt = ourDoc.createdAt || new Date();
+    const result = super.insert(ourDoc, callback);
+    incompleteCountDenormalizer.afterInsertTodo(ourDoc);
     return result;
   }
   update(selector, modifier) {
@@ -37,20 +38,20 @@ Todos.schema = new SimpleSchema({
   listId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-    denyUpdate: true
+    denyUpdate: true,
   },
   text: {
     type: String,
-    max: 100
+    max: 100,
   },
   createdAt: {
     type: Date,
-    denyUpdate: true
+    denyUpdate: true,
   },
   checked: {
     type: Boolean,
-    defaultValue: false
-  }
+    defaultValue: false,
+  },
 });
 
 Todos.attachSchema(Todos.schema);
@@ -62,7 +63,7 @@ Todos.publicFields = {
   listId: 1,
   text: 1,
   createdAt: 1,
-  checked: 1
+  checked: 1,
 };
 
 // TODO This factory has a name - do we have a code style for this?
@@ -71,7 +72,7 @@ Todos.publicFields = {
 Factory.define('todo', Todos, {
   listId: () => Factory.get('list'),
   text: () => faker.lorem.sentence(),
-  createdAt: () => new Date()
+  createdAt: () => new Date(),
 });
 
 Todos.helpers({
@@ -80,5 +81,5 @@ Todos.helpers({
   },
   editableBy(userId) {
     return this.list().editableBy(userId);
-  }
+  },
 });

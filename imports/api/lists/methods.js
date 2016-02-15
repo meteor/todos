@@ -4,7 +4,7 @@ import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 import { Lists } from './lists.js';
 
 const LIST_ID_ONLY = new SimpleSchema({
-  listId: { type: String }
+  listId: { type: String },
 }).validator();
 
 export const insert = new ValidatedMethod({
@@ -12,7 +12,7 @@ export const insert = new ValidatedMethod({
   validate: new SimpleSchema({}).validator(),
   run() {
     return Lists.insert({});
-  }
+  },
 });
 
 export const makePrivate = new ValidatedMethod({
@@ -32,9 +32,9 @@ export const makePrivate = new ValidatedMethod({
     }
 
     Lists.update(listId, {
-      $set: { userId: this.userId }
+      $set: { userId: this.userId },
     });
-  }
+  },
 });
 
 export const makePublic = new ValidatedMethod({
@@ -56,16 +56,16 @@ export const makePublic = new ValidatedMethod({
     // XXX the security check above is not atomic, so in theory a race condition could
     // result in exposing private data
     Lists.update(listId, {
-      $unset: { userId: true }
+      $unset: { userId: true },
     });
-  }
+  },
 });
 
 export const updateName = new ValidatedMethod({
   name: 'Lists.methods.updateName',
   validate: new SimpleSchema({
     listId: { type: String },
-    newName: { type: String }
+    newName: { type: String },
   }).validator(),
   run({ listId, newName }) {
     const list = Lists.findOne(listId);
@@ -79,9 +79,9 @@ export const updateName = new ValidatedMethod({
     // result in exposing private data
 
     Lists.update(listId, {
-      $set: { name: newName }
+      $set: { name: newName },
     });
-  }
+  },
 });
 
 export const remove = new ValidatedMethod({
@@ -104,7 +104,7 @@ export const remove = new ValidatedMethod({
     }
 
     Lists.remove(listId);
-  }
+  },
 });
 
 // Get list of all method names on Lists
@@ -113,7 +113,7 @@ const LISTS_METHODS = _.pluck([
   makePublic,
   makePrivate,
   updateName,
-  remove
+  remove,
 ], 'name');
 
 if (Meteor.isServer) {
@@ -124,6 +124,6 @@ if (Meteor.isServer) {
     },
 
     // Rate limit per connection ID
-    connectionId() { return true; }
+    connectionId() { return true; },
   }, 5, 1000);
 }

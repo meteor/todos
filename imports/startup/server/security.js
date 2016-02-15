@@ -4,7 +4,7 @@ import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 Meteor.users.deny({
   update() {
     return true;
-  }
+  },
 });
 
 // Get a list of all accounts methods by running `Meteor.server.method_handlers` in meteor shell
@@ -33,6 +33,6 @@ if (Meteor.isServer) {
     },
 
     // Rate limit per connection ID
-    connectionId() { return true; }
+    connectionId() { return true; },
   }, 2, 5000);
 }

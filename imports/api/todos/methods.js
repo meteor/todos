@@ -8,7 +8,7 @@ export const insert = new ValidatedMethod({
   name: 'Todos.methods.insert',
   validate: new SimpleSchema({
     listId: { type: String },
-    text: { type: String }
+    text: { type: String },
   }).validator(),
   run({ listId, text }) {
     const list = Lists.findOne(listId);
@@ -22,18 +22,18 @@ export const insert = new ValidatedMethod({
       listId,
       text,
       checked: false,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     Todos.insert(todo);
-  }
+  },
 });
 
 export const setCheckedStatus = new ValidatedMethod({
   name: 'Todos.methods.makeChecked',
   validate: new SimpleSchema({
     todoId: { type: String },
-    newCheckedStatus: { type: Boolean }
+    newCheckedStatus: { type: Boolean },
   }).validator(),
   run({ todoId, newCheckedStatus }) {
     const todo = Todos.findOne(todoId);
@@ -48,17 +48,17 @@ export const setCheckedStatus = new ValidatedMethod({
         'Cannot edit checked status in a private list that is not yours');
     }
 
-    Todos.update(todoId, {$set: {
-      checked: newCheckedStatus
-    }});
-  }
+    Todos.update(todoId, { $set: {
+      checked: newCheckedStatus,
+    } });
+  },
 });
 
 export const updateText = new ValidatedMethod({
   name: 'Todos.methods.updateText',
   validate: new SimpleSchema({
     todoId: { type: String },
-    newText: { type: String }
+    newText: { type: String },
   }).validator(),
   run({ todoId, newText }) {
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
@@ -71,15 +71,15 @@ export const updateText = new ValidatedMethod({
     }
 
     Todos.update(todoId, {
-      $set: { text: newText }
+      $set: { text: newText },
     });
-  }
+  },
 });
 
 export const remove = new ValidatedMethod({
   name: 'Todos.methods.remove',
   validate: new SimpleSchema({
-    todoId: { type: String }
+    todoId: { type: String },
   }).validator(),
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
@@ -90,7 +90,7 @@ export const remove = new ValidatedMethod({
     }
 
     Todos.remove(todoId);
-  }
+  },
 });
 
 // Get list of all method names on Todos
@@ -109,6 +109,6 @@ if (Meteor.isServer) {
     },
 
     // Rate limit per connection ID
-    connectionId() { return true; }
+    connectionId() { return true; },
   }, 5, 1000);
 }

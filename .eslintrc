@@ -6,7 +6,7 @@
 */
 
 {
-  "extends": [".eslintrc-meteor"],
+  "extends": "airbnb/base",
   "env": {},
   "rules": {
 

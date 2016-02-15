@@ -14,8 +14,8 @@ Meteor.startup(() => {
           'Latency Compensation',
           'Full Stack Reactivity',
           'Embrace the Ecosystem',
-          'Simplicity Equals Productivity'
-        ]
+          'Simplicity Equals Productivity',
+        ],
       },
       {
         name: 'Languages',
@@ -28,8 +28,8 @@ Meteor.startup(() => {
           'JavaScript',
           'Scala',
           'Erlang',
-          '6502 Assembly'
-        ]
+          '6502 Assembly',
+        ],
       },
       {
         name: 'Favorite Scientists',
@@ -39,9 +39,9 @@ Meteor.startup(() => {
           'Marie Curie',
           'Carl Friedrich Gauss',
           'Nikola Tesla',
-          'Claude Shannon'
-        ]
-      }
+          'Claude Shannon',
+        ],
+      },
     ];
 
     let timestamp = (new Date()).getTime();
@@ -49,14 +49,14 @@ Meteor.startup(() => {
     data.forEach((list) => {
       const listId = Lists.insert({
         name: list.name,
-        incompleteCount: list.items.length
+        incompleteCount: list.items.length,
       });
 
       list.items.forEach((text) => {
         Todos.insert({
-          listId: listId,
-          text: text,
-          createdAt: new Date(timestamp)
+          listId,
+          text,
+          createdAt: new Date(timestamp),
         });
 
         timestamp += 1; // ensure unique timestamp.
