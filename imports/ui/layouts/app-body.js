@@ -31,14 +31,14 @@ Meteor.startup(() => {
   }, CONNECTION_ISSUE_TIMEOUT);
 });
 
-Template.App_body.onCreated(function() {
+Template.App_body.onCreated(function () {
   this.subscribe('Lists.public');
   this.subscribe('Lists.private');
 
   this.state = new ReactiveDict();
   this.state.setDefault({
     menuOpen: false,
-    userMenuOpen: false
+    userMenuOpen: false,
   });
 });
 
@@ -59,10 +59,10 @@ Template.App_body.helpers({
     return instance.state.get('userMenuOpen');
   },
   lists() {
-    return Lists.find({$or: [
-      {userId: {$exists: false}},
-      {userId: Accounts.userId()}
-    ]});
+    return Lists.find({ $or: [
+      { userId: { $exists: false } },
+      { userId: Accounts.userId() },
+    ] });
   },
   activeListClass(list) {
     const active = ActiveRoute.name('Lists.show')
@@ -83,8 +83,8 @@ Template.App_body.helpers({
     },
     'swiperight .cordova'(event, instance) {
       instance.state.set('menuOpen', true);
-    }
-  }
+    },
+  },
 });
 
 Template.App_body.events({
@@ -115,7 +115,7 @@ Template.App_body.events({
       // TODO -- test this code path
       const list = Lists.findOne(FlowRouter.getParam('_id'));
       if (list.userId) {
-        FlowRouter.go('Lists.show', Lists.findOne({userId: {$exists: false}}));
+        FlowRouter.go('Lists.show', Lists.findOne({ userId: { $exists: false } }));
       }
     }
   },
@@ -132,5 +132,5 @@ Template.App_body.events({
     });
 
     FlowRouter.go('Lists.show', { _id: listId });
-  }
+  },
 });

@@ -3,22 +3,22 @@
 import { MeteorServer } from 'meteor/ddp-server';
 import { Lists } from '../lists.js';
 
-MeteorServer.publish('Lists.public', function() {
+MeteorServer.publish('Lists.public', function () {
   return Lists.find({
-    userId: {$exists: false}
+    userId: { $exists: false },
   }, {
-    fields: Lists.publicFields
+    fields: Lists.publicFields,
   });
 });
 
-MeteorServer.publish('Lists.private', function() {
+MeteorServer.publish('Lists.private', function () {
   if (!this.userId) {
     return this.ready();
   }
 
   return Lists.find({
-    userId: this.userId
+    userId: this.userId,
   }, {
-    fields: Lists.publicFields
+    fields: Lists.publicFields,
   });
 });

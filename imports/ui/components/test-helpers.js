@@ -1,7 +1,12 @@
 // TODO -- this should probably be some kind of test package that people use
 /* global withRenderedTemplate:true */
 
-const withDiv = function(callback) {
+import { _ } from 'meteor/underscore';
+import { Template } from 'meteor/templating';
+import { Blaze } from 'meteor/blaze';
+import { Tracker } from 'meteor/tracker';
+
+const withDiv = function (callback) {
   const el = document.createElement('div');
   document.body.appendChild(el);
   try {
@@ -11,10 +16,10 @@ const withDiv = function(callback) {
   }
 };
 
-withRenderedTemplate = function(template, data, callback) {
+withRenderedTemplate = function (template, data, callback) {
   withDiv((el) => {
-    template = _.isString(template) ? Template[template] : template;
-    Blaze.renderWithData(template, data, el);
+    const ourTemplate = _.isString(template) ? Template[template] : template;
+    Blaze.renderWithData(ourTemplate, data, el);
     Tracker.flush();
     callback(el);
   });

@@ -10,10 +10,10 @@ AccountsTemplates.configure({
     title: {
       signIn: 'Sign In',
       signUp: 'Join',
-    }
+    },
   },
   defaultTemplate: 'Auth_page',
   defaultLayout: 'App_body',
   defaultContentRegion: 'main',
-  defaultLayoutRegions: {}
+  defaultLayoutRegions: {},
 });

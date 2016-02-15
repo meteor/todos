@@ -12,12 +12,12 @@ import {
   remove,
 } from '../../api/todos/methods.js';
 
-Template.Todos_item.onCreated(function() {
+Template.Todos_item.onCreated(function () {
   this.autorun(() => {
     new SimpleSchema({
-      todo: {type: Todos._helpers},
-      editing: {type: Boolean, optional: true},
-      onEditingChange: {type: Function}
+      todo: { type: Todos._helpers },
+      editing: { type: Boolean, optional: true },
+      onEditingChange: { type: Function },
     }).validate(Template.currentData());
   });
 });
@@ -28,7 +28,7 @@ Template.Todos_item.helpers({
   },
   editingClass(editing) {
     return editing && 'editing';
-  }
+  },
 });
 
 Template.Todos_item.events({
@@ -37,7 +37,7 @@ Template.Todos_item.events({
 
     setCheckedStatus.call({
       todoId: this.todo._id,
-      newCheckedStatus: checked
+      newCheckedStatus: checked,
     });
   },
 
@@ -62,12 +62,14 @@ Template.Todos_item.events({
   // update the text of the item on keypress but throttle the event to ensure
   // we don't flood the server with updates (handles the event at most once
   // every 300ms)
-  'keyup input[type=text]': _.throttle(function(event) {
+  'keyup input[type=text]': _.throttle(function (event) {
     updateText.call({
       todoId: this.todo._id,
-      newText: event.target.value
+      newText: event.target.value,
     }, (err) => {
-      err && alert(err.error); // translate this string after #59
+      if (err) {
+        alert(err.error); // translate this string after #59
+      }
     });
   }, 300),
 
@@ -75,9 +77,11 @@ Template.Todos_item.events({
   // on iOS, we still require the click event so handle both
   'mousedown .js-delete-item, click .js-delete-item'() {
     remove.call({
-      todoId: this.todo._id
+      todoId: this.todo._id,
     }, (err) => {
-      err && alert(err.error); // translate this string after #59
+      if (err) {
+        alert(err.error); // translate this string after #59
+      }
     });
-  }
+  },
 });
