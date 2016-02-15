@@ -7,7 +7,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
 export const insert = new ValidatedMethod({
-  name: 'Todos.methods.insert',
+  name: 'todos.insert',
   validate: new SimpleSchema({
     listId: { type: String },
     text: { type: String },
@@ -16,7 +16,7 @@ export const insert = new ValidatedMethod({
     const list = Lists.findOne(listId);
 
     if (list.isPrivate() && list.userId !== this.userId) {
-      throw new Meteor.Error('Todos.methods.insert.unauthorized',
+      throw new Meteor.Error('todos.insert.unauthorized',
         'Cannot add todos to a private list that is not yours');
     }
 
@@ -32,7 +32,7 @@ export const insert = new ValidatedMethod({
 });
 
 export const setCheckedStatus = new ValidatedMethod({
-  name: 'Todos.methods.makeChecked',
+  name: 'todos.makeChecked',
   validate: new SimpleSchema({
     todoId: { type: String },
     newCheckedStatus: { type: Boolean },
@@ -46,7 +46,7 @@ export const setCheckedStatus = new ValidatedMethod({
     }
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('Todos.methods.setCheckedStatus.unauthorized',
+      throw new Meteor.Error('todos.setCheckedStatus.unauthorized',
         'Cannot edit checked status in a private list that is not yours');
     }
 
@@ -57,7 +57,7 @@ export const setCheckedStatus = new ValidatedMethod({
 });
 
 export const updateText = new ValidatedMethod({
-  name: 'Todos.methods.updateText',
+  name: 'todos.updateText',
   validate: new SimpleSchema({
     todoId: { type: String },
     newText: { type: String },
@@ -68,7 +68,7 @@ export const updateText = new ValidatedMethod({
     const todo = Todos.findOne(todoId);
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('Todos.methods.updateText.unauthorized',
+      throw new Meteor.Error('todos.updateText.unauthorized',
         'Cannot edit todos in a private list that is not yours');
     }
 
@@ -79,7 +79,7 @@ export const updateText = new ValidatedMethod({
 });
 
 export const remove = new ValidatedMethod({
-  name: 'Todos.methods.remove',
+  name: 'todos.remove',
   validate: new SimpleSchema({
     todoId: { type: String },
   }).validator(),
@@ -87,7 +87,7 @@ export const remove = new ValidatedMethod({
     const todo = Todos.findOne(todoId);
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('Todos.methods.remove.unauthorized',
+      throw new Meteor.Error('todos.remove.unauthorized',
         'Cannot remove todos in a private list that is not yours');
     }
 

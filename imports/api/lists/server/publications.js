@@ -3,7 +3,7 @@
 import { MeteorServer } from 'meteor/ddp-server';
 import { Lists } from '../lists.js';
 
-MeteorServer.publish('Lists.public', function () {
+MeteorServer.publish('lists.public', function () {
   return Lists.find({
     userId: { $exists: false },
   }, {
@@ -11,7 +11,7 @@ MeteorServer.publish('Lists.public', function () {
   });
 });
 
-MeteorServer.publish('Lists.private', function () {
+MeteorServer.publish('lists.private', function () {
   if (!this.userId) {
     return this.ready();
   }
