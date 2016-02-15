@@ -1,4 +1,4 @@
-/* Galaxy's Javascript linting configuration (Meteor)
+/* ESLint config
  *
  * Documentation on rules can be found at:
  * http://eslint.org/docs/rules/ <- Optionally append the rulename
