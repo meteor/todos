@@ -1,6 +1,16 @@
 {
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^6.3.1"
+  },
+  "devDependencies": {
+    "chimp": "^0.28.2",
+    "eslint": "^1.0.0",
+    "babel-eslint": "^4.1.8",
+    "eslint-config-airbnb": "^5.0.0"
+  },
+  "scripts": {
+    "chimp-watch": "node_modules/.bin/chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
+    "lint": "eslint . || true"
   },
   "postcss": {
     "plugins": {

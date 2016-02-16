@@ -2,19 +2,19 @@
 
 function countLists() {
   browser.waitForExist('.list-todo');
-  var elements = browser.elements("selector");
+  var elements = browser.elements('.list-todo');
   return elements.value.length;
 }
 
 describe('list ui', function () {
-  it('can create a list @watch', function() {
-    // XXX: why is this line needed?
+  beforeEach(function() {
     browser.url('http://localhost:3000');
+  });
 
+  it('can create a list @watch', function() {
     var initialCount = countLists();
     browser.click('.js-new-list');
-    setTimeout(function() {
-      assert.equal(countLists(), initialCount + 1);
-    }, 100);
+
+    assert.equal(countLists(), initialCount + 1);
   });
 });
