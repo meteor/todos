@@ -48,7 +48,7 @@ export const makePublic = new ValidatedMethod({
 
     const list = Lists.findOne(listId);
 
-    if (Meteor.isServer || !list.editableBy(this.userId)) {
+    if (!list.editableBy(this.userId)) {
       throw new Meteor.Error('lists.makePublic.accessDenied',
         'You don\'t have permission to edit this list.');
     }

@@ -6,6 +6,15 @@ import { PublicationCollector } from 'meteor/publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 
+// These are server-only tests.
+if (Meteor.isClient) {
+  return;
+}
+
+if (Meteor.isServer) {
+  require('./server/publications.js');
+}
+
 describe('todos', () => {
   describe('mutators', () => {
     it('builds correctly from factory', () => {
