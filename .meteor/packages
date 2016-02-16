@@ -67,3 +67,4 @@ app-prod-security
 
 mdg:validated-method
 aldeed:simple-schema
+tap:i18n

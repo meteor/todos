@@ -1,0 +1,33 @@
+{
+  "lists": {
+    "makePrivate": {
+      "notLoggedIn": "Must be logged in to make private lists.",
+      "lastPublicList": "Cannot make the last public list private."
+    },
+    "makePublic": {
+      "notLoggedIn": "Must be logged in.",
+      "accessDenied": "You don't have permission to edit this list."
+    },
+    "updateName": {
+      "accessDenied": "You don't have permission to edit this list."
+    },
+    "remove": {
+      "accessDenied": "'You don't have permission to remove this list.'",
+      "lastPublicList": "Cannot delete the last public list."
+    }
+  },
+  "todos": {
+    "insert": {
+      "accessDenied": "Cannot add todos to a private list that is not yours"
+    },
+    "setCheckedStatus": {
+      "accessDenied": "Cannot edit todos in a private list that is not yours"
+    },
+    "updateText": {
+      "accessDenied": "Cannot edit todos in a private list that is not yours"
+    },
+    "remove": {
+      "accessDenied": "Cannot remove todos in a private list that is not yours"
+    }
+  }
+}

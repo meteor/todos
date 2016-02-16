@@ -14,8 +14,11 @@ import {
   insert,
 } from '../../api/todos/methods.js';
 
+import { displayError } from '../lib/errors.js';
+
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.Lists_show.onCreated(function() {
   this.autorun(() => {
@@ -38,12 +41,7 @@ Template.Lists_show.onCreated(function() {
     updateName.call({
       listId: this.data.list()._id,
       newName: this.$('[name=name]').val()
-    }, (err) => {
-      // Ignore the error - there's nothing useful we can do in the UI
-      // here. In particular this case happens if you try to save with
-      // an empty list name.
-      err && console.error(err);
-    });
+    }, displayError);
   };
 
   this.editList = () => {
@@ -60,17 +58,12 @@ Template.Lists_show.onCreated(function() {
 
   this.deleteList = () => {
     const list = this.data.list();
-    const message = `Are you sure you want to delete the list ${list.name}?`;
+    const message = `${TAPi18n.__('Are you sure you want to delete the list')} ${list.name}?`;
 
     if (confirm(message)) {
       remove.call({
         listId: list._id
-      }, (err) => {
-        // At this point, we have already redirected home as if the list was
-        // successfully deleted, but we should at least warn the user their list
-        // could not be deleted
-        err && alert(err.error); // translate this string after #59
-      });
+      }, displayError);
 
       FlowRouter.go('App.home');
       return true;
@@ -82,13 +75,9 @@ Template.Lists_show.onCreated(function() {
   this.toggleListPrivacy = () => {
     const list = this.data.list();
     if (list.userId) {
-      makePublic.call({ listId: list._id }, (err) => {
-        err && alert(err.error); // translate this string after #59
-      });
+      makePublic.call({ listId: list._id }, displayError);
     } else {
-      makePrivate.call({ listId: list._id }, (err) => {
-        err && alert(err.error); // translate this string after #59
-      });
+      makePrivate.call({ listId: list._id }, displayError);
     }
   };
 });
@@ -178,12 +167,8 @@ Template.Lists_show.events({
     insert.call({
       listId: this.list()._id,
       text: $input.val()
-    }, (err) => {
-      err && alert(err.error); // translate this string after #59
-    });
+    }, displayError);
 
     $input.val('');
   }
 });
-
-console.log('right here 10')
