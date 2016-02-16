@@ -1,6 +1,6 @@
 import { TAPi18n } from 'meteor/tap:i18n';
 
-export const handleError = (error) =>  {
+export const displayError = (error) =>  {
   console.log(error)
   if (error) {
     // It would be better to not alert the error here but inform the user in some

@@ -14,7 +14,7 @@ import {
   insert,
 } from '../../api/todos/methods.js';
 
-import { handleError } from '../lib/errors.js';
+import { displayError } from '../lib/errors.js';
 
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
@@ -41,7 +41,7 @@ Template.Lists_show.onCreated(function() {
     updateName.call({
       listId: this.data.list()._id,
       newName: this.$('[name=name]').val()
-    }, handleError);
+    }, displayError);
   };
 
   this.editList = () => {
@@ -63,7 +63,7 @@ Template.Lists_show.onCreated(function() {
     if (confirm(message)) {
       remove.call({
         listId: list._id
-      }, handleError);
+      }, displayError);
 
       FlowRouter.go('App.home');
       return true;
@@ -75,9 +75,9 @@ Template.Lists_show.onCreated(function() {
   this.toggleListPrivacy = () => {
     const list = this.data.list();
     if (list.userId) {
-      makePublic.call({ listId: list._id }, handleError);
+      makePublic.call({ listId: list._id }, displayError);
     } else {
-      makePrivate.call({ listId: list._id }, handleError);
+      makePrivate.call({ listId: list._id }, displayError);
     }
   };
 });
@@ -167,7 +167,7 @@ Template.Lists_show.events({
     insert.call({
       listId: this.list()._id,
       text: $input.val()
-    }, handleError);
+    }, displayError);
 
     $input.val('');
   }

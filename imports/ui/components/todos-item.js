@@ -8,7 +8,7 @@ import {
   remove,
 } from '../../api/todos/methods.js';
 
-import { handleError } from '../lib/errors.js';
+import { displayError } from '../lib/errors.js';
 
 Template.Todos_item.onCreated(function() {
   this.autorun(() => {
@@ -64,7 +64,7 @@ Template.Todos_item.events({
     updateText.call({
       todoId: this.todo._id,
       newText: event.target.value
-    }, handleError);
+    }, displayError);
   }, 300),
 
   // handle mousedown otherwise the blur handler above will swallow the click
@@ -72,6 +72,6 @@ Template.Todos_item.events({
   'mousedown .js-delete-item, click .js-delete-item'() {
     remove.call({
       todoId: this.todo._id
-    }, handleError);
+    }, displayError);
   }
 });
