@@ -67,6 +67,9 @@ app-prod-security
 
 mdg:validated-method
 aldeed:simple-schema
+
 practicalmeteor:mocha
 publication-collector
 stub-collections
+
+tap:i18n
