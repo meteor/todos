@@ -18,3 +18,8 @@ export const withRenderedTemplate = function(template, data, callback) {
     callback(el);
   });
 };
+
+// XXX: Work around issues with the tap:i18n build plugin not working correctly in unit test mode
+if (Meteor.isClient) {
+  Template.registerHelper('_', (str) => str);  
+}
