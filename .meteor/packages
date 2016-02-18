@@ -68,7 +68,7 @@ app-prod-security
 mdg:validated-method
 aldeed:simple-schema
 
-practicalmeteor:mocha
+avital:mocha
 publication-collector
 stub-collections
 
