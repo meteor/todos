@@ -7,7 +7,7 @@ allow-deny@1.0.1-beta.11
 app-prod-security@0.0.0
 arillo:flow-router-helpers@0.4.5
 autoupdate@1.2.5-beta.11
-avital:mocha@2.1.0_8
+avital:mocha@2.1.0_5
 babel-compiler@6.4.0-beta.11
 babel-runtime@0.1.5-beta.11
 base64@1.0.5-beta.11
@@ -62,7 +62,7 @@ livedata@1.0.15
 localstorage@1.0.6-beta.11
 logging@1.0.9-beta.11
 mdg:validated-method@1.0.1
-mdg:validation-error@0.4.0
+mdg:validation-error@0.2.0
 meteor@1.1.11-beta.11
 meteor-base@1.0.1
 meteor-env-dev@0.0.1-beta.11
@@ -115,6 +115,7 @@ stub-collections@0.0.1
 tap:i18n@1.7.0
 templating@1.1.6-beta.11
 templating-tools@1.0.1-beta.11
+tmeasday:test-reporter-helpers@0.1.0
 tracker@1.0.10-beta.11
 ui@1.0.8
 underscore@1.0.5-beta.11
@@ -124,4 +125,5 @@ useraccounts:flow-routing@1.13.1
 useraccounts:unstyled@1.13.1
 webapp@1.2.5-beta.11
 webapp-hashing@1.0.6-beta.11
+xolvio:cleaner@0.2.0
 zimme:active-route@2.3.2
