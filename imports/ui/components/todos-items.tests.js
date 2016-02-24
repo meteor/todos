@@ -9,7 +9,7 @@ import { StubCollections } from 'meteor/stub-collections';
 import { withRenderedTemplate } from './test-helpers.js';
 import { Template } from 'meteor/templating';
 
-if (Meteor.isClient) {
+if (Meteor.isClient && Meteor.isUnitTest) {
   require('./todos-item.js');
 
   describe('Todos_item', () => {
