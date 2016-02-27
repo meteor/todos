@@ -1,5 +1,5 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Lists } from '../../api/lists/lists.js';
+import { Lists } from '../../api/lists/lists.coffee';
 
 import './root-redirector.html';
 

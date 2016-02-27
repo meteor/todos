@@ -8,11 +8,11 @@ import {
   makePublic,
   makePrivate,
   remove,
-} from '../../api/lists/methods.js';
+} from '../../api/lists/methods.coffee';
 
 import {
   insert,
-} from '../../api/todos/methods.js';
+} from '../../api/todos/methods.coffee';
 
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';

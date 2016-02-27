@@ -1,0 +1,36 @@
+{ DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
+
+# Don't let people write arbitrary data to their 'profile' field from the client
+Meteor.users.deny
+  update: ->
+    yes
+
+# Get a list of all accounts methods by running `Meteor.server.method_handlers` in meteor shell
+AUTH_METHODS = [
+  'login'
+  'logout'
+  'logoutOtherClients'
+  'getNewToken'
+  'removeOtherTokens'
+  'configureLoginService'
+  'changePassword'
+  'forgotPassword'
+  'resetPassword'
+  'verifyEmail'
+  'createUser'
+  'ATRemoveService'
+  'ATCreateUserServer'
+  'ATResendVerificationEmail'
+]
+
+if Meteor.isServer
+  # Only allow 2 login attempts per connection per 5 seconds
+  DDPRateLimiter.addRule
+    name: (name) ->
+      _.contains AUTH_METHODS, name
+
+    # Rate limit per connection ID
+    connectionId: ->
+      yes
+
+  , 2, 5000

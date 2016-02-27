@@ -1,23 +1,15 @@
-# `import { FlowRouter } from 'meteor/kadira:flow-router'`
-# `import { BlazeLayout } from 'meteor/kadira:blaze-layout'`
-# `import { AccountsTemplates } from 'meteor/useraccounts:core'`
 { FlowRouter } = require 'meteor/kadira:flow-router'
 { BlazeLayout } = require 'meteor/kadira:blaze-layout'
 { AccountsTemplates } = require 'meteor/useraccounts:core'
 
 # Import to load these templates
-# `import '../../ui/layouts/app-body.js'`
-# `import '../../ui/pages/root-redirector.js'`
-# `import '../../ui/pages/lists-show-page.js'`
-# `import '../../ui/pages/app-not-found.js'`
-require '../../ui/layouts/app-body.js'
-require '../../ui/pages/root-redirector.js'
-require '../../ui/pages/lists-show-page.js'
-require '../../ui/pages/app-not-found.js'
+require '../../ui/layouts/app-body.coffee'
+require '../../ui/pages/root-redirector.coffee'
+require '../../ui/pages/lists-show-page.coffee'
+require '../../ui/pages/app-not-found.coffee'
 
 # Import to override accounts templates
-# `import '../../ui/accounts/accounts-templates.js'`
-require '../../ui/accounts/accounts-templates.js'
+require '../../ui/accounts/accounts-templates.coffee'
 
 FlowRouter.route '/lists/:_id',
   name: 'Lists.show'

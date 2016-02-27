@@ -1,5 +1,5 @@
-import { Lists } from '../../api/lists/lists.js';
-import { Todos } from '../../api/todos/todos.js';
+import { Lists } from '../../api/lists/lists.coffee';
+import { Todos } from '../../api/todos/todos.coffee';
 
 // if the database is empty on server start, create some sample data.
 Meteor.startup(() => {

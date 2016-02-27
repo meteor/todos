@@ -1,12 +1,12 @@
 import './todos-item.html';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Todos } from '../../api/todos/todos.js';
+import { Todos } from '../../api/todos/todos.coffee';
 
 import {
   setCheckedStatus,
   updateText,
   remove,
-} from '../../api/todos/methods.js';
+} from '../../api/todos/methods.coffee';
 
 Template.Todos_item.onCreated(function() {
   this.autorun(() => {

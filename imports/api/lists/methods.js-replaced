@@ -1,7 +1,7 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
-import { Lists } from './lists.js';
+import { Lists } from './lists.coffee';
 
 const LIST_ID_ONLY = new SimpleSchema({
   listId: { type: String }
