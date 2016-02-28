@@ -7,8 +7,8 @@
 meteor-base   # Packages every Meteor app needs to have
 crosswalk     # Modify mobile build to use Chromium instead of default Android web view
 
-juliancwirko:postcss@1.0.0-beta.1
-standard-minifiers-js
+juliancwirko:postcss@1.0.0-beta.11
+standard-minifier-js
 
 simple:rest-accounts-password
 ecmascript
@@ -67,4 +67,10 @@ app-prod-security
 
 mdg:validated-method
 aldeed:simple-schema
+
+avital:mocha
+publication-collector
+stub-collections
+
+tap:i18n
 coffeescript
