@@ -25,9 +25,7 @@ class TodosCollection extends Mongo.Collection
     incompleteCountDenormalizer.afterRemoveTodos todos
     result
 
-
-Todos = new TodosCollection 'Todos'
-module.exports.Todos = Todos
+Todos = exports.Todos = new TodosCollection 'Todos'
 
 
 # Deny all client-side updates since we will be using methods to manage this collection

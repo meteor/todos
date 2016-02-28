@@ -20,9 +20,7 @@ class ListsCollection extends Mongo.Collection
     Todos.remove {listId: selector}
     super.remove selector, callback
 
-
-Lists = new ListsCollection 'Lists'
-module.exports.Lists = Lists
+Lists = exports.Lists = new ListsCollection 'Lists'
 
 
 # Deny all client-side updates since we will be using methods to manage this collection
