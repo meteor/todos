@@ -2,6 +2,8 @@
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 { DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
 { Lists } = require './lists.coffee'
+console.log 'Lists in methods.coffee:'
+console.log Lists
 
 LIST_ID_ONLY = new SimpleSchema
 	listId:

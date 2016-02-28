@@ -1,5 +1,7 @@
 { Lists } = require '../../api/lists/lists.coffee'
 { Todos } = require '../../api/todos/todos.coffee'
+console.log 'Lists in fixtures.coffee:'
+console.log Lists
 
 # if the database is empty on server start, create some sample data.
 Meteor.startup ->

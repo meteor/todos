@@ -3,6 +3,8 @@ incompleteCountDenormalizer = require './incompleteCountDenormalizer.coffee'
 { Factory } = require 'meteor/factory'
 { faker } = require 'meteor/dfischer:faker'
 { Lists } = require '../lists/lists.coffee'
+console.log 'Lists in todos.coffee:'
+console.log Lists
 
 
 class TodosCollection extends Mongo.Collection
