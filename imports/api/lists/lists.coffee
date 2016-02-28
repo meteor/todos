@@ -14,11 +14,11 @@ class ListsCollection extends Mongo.Collection
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1)
         list.name = "List #{nextLetter}"
 
-    super.insert list, callback
+    super list, callback
 
   remove: (selector, callback) ->
     Todos.remove {listId: selector}
-    super.remove selector, callback
+    super selector, callback
 
 Lists = exports.Lists = new ListsCollection 'Lists'
 
