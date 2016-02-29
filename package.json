@@ -1,9 +1,15 @@
 {
+  "scripts": {
+    "lint": "eslint . || true"
+  },
   "devDependencies": {
     "autoprefixer": "^6.3.1",
     "faker": "^3.0.1",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^5.0.1"
+  },
+  "eslintConfig": {
+    "extends": "airbnb/base"
   },
   "postcss": {
     "plugins": {
