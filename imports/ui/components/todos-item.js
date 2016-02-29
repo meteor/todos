@@ -1,5 +1,9 @@
-import './todos-item.html';
+import { Template } from 'meteor/templating';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { $ } from 'meteor/jquery';
+import { _ } from 'meteor/underscore';
+
+import './todos-item.html';
 import { Todos } from '../../api/todos/todos.js';
 
 import {
@@ -10,7 +14,7 @@ import {
 
 import { displayError } from '../lib/errors.js';
 
-Template.Todos_item.onCreated(function () {
+Template.Todos_item.onCreated(function todosItemOnCreated() {
   this.autorun(() => {
     new SimpleSchema({
       todo: { type: Todos._helpers },
@@ -60,7 +64,7 @@ Template.Todos_item.events({
   // update the text of the item on keypress but throttle the event to ensure
   // we don't flood the server with updates (handles the event at most once
   // every 300ms)
-  'keyup input[type=text]': _.throttle(function (event) {
+  'keyup input[type=text]': _.throttle(function todosItemKeyUpInner(event) {
     updateText.call({
       todoId: this.todo._id,
       newText: event.target.value,

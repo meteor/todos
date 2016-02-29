@@ -1,3 +1,8 @@
+import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
+import { Lists } from '../../api/lists/lists.js';
+
 import { listRenderHold } from '../launch-screen.js';
 import './lists-show-page.html';
 
@@ -5,10 +10,7 @@ import './lists-show-page.html';
 import './app-not-found.js';
 import '../components/lists-show.js';
 
-import { Lists } from '../../api/lists/lists.js';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
-Template.Lists_show_page.onCreated(function () {
+Template.Lists_show_page.onCreated(function listsShowPageOnCreated() {
   this.getListId = () => FlowRouter.getParam('_id');
 
   this.autorun(() => {
@@ -16,7 +18,7 @@ Template.Lists_show_page.onCreated(function () {
   });
 });
 
-Template.Lists_show_page.onRendered(function () {
+Template.Lists_show_page.onRendered(function listsShowPageOnRendered() {
   this.autorun(() => {
     if (this.subscriptionsReady()) {
       listRenderHold.release();

@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Lists } from '../../api/lists/lists.js';
 import { Todos } from '../../api/todos/todos.js';
 

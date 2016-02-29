@@ -1,13 +1,17 @@
 /* eslint-env mocha */
-/* global Todos Lists Factory chai withRenderedTemplate */
 
-import { Todos } from '../../api/todos/todos.js';
-import { Lists } from '../../api/lists/lists.js';
+import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { StubCollections } from 'meteor/stub-collections';
-import { withRenderedTemplate } from './test-helpers.js';
 import { Template } from 'meteor/templating';
+import { _ } from 'meteor/underscore';
+import { $ } from 'meteor/jquery';
+
+import { withRenderedTemplate } from './test-helpers.js';
+
+import { Todos } from '../../api/todos/todos.js';
+import { Lists } from '../../api/lists/lists.js';
 
 if (Meteor.isClient) {
   require('./lists-show.js');
@@ -26,17 +30,15 @@ if (Meteor.isClient) {
     it('renders correctly with simple data', () => {
       const list = Factory.create('list');
       const timestamp = new Date();
-      const todos = _.times(3, (i) => {
-        return Factory.create('todo', {
-          listId: list._id,
-          createdAt: new Date(timestamp - (3 - i))
-        });
-      });
+      const todos = _.times(3, i => Factory.create('todo', {
+        listId: list._id,
+        createdAt: new Date(timestamp - (3 - i)),
+      }));
 
       const data = {
         list: () => list,
         todosReady: true,
-        todos: list.todos()
+        todos: list.todos(),
       };
 
       withRenderedTemplate('Lists_show', data, el => {

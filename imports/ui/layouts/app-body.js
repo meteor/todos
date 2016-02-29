@@ -1,10 +1,15 @@
 import './app-body.html';
 
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import { Lists } from '../../api/lists/lists.js';
-import { insert } from '../../api/lists/methods.js';
+import { Template } from 'meteor/templating';
 import { ActiveRoute } from 'meteor/zimme:active-route';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
+
+import { insert } from '../../api/lists/methods.js';
 
 import '../components/loading.js';
 
@@ -26,7 +31,7 @@ Meteor.startup(() => {
   }, CONNECTION_ISSUE_TIMEOUT);
 });
 
-Template.App_body.onCreated(function () {
+Template.App_body.onCreated(function appBodyOnCreated() {
   this.subscribe('lists.public');
   this.subscribe('lists.private');
 
@@ -122,7 +127,7 @@ Template.App_body.events({
         // for some reason the list didn't get created. This should almost never
         // happen, but it's good to handle it anyway.
         FlowRouter.go('App.home');
-        alert(TAPi18n.__('Could not create list.'));
+        alert(TAPi18n.__('Could not create list.')); // eslint-disable-line no-alert
       }
     });
 

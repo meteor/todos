@@ -1,13 +1,17 @@
 /* eslint-env mocha */
 /* global Todos Lists Factory chai withRenderedTemplate */
 
-import { Todos } from '../../api/todos/todos.js';
-import { Lists } from '../../api/lists/lists.js';
+import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { StubCollections } from 'meteor/stub-collections';
-import { withRenderedTemplate } from './test-helpers.js';
 import { Template } from 'meteor/templating';
+import { $ } from 'meteor/jquery';
+
+import { withRenderedTemplate } from './test-helpers.js';
+
+import { Todos } from '../../api/todos/todos.js';
+import { Lists } from '../../api/lists/lists.js';
 
 if (Meteor.isClient) {
   require('./todos-item.js');
@@ -24,10 +28,10 @@ if (Meteor.isClient) {
     });
 
     it('renders correctly with simple data', () => {
-      const todo = Factory.create('todo', {checked: false});
+      const todo = Factory.create('todo', { checked: false });
       const data = {
         todo,
-        onEditingChange: () => {}
+        onEditingChange: () => 0,
       };
 
       withRenderedTemplate('Todos_item', data, el => {
@@ -38,10 +42,10 @@ if (Meteor.isClient) {
     });
 
     it('renders correctly when checked', () => {
-      const todo = Factory.create('todo', {checked: true});
+      const todo = Factory.create('todo', { checked: true });
       const data = {
         todo,
-        onEditingChange: () => {}
+        onEditingChange: () => 0,
       };
 
       withRenderedTemplate('Todos_item', data, el => {
@@ -55,7 +59,7 @@ if (Meteor.isClient) {
       const data = {
         todo,
         editing: true,
-        onEditingChange: () => {}
+        onEditingChange: () => 0,
       };
 
       withRenderedTemplate('Todos_item', data, el => {

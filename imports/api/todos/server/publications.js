@@ -1,10 +1,12 @@
 /* eslint-disable prefer-arrow-callback */
 
-import { Todos } from '../todos.js';
-import { Lists } from '../../lists/lists.js';
+import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-Meteor.publishComposite('todos.inList', function (listId) {
+import { Todos } from '../todos.js';
+import { Lists } from '../../lists/lists.js';
+
+Meteor.publishComposite('todos.inList', function todosInList(listId) {
   new SimpleSchema({
     listId: { type: String },
   }).validate({ listId });

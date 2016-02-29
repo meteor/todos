@@ -1,3 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { Mongo } from 'meteor/mongo';
+import { ReactiveDict } from 'meteor/reactive-dict';
+import { Tracker } from 'meteor/tracker';
+import { $ } from 'meteor/jquery';
+
 import './lists-show.html';
 
 // Component used in the template
@@ -20,7 +27,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-Template.Lists_show.onCreated(function () {
+Template.Lists_show.onCreated(function listShowOnCreated() {
   this.autorun(() => {
     new SimpleSchema({
       list: { type: Function },
@@ -60,7 +67,7 @@ Template.Lists_show.onCreated(function () {
     const list = this.data.list();
     const message = `${TAPi18n.__('Are you sure you want to delete the list')} ${list.name}?`;
 
-    if (confirm(message)) {
+    if (confirm(message)) { // eslint-disable-line no-alert
       remove.call({
         listId: list._id,
       }, displayError);
