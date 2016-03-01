@@ -9,7 +9,7 @@ const Message = ({ title, subtitle }) => (
 
 Message.propTypes = {
   title: React.PropTypes.string,
-  subtitle: React.PropTypes.string
+  subtitle: React.PropTypes.string,
 };
 
 export default Message;

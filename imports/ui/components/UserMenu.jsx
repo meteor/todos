@@ -5,14 +5,15 @@ export default class UserMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle(e) {
     e.stopPropagation();
     this.setState({
-      open: !this.state.open
+      open: !this.state.open,
     });
   }
 
@@ -24,7 +25,7 @@ export default class UserMenu extends React.Component {
 
     return (
       <div className="user-menu vertical">
-        <a href="#" className="btn-secondary" onClick={this.toggle.bind(this)}>
+        <a href="#" className="btn-secondary" onClick={this.toggle}>
           {open
             ? <span className="icon-arrow-up"></span>
             : <span className="icon-arrow-down"></span>}
@@ -55,5 +56,5 @@ export default class UserMenu extends React.Component {
 
 UserMenu.propTypes = {
   user: React.PropTypes.object,
-  logout: React.PropTypes.func
+  logout: React.PropTypes.func,
 };

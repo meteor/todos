@@ -8,13 +8,14 @@ export default class ListPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editingTodo: null
+      editingTodo: null,
     };
+    this.onEditingChange = this.onEditingChange.bind(this);
   }
 
   onEditingChange(id, editing) {
     this.setState({
-      editingTodo: editing ? id : null
+      editingTodo: editing ? id : null,
     });
   }
 
@@ -26,17 +27,24 @@ export default class ListPage extends React.Component {
       return <NotFoundPage/>;
     }
 
-    const Todos = !todos || !todos.length
-      ? <Message
+    let Todos;
+    if (!todos || !todos.length) {
+      Todos = (
+        <Message
           title="No tasks here"
-          subtitle="Add new tasks using the field above"/>
-      : todos.map(todo => (
-          <TodoItem
-            todo={todo}
-            key={todo._id}
-            editing={todo._id === editingTodo}
-            onEditingChange={this.onEditingChange.bind(this)}/>
-        ));
+          subtitle="Add new tasks using the field above"
+        />
+      );
+    } else {
+      Todos = todos.map(todo => (
+        <TodoItem
+          todo={todo}
+          key={todo._id}
+          editing={todo._id === editingTodo}
+          onEditingChange={this.onEditingChange}
+        />
+      ));
+    }
 
     return (
       <div className="page lists-show">
@@ -53,5 +61,5 @@ ListPage.propTypes = {
   list: React.PropTypes.object,
   todos: React.PropTypes.array,
   loading: React.PropTypes.bool,
-  listExists: React.PropTypes.bool
+  listExists: React.PropTypes.bool,
 };

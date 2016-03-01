@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import AuthPage from './AuthPage.jsx';
 import { Link } from 'react-router';
@@ -5,7 +6,8 @@ import { Link } from 'react-router';
 export default class SignInPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { errors: {}};
+    this.state = { errors: {} };
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(event) {
@@ -29,7 +31,7 @@ export default class SignInPage extends React.Component {
     Meteor.loginWithPassword(email, password, err => {
       if (err) {
         this.setState({
-          errors: { 'none': err.reason }
+          errors: { none: err.reason },
         });
       }
       this.context.router.push('/');
@@ -45,7 +47,7 @@ export default class SignInPage extends React.Component {
       <div className="wrapper-auth">
         <h1 className="title-auth">Sign In.</h1>
         <p className="subtitle-auth" >Signing in allows you to view private lists</p>
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form onSubmit={this.onSubmit}>
           <div className="list-errors">
             {errorMessages.map(msg => (
               <div className="list-item" key={msg}>{msg}</div>
@@ -71,5 +73,5 @@ export default class SignInPage extends React.Component {
 }
 
 SignInPage.contextTypes = {
-  router: React.PropTypes.object
+  router: React.PropTypes.object,
 };

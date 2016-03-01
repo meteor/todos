@@ -9,13 +9,13 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 export function createContainer(options = {}, Component) {
   if (typeof options === 'function') {
     options = {
-      getMeteorData: options
-    }
+      getMeteorData: options,
+    };
   }
 
   const {
     getMeteorData,
-    pure = true
+    pure = true,
   } = options;
 
   const mixins = [ReactMeteorData];
@@ -32,6 +32,6 @@ export function createContainer(options = {}, Component) {
     },
     render() {
       return <Component {...this.props} {...this.data}/>;
-    }
+    },
   });
 }

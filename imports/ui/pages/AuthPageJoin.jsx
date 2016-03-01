@@ -6,7 +6,8 @@ import { Accounts } from 'meteor/accounts-base';
 export default class JoinPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { errors: {}};
+    this.state = { errors: {} };
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(event) {
@@ -33,11 +34,11 @@ export default class JoinPage extends React.Component {
 
     Accounts.createUser({
       email,
-      password
+      password,
     }, err => {
       if (err) {
         this.setState({
-          errors: { 'none': err.reason }
+          errors: { none: err.reason },
         });
       }
       this.context.router.push('/');
@@ -53,7 +54,7 @@ export default class JoinPage extends React.Component {
       <div className="wrapper-auth">
         <h1 className="title-auth">Join.</h1>
         <p className="subtitle-auth" >Joining allows you to make private lists</p>
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form onSubmit={this.onSubmit}>
           <div className="list-errors">
             {errorMessages.map(msg => (
               <div className="list-item" key={msg}>{msg}</div>
@@ -83,5 +84,5 @@ export default class JoinPage extends React.Component {
 }
 
 JoinPage.contextTypes = {
-  router: React.PropTypes.object
+  router: React.PropTypes.object,
 };

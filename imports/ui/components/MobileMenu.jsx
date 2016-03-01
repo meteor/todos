@@ -1,4 +1,6 @@
 import React from 'react';
+// XXX: no session!
+import { Session } from 'meteor/session';
 
 function toggleMenu() {
   Session.set('menuOpen', !Session.get('menuOpen'));

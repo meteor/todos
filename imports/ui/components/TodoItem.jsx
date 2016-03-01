@@ -1,5 +1,7 @@
 import React from 'react';
+import { _ } from 'meteor/underscore';
 import classnames from 'classnames';
+import { displayError } from '../helpers/errors.js';
 
 import {
   setCheckedStatus,
@@ -14,31 +16,16 @@ export default class TodoItem extends React.Component {
       if (value) {
         updateText.call({
           todoId: this.props.todo._id,
-          newText: value
-        }, (err) => {
-          err && alert(err.error);
-        });
+          newText: value,
+        }, displayError);
       }
     }, 300);
-  }
 
-  setTodoCheckStatus(event) {
-    setCheckedStatus.call({
-      todoId: this.props.todo._id,
-      newCheckedStatus: event.target.checked
-    });
-  }
-
-  updateTodo(event) {
-    this.throttledUpdate(event.target.value);
-  }
-
-  deleteTodo() {
-    remove.call({
-      todoId: this.props.todo._id
-    }, (err) => {
-      err && alert(err.error);
-    });
+    this.setTodoCheckStatus = this.setTodoCheckStatus.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
 
   onFocus() {
@@ -49,12 +36,27 @@ export default class TodoItem extends React.Component {
     this.props.onEditingChange(this.props.todo._id, false);
   }
 
+  setTodoCheckStatus(event) {
+    setCheckedStatus.call({
+      todoId: this.props.todo._id,
+      newCheckedStatus: event.target.checked,
+    });
+  }
+
+  updateTodo(event) {
+    this.throttledUpdate(event.target.value);
+  }
+
+  deleteTodo() {
+    remove.call({ todoId: this.props.todo._id }, displayError);
+  }
+
   render() {
     const { todo, editing } = this.props;
     const todoClass = classnames({
       'list-item': true,
       checked: todo.checked,
-      editing
+      editing,
     });
 
     return (
@@ -64,21 +66,24 @@ export default class TodoItem extends React.Component {
             type="checkbox"
             checked={todo.checked}
             name="checked"
-            onChange={this.setTodoCheckStatus.bind(this)}/>
+            onChange={this.setTodoCheckStatus}
+          />
           <span className="checkbox-custom"></span>
         </label>
         <input
           type="text"
           defaultValue={todo.text}
           placeholder="Task name"
-          onFocus={this.onFocus.bind(this)}
-          onBlur={this.onBlur.bind(this)}
-          onChange={this.updateTodo.bind(this)}/>
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          onChange={this.updateTodo}
+        />
         <a
           className="delete-item"
           href="#"
-          onClick={this.deleteTodo.bind(this)}
-          onMouseDown={this.deleteTodo.bind(this)}>
+          onClick={this.deleteTodo}
+          onMouseDown={this.deleteTodo}
+        >
           <span className="icon-trash"></span>
         </a>
       </div>
@@ -88,5 +93,6 @@ export default class TodoItem extends React.Component {
 
 TodoItem.propTypes = {
   todo: React.PropTypes.object,
-  editing: React.PropTypes.bool
+  editing: React.PropTypes.bool,
+  onEditingChange: React.PropTypes.func,
 };

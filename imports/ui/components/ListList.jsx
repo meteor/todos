@@ -3,6 +3,12 @@ import { Link } from 'react-router';
 import { insert } from '../../api/lists/methods.js';
 
 export default class ListList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.createNewList = this.createNewList.bind(this);
+  }
+
   createNewList() {
     const { router } = this.context;
     const listId = insert.call((err) => {
@@ -19,7 +25,7 @@ export default class ListList extends React.Component {
     const { lists } = this.props;
     return (
       <div className="list-todos">
-        <a className="link-list-new" onClick={this.createNewList.bind(this)}>
+        <a className="link-list-new" onClick={this.createNewList}>
           <span className="icon-plus"></span>
           New List
         </a>
@@ -29,7 +35,8 @@ export default class ListList extends React.Component {
             key={list._id}
             title={list.name}
             className="list-todo"
-            activeClassName="active">
+            activeClassName="active"
+          >
             {list.userId
               ? <span className="icon-lock"></span>
               : null}
@@ -45,9 +52,9 @@ export default class ListList extends React.Component {
 }
 
 ListList.propTypes = {
-  lists: React.PropTypes.array
+  lists: React.PropTypes.array,
 };
 
 ListList.contextTypes = {
-  router: React.PropTypes.object
+  router: React.PropTypes.object,
 };

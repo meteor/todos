@@ -9,15 +9,15 @@ import { composeWithTracker } from 'react-komposer';
 export function createContainer(options = {}, Component) {
   if (typeof options === 'function') {
     options = {
-      getMeteorData: options
-    }
+      getMeteorData: options,
+    };
   }
 
   const {
     getMeteorData,
     loadingComponent = null,
     errorComponent = null,
-    pure = true
+    pure = true,
   } = options;
 
   const compose = (props, onData) => onData(null, getMeteorData(props));

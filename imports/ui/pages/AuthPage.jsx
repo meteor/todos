@@ -16,7 +16,7 @@ const AuthPage = ({ content, link }) => (
 
 AuthPage.propTypes = {
   content: React.PropTypes.element,
-  link: React.PropTypes.element
+  link: React.PropTypes.element,
 };
 
 export default AuthPage;

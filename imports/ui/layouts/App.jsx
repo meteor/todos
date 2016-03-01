@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session'; // XXX: SESSION
 import { Lists } from '../../api/lists/lists.js';
 import UserMenu from '../components/UserMenu.jsx';
 import ListList from '../components/ListList.jsx';
@@ -13,8 +15,17 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showConnectionIssue: false
+      showConnectionIssue: false,
     };
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      /* eslint-disable react/no-did-mount-set-state */
+      this.setState({ showConnectionIssue: true });
+    }, CONNECTION_ISSUE_TIMEOUT);
   }
 
   componentWillReceiveProps({ loading, children }) {
@@ -23,13 +34,6 @@ export default class App extends React.Component {
       const list = Lists.findOne();
       this.context.router.replace(`/lists/${ list._id }`);
     }
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      /* eslint-disable react/no-did-mount-set-state */
-      this.setState({ showConnectionIssue: true });
-    }, CONNECTION_ISSUE_TIMEOUT);
   }
 
   toggleMenu(menuOpen = !Session.get('menuOpen')) {
@@ -42,7 +46,7 @@ export default class App extends React.Component {
     // if we are on a private list, we'll need to go to a public one
     const list = Lists.findOne(this.props.params.id);
     if (list.userId) {
-      const publicList = Lists.findOne({ userId: { $exists: false }});
+      const publicList = Lists.findOne({ userId: { $exists: false } });
       this.context.router.push(`/lists/${ publicList._id }`);
     }
   }
@@ -56,7 +60,7 @@ export default class App extends React.Component {
       lists,
       menuOpen,
       children,
-      location
+      location,
     } = this.props;
 
     const closeMenu = this.toggleMenu.bind(this, false);
@@ -64,13 +68,13 @@ export default class App extends React.Component {
     // clone route components with keys so that they can
     // have transitions
     const clonedChildren = children && React.cloneElement(children, {
-      key: location.pathname
+      key: location.pathname,
     });
 
     return (
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
         <section id="menu">
-          <UserMenu user={user} logout={this.logout.bind(this)}/>
+          <UserMenu user={user} logout={this.logout}/>
           <ListList lists={lists}/>
         </section>
         {showConnectionIssue && !connected
@@ -81,7 +85,8 @@ export default class App extends React.Component {
           <ReactCSSTransitionGroup
             transitionName="fade"
             transitionEnterTimeout={200}
-            transitionLeaveTimeout={200}>
+            transitionLeaveTimeout={200}
+          >
             {loading
               ? <Loading key="loading"/>
               : clonedChildren}
@@ -99,9 +104,9 @@ App.propTypes = {
   menuOpen: React.PropTypes.bool,    // is side menu open?
   lists: React.PropTypes.array,      // all lists visible to the current user
   children: React.PropTypes.element, // matched child route component
-  location: React.PropTypes.object   // current router location
+  location: React.PropTypes.object,  // current router location
 };
 
 App.contextTypes = {
-  router: React.PropTypes.object
+  router: React.PropTypes.object,
 };
