@@ -24,46 +24,22 @@ reywood:publish-composite
 
 tracker
 jquery
-blaze-html-templates
-blaze-helpers
 reactive-dict
 reactive-var
 session
-aldeed:template-extension
 percolate:momentum
-
-kadira:flow-router
-kadira:blaze-layout
-arillo:flow-router-helpers
-zimme:active-route
-
-
 
 mobile-experience
 chriswessels:hammer
 
-
-
 less
-
-
 
 factory
 
-
-
 accounts-password
-useraccounts:unstyled
-useraccounts:flow-routing
-softwarerero:accounts-t9n
-
-
 
 ddp-rate-limiter
-
 app-prod-security
-
-
 
 mdg:validated-method
 aldeed:simple-schema
@@ -73,3 +49,5 @@ publication-collector
 stub-collections
 
 tap:i18n
+react-meteor-data
+static-html

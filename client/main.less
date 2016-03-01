@@ -5,18 +5,23 @@
 @import '{}/imports/ui/stylesheets/button.less';
 @import '{}/imports/ui/stylesheets/form.less';
 @import '{}/imports/ui/stylesheets/icon.less';
-@import '{}/imports/ui/stylesheets/layout.less';
 @import '{}/imports/ui/stylesheets/link.less';
-@import '{}/imports/ui/stylesheets/menu.less';
 @import '{}/imports/ui/stylesheets/nav.less';
+@import '{}/imports/ui/stylesheets/fade-transition.less';
 
-// Global components
-@import '{}/imports/ui/stylesheets/list-items.less';
-@import '{}/imports/ui/stylesheets/message.less';
-@import '{}/imports/ui/stylesheets/notification.less';
+// App layout
+@import "{}/imports/ui/layouts/App.less";
 
-// Individual components
-@import "{}/imports/ui/components/lists-show.less";
-@import "{}/imports/ui/components/loading.less";
-@import "{}/imports/ui/pages/app-not-found.less";
-@import "{}/imports/ui/accounts/accounts-templates.less";
+// Pages
+@import "{}/imports/ui/pages/ListPage.less";
+@import "{}/imports/ui/pages/AuthPage.less";
+@import "{}/imports/ui/pages/NotFoundPage.less";
+
+// Components
+@import "{}/imports/ui/components/ConnectionNotification.less";
+@import "{}/imports/ui/components/ListHeader.less";
+@import "{}/imports/ui/components/ListList.less";
+@import "{}/imports/ui/components/Loading.less";
+@import "{}/imports/ui/components/Message.less";
+@import "{}/imports/ui/components/TodoItem.less";
+@import "{}/imports/ui/components/UserMenu.less";

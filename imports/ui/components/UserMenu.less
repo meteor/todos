@@ -1,0 +1,37 @@
+@import '{}/imports/ui/stylesheets/utils.less';
+
+.user-menu {
+  margin: 2em auto 2em;
+  width: 80%;
+
+  .btn-secondary {
+    .font-s1;
+    padding-top: .5em;
+    padding-bottom: .5em;
+  }
+
+  &.vertical .btn-secondary {
+    .force-wrap;
+    padding-right: 2.5em;
+    text-align: left;
+    text-indent: 0;
+    white-space: normal; // Resets wrapping
+    width: 100%;
+
+    & + .btn-secondary {
+      margin-top: .5rem;
+
+      &:before {
+        .position(absolute, -.5rem, 50%, auto, auto, 1px, .5rem);
+        background: lighten(#517096, 5%);
+        content: '';
+      }
+    }
+
+    [class^="icon-"],
+    [class*=" icon-"] {
+      .position(absolute, .5em, .5em, auto, auto);
+      line-height: 20px;
+    }
+  }
+}

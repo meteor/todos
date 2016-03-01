@@ -1,9 +1,0 @@
-<template name="Lists_show_page">
-  {{#if listIdArray}}
-    {{#each listId in listIdArray}}
-      {{> Lists_show (listArgs listId)}}
-    {{/each}}
-  {{else}}
-    {{> App_notFound}}
-  {{/if}}
-</template>
