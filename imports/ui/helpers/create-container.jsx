@@ -7,8 +7,9 @@ import { ReactMeteorData } from 'meteor/react-meteor-data';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export function createContainer(options = {}, Component) {
+  let expandedOptions = options;
   if (typeof options === 'function') {
-    options = {
+    expandedOptions = {
       getMeteorData: options,
     };
   }
@@ -16,7 +17,7 @@ export function createContainer(options = {}, Component) {
   const {
     getMeteorData,
     pure = true,
-  } = options;
+  } = expandedOptions;
 
   const mixins = [ReactMeteorData];
   if (pure) {
