@@ -2,10 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Random } from 'meteor/random';
+import { _ } from 'meteor/underscore';
 
 const createList = (userId) => {
-  const list = Factory.create('list', {userId});
-  _.times(3, () => Factory.create('todo', {listId: list._id}));
+  const list = Factory.create('list', { userId });
+  _.times(3, () => Factory.create('todo', { listId: list._id }));
   return list;
 };
 
@@ -18,7 +19,7 @@ Meteor.methods({
 
     // create 3 private lists
     _.times(3, () => createList(Random.id()));
-  }
+  },
 });
 
 let generateData;
@@ -27,11 +28,9 @@ if (Meteor.isClient) {
   // We do this so there's no contention w/ the currently tested user's connection
   const testConnection = Meteor.connect(Meteor.absoluteUrl());
 
-  generateData = () => {
-    return Promise.denodeify((cb) => {
-      testConnection.call('generateFixtures', cb);
-    })();
-  };
+  generateData = () => Promise.denodeify((cb) => {
+    testConnection.call('generateFixtures', cb);
+  })();
 }
 
 

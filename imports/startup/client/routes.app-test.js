@@ -1,10 +1,12 @@
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
-import { generateData } from './generateData.js';
-import { Lists } from '../../imports/api/lists/lists.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { assert } from 'meteor/practicalmeteor:chai';
+import { $ } from 'meteor/jquery';
+
+import { generateData } from './generateData.js';
+import { Lists } from '../../api/lists/lists.js';
 
 if (Meteor.isClient) {
   describe('data available when routed', () => {
@@ -21,7 +23,7 @@ if (Meteor.isClient) {
 
       it('renders the correct list when routed to', () => {
         const list = Lists.findOne();
-        FlowRouter.go('Lists.show', {listId: list._id});
+        FlowRouter.go('Lists.show', { listId: list._id });
         assert.equal($('.title-wrapper').html(), list.name);
       });
     });
