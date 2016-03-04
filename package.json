@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "test": "meteor test --driver-package avital:mocha",
+    "test-app": "meteor test --full-app --driver-package avital:mocha",
     "lint": "eslint . || true"
   },
   "devDependencies": {
