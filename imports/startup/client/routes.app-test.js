@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
-import { generateData } from './generateData.js';
+import { generateData } from './generate-route-test-data.js';
 import { Lists } from '../../imports/api/lists/lists.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { assert } from 'meteor/practicalmeteor:chai';
