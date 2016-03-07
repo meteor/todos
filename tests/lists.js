@@ -15,6 +15,7 @@ describe('list ui', () => {
 
   it('can create a list @watch', () => {
     const initialCount = countLists();
+
     browser.click('.js-new-list');
 
     assert.equal(countLists(), initialCount + 1);
