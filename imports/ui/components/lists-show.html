@@ -7,14 +7,14 @@
             <input type="text" name="name" value="{{name}}">
             <div class="nav-group right">
               <a href="#" class="js-cancel nav-item">
-                <span class="icon-close js-cancel" title="Cancel"></span>
+                <span class="icon-close js-cancel" title={{_ 'Cancel'}}></span>
               </a>
             </div>
           </form>
         {{else}}
           <div class="nav-group">
             <a href="#" class="js-menu nav-item">
-              <span class="icon-list-unordered" title="Show menu"></span>
+              <span class="icon-list-unordered" title={{_ 'Show Menu'}}></span>
             </a>
           </div>
 
@@ -26,27 +26,27 @@
           <div class="nav-group right">
             <div class="nav-item options-mobile">
               <select class="list-edit">
-                <option disabled selected>Select an action</option>
+                <option disabled selected>{{_ 'Select an action'}}</option>
                 {{#if list.userId}}
-                  <option value="public">Make Public</option>
+                  <option value="public">{{_ 'Make Public'}}</option>
                 {{else}}
-                  <option value="private">Make Private</option>
+                  <option value="private">{{_ 'Make Private'}}</option>
                 {{/if}}
-                <option value="delete">Delete</option>
+                <option value="delete">{{_ 'Delete'}}</option>
               </select>
               <span class="icon-cog"></span>
             </div>
             <div class="options-web">
               <a class="js-toggle-list-privacy nav-item">
                 {{#if list.userId}}
-                  <span class="icon-lock" title="Make list public"></span>
+                  <span class="icon-lock" title={{_ 'Make list public'}}></span>
                 {{else}}
-                  <span class="icon-unlock" title="Make list private"></span>
+                  <span class="icon-unlock" title={{_ 'Make list private'}}></span>
                 {{/if}}
               </a>
 
               <a class="js-delete-list nav-item">
-                <span class="icon-trash" title="Delete list"></span>
+                <span class="icon-trash" title={{_ 'Delete list'}}></span>
               </a>
             </div>
           </div>
@@ -54,7 +54,7 @@
       {{/momentum}}
 
       <form class="js-todo-new todo-new input-symbol">
-        <input type="text" placeholder="Type to add new tasks">
+        <input type="text" placeholder={{_ 'Type to add new tasks'}}>
         <span class="icon-add js-todo-add"></span>
       </form>
     </nav>
@@ -66,13 +66,13 @@
           {{> Todos_item (todoArgs todo)}}
         {{else}}
           <div class="wrapper-message">
-            <div class="title-message">No tasks here</div>
-            <div class="subtitle-message">Add new tasks using the field above</div>
+            <div class="title-message">{{_ 'No tasks here'}}</div>
+            <div class="subtitle-message">{{_ 'Add new tasks using the field above'}}</div>
           </div>
         {{/each}}
       {{else}}
           <div class="wrapper-message">
-            <div class="title-message">Loading tasks...</div>
+            <div class="title-message">{{_ 'Loading tasks...'}}</div>
           </div>
       {{/if}}
     </div>

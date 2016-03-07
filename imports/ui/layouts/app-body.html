@@ -14,20 +14,20 @@
               {{emailLocalPart}}
             </a>
             {{#if userMenuOpen}}
-              <a class="js-logout btn-secondary">Logout</a>
+              <a class="js-logout btn-secondary">{{_ 'Logout'}}</a>
             {{/if}}
           </div>
         {{else}}
           <div class="btns-group">
-            <a href="{{pathFor 'signin'}}" class="btn-secondary">Sign In</a>
-            <a href="{{pathFor 'join'}}" class="btn-secondary">Join</a>
+            <a href="{{pathFor 'signin'}}" class="btn-secondary">{{_ 'Sign In'}}</a>
+            <a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Join'}}</a>
           </div>
         {{/if}}
 
         <div class="list-todos">
           <a class="js-new-list link-list-new">
             <span class="icon-plus"></span>
-            New List
+            {{_ "New List"}}
           </a>
 
           {{#each list in lists}}

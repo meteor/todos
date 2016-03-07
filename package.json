@@ -1,20 +1,32 @@
 {
-  "dependencies": {
-    "autoprefixer": "^6.3.1"
+  "scripts": {
+    "test": "meteor test --driver-package avital:mocha",
+    "test-app": "meteor test --full-app --driver-package avital:mocha",
+    "lint": "eslint . || true",
+    "chimp-watch": "node_modules/.bin/chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "devDependencies": {
-    "chimp": "^0.29.0",
+    "chimp": "^0.30.0",
+    "autoprefixer": "^6.3.1",
+    "faker": "^3.0.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^5.0.1"
+  },
+  "eslintConfig": {
+    "extends": "airbnb/base"
+  },
+  "devDependencies": {
     "eslint": "^1.0.0",
     "babel-eslint": "^4.1.8",
     "eslint-config-airbnb": "^5.0.0"
   },
-  "scripts": {
-    "chimp-watch": "node_modules/.bin/chimp --ddp=http://localhost:3000 --watch --mocha --path=tests",
-    "lint": "eslint . || true"
-  },
   "postcss": {
     "plugins": {
-      "autoprefixer": {"browsers": ["last 2 versions"]}
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
     }
   }
 }
