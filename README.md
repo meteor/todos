@@ -7,7 +7,7 @@ This is a Todos example app built on the principles described in the Meteor Guid
 In order to run properly, please make sure you've installed the 1.3 beta.
 
 ```bash
-meteor update --release 1.3-beta.11
+meteor update --release 1.3-beta.12
 ```
 
 ### Running the app
