@@ -1,10 +1,12 @@
-// E2E tests for creating, editing and removing lists
+/* eslint-env mocha */
+// These are Chimp globals */
+/* globals browser assert */
 
 const countLists = () => {
   browser.waitForExist('.list-todo');
-  var elements = browser.elements('.list-todo');
+  const elements = browser.elements('.list-todo');
   return elements.value.length;
-}
+};
 
 describe('list ui', () => {
   beforeEach(() => {
@@ -12,7 +14,7 @@ describe('list ui', () => {
   });
 
   it('can create a list @watch', () => {
-    var initialCount = countLists();
+    const initialCount = countLists();
     browser.click('.js-new-list');
 
     assert.equal(countLists(), initialCount + 1);
