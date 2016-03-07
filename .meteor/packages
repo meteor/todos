@@ -68,7 +68,7 @@ app-prod-security
 mdg:validated-method
 aldeed:simple-schema
 
-avital:mocha
+avital:mocha@2.1.0_9
 publication-collector
 stub-collections
 
