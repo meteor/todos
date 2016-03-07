@@ -51,3 +51,4 @@ stub-collections
 tap:i18n
 react-meteor-data
 static-html
+practicalmeteor:sinon

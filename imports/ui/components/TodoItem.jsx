@@ -28,6 +28,9 @@ export default class TodoItem extends React.Component {
     this.onBlur = this.onBlur.bind(this);
   }
 
+  componentDidMount() {
+  }
+
   onFocus() {
     this.props.onEditingChange(this.props.todo._id, true);
   }
