@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Lists } from '../../api/lists/lists.js';
-import { createContainer } from '../helpers/create-container.jsx';
+import { createContainer } from 'meteor/react-meteor-data';
 import ListPage from '../pages/ListPage.jsx';
 
 export default createContainer(({ params: { id } }) => {

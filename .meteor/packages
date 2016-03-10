@@ -49,5 +49,5 @@ publication-collector
 stub-collections
 
 tap:i18n
-react-meteor-data
+react-meteor-data@0.2.6-beta.16
 static-html
