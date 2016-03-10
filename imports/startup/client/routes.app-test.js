@@ -53,7 +53,7 @@ if (Meteor.isClient) {
 
           // Wait for all subscriptions triggered by this route to complete
           waitForSubscriptions(catchAsync(done, () => {
-            assert.equal(Todos.find({listId: list._id}).count(), 3);
+            assert.equal(Todos.find({ listId: list._id }).count(), 3);
             done();
           }));
         }));
