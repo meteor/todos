@@ -1,7 +1,4 @@
 import { Mongo } from 'meteor/mongo';
-import { Factory } from 'meteor/factory';
-import faker from 'faker';
-
 import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Lists } from '../lists/lists.js';
@@ -67,15 +64,6 @@ Todos.publicFields = {
   createdAt: 1,
   checked: 1,
 };
-
-// TODO This factory has a name - do we have a code style for this?
-//   - usually I've used the singular, sometimes you have more than one though, like
-//   'todo', 'emptyTodo', 'checkedTodo'
-Factory.define('todo', Todos, {
-  listId: () => Factory.get('list'),
-  text: () => faker.lorem.sentence(),
-  createdAt: () => new Date(),
-});
 
 Todos.helpers({
   list() {

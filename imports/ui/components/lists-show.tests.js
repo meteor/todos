@@ -10,15 +10,25 @@ import { $ } from 'meteor/jquery';
 
 import { withRenderedTemplate } from './test-helpers.js';
 
-import { Todos } from '../../api/todos/todos.js';
-import { Lists } from '../../api/lists/lists.js';
+import { Mongo } from 'meteor/mongo';
+const todosModule = require('../../api/todos/todos.js');
+todosModule.Todos = new Mongo.Collection(null, { transform: todosModule.Todos._transform });
+const listsModule = require('../../api/lists/lists.js');
+listsModule.Lists = new Mongo.Collection(null, { transform: listsModule.Lists._transform });
+
+const { listFactory } = require('../../api/lists/factories.js');
+const { todoFactory } = require('../../api/todos/factories.js');
+
+// XXX: the factory package needs to make this API available (i.e. factory.create())
+const factoryCreate = (factory, ...args) => Factory.create(factory.name, ...args);
 
 if (Meteor.isClient) {
   require('./lists-show.js');
 
   describe('Lists_show', () => {
     beforeEach(() => {
-      StubCollections.stub([Todos, Lists]);
+      // StubCollections.stub([Todos, Lists]);
+
       Template.registerHelper('_', key => key);
     });
 
@@ -28,9 +38,9 @@ if (Meteor.isClient) {
     });
 
     it('renders correctly with simple data', () => {
-      const list = Factory.create('list');
+      const list = factoryCreate(listFactory);
       const timestamp = new Date();
-      const todos = _.times(3, i => Factory.create('todo', {
+      const todos = _.times(3, i => factoryCreate(todoFactory, {
         listId: list._id,
         createdAt: new Date(timestamp - (3 - i)),
       }));

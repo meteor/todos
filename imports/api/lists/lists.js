@@ -1,6 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Factory } from 'meteor/factory';
 import { Todos } from '../todos/todos.js';
 
 class ListsCollection extends Mongo.Collection {
@@ -50,8 +49,6 @@ Lists.publicFields = {
   incompleteCount: 1,
   userId: 1,
 };
-
-Factory.define('list', Lists, {});
 
 Lists.helpers({
   // A list is considered to be private if it has a userId set
