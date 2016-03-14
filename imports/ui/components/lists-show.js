@@ -58,7 +58,7 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
     Tracker.flush();
     // TODO -- I think velocity introduces a timeout before actually setting opacity on the
     //   element, so I can't focus it for a moment.
-    Meteor.setTimeout(() => {
+    Meteor.defer(() => {
       this.$('.js-edit-form input[type=text]').focus();
     });
   };
