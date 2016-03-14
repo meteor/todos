@@ -16,3 +16,6 @@
 [submodule "packages/momentum"]
 	path = packages/momentum
 	url = https://github.com/percolatestudio/meteor-momentum.git
+[submodule "packages/meteor-dev-error-overlay"]
+	path = packages/meteor-dev-error-overlay
+	url = git@github.com:stubailo/meteor-dev-error-overlay.git
