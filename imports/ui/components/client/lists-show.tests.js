@@ -26,6 +26,7 @@ describe('Lists_show', () => {
     const timestamp = new Date();
 
     // Create a local collection in order to get a cursor
+    // Note that we need to pass the transform in so the documents look right when they come out.
     const todosCollection = new Mongo.Collection(null, { transform: Todos._transform });
     _.times(3, i => {
       const todo = Factory.build('todo', {

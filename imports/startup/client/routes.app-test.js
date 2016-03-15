@@ -5,36 +5,37 @@ import { Tracker } from 'meteor/tracker';
 import { DDP } from 'meteor/ddp-client';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { assert } from 'meteor/practicalmeteor:chai';
+import { Promise } from 'meteor/promise';
 import { $ } from 'meteor/jquery';
 
 import { generateData } from './../../api/generate-data.app-tests.js';
 import { Lists } from '../../api/lists/lists.js';
 import { Todos } from '../../api/todos/todos.js';
 
-// Utility function to wait for subscriptions
-const waitForSubscriptions = (done) => {
+
+// Utility -- returns a promise which resolves when all subscriptions are done
+const waitForSubscriptions = () => new Promise(resolve => {
   const poll = Meteor.setInterval(() => {
     if (DDP._allSubscriptionsReady()) {
       clearInterval(poll);
-      done();
+      resolve();
     }
   }, 200);
-};
+});
 
-// Utility to allow throwing inside callback
-const catchAsync = (done, cb) => () => {
-  try {
-    cb();
-  } catch (e) {
-    done(e);
-  }
-};
+// Tracker.afterFlush runs code when all consequent of a tracker based change
+//   (such as a route change) have occured. This makes it a promise.
+const afterFlushPromise = Promise.denodeify(Tracker.afterFlush);
 
 if (Meteor.isClient) {
   describe('data available when routed', () => {
     beforeEach(done => {
+      // First, ensure the data that we expect is loaded on the server
       generateData()
+        // Then, route the app to the homepage
         .then(() => FlowRouter.go('/'))
+        // Nodeify is a API to return any error from the promise
+        // to the node-style done callback in the style it expects
         .nodeify(done);
     });
 
@@ -47,16 +48,15 @@ if (Meteor.isClient) {
         const list = Lists.findOne();
         FlowRouter.go('Lists.show', { _id: list._id });
 
-        // Wait for the router change to take affect
-        Tracker.afterFlush(catchAsync(done, () => {
-          assert.equal($('.title-wrapper').html(), list.name);
-
-          // Wait for all subscriptions triggered by this route to complete
-          waitForSubscriptions(catchAsync(done, () => {
+        afterFlushPromise()
+          .then(() => {
+            assert.equal($('.title-wrapper').html(), list.name);
+          })
+          .then(() => waitForSubscriptions())
+          .then(() => {
             assert.equal(Todos.find({ listId: list._id }).count(), 3);
-            done();
-          }));
-        }));
+          })
+          .nodeify(done);
       });
     });
   });

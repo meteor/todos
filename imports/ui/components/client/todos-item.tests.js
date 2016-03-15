@@ -1,5 +1,4 @@
 /* eslint-env mocha */
-/* global Todos Lists Factory chai withRenderedTemplate */
 
 import { Factory } from 'meteor/factory';
 import { chai } from 'meteor/practicalmeteor:chai';
