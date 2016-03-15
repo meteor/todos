@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "pretest": "npm run lint",
+    "pretest": "npm run lint --silent",
     "test": "meteor test --driver-package avital:mocha",
     "test-app": "meteor test --full-app --driver-package avital:mocha",
     "lint": "eslint .",
