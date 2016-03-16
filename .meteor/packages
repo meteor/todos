@@ -32,7 +32,7 @@ session
 aldeed:template-extension
 percolate:momentum
 
-kadira:flow-router
+kadira:flow-router@2.11.0
 kadira:blaze-layout
 arillo:flow-router-helpers
 zimme:active-route
