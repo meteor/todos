@@ -4,10 +4,7 @@ machine:
 dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
-    - npm install -g spacejam
+    - npm install
 checkout:
   post:
     - git submodule update --init
-test:
-  override:
-    - spacejam test-packages --driver-package practicalmeteor:mocha-console-reporter

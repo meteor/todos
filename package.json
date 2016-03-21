@@ -1,10 +1,11 @@
 {
   "scripts": {
     "pretest": "npm run lint --silent",
-    "test": "meteor test --driver-package avital:mocha",
-    "test-app": "meteor test --full-app --driver-package avital:mocha",
+    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
+    "test-watch": "meteor test --driver-package avital:mocha",
+    "test-app-watch": "meteor test --full-app --driver-package avital:mocha",
     "lint": "eslint .",
-    "chimp-watch": "node_modules/.bin/chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
+    "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "dependencies": {
     "autoprefixer": "^6.3.1",
@@ -13,7 +14,8 @@
   "devDependencies": {
     "eslint": "^2.3.0",
     "eslint-config-airbnb": "6.1.0",
-    "eslint-plugin-meteor": "3.0.1"
+    "eslint-plugin-meteor": "3.0.1",
+    "mocha": "^2.4.5"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -28,11 +30,16 @@
       "plugin:meteor/recommended"
     ],
     "rules": {
-      "meteor/eventmap-params": [2, {
-        "eventParamName": "event",
-        "templateInstanceParamName": "instance"
-      }],
-      "meteor/template-names": [0]
+      "meteor/eventmap-params": [
+        2,
+        {
+          "eventParamName": "event",
+          "templateInstanceParamName": "instance"
+        }
+      ],
+      "meteor/template-names": [
+        0
+      ]
     }
   },
   "postcss": {
