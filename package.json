@@ -6,13 +6,14 @@
     "lint": "eslint .",
     "chimp-watch": "node_modules/.bin/chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^6.3.1",
-    "chimp": "^0.30.0",
+    "faker": "^3.0.1"
+  },
+  "devDependencies": {
     "eslint": "^2.3.0",
     "eslint-config-airbnb": "6.1.0",
-    "eslint-plugin-meteor": "3.0.1",
-    "faker": "^3.0.1"
+    "eslint-plugin-meteor": "3.0.1"
   },
   "eslintConfig": {
     "parserOptions": {
