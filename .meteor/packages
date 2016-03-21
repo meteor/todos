@@ -68,9 +68,9 @@ app-prod-security
 mdg:validated-method
 aldeed:simple-schema
 
-avital:mocha@2.1.0_9
 publication-collector
 stub-collections
 
 tap:i18n
 xolvio:cleaner
+practicalmeteor:mocha@2.1.1-rc.1
