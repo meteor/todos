@@ -15,8 +15,7 @@
     "eslint": "^2.3.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-meteor": "^3.0.1",
-    "eslint-plugin-react": "^4.0.0",
-    "mocha": "^2.4.5"
+    "eslint-plugin-react": "^4.0.0"
   },
   "eslintConfig": {
     "parserOptions": {

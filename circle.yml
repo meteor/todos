@@ -5,8 +5,6 @@ dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
     - npm install
-    - meteor rebuild
-    - (cd ~/.meteor/packages/dispatch_phantomjs-tests/0.0.2/npm/ && npm rebuild)
 checkout:
   post:
     - git submodule update --init

@@ -36,8 +36,8 @@ ddp-rate-limiter@1.0.2-rc.4
 ddp-server@1.2.4-rc.4
 deps@1.0.10-rc.4
 diff-sequence@1.0.3-rc.4
-dispatch:mocha-phantomjs@0.0.1
-dispatch:phantomjs-tests@0.0.2
+dispatch:mocha-phantomjs@0.0.4
+dispatch:phantomjs-tests@0.0.4
 ecmascript@0.4.1-rc.4
 ecmascript-runtime@0.2.8-rc.4
 ejson@1.0.9-rc.4
@@ -115,7 +115,6 @@ stub-collections@0.0.1
 tap:i18n@1.8.0
 templating@1.1.7-rc.4
 templating-tools@1.0.2-rc.4
-tmeasday:check-npm-versions@0.1.1
 tmeasday:test-reporter-helpers@0.2.1
 tracker@1.0.11-rc.4
 ui@1.0.9-rc.4
