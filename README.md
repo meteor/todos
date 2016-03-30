@@ -16,5 +16,3 @@ To lint:
 ```bash
 npm run lint
 ```
-
-Pass the `--quiet` flag to ignore warnings.
