@@ -14,8 +14,7 @@ meteor
 To lint:
 
 ```bash
-npm install -g eslint babel-eslint
-eslint .
+npm run lint
 ```
 
 Pass the `--quiet` flag to ignore warnings.
