@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* eslint-disable func-names, prefer-arrow-callback */
 
 import { Factory } from 'meteor/factory';
 import { chai } from 'meteor/practicalmeteor:chai';
@@ -9,16 +10,16 @@ import { $ } from 'meteor/jquery';
 import { withRenderedTemplate } from '../../test-helpers.js';
 import '../todos-item.js';
 
-describe('Todos_item', () => {
-  beforeEach(() => {
+describe('Todos_item', function () {
+  beforeEach(function () {
     Template.registerHelper('_', key => key);
   });
 
-  afterEach(() => {
+  afterEach(function () {
     Template.deregisterHelper('_');
   });
 
-  it('renders correctly with simple data', () => {
+  it('renders correctly with simple data', function () {
     const todo = Factory.build('todo', { checked: false });
     const data = {
       todo,
@@ -32,7 +33,7 @@ describe('Todos_item', () => {
     });
   });
 
-  it('renders correctly when checked', () => {
+  it('renders correctly when checked', function () {
     const todo = Factory.build('todo', { checked: true });
     const data = {
       todo,
@@ -45,7 +46,7 @@ describe('Todos_item', () => {
     });
   });
 
-  it('renders correctly when editing', () => {
+  it('renders correctly when editing', function () {
     const todo = Factory.build('todo');
     const data = {
       todo,

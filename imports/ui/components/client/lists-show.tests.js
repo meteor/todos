@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* eslint-disable func-names, prefer-arrow-callback */
 
 import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/factory';
@@ -12,16 +13,16 @@ import '../lists-show.js';
 import { Todos } from '../../../api/todos/todos.js';
 
 
-describe('Lists_show', () => {
-  beforeEach(() => {
+describe('Lists_show', function () {
+  beforeEach(function () {
     Template.registerHelper('_', key => key);
   });
 
-  afterEach(() => {
+  afterEach(function () {
     Template.deregisterHelper('_');
   });
 
-  it('renders correctly with simple data', () => {
+  it('renders correctly with simple data', function () {
     const list = Factory.build('list');
     const timestamp = new Date();
 
