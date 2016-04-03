@@ -1,8 +1,15 @@
-require './todos-item.html'
+{ Template } = require 'meteor/templating'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
+{ $ } = require 'meteor/jquery'
+{ _ } = require 'meteor/underscore'
+
+require './todos-item.html'
 { Todos } = require '../../api/todos/todos.coffee'
 
 { setCheckedStatus, updateText, remove } = require '../../api/todos/methods.coffee'
+
+{ displayError } = require '../lib/errors.coffee'
+
 
 Template.Todos_item.onCreated ->
   @autorun ->
@@ -56,11 +63,9 @@ Template.Todos_item.events
     updateText.call
       todoId: @todo._id
       newText: event.target.value
-    , (err) ->
-      alert err.error if err? # translate this string after #59
+    , displayError
   , 300
 
 
   'mousedown .js-delete-item, click .js-delete-item': ->
-    remove.call { todoId: @todo._id }, (err) ->
-      alert err.error if err? # translate this string after #59
+    remove.call { todoId: @todo._id }, displayError

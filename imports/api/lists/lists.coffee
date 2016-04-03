@@ -1,3 +1,4 @@
+{ Mongo } = require 'meteor/mongo'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 { Factory } = require 'meteor/factory'
 { Todos } = require '../todos/todos.coffee'
@@ -5,16 +6,17 @@
 
 class ListsCollection extends Mongo.Collection
   insert: (list, callback) ->
-    unless list.name?
+    ourList = list
+    unless ourList.name?
       nextLetter = 'A'
-      list.name = "List #{nextLetter}"
+      ourList.name = "List #{nextLetter}"
 
-      while this.findOne({name: list.name})?
+      while this.findOne({name: ourList.name})?
         # not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1)
-        list.name = "List #{nextLetter}"
+        ourList.name = "List #{nextLetter}"
 
-    super list, callback
+    super ourList, callback
 
   remove: (selector, callback) ->
     Todos.remove {listId: selector}

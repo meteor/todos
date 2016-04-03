@@ -1,3 +1,8 @@
+{ Template } = require 'meteor/templating'
+{ FlowRouter } = require 'meteor/kadira:flow-router'
+
+{ Lists } = require '../../api/lists/lists.coffee'
+
 { listRenderHold } = require '../launch-screen.coffee'
 require './lists-show-page.html'
 
@@ -5,16 +10,13 @@ require './lists-show-page.html'
 require './app-not-found.coffee'
 require '../components/lists-show.coffee'
 
-{ Lists } = require '../../api/lists/lists.coffee'
-{ FlowRouter } = require 'meteor/kadira:flow-router'
-
 
 Template.Lists_show_page.onCreated ->
   @getListId = ->
     FlowRouter.getParam '_id'
 
   @autorun =>
-    @subscribe 'Todos.inList', @getListId()
+    @subscribe 'todos.inList', @getListId()
 
 
 Template.Lists_show_page.onRendered ->
@@ -37,7 +39,7 @@ Template.Lists_show_page.helpers
     # By finding the list with only the `_id` field set, we don't create a dependency on the
     # `list.incompleteCount`, and avoid re-rendering the todos when it changes
     list = Lists.findOne(listId, fields: _id: true)
-    todos = list and list.todos()
+    todos = list.todos() if list?
 
     ret =
       todosReady: instance.subscriptionsReady()

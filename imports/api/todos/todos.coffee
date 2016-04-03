@@ -1,7 +1,9 @@
+{ Mongo } = require 'meteor/mongo'
+{ Factory } = require 'meteor/factory'
+faker = require 'faker'
+
 incompleteCountDenormalizer = require './incompleteCountDenormalizer.coffee'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ Factory } = require 'meteor/factory'
-{ faker } = require 'meteor/dfischer:faker'
 { Lists } = require '../lists/lists.coffee'
 console.log 'Lists in todos.coffee:'
 console.log Lists
@@ -9,21 +11,22 @@ console.log Lists
 
 class TodosCollection extends Mongo.Collection
   insert: (doc, callback) ->
-    doc.createdAt = doc.createdAt or new Date()
-    result = @insert doc, callback
-    incompleteCountDenormalizer.afterInsertTodo doc
+    ourDoc = doc
+    ourDoc.createdAt = ourDoc.createdAt or new Date()
+    result = super ourDoc, callback
+    incompleteCountDenormalizer.afterInsertTodo ourDoc
     result
 
 
   update: (selector, modifier) ->
-    result = @update selector, modifier
+    result = super selector, modifier
     incompleteCountDenormalizer.afterUpdateTodo selector, modifier
     result
 
 
   remove: (selector) ->
     todos = @find(selector).fetch()
-    result = @remove selector
+    result = super selector
     incompleteCountDenormalizer.afterRemoveTodos todos
     result
 

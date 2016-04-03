@@ -1,9 +1,15 @@
 import './app-body.html';
 
-import { Lists } from '../../api/lists/lists.coffee';
-import { insert } from '../../api/lists/methods.coffee';
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { ReactiveDict } from 'meteor/reactive-dict';
+import { Lists } from '../../api/lists/lists.js';
+import { Template } from 'meteor/templating';
 import { ActiveRoute } from 'meteor/zimme:active-route';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { TAPi18n } from 'meteor/tap:i18n';
+
+import { insert } from '../../api/lists/methods.js';
 
 import '../components/loading.js';
 
@@ -25,14 +31,14 @@ Meteor.startup(() => {
   }, CONNECTION_ISSUE_TIMEOUT);
 });
 
-Template.App_body.onCreated(function() {
-  this.subscribe('Lists.public');
-  this.subscribe('Lists.private');
+Template.App_body.onCreated(function appBodyOnCreated() {
+  this.subscribe('lists.public');
+  this.subscribe('lists.private');
 
   this.state = new ReactiveDict();
   this.state.setDefault({
     menuOpen: false,
-    userMenuOpen: false
+    userMenuOpen: false,
   });
 });
 
@@ -53,10 +59,10 @@ Template.App_body.helpers({
     return instance.state.get('userMenuOpen');
   },
   lists() {
-    return Lists.find({$or: [
-      {userId: {$exists: false}},
-      {userId: Meteor.userId()}
-    ]});
+    return Lists.find({ $or: [
+      { userId: { $exists: false } },
+      { userId: Meteor.userId() },
+    ] });
   },
   activeListClass(list) {
     const active = ActiveRoute.name('Lists.show')
@@ -77,8 +83,8 @@ Template.App_body.helpers({
     },
     'swiperight .cordova'(event, instance) {
       instance.state.set('menuOpen', true);
-    }
-  }
+    },
+  },
 });
 
 Template.App_body.events({
@@ -109,7 +115,7 @@ Template.App_body.events({
       // TODO -- test this code path
       const list = Lists.findOne(FlowRouter.getParam('_id'));
       if (list.userId) {
-        FlowRouter.go('Lists.show', Lists.findOne({userId: {$exists: false}}));
+        FlowRouter.go('Lists.show', Lists.findOne({ userId: { $exists: false } }));
       }
     }
   },
@@ -121,10 +127,10 @@ Template.App_body.events({
         // for some reason the list didn't get created. This should almost never
         // happen, but it's good to handle it anyway.
         FlowRouter.go('App.home');
-        alert('Could not create list.');
+        alert(TAPi18n.__('Could not create list.')); // eslint-disable-line no-alert
       }
     });
 
     FlowRouter.go('Lists.show', { _id: listId });
-  }
+  },
 });

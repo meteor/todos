@@ -1,20 +1,23 @@
-import { Todos } from './todos.coffee';
-import { Lists } from '../lists/lists.coffee';
+import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
+import { Todos } from './todos.js';
+import { Lists } from '../lists/lists.js';
+
 export const insert = new ValidatedMethod({
-  name: 'Todos.methods.insert',
+  name: 'todos.insert',
   validate: new SimpleSchema({
     listId: { type: String },
-    text: { type: String }
+    text: { type: String },
   }).validator(),
   run({ listId, text }) {
     const list = Lists.findOne(listId);
 
     if (list.isPrivate() && list.userId !== this.userId) {
-      throw new Meteor.Error('Todos.methods.insert.unauthorized',
+      throw new Meteor.Error('todos.insert.accessDenied',
         'Cannot add todos to a private list that is not yours');
     }
 
@@ -22,18 +25,18 @@ export const insert = new ValidatedMethod({
       listId,
       text,
       checked: false,
-      createdAt: new Date()
+      createdAt: new Date(),
     };
 
     Todos.insert(todo);
-  }
+  },
 });
 
 export const setCheckedStatus = new ValidatedMethod({
-  name: 'Todos.methods.makeChecked',
+  name: 'todos.makeChecked',
   validate: new SimpleSchema({
     todoId: { type: String },
-    newCheckedStatus: { type: Boolean }
+    newCheckedStatus: { type: Boolean },
   }).validator(),
   run({ todoId, newCheckedStatus }) {
     const todo = Todos.findOne(todoId);
@@ -44,21 +47,21 @@ export const setCheckedStatus = new ValidatedMethod({
     }
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('Todos.methods.setCheckedStatus.unauthorized',
+      throw new Meteor.Error('todos.setCheckedStatus.accessDenied',
         'Cannot edit checked status in a private list that is not yours');
     }
 
-    Todos.update(todoId, {$set: {
-      checked: newCheckedStatus
-    }});
-  }
+    Todos.update(todoId, { $set: {
+      checked: newCheckedStatus,
+    } });
+  },
 });
 
 export const updateText = new ValidatedMethod({
-  name: 'Todos.methods.updateText',
+  name: 'todos.updateText',
   validate: new SimpleSchema({
     todoId: { type: String },
-    newText: { type: String }
+    newText: { type: String },
   }).validator(),
   run({ todoId, newText }) {
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
@@ -66,31 +69,31 @@ export const updateText = new ValidatedMethod({
     const todo = Todos.findOne(todoId);
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('Todos.methods.updateText.unauthorized',
+      throw new Meteor.Error('todos.updateText.accessDenied',
         'Cannot edit todos in a private list that is not yours');
     }
 
     Todos.update(todoId, {
-      $set: { text: newText }
+      $set: { text: newText },
     });
-  }
+  },
 });
 
 export const remove = new ValidatedMethod({
-  name: 'Todos.methods.remove',
+  name: 'todos.remove',
   validate: new SimpleSchema({
-    todoId: { type: String }
+    todoId: { type: String },
   }).validator(),
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('Todos.methods.remove.unauthorized',
+      throw new Meteor.Error('todos.remove.accessDenied',
         'Cannot remove todos in a private list that is not yours');
     }
 
     Todos.remove(todoId);
-  }
+  },
 });
 
 // Get list of all method names on Todos
@@ -109,6 +112,6 @@ if (Meteor.isServer) {
     },
 
     // Rate limit per connection ID
-    connectionId() { return true; }
+    connectionId() { return true; },
   }, 5, 1000);
 }

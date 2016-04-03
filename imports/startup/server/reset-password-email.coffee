@@ -1,3 +1,6 @@
+{ Accounts } = require 'meteor/accounts-base'
+
+
 Accounts.emailTemplates.siteName = 'Meteor Guide Todos Example'
 Accounts.emailTemplates.from = 'Meteor Todos Accounts <accounts@example.com>'
 

@@ -1,9 +1,15 @@
 require './app-body.html'
 
+{ Meteor } = require 'meteor/meteor'
+{ ReactiveVar } = require 'meteor/reactive-var'
+{ ReactiveDict } = require 'meteor/reactive-dict'
 { Lists } = require '../../api/lists/lists.coffee'
-{ insert } = require '../../api/lists/methods.coffee'
+{ Template } = require 'meteor/templating'
 { ActiveRoute } = require 'meteor/zimme:active-route'
 { FlowRouter } = require 'meteor/kadira:flow-router'
+{ TAPi18n } = require 'meteor/tap:i18n'
+
+{ insert } = require '../../api/lists/methods.coffee'
 
 require '../components/loading.coffee'
 
@@ -27,8 +33,8 @@ Meteor.startup ->
 
 
 Template.App_body.onCreated ->
-  @subscribe 'Lists.public'
-  @subscribe 'Lists.private'
+  @subscribe 'lists.public'
+  @subscribe 'lists.private'
 
   @state = new ReactiveDict
   @state.setDefault
@@ -108,7 +114,7 @@ Template.App_body.events
         # for some reason the list didn't get created. This should almost never
         # happen, but it's good to handle it anyway.
         FlowRouter.go 'App.home'
-        alert 'Could not create list.'
+        alert TAPi18n.__ 'Could not create list.'
 
       )
     FlowRouter.go 'Lists.show', _id: listId

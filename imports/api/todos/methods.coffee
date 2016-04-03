@@ -1,12 +1,15 @@
-{ Todos } = require './todos.coffee'
-{ Lists } = require '../lists/lists.coffee'
+{ Meteor } = require 'meteor/meteor'
+{ _ } = require 'meteor/underscore'
 { ValidatedMethod } = require 'meteor/mdg:validated-method'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 { DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
 
+{ Todos } = require './todos.coffee'
+{ Lists } = require '../lists/lists.coffee'
+
 
 module.exports.insert = new ValidatedMethod
-  name: 'Todos.methods.insert'
+  name: 'todos.insert'
   validate: new SimpleSchema
     listId:
       type: String
@@ -17,7 +20,7 @@ module.exports.insert = new ValidatedMethod
     list = Lists.findOne listId
 
     if list.isPrivate() and list.userId isnt @userId
-      throw new Meteor.Error 'Todos.methods.insert.unauthorized', 'Cannot add todos to a private list that is not yours'
+      throw new Meteor.Error 'todos.insert.accessDenied', 'Cannot add todos to a private list that is not yours'
 
     todo =
       listId: listId
@@ -29,7 +32,7 @@ module.exports.insert = new ValidatedMethod
 
 
 module.exports.setCheckedStatus = new ValidatedMethod
-  name: 'Todos.methods.makeChecked'
+  name: 'todos.makeChecked'
   validate: new SimpleSchema
     todoId:
       type: String
@@ -39,12 +42,12 @@ module.exports.setCheckedStatus = new ValidatedMethod
   run: ({ todoId, newCheckedStatus }) ->
     todo = Todos.findOne todoId
 
-    if todo.checked isnt newCheckedStatus
+    if todo.checked is newCheckedStatus
       # The status is already what we want, let's not do any extra work
       return
 
     unless todo.editableBy(@userId)
-      throw new Meteor.Error 'Todos.methods.setCheckedStatus.unauthorized', 'Cannot edit checked status in a private list that is not yours'
+      throw new Meteor.Error 'todos.setCheckedStatus.accessDenied', 'Cannot edit checked status in a private list that is not yours'
 
     Todos.update todoId,
       $set:
@@ -52,7 +55,7 @@ module.exports.setCheckedStatus = new ValidatedMethod
 
 
 module.exports.updateText = new ValidatedMethod
-  name: 'Todos.methods.updateText'
+  name: 'todos.updateText'
   validate: new SimpleSchema(
     todoId: type: String
     newText: type: String).validator()
@@ -62,7 +65,7 @@ module.exports.updateText = new ValidatedMethod
     todo = Todos.findOne todoId
 
     unless todo.editableBy(@userId)
-      throw new Meteor.Error 'Todos.methods.updateText.unauthorized', 'Cannot edit todos in a private list that is not yours'
+      throw new Meteor.Error 'todos.updateText.accessDenied', 'Cannot edit todos in a private list that is not yours'
 
     Todos.update todoId,
       $set:
@@ -70,7 +73,7 @@ module.exports.updateText = new ValidatedMethod
 
 
 module.exports.remove = new ValidatedMethod
-  name: 'Todos.methods.remove'
+  name: 'todos.remove'
   validate: new SimpleSchema
     todoId:
       type: String
@@ -79,7 +82,7 @@ module.exports.remove = new ValidatedMethod
     todo = Todos.findOne todoId
 
     unless todo.editableBy(@userId)
-      throw new Meteor.Error 'Todos.methods.remove.unauthorized', 'Cannot remove todos in a private list that is not yours'
+      throw new Meteor.Error 'todos.remove.accessDenied', 'Cannot remove todos in a private list that is not yours'
 
     Todos.remove todoId
 

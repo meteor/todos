@@ -1,3 +1,6 @@
+{ _ } = require 'meteor/underscore'
+{ check } = require 'meteor/check'
+
 { Todos } = require './todos.coffee'
 { Lists } = require '../lists/lists.coffee'
 

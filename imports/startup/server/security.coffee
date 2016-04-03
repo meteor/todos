@@ -1,4 +1,7 @@
+{ Meteor } = require 'meteor/meteor'
 { DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
+{ _ } = require 'meteor/underscore'
+
 
 # Don't let people write arbitrary data to their 'profile' field from the client
 Meteor.users.deny

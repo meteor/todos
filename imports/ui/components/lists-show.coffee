@@ -1,3 +1,10 @@
+{ Meteor } = require 'meteor/meteor'
+{ Template } = require 'meteor/templating'
+{ Mongo } = require 'meteor/mongo'
+{ ReactiveDict } = require 'meteor/reactive-dict'
+{ Tracker } = require 'meteor/tracker'
+{ $ } = require 'meteor/jquery'
+
 require './lists-show.html'
 
 # Component used in the template
@@ -7,8 +14,11 @@ require './todos-item.coffee'
 
 { insert } = require '../../api/todos/methods.coffee'
 
+{ displayError } = require '../lib/errors.coffee'
+
 { FlowRouter } = require 'meteor/kadira:flow-router'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
+{ TAPi18n } = require 'meteor/tap:i18n'
 
 
 Template.Lists_show.onCreated ->
@@ -30,14 +40,11 @@ Template.Lists_show.onCreated ->
 
   @saveList = =>
     @state.set 'editing', no
+
     updateName.call
       listId: @data.list()._id
       newName: @$('[name=name]').val()
-    , (err) ->
-      # Ignore the error - there's nothing useful we can do in the UI
-      # here. In particular this case happens if you try to save with
-      # an empty list name.
-      console.error err if err?
+    , displayError
 
 
   @editList = =>
@@ -47,19 +54,15 @@ Template.Lists_show.onCreated ->
     Tracker.flush()
     # TODO -- I think velocity introduces a timeout before actually setting opacity on the
     #   element, so I can't focus it for a moment.
-    Meteor.setTimeout =>
+    Meteor.defer =>
       @$('.js-edit-form input[type=text]').focus()
 
 
   @deleteList = =>
     list = @data.list()
-    message = "Are you sure you want to delete the list #{list.name}?"
+    message = "#{TAPi18n.__('Are you sure you want to delete the list')} #{list.name}?"
     if confirm(message)
-      remove.call { listId: list._id }, (err) ->
-        # At this point, we have already redirected home as if the list was
-        # successfully deleted, but we should at least warn the user their list
-        # could not be deleted
-        console.error err if err? # translate this string after #59
+      remove.call { listId: list._id }, displayError
 
       FlowRouter.go 'App.home'
       return yes
@@ -69,11 +72,9 @@ Template.Lists_show.onCreated ->
   @toggleListPrivacy = =>
     list = @data.list()
     if list.userId?
-      makePublic.call { listId: list._id }, (err) ->
-        console.error err if err? # translate this string after #59
+      makePublic.call { listId: list._id }, displayError
     else
-      makePrivate.call { listId: list._id }, (err) ->
-        console.error err if err? # translate this string after #59
+      makePrivate.call { listId: list._id }, displayError
 
 
 Template.Lists_show.helpers
@@ -115,13 +116,14 @@ Template.Lists_show.events
 
 
   'change .list-edit': (event, instance) ->
-    if $(event.target).val() is 'edit'
+    target = event.target
+    if $(target).val() is 'edit'
       instance.editList()
-    else if $(event.target).val() is 'delete'
+    else if $(target).val() is 'delete'
       instance.deleteList()
     else
       instance.toggleListPrivacy()
-    event.target.selectedIndex = 0
+    target.selectedIndex = 0
 
 
   'click .js-edit-list': (event, instance) ->
@@ -143,12 +145,10 @@ Template.Lists_show.events
   'submit .js-todo-new': (event) ->
     event.preventDefault()
     $input = $(event.target).find('[type=text]')
-    unless $input.val()
+    if $input.val()
       insert.call
         listId: @list()._id
         text: $input.val()
-      , (err) ->
-        console.error err if err? # translate this string after #59
-        $input.val ''
+      , displayError
 
-console.log 'right here 10'
+      $input.val ''

@@ -1,9 +1,11 @@
-{ Todos } = require '../todos.coffee'
-{ Lists } = require '../../lists/lists.coffee'
+{ Meteor } = require 'meteor/meteor'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 
+{ Todos } = require '../todos.coffee'
+{ Lists } = require '../../lists/lists.coffee'
 
-Meteor.publishComposite 'Todos.inList', (listId) ->
+
+Meteor.publishComposite 'todos.inList', (listId) ->
   new SimpleSchema
   	listId:
   		type: String
