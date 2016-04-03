@@ -1,8 +1,8 @@
 { Meteor } = require 'meteor/meteor'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 
-{ Todos } = require '../todos.coffee'
-{ Lists } = require '../../lists/lists.coffee'
+TodosModule = require '../todos.coffee'
+ListsModule = require '../../lists/lists.coffee'
 
 
 Meteor.publishComposite 'todos.inList', (listId) ->
@@ -28,9 +28,9 @@ Meteor.publishComposite 'todos.inList', (listId) ->
       	fields:
       		_id: 1
 
-      Lists.find query, options
+      ListsModule.Lists.find query, options
 
     children: [
     	find: (list) ->
-      	Todos.find { listId: list._id }, fields: Todos.publicFields
+      	TodosModule.Todos.find { listId: list._id }, fields: TodosModule.Todos.publicFields
  		]

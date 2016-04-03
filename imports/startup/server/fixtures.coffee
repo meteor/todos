@@ -1,11 +1,11 @@
 { Meteor } = require 'meteor/meteor'
-{ Lists } = require '../../api/lists/lists.coffee'
-{ Todos } = require '../../api/todos/todos.coffee'
+ListsModule = require '../../api/lists/lists.coffee'
+TodosModule = require '../../api/todos/todos.coffee'
 
 
 # if the database is empty on server start, create some sample data.
 Meteor.startup ->
-  if Lists.find().count() is 0
+  if ListsModule.Lists.find().count() is 0
     data = [
       {
         name: 'Meteor Principles'
@@ -49,12 +49,12 @@ Meteor.startup ->
     timestamp = (new Date).getTime()
 
     data.forEach (list) ->
-      listId = Lists.insert
+      listId = ListsModule.Lists.insert
         name: list.name
         incompleteCount: list.items.length
 
       list.items.forEach (text) ->
-        Todos.insert
+        TodosModule.Todos.insert
           listId: listId
           text: text
           createdAt: new Date(timestamp)

@@ -4,7 +4,7 @@
 { _ } = require 'meteor/underscore'
 
 require './todos-item.html'
-{ Todos } = require '../../api/todos/todos.coffee'
+TodosModule = require '../../api/todos/todos.coffee'
 
 { setCheckedStatus, updateText, remove } = require '../../api/todos/methods.coffee'
 
@@ -15,7 +15,7 @@ Template.Todos_item.onCreated ->
   @autorun ->
     new SimpleSchema
       todo:
-      	type: Todos._helpers
+      	type: TodosModule.Todos._helpers
       editing:
         type: Boolean
         optional: yes

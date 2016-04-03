@@ -4,9 +4,12 @@ faker = require 'faker'
 
 incompleteCountDenormalizer = require './incompleteCountDenormalizer.coffee'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ Lists } = require '../lists/lists.coffee'
-console.log 'Lists in todos.coffee:'
-console.log Lists
+
+# lists.coffee includes todos.coffee, and vice versa: a circular reference
+# CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
+# Learn more at https://github.com/meteor/meteor/issues/6381
+# and http://benjamn.github.io/empirenode-2015/#/31
+ListsModule = require '../lists/lists.coffee'
 
 
 class TodosCollection extends Mongo.Collection
@@ -89,7 +92,7 @@ Factory.define 'todo', Todos,
 
 Todos.helpers
   list: ->
-    Lists.findOne @listId
+    ListsModule.Lists.findOne @listId
 
 
   editableBy: (userId) ->

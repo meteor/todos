@@ -1,8 +1,12 @@
 { Mongo } = require 'meteor/mongo'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 { Factory } = require 'meteor/factory'
-{ Todos } = require '../todos/todos.coffee'
 
+# todos.coffee includes lists.coffee, and vice versa: a circular reference
+# CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
+# Learn more at https://github.com/meteor/meteor/issues/6381
+# and http://benjamn.github.io/empirenode-2015/#/31
+TodosModule = require '../todos/todos.coffee'
 
 class ListsCollection extends Mongo.Collection
   insert: (list, callback) ->
@@ -19,7 +23,7 @@ class ListsCollection extends Mongo.Collection
     super ourList, callback
 
   remove: (selector, callback) ->
-    Todos.remove {listId: selector}
+    TodosModule.Todos.remove {listId: selector}
     super selector, callback
 
 Lists = exports.Lists = new ListsCollection 'Lists'
@@ -67,7 +71,7 @@ Lists.helpers
 
 
   isLastPublicList: ->
-    publicListCount = Lists.find(userId: $exists: yes).count()
+    publicListCount = Lists.find(userId: $exists: no).count()
     not @isPrivate() and publicListCount is 1
 
 
@@ -79,4 +83,4 @@ Lists.helpers
 
 
   todos: ->
-    Todos.find { listId: @_id }, sort: createdAt: -1
+    TodosModule.Todos.find { listId: @_id }, sort: createdAt: -1
