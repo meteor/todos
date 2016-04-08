@@ -6,7 +6,7 @@ This is a Todos example app built on the principles described in the [Meteor Gui
 
 This version (the `master`) branch uses the [Blaze](http://guide.meteor.com/blaze.html) rendering library, with code written in ES2015 JavaScript.
 
-The [`react`](https://github.com/meteor/todos/tree/react) branch implements the same application using the [React](http://guide.meteor.com/react.html)
+The [`react`](https://github.com/meteor/todos/tree/react) branch implements the same application using [React](http://guide.meteor.com/react.html)
 
 The [`coffeescript`](https://github.com/meteor/todos/tree/coffeescript) branch implements this (the Blaze) version of the app in CoffeeScript.
 
