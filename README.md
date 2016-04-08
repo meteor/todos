@@ -10,7 +10,7 @@ The [`react`](https://github.com/meteor/todos/tree/react) branch implements the 
 
 The [`coffeescript`](https://github.com/meteor/todos/tree/coffeescript) branch implements this (the Blaze) version of the app in CoffeeScript.
 
-Not that attempts will be made to keep the branches up to date but this isn't guaranteed.
+Note that attempts will be made to keep the branches up to date but this isn't guaranteed.
 
 ### Running the app
 
