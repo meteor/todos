@@ -45,10 +45,12 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
   this.saveList = () => {
     this.state.set('editing', false);
 
-    updateName.call({
-      listId: this.data.list()._id,
-      newName: this.$('[name=name]').val(),
-    }, displayError);
+    if (this.$('[name=name]').val().trim()) {
+      updateName.call({
+        listId: this.data.list()._id,
+        newName: this.$('[name=name]').val(),
+      }, displayError);
+    }
   };
 
   this.editList = () => {
@@ -99,6 +101,10 @@ Template.Lists_show.helpers({
         instance.state.set('editingTodo', editing ? todo._id : false);
       },
     };
+  },
+  editing() {
+    const instance = Template.instance();
+    return instance.state.get('editing');
   },
 });
 
