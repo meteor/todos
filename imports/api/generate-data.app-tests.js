@@ -36,5 +36,4 @@ if (Meteor.isClient) {
   });
 }
 
-
 export { generateData };
