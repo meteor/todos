@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { Random } from 'meteor/random';
 import { chai } from 'meteor/practicalmeteor:chai';
-import { StubCollections } from 'meteor/stub-collections';
+import StubCollections from 'meteor/hwillson:stub-collections';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
