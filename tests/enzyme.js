@@ -31,12 +31,12 @@ td.replace('meteor/check', { check })
 
 // Use require to import TodoItem per @smeijer's suggestion
 // https://forums.meteor.com/t/meteor-1-3-testing-with-meteor-meteor-x-package-imports/21009
-const { TodoItem } = require('../imports/ui/components/TodoItem')
+const TodoItem = require('../imports/ui/components/TodoItem').default
 
-describe('TodoItem', function () {
-  it('should render label and class', () => {
+describe('TodoItem', () => {
+  it('should render', () => {
     const todo = { text: "testing", checked: false, createdAt: new Date('2016-01-01') }
     const item = shallow(<TodoItem todo={todo} />)
-    expect(item).to.have.className('list-name')
+    expect(item).to.have.className('list-item')
   })
-});
+})
