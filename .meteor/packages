@@ -48,7 +48,7 @@ useraccounts:flow-routing
 softwarerero:accounts-t9n
 
 # mobile
-crosswalk 
+crosswalk
 mobile-experience
 chriswessels:hammer
 
@@ -64,8 +64,8 @@ simple:rest
 
 # testing
 factory
-publication-collector
 xolvio:cleaner
 dispatch:mocha-phantomjs
 practicalmeteor:mocha@2.1.1-rc.1
 hwillson:stub-collections
+johanbrook:publication-collector

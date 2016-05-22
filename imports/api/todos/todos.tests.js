@@ -3,7 +3,7 @@
 
 import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
-import { PublicationCollector } from 'meteor/publication-collector';
+import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
