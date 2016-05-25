@@ -8,20 +8,23 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "dependencies": {
-    "autoprefixer": "^6.3.1",
-    "classnames": "^2.2.3",
-    "faker": "^3.0.1",
-    "react": "^15.0.0",
-    "react-addons-css-transition-group": "^15.0.0",
-    "react-addons-pure-render-mixin": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "react-router": "^2.0.0"
+    "autoprefixer": "6.3.1",
+    "classnames": "2.2.3",
+    "faker": "3.0.1",
+    "react": "15.0.0",
+    "react-addons-css-transition-group": "15.0.0",
+    "react-addons-pure-render-mixin": "15.0.0",
+    "react-dom": "15.0.0",
+    "react-router": "2.0.0"
   },
   "devDependencies": {
-    "eslint": "^2.3.0",
-    "eslint-config-airbnb": "^6.1.0",
-    "eslint-plugin-meteor": "^3.0.1",
-    "eslint-plugin-react": "^4.0.0"
+    "enzyme": "2.3.0",
+    "eslint": "2.3.0",
+    "eslint-config-airbnb": "6.1.0",
+    "eslint-plugin-meteor": "3.0.1",
+    "eslint-plugin-react": "4.0.0",
+    "meteor-node-stubs": "0.2.3",
+    "react-addons-test-utils": "15.0.0"
   },
   "eslintConfig": {
     "parserOptions": {
