@@ -8,6 +8,12 @@ import { chai } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 import TodoItem from './TodoItem.jsx';
 
+import {
+  setCheckedStatus,
+  updateText,
+  remove,
+} from '../../api/todos/methods.js';
+
 if (Meteor.isClient) {
   describe('TodoItem', () => {
     it('should render', () => {
@@ -19,23 +25,36 @@ if (Meteor.isClient) {
     });
     describe('interaction', function testInteraction() {
       beforeEach(() => {
-        const todo = Factory.create('todo', { text: 'testing' });
-        this.item = mount(<TodoItem todo={todo} />);
+        this.todo = Factory.create('todo', { text: 'testing' });
+        this.item = mount(<TodoItem todo={this.todo} />);
       });
       it('should update text when edited', () => {
-        const stub = sinon.stub(this.item.instance(), 'throttledUpdate');
-        this.item.find('input[type="text"]').simulate('change', { target: { value: 'tested' } });
-        chai.assert(stub.calledWith('tested'));
+        sinon.stub(updateText, 'call');
+        this.item.find('input[type="text"]').simulate('change', {
+          target: { value: 'tested' },
+        });
+        chai.assert(updateText.call.calledWith({
+          todoId: this.todo._id,
+          newText: 'tested',
+        }));
+        updateText.call.restore();
       });
       it('should update status when checked', () => {
-        const stub = sinon.stub(this.item.instance(), 'setTodoCheckStatus');
-        this.item.find('input[type="checkbox"]').simulate('change', { target: { checked: true } });
-        chai.assert(stub.calledOnce);
+        sinon.stub(setCheckedStatus, 'call');
+        this.item.find('input[type="checkbox"]').simulate('change', {
+          target: { checked: true },
+        });
+        chai.assert(setCheckedStatus.call.calledWith({
+          todoId: this.todo._id,
+          newCheckedStatus: true,
+        }));
+        setCheckedStatus.call.restore();
       });
       it('should delete when trash is clicked', () => {
-        const stub = sinon.stub(this.item.instance(), 'deleteTodo');
+        sinon.stub(remove, 'call');
         this.item.find('.delete-item').simulate('click');
-        chai.assert(stub.calledOnce);
+        chai.assert(remove.call.calledOnce);
+        remove.call.restore();
       });
     });
   });
