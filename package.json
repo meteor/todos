@@ -11,7 +11,7 @@
     "autoprefixer": "^6.3.1",
     "classnames": "^2.2.3",
     "faker": "^3.0.1",
-    "react": "^15.0.0-0",
+    "react": "^15.0.0",
     "react-addons-css-transition-group": "^15.0.0",
     "react-addons-pure-render-mixin": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
