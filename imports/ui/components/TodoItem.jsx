@@ -66,7 +66,7 @@ export default class TodoItem extends React.Component {
             type="checkbox"
             checked={todo.checked}
             name="checked"
-            onChange={this.setTodoCheckStatus}
+            onChange={(e) => this.setTodoCheckStatus(e)}
           />
           <span className="checkbox-custom"></span>
         </label>
@@ -81,8 +81,8 @@ export default class TodoItem extends React.Component {
         <a
           className="delete-item"
           href="#"
-          onClick={this.deleteTodo}
-          onMouseDown={this.deleteTodo}
+          onClick={(e) => this.deleteTodo(e)}
+          onMouseDown={(e) => this.deleteTodo(e)}
         >
           <span className="icon-trash"></span>
         </a>
