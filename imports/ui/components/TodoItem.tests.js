@@ -34,32 +34,41 @@ if (Meteor.isClient) {
 
       it('should update text when edited', () => {
         sinon.stub(updateText, 'call');
+
         item.find('input[type="text"]').simulate('change', {
           target: { value: 'tested' },
         });
+
         sinon.assert.calledWith(updateText.call, {
           todoId: todo._id,
           newText: 'tested',
         });
+
         updateText.call.restore();
       });
 
       it('should update status when checked', () => {
         sinon.stub(setCheckedStatus, 'call');
+
         item.find('input[type="checkbox"]').simulate('change', {
           target: { checked: true },
         });
+
         sinon.assert.calledWith(setCheckedStatus.call, {
           todoId: todo._id,
           newCheckedStatus: true,
         });
+
         setCheckedStatus.call.restore();
       });
 
       it('should delete when trash is clicked', () => {
         sinon.stub(remove, 'call');
+
         item.find('.delete-item').simulate('click');
+
         sinon.assert.calledOnce(remove.call);
+
         remove.call.restore();
       });
     });

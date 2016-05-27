@@ -33,27 +33,24 @@ if (Meteor.isClient) {
     describe('any state', () => {
       it('should create a new todo when user submits', () => {
         sinon.stub(insert, 'call');
-        // FIXME: can we simulate the user better?
-        // header.find('.todo-new').find('input[type="text"]').simulate('change', {
-        //   target: { value: 'new todo' },
-        // });
+
         header.instance().refs.newTodoInput.value = 'new todo';
         header.find('.todo-new').simulate('submit');
-        sinon.assert.calledWith(insert.call, {
-          listId: list._id,
-          text: 'new todo',
-        });
+
+        sinon.assert.calledWith(insert.call, { listId: list._id, text: 'new todo' });
+
         insert.call.restore();
       });
 
       it('should delete list and navigate home when user clicks trash', () => {
         sinon.stub(remove, 'call');
         sinon.stub(window, 'confirm').returns(true);
+
         header.find('.trash').simulate('click');
-        sinon.assert.calledWith(remove.call, {
-          listId: list._id,
-        });
+
+        sinon.assert.calledWith(remove.call, { listId: list._id });
         sinon.assert.calledWith(router.push, '/');
+
         remove.call.restore();
         window.confirm.restore();
       });
@@ -80,6 +77,7 @@ if (Meteor.isClient) {
 
       it('should rename the list when user edits', () => {
         sinon.stub(updateName, 'call');
+
         header.instance().refs.listNameInput.value = 'renamed';
         header.find('.list-edit-form').simulate('submit');
         sinon.assert.calledWith(updateName.call, {
