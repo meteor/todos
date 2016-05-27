@@ -138,7 +138,7 @@ export default class ListHeader extends React.Component {
                 ? <span className="icon-lock" title="Make list public"></span>
                 : <span className="icon-unlock" title="Make list private"></span>}
             </a>
-            <a className="nav-item" onClick={this.deleteList}>
+            <a className="nav-item trash" onClick={this.deleteList}>
               <span className="icon-trash" title="Delete list"></span>
             </a>
           </div>
