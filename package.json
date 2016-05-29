@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "meteor",
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
