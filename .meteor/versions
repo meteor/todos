@@ -35,8 +35,8 @@ ddp-rate-limiter@1.0.2
 ddp-server@1.2.4
 deps@1.0.10
 diff-sequence@1.0.3
-dispatch:mocha-phantomjs@0.0.4
-dispatch:phantomjs-tests@0.0.4
+dispatch:mocha-phantomjs@0.1.6
+dispatch:phantomjs-tests@0.0.5
 ecmascript@0.4.1
 ecmascript-runtime@0.2.8
 ejson@1.0.9
@@ -84,8 +84,8 @@ percolate:momentum@0.7.2
 percolate:velocityjs@1.1.0
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2
-practicalmeteor:mocha@2.1.1-rc.1
-practicalmeteor:mocha-core@0.1.4
+practicalmeteor:mocha@2.4.5_4
+practicalmeteor:mocha-core@1.0.0
 practicalmeteor:sinon@1.14.1_2
 promise@0.6.5
 raix:eventemitter@0.1.3
