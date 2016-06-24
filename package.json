@@ -3,8 +3,11 @@
     "start": "meteor",
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
+    "test-app": "meteor test --full-app --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
+    "test-watch-terminal": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs",
+    "test-app-watch-terminal": "TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha-phantomjs",
     "lint": "eslint .",
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },

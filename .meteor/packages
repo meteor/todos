@@ -65,7 +65,7 @@ simple:rest
 # testing
 factory
 xolvio:cleaner
-dispatch:mocha-phantomjs
-practicalmeteor:mocha@2.1.1-rc.1
+dispatch:mocha-phantomjs@0.1.6
+practicalmeteor:mocha@2.4.5_4
 hwillson:stub-collections
 johanbrook:publication-collector
