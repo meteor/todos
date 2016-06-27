@@ -38,6 +38,13 @@
       "import/resolver": "meteor"
     },
     "rules": {
+      "meteor/eventmap-params": [
+        2,
+        {
+          "eventParamName": "event",
+          "templateInstanceParamName": "instance"
+        }
+      ],
       "meteor/template-names": [
         0
       ]
