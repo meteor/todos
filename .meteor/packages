@@ -10,6 +10,7 @@ ecmascript
 es5-shim
 check
 tracker
+session
 
 # standard libraries
 jquery
