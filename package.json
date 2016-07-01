@@ -20,7 +20,8 @@
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-import": "^1.6.1",
     "eslint-plugin-meteor": "^3.0.1",
-    "eslint-plugin-react": "^4.0.0"
+    "eslint-plugin-react": "^4.0.0",
+    "eslint-import-resolver-meteor": "*"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -35,6 +36,9 @@
       "airbnb/base",
       "plugin:meteor/recommended"
     ],
+    "settings": {
+      "import/resolver": "meteor"
+    },
     "rules": {
       "meteor/eventmap-params": [
         2,
