@@ -43,6 +43,7 @@ tap:i18n
 
 # accounts
 accounts-password
+useraccounts:core
 useraccounts:unstyled
 useraccounts:flow-routing
 softwarerero:accounts-t9n
@@ -66,6 +67,8 @@ simple:rest
 factory
 xolvio:cleaner
 dispatch:mocha-phantomjs@0.1.6
+practicalmeteor:chai
+practicalmeteor:sinon
 practicalmeteor:mocha@2.4.5_4
 hwillson:stub-collections
 johanbrook:publication-collector
