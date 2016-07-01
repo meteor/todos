@@ -7,8 +7,8 @@ import { _ } from 'meteor/underscore';
 import { Lists } from './lists.js';
 
 const LIST_ID_ONLY = new SimpleSchema({
-  listId: { type: String },
-}).validator();
+  listId: Lists.simpleSchema().schema('_id'),
+}).validator({ clean: true, filter: false });
 
 export const insert = new ValidatedMethod({
   name: 'lists.insert',
@@ -67,9 +67,9 @@ export const makePublic = new ValidatedMethod({
 export const updateName = new ValidatedMethod({
   name: 'lists.updateName',
   validate: new SimpleSchema({
-    listId: { type: String },
-    newName: { type: String },
-  }).validator(),
+    listId: Lists.simpleSchema().schema('_id'),
+    newName: Lists.simpleSchema().schema('name'),
+  }).validator({ clean: true, filter: false }),
   run({ listId, newName }) {
     const list = Lists.findOne(listId);
 

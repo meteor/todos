@@ -9,10 +9,7 @@ import { Lists } from '../lists/lists.js';
 
 export const insert = new ValidatedMethod({
   name: 'todos.insert',
-  validate: new SimpleSchema({
-    listId: { type: String },
-    text: { type: String },
-  }).validator(),
+  validate: Todos.simpleSchema().pick(['listId', 'text']).validator({ clean: true, filter: false }),
   run({ listId, text }) {
     const list = Lists.findOne(listId);
 
@@ -35,9 +32,9 @@ export const insert = new ValidatedMethod({
 export const setCheckedStatus = new ValidatedMethod({
   name: 'todos.makeChecked',
   validate: new SimpleSchema({
-    todoId: { type: String },
-    newCheckedStatus: { type: Boolean },
-  }).validator(),
+    todoId: Todos.simpleSchema().schema('_id'),
+    newCheckedStatus: Todos.simpleSchema().schema('checked'),
+  }).validator({ clean: true, filter: false }),
   run({ todoId, newCheckedStatus }) {
     const todo = Todos.findOne(todoId);
 
@@ -60,9 +57,9 @@ export const setCheckedStatus = new ValidatedMethod({
 export const updateText = new ValidatedMethod({
   name: 'todos.updateText',
   validate: new SimpleSchema({
-    todoId: { type: String },
-    newText: { type: String },
-  }).validator(),
+    todoId: Todos.simpleSchema().schema('_id'),
+    newText: Todos.simpleSchema().schema('text'),
+  }).validator({ clean: true, filter: false }),
   run({ todoId, newText }) {
     // This is complex auth stuff - perhaps denormalizing a userId onto todos
     // would be correct here?
@@ -82,8 +79,8 @@ export const updateText = new ValidatedMethod({
 export const remove = new ValidatedMethod({
   name: 'todos.remove',
   validate: new SimpleSchema({
-    todoId: { type: String },
-  }).validator(),
+    todoId: Todos.simpleSchema().schema('_id'),
+  }).validator({ clean: true, filter: false }),
   run({ todoId }) {
     const todo = Todos.findOne(todoId);
 
