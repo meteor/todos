@@ -13,6 +13,7 @@ import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
 
 if (Meteor.isServer) {
+  // eslint-disable-next-line global-require
   require('./server/publications.js');
 
   describe('lists', function () {
