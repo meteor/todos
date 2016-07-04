@@ -54,7 +54,7 @@ mobile-experience
 chriswessels:hammer
 
 # production
-juliancwirko:postcss@1.0.0-beta.11
+juliancwirko:postcss
 standard-minifier-js
 ddp-rate-limiter
 app-prod-security
