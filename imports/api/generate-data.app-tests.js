@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Random } from 'meteor/random';
-import { Promise } from 'meteor/promise';
+import denodeify from 'denodeify';
 import { _ } from 'meteor/underscore';
 
 const createList = (userId) => {
@@ -31,7 +31,7 @@ if (Meteor.isClient) {
   // We do this so there's no contention w/ the currently tested user's connection
   const testConnection = Meteor.connect(Meteor.absoluteUrl());
 
-  generateData = Promise.denodeify((cb) => {
+  generateData = denodeify((cb) => {
     testConnection.call('generateFixtures', cb);
   });
 }
