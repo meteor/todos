@@ -21,6 +21,4 @@ test:
   pre:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
   override:
-    - meteor npm run test
-    - meteor npm run test-app
     - ./tests/acceptance_run

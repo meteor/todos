@@ -3,7 +3,7 @@
 /* globals browser assert */
 
 const countLists = () => {
-  browser.waitForExist('.list-todo');
+  browser.waitForVisible('.list-todo', 5000);
   const elements = browser.elements('.list-todo');
   return elements.value.length;
 };
