@@ -10,7 +10,7 @@ const countLists = () => {
 
 describe('list ui', () => {
   beforeEach(() => {
-    browser.url('http://localhost:3000');
+    browser.url('http://localhost:3100');
   });
 
   it('can create a list @watch', () => {
