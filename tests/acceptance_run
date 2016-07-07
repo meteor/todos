@@ -1,0 +1,2 @@
+#!/bin/sh
+node ./.testing/chimp.js --ci
