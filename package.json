@@ -8,16 +8,46 @@
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
     "test-watch-terminal": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs",
     "test-app-watch-terminal": "TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha-phantomjs",
-    "lint": "eslint .",
-    "chimp-watch": "node ./.testing/chimp.js",
-    "chimp": "node ./.testing/chimp.js --ci"
+    "lint": "eslint ."
   },
   "dependencies": {
     "autoprefixer": "^6.3.1",
     "faker": "^3.0.1"
   },
   "devDependencies": {
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-import-resolver-meteor": "^0.2.4",
+    "eslint-plugin-import": "^1.10.0",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-meteor": "^3.6.0",
+    "eslint-plugin-react": "^5.2.2",
     "shell-source": "^1.1.0"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "airbnb",
+      "plugin:meteor/recommended"
+    ],
+    "rules": {
+      "no-underscore-dangle": "off",
+      "meteor/eventmap-params": [
+        "error",
+        {
+          "eventParamName": "event",
+          "templateInstanceParamName": "instance"
+        }
+      ],
+      "meteor/template-names": [
+        "off"
+      ]
+    },
+    "settings": {
+      "import/resolver": "meteor"
+    }
   },
   "postcss": {
     "plugins": {
