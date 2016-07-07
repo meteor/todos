@@ -2,12 +2,12 @@
 
 const path = require('path');
 const spawn = require('child_process').spawn;
-const baseDir = path.resolve(__dirname, '../..');
-const srcDir = path.resolve(baseDir, 'attainenroll');
+const baseDir = path.resolve(__dirname, '../');
+const srcDir = baseDir;
 
 const cacheMeteor = function() {
   console.log('Caching build & dependencies (can take a while the first time)');
-  const childProcess = spawn('meteor', ['--raw-logs', '--settings', '../config/testing.json'], {
+  const childProcess = spawn('meteor', ['--raw-logs'], {
     cwd: srcDir,
     env: process.env
   });
