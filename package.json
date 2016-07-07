@@ -9,7 +9,8 @@
     "test-watch-terminal": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs",
     "test-app-watch-terminal": "TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha-phantomjs",
     "lint": "eslint .",
-    "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
+    "chimp-watch": "node ./.testing/chimp.js",
+    "chimp": "node ./.testing/chimp.js --ci"
   },
   "dependencies": {
     "autoprefixer": "^6.3.7",
@@ -23,7 +24,8 @@
     "eslint-plugin-import": "^1.10.3",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-meteor": "^3.6.0",
-    "eslint-plugin-react": "^5.2.2"
+    "eslint-plugin-react": "^5.2.2",
+    "shell-source": "^1.1.0"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
