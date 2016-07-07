@@ -6,16 +6,16 @@ dependencies:
     - "~/.npm"
     - "~/.meteor"
     - "node_modules"
-    - ".meteor/local/build"
-    - ".meteor/local/bundler-cache"
-    - ".meteor/local/isopacks"
-    - ".meteor/local/plugin-cache"
+    - "./.meteor/local/build"
+    - "./.meteor/local/bundler-cache"
+    - "./.meteor/local/isopacks"
+    - "./.meteor/local/plugin-cache"
     - "/home/ubuntu/nvm/versions/node/v5.2.0/bin"
     - "/home/ubuntu/nvm/versions/node/v5.2.0/lib/node_modules"
   override:
-    - .testing/_helpers/cache_meteor.sh
-    - .testing/_helpers/cache_npm_dependencies.sh
-    - .testing/_helpers/cache_build_and_dependencies.sh
+    - ./.testing/_helpers/cache_meteor.sh
+    - ./.testing/_helpers/cache_npm_dependencies.sh
+    - ./.testing/_helpers/cache_build_and_dependencies.sh
     - chimp --path=features # Cache chimp deps by running it without any tests
 test:
   pre:
