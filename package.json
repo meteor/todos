@@ -8,9 +8,7 @@
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
     "test-watch-terminal": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs",
     "test-app-watch-terminal": "TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha-phantomjs",
-    "lint": "eslint .",
-    "chimp-watch": "node ./.testing/chimp.js",
-    "chimp": "node ./.testing/chimp.js --ci"
+    "lint": "eslint ."
   },
   "dependencies": {
     "autoprefixer": "^6.3.7",
