@@ -11,8 +11,7 @@ import { _ } from 'meteor/underscore';
 import { Todos } from './todos.js';
 
 if (Meteor.isServer) {
-  // eslint-disable-next-line global-require
-  require('./server/publications.js');
+  import './server/publications.js';
 
   describe('todos', function () {
     describe('mutators', function () {
