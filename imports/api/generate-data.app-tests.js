@@ -4,8 +4,9 @@ import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Random } from 'meteor/random';
-import denodeify from 'denodeify';
 import { _ } from 'meteor/underscore';
+
+import { denodeify } from '../utils/denodeify';
 
 const createList = (userId) => {
   const list = Factory.create('list', { userId });

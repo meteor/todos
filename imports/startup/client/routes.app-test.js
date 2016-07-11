@@ -6,9 +6,9 @@ import { DDP } from 'meteor/ddp-client';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { assert } from 'meteor/practicalmeteor:chai';
 import { Promise } from 'meteor/promise';
-import denodeify from 'denodeify';
 import { $ } from 'meteor/jquery';
 
+import { denodeify } from '../../utils/denodeify';
 import { generateData } from './../../api/generate-data.app-tests.js';
 import { Lists } from '../../api/lists/lists.js';
 import { Todos } from '../../api/todos/todos.js';
