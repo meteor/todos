@@ -20,7 +20,7 @@
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-import-resolver-meteor": "^0.2.4",
-    "eslint-plugin-import": ">1.10.1",
+    "eslint-plugin-import": "file:../eslint-plugin-import",
     "eslint-plugin-jsx-a11y": "^1.5.3",
     "eslint-plugin-meteor": "^3.6.0",
     "eslint-plugin-react": "^5.2.2"
