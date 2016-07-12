@@ -17,7 +17,7 @@ import { Todos } from '../../api/todos/todos.js';
 const waitForSubscriptions = () => new Promise(resolve => {
   const poll = Meteor.setInterval(() => {
     if (DDP._allSubscriptionsReady()) {
-      clearInterval(poll);
+      Meteor.clearInterval(poll);
       resolve();
     }
   }, 200);
@@ -31,7 +31,11 @@ if (Meteor.isClient) {
   describe('data available when routed', () => {
     // First, ensure the data that we expect is loaded on the server
     //   Then, route the app to the homepage
-    beforeEach(() => generateData().then(() => FlowRouter.go('/')));
+    beforeEach(() => {
+      return generateData()
+        .then(() => FlowRouter.go('/'))
+        .then(waitForSubscriptions);
+    });
 
     describe('when logged out', () => {
       it('has all public lists at homepage', () => {
@@ -43,11 +47,9 @@ if (Meteor.isClient) {
         FlowRouter.go('Lists.show', { _id: list._id });
 
         return afterFlushPromise()
+          .then(waitForSubscriptions)
           .then(() => {
             assert.equal($('.title-wrapper').html(), list.name);
-          })
-          .then(() => waitForSubscriptions())
-          .then(() => {
             assert.equal(Todos.find({ listId: list._id }).count(), 3);
           });
       });
