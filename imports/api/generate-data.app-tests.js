@@ -26,7 +26,6 @@ Meteor.methods({
   },
 });
 
-// let generateData; // eslint-disable-line import/no-mutable-exports
 if (Meteor.isClient) {
   // Create a second connection to the server to use to call test data methods
   // We do this so there's no contention w/ the currently tested user's connection
