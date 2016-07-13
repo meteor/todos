@@ -4,8 +4,7 @@ machine:
 dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
-    - npm install
+    - meteor npm install
 checkout:
   post:
     - git submodule update --init
-   
