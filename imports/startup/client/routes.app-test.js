@@ -31,11 +31,10 @@ if (Meteor.isClient) {
   describe('data available when routed', () => {
     // First, ensure the data that we expect is loaded on the server
     //   Then, route the app to the homepage
-    beforeEach(() => {
-      return generateData()
+    beforeEach(() =>
+      generateData()
         .then(() => FlowRouter.go('/'))
-        .then(waitForSubscriptions);
-    });
+        .then(waitForSubscriptions));
 
     describe('when logged out', () => {
       it('has all public lists at homepage', () => {
