@@ -33,7 +33,7 @@ mdg:validated-method
 mdg:validation-error
 
 # routing
-kadira:flow-router@2.11.0
+kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
 zimme:active-route
@@ -54,7 +54,7 @@ mobile-experience
 chriswessels:hammer
 
 # production
-juliancwirko:postcss@1.0.0-beta.11
+juliancwirko:postcss
 standard-minifier-js
 ddp-rate-limiter
 app-prod-security
@@ -66,9 +66,9 @@ simple:rest
 # testing
 factory
 xolvio:cleaner
-dispatch:mocha-phantomjs@0.1.6
+dispatch:mocha-phantomjs
 practicalmeteor:chai
 practicalmeteor:sinon
-practicalmeteor:mocha@2.4.5_4
+practicalmeteor:mocha
 hwillson:stub-collections
 johanbrook:publication-collector

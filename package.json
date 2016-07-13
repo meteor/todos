@@ -12,10 +12,11 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "dependencies": {
-    "autoprefixer": "^6.3.1",
+    "autoprefixer": "^6.3.7",
     "faker": "^3.0.1"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.0",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-import-resolver-meteor": "^0.2.4",
@@ -25,6 +26,10 @@
     "eslint-plugin-react": "^5.2.2"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "allowImportExportEverywhere": true
+    },
     "plugins": [
       "meteor"
     ],

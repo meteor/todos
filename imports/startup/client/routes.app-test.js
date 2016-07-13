@@ -8,6 +8,7 @@ import { assert } from 'meteor/practicalmeteor:chai';
 import { Promise } from 'meteor/promise';
 import { $ } from 'meteor/jquery';
 
+import { denodeify } from '../../utils/denodeify';
 import { generateData } from './../../api/generate-data.app-tests.js';
 import { Lists } from '../../api/lists/lists.js';
 import { Todos } from '../../api/todos/todos.js';
@@ -25,7 +26,7 @@ const waitForSubscriptions = () => new Promise(resolve => {
 
 // Tracker.afterFlush runs code when all consequent of a tracker based change
 //   (such as a route change) have occured. This makes it a promise.
-const afterFlushPromise = Promise.denodeify(Tracker.afterFlush);
+const afterFlushPromise = denodeify(Tracker.afterFlush);
 
 if (Meteor.isClient) {
   describe('data available when routed', () => {
