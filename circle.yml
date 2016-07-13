@@ -8,3 +8,6 @@ dependencies:
 checkout:
   post:
     - git submodule update --init
+test:
+  override:
+    - meteor npm test
