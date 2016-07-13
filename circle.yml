@@ -1,13 +1,27 @@
 machine:
   node:
-    version: 0.10.40
+    version: 5.2.0
 dependencies:
+  cache_directories:
+    - "~/.npm"
+    - "~/.meteor"
+    - "node_modules"
+    - "./.meteor/local/build"
+    - "./.meteor/local/bundler-cache"
+    - "./.meteor/local/isopacks"
+    - "./.meteor/local/plugin-cache"
+    - "/home/ubuntu/nvm/versions/node/v5.2.0/bin"
+    - "/home/ubuntu/nvm/versions/node/v5.2.0/lib/node_modules"
   override:
-    - curl https://install.meteor.com | /bin/sh
-    - meteor npm install
+    - ./.testing/cache_meteor.sh
+    - ./.testing/cache_npm_dependencies.sh
+    - ./.testing/cache_build_and_dependencies.sh
+    - chimp --path=features # Cache chimp deps by running it without any tests
 checkout:
   post:
     - git submodule update --init
 test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
   override:
-    - meteor npm test
+    - ./tests/acceptance_run
