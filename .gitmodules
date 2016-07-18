@@ -1,0 +1,3 @@
+[submodule "packages/apollo"]
+	path = packages/apollo
+	url = https://github.com/apollostack/meteor-integration/

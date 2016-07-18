@@ -43,6 +43,16 @@ Lists.schema = new SimpleSchema({
 
 Lists.attachSchema(Lists.schema);
 
+export const ListSchema = `
+  type List {
+    _id: String!
+    name: String!
+    incompleteCount: Int!
+    private: Boolean!
+    todos: [Todo]!
+  }
+`;
+
 // This represents the keys from Lists objects that should be published
 // to the client. If we add secret properties to List objects, don't list
 // them here to keep them private to the server.

@@ -62,6 +62,15 @@ Todos.schema = new SimpleSchema({
 
 Todos.attachSchema(Todos.schema);
 
+export const TodoSchema = `
+  type Todo {
+    _id: String!
+    text: String!
+    createdAt: String!
+    checked: Boolean!
+  }
+`;
+
 // This represents the keys from Lists objects that should be published
 // to the client. If we add secret properties to List objects, don't list
 // them here to keep them private to the server.
