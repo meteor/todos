@@ -13,6 +13,7 @@ dependencies:
     - "/home/ubuntu/nvm/versions/node/v5.2.0/bin"
     - "/home/ubuntu/nvm/versions/node/v5.2.0/lib/node_modules"
   override:
+    - ./.testing/upgrade_chrome_version.sh
     - ./.testing/cache_meteor.sh
     - ./.testing/cache_npm_dependencies.sh
     - ./.testing/cache_build_and_dependencies.sh
