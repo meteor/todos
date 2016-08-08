@@ -13,7 +13,7 @@ describe('list ui', () => {
     browser.url('http://localhost:3100');
   });
 
-  it('can create a list @watch', () => {
+  it('can create a list', () => {
     const initialCount = countLists();
 
     browser.click('.js-new-list');
