@@ -1,19 +1,18 @@
 { _ } = require 'meteor/underscore'
 { check } = require 'meteor/check'
 
-TodosModule = require './todos.coffee'
-ListsModule = require '../lists/lists.coffee'
+`import { Todos } from './todos.coffee'`
+`import { Lists } from '../lists/lists.coffee'`
 
-
-incompleteCountDenormalizer =
+incompleteCountDenormalizerMap =
   _updateList: (listId) ->
-    # Recalculate the correct incomplete count direct from MongoDB
-    incompleteCount = TodosModule.Todos.find
+    console.log 'Called _updateList with: ', listId
+    incompleteCount = Todos.find
       listId: listId
       checked: no
     .count()
 
-    ListsModule.Lists.update listId, $set: incompleteCount: incompleteCount
+    Lists.update listId, $set: incompleteCount: incompleteCount
 
 
   afterInsertTodo: (todo) ->
@@ -21,18 +20,21 @@ incompleteCountDenormalizer =
 
 
   afterUpdateTodo: (selector, modifier) ->
+    console.log 'afterUpdateTodo', selector
     # We only support very limited operations on todos
     check modifier, $set: Object
 
     # We can only deal with $set modifiers, but that's all we do in this app
     if _.has(modifier.$set, 'checked')
-      TodosModule.Todos.find(selector, fields: listId: 1).forEach (todo) =>
+      Todos.find(selector, fields: listId: 1).forEach (todo) =>
         @_updateList todo.listId
 
 
   afterRemoveTodos: (todos) ->
+    console.log 'After Remove in Denormalizer', todos
     todos.forEach (todo) =>
       @_updateList todo.listId
 
 
-module.exports = incompleteCountDenormalizer
+module.exports.incompleteCountDenormalizer = incompleteCountDenormalizerMap
+`export const incompleteCountDenormalizer = incompleteCountDenormalizerMap`
