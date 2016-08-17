@@ -36,7 +36,6 @@ setCheckedStatusMethod = new ValidatedMethod
     newCheckedStatus: Todos.simpleSchema().schema('checked')
   .validator({ clean: true, filter: false })
   run: ({ todoId, newCheckedStatus }) ->
-    console.log 'setCheckedStatusMethod'
     todo = Todos.findOne todoId
 
     if todo.checked is newCheckedStatus
@@ -60,7 +59,6 @@ updateTextMethod = new ValidatedMethod
     newText: Todos.simpleSchema().schema('text')
   .validator({ clean: true, filter: false })
   run: ({ todoId, newText }) ->
-    console.log 'updateTextMethod'
     # This is complex auth stuff - perhaps denormalizing a userId onto todos
     # would be correct here?
     todo = Todos.findOne todoId
@@ -81,7 +79,6 @@ removeMethod = new ValidatedMethod
     todoId: Todos.simpleSchema().schema('_id')
   .validator({ clean: true, filter: false })
   run: ({ todoId }) ->
-    console.log 'Hit inside remove code'
     todo = Todos.findOne todoId
 
     unless todo.editableBy(@userId)

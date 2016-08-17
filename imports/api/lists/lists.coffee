@@ -27,7 +27,6 @@ class ListsCollection extends Mongo.Collection
     super ourList, callback
 
   remove: (selector, callback) ->
-    console.log 'From Lists [remove]: ', selector
     Todos.remove {listId: selector}
     super selector, callback
 

@@ -94,7 +94,6 @@ Template.Lists_show.helpers
 
 Template.Lists_show.events
   'click .js-cancel': (event, instance) ->
-    console.log "Fired"
     instance.state.set 'editing', no
 
 

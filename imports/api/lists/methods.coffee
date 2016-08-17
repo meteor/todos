@@ -64,7 +64,6 @@ module.exports.updateName = new ValidatedMethod
     newName: Lists.simpleSchema().schema('name')
   .validator({ clean: true, filter: false })
   run: ({ listId, newName }) ->
-    console.log "Looking for List, found: ", list
     list = Lists.findOne listId
 
     unless list.editableBy @userId
@@ -79,7 +78,6 @@ module.exports.remove = new ValidatedMethod
   name: 'lists.remove'
   validate: LIST_ID_ONLY
   run: ({ listId }) ->
-    console.log 'Inside Lists Methods: ', listId
     list = ListsModule.Lists.findOne listId
 
     unless list.editableBy @userId
