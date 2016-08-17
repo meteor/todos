@@ -19,7 +19,6 @@ class TodosCollection extends Mongo.Collection
     ourDoc.createdAt = ourDoc.createdAt or new Date()
 
     callback || callback = () ->
-      console.log 'Insert Created. No callback passed.'
 
     result = super ourDoc, callback
     incompleteCountDenormalizer.afterInsertTodo ourDoc
@@ -32,7 +31,6 @@ class TodosCollection extends Mongo.Collection
     result
 
   remove: (selector) ->
-    console.log  'Inside Remove: ', selector
     # Should be super?
     todos = @find(selector).fetch()
     result = super selector
@@ -99,7 +97,6 @@ Factory.define 'todo', TodosModule,
 
 TodosModule.helpers
   list: ->
-    console.log 'Searching for list in todos helper: ', @listId
     Lists.findOne @listId
 
   editableBy: (userId) ->

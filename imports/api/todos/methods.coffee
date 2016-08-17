@@ -7,9 +7,6 @@
 `import { Todos } from './todos.coffee'`
 `import { Lists } from '../lists/lists.coffee'`
 
-#TodosModule = Todos
-#ListsModule = Lists
-
 insertMethod = new ValidatedMethod
   name: 'todos.insert'
   validate: Todos.schema

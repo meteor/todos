@@ -6,7 +6,6 @@
 
 incompleteCountDenormalizerMap =
   _updateList: (listId) ->
-    console.log 'Called _updateList with: ', listId
     incompleteCount = Todos.find
       listId: listId
       checked: no
@@ -20,7 +19,6 @@ incompleteCountDenormalizerMap =
 
 
   afterUpdateTodo: (selector, modifier) ->
-    console.log 'afterUpdateTodo', selector
     # We only support very limited operations on todos
     check modifier, $set: Object
 
@@ -31,7 +29,6 @@ incompleteCountDenormalizerMap =
 
 
   afterRemoveTodos: (todos) ->
-    console.log 'After Remove in Denormalizer', todos
     todos.forEach (todo) =>
       @_updateList todo.listId
 
