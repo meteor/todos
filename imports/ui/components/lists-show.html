@@ -2,7 +2,7 @@
   <div class="page lists-show">
     <nav class="js-title-nav">
       {{#momentum plugin="fade"}}
-        {{#if instance.state.get 'editing'}}
+        {{#if editing }}
           <form class="js-edit-form list-edit-form">
             <input type="text" name="name" value="{{name}}">
             <div class="nav-group right">
