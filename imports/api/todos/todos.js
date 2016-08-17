@@ -37,6 +37,10 @@ Todos.deny({
 });
 
 Todos.schema = new SimpleSchema({
+  _id: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+  },
   listId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,

@@ -35,6 +35,7 @@ Lists.deny({
 });
 
 Lists.schema = new SimpleSchema({
+  _id: { type: String, regEx: SimpleSchema.RegEx.Id },
   name: { type: String },
   incompleteCount: { type: Number, defaultValue: 0 },
   userId: { type: String, regEx: SimpleSchema.RegEx.Id, optional: true },
