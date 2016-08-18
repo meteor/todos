@@ -73,3 +73,4 @@ practicalmeteor:mocha@2.1.1-rc.1
 # and of course . . . CoffeeScript!
 coffeescript@1.2.3
 dalgard:jade
+johanbrook:publication-collector

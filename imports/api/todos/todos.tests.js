@@ -8,10 +8,10 @@ import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
 
-import { Todos } from './todos.js';
+import { Todos } from './todos.coffee';
 
 if (Meteor.isServer) {
-  import './server/publications.js';
+  import './server/publications.coffee';
 
   describe('todos', function () {
     describe('mutators', function () {

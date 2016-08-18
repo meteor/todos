@@ -56,6 +56,7 @@ html-tools@1.0.10
 htmljs@1.0.10
 http@1.1.8
 id-map@1.0.8
+johanbrook:publication-collector@1.0.0
 jquery@1.11.9
 juliancwirko:postcss@1.1.1
 kadira:blaze-layout@2.3.0
