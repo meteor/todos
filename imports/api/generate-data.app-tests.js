@@ -35,5 +35,11 @@ if (Meteor.isClient) {
     testConnection.call('generateFixtures', cb);
   });
 
-  export { generateData };
 }
+
+// Added because circle omplains while incluing about allowing only top level exports.
+if ( !Meteor.isClient ) {
+  var generateData = null;
+}
+
+export { generateData };
