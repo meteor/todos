@@ -6,6 +6,8 @@ import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
 import { denodeify } from '../utils/denodeify';
+var generateData = null;
+
 const createList = (userId) => {
   const list = Factory.create('list', { userId });
   _.times(3, () => Factory.create('todo', { listId: list._id }));
@@ -31,7 +33,4 @@ if (Meteor.isClient) {
   });
 }
 // Added because circle omplains while incluing about allowing only top level exports.
-if (!Meteor.isClient) {
-  var generateData = null;
-}
 export {generateData};
