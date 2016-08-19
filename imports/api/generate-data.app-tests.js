@@ -6,8 +6,7 @@ import { resetDatabase } from 'meteor/xolvio:cleaner';
 import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
 import { denodeify } from '../utils/denodeify';
-var generateData = null;
-
+const generateData = null;
 const createList = (userId) => {
   const list = Factory.create('list', { userId });
   _.times(3, () => Factory.create('todo', { listId: list._id }));
@@ -28,9 +27,9 @@ if (Meteor.isClient) {
   // Create a second connection to the server to use to call test data methods
   // We do this so there's no contention w/ the currently tested user's connection
   const testConnection = Meteor.connect(Meteor.absoluteUrl());
-  const generateData = denodeify((cb) => {
+  generateData = denodeify((cb) => {
     testConnection.call('generateFixtures', cb);
   });
 }
 // Added because circle omplains while incluing about allowing only top level exports.
-export {generateData};
+export { generateData };
