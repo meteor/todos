@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import { Random } from 'meteor/random';
 import { chai } from 'meteor/practicalmeteor:chai';
-import { StubCollections } from 'meteor/stub-collections';
+import StubCollections from 'meteor/hwillson:stub-collections';
 import { Template } from 'meteor/templating';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
@@ -14,10 +14,10 @@ import { sinon } from 'meteor/practicalmeteor:sinon';
 
 
 import { withRenderedTemplate } from '../../test-helpers.js';
-import '../lists-show-page.js';
+import '../lists-show-page.coffee';
 
-import { Todos } from '../../../api/todos/todos.js';
-import { Lists } from '../../../api/lists/lists.js';
+import { Todos } from '../../../api/todos/todos.coffee';
+import { Lists } from '../../../api/lists/lists.coffee';
 
 describe('Lists_show_page', function () {
   const listId = Random.id();

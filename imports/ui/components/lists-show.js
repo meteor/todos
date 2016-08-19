@@ -45,10 +45,13 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
   this.saveList = () => {
     this.state.set('editing', false);
 
-    updateName.call({
-      listId: this.data.list()._id,
-      newName: this.$('[name=name]').val(),
-    }, displayError);
+    const newName = this.$('[name=name]').val().trim();
+    if (newName) {
+      updateName.call({
+        listId: this.data.list()._id,
+        newName,
+      }, displayError);
+    }
   };
 
   this.editList = () => {
@@ -56,11 +59,10 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
 
     // force the template to redraw based on the reactive change
     Tracker.flush();
-    // TODO -- I think velocity introduces a timeout before actually setting opacity on the
-    //   element, so I can't focus it for a moment.
-    Meteor.defer(() => {
+    // We need to wait for the fade in animation to complete to reliably focus the input
+    Meteor.setTimeout(() => {
       this.$('.js-edit-form input[type=text]').focus();
-    });
+    }, 400);
   };
 
   this.deleteList = () => {
@@ -99,6 +101,10 @@ Template.Lists_show.helpers({
         instance.state.set('editingTodo', editing ? todo._id : false);
       },
     };
+  },
+  editing() {
+    const instance = Template.instance();
+    return instance.state.get('editing');
   },
 });
 

@@ -8,12 +8,11 @@
 # CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
 # Learn more at https://github.com/meteor/meteor/issues/6381
 ListsModule = require '../lists/lists.coffee'
-
+Lists = ListsModule.Lists
 
 LIST_ID_ONLY = new SimpleSchema
-	listId:
-		type: String
-.validator()
+	listId: Lists.simpleSchema().schema('_id')
+.validator({ clean: true, filter: false })
 
 
 module.exports.insert = new ValidatedMethod
@@ -60,21 +59,19 @@ module.exports.makePublic = new ValidatedMethod
 
 module.exports.updateName = new ValidatedMethod
   name: 'lists.updateName'
-  validate: new SimpleSchema(
-    listId: type: String
-    newName: type: String).validator()
+  validate: new SimpleSchema 
+    listId: Lists.simpleSchema().schema('_id')
+    newName: Lists.simpleSchema().schema('name')
+  .validator({ clean: true, filter: false })
   run: ({ listId, newName }) ->
-    list = ListsModule.Lists.findOne listId
+    list = Lists.findOne listId
 
     unless list.editableBy @userId
       throw new Meteor.Error 'lists.updateName.accessDenied', 'You don\'t have permission to edit this list.'
-
     # XXX the security check above is not atomic, so in theory a race condition could
     # result in exposing private data
-
-    ListsModule.Lists.update listId,
-    	$set:
-    		name: newName
+    Lists.update listId,
+    	$set: {name: newName}
 
 
 module.exports.remove = new ValidatedMethod

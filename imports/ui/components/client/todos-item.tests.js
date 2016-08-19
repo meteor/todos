@@ -8,7 +8,7 @@ import { $ } from 'meteor/jquery';
 
 
 import { withRenderedTemplate } from '../../test-helpers.js';
-import '../todos-item.js';
+import '../todos-item.coffee';
 
 describe('Todos_item', function () {
   beforeEach(function () {

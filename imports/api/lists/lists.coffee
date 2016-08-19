@@ -6,7 +6,11 @@
 # CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
 # Learn more at https://github.com/meteor/meteor/issues/6381
 # and http://benjamn.github.io/empirenode-2015/#/31
-TodosModule = require '../todos/todos.coffee'
+
+# TodosModule = require '../todos/todos.coffee'
+`import { Todos } from '../todos/todos.coffee'`
+
+TodosModule = Todos
 
 class ListsCollection extends Mongo.Collection
   insert: (list, callback) ->
@@ -23,10 +27,11 @@ class ListsCollection extends Mongo.Collection
     super ourList, callback
 
   remove: (selector, callback) ->
-    TodosModule.Todos.remove {listId: selector}
+    Todos.remove {listId: selector}
     super selector, callback
 
-Lists = exports.Lists = new ListsCollection 'Lists'
+# Lists = exports.Lists = new ListsCollection 'Lists'
+`export const Lists = new ListsCollection('Lists')`
 
 
 # Deny all client-side updates since we will be using methods to manage this collection
@@ -40,8 +45,10 @@ Lists.deny
   remove: ->
     yes
 
-
 Lists.schema = new SimpleSchema
+  _id: 
+    type: String 
+    regEx: SimpleSchema.RegEx.Id
   name:
     type: String
   incompleteCount:
@@ -83,4 +90,4 @@ Lists.helpers
 
 
   todos: ->
-    TodosModule.Todos.find { listId: @_id }, sort: createdAt: -1
+    Todos.find { listId: @_id }, sort: createdAt: -1
