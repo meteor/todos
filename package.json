@@ -11,8 +11,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "apollo-client": "^0.4.1",
+    "apollo-server": "^0.1.5",
     "autoprefixer": "^6.3.7",
-    "faker": "^3.0.1"
+    "express": "^4.14.0",
+    "faker": "^3.0.1",
+    "graphql": "^0.6.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.0",
