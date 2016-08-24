@@ -5,26 +5,26 @@
 # but you can also edit it by hand.
 
 # meteor libraries
-meteor-base
-ecmascript
-es5-shim
-check
-tracker
+meteor-base@1.0.4
+ecmascript@0.5.7
+es5-shim@4.6.13
+check@1.2.3
+tracker@1.1.0
 
 # standard libraries
-jquery
-underscore
-less
+jquery@1.11.9
+underscore@1.0.9
+less@2.7.4
 
 # ui
-blaze-html-templates
-reactive-dict
-reactive-var
+blaze-html-templates@1.0.4
+reactive-dict@1.1.8
+reactive-var@1.0.10
 aldeed:template-extension
 percolate:momentum
 
 # data
-mongo
+mongo@1.1.10
 aldeed:simple-schema
 aldeed:collection2
 dburles:collection-helpers
@@ -42,21 +42,21 @@ zimme:active-route
 tap:i18n
 
 # accounts
-accounts-password
+accounts-password@1.2.12
 useraccounts:core
 useraccounts:unstyled
 useraccounts:flow-routing
 softwarerero:accounts-t9n
 
 # mobile
-crosswalk
-mobile-experience
+crosswalk@1.6.2
+mobile-experience@1.0.4
 chriswessels:hammer
 
 # production
 juliancwirko:postcss
-standard-minifier-js
-ddp-rate-limiter
+standard-minifier-js@1.1.8
+ddp-rate-limiter@1.0.5
 app-prod-security
 
 # rest apis
