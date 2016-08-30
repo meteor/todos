@@ -1,45 +1,57 @@
 {
   "scripts": {
+    "start": "meteor",
     "pretest": "npm run lint --silent",
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
+    "test-app": "meteor test --full-app --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
-    "lint": "eslint .",
-    "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
+    "test-watch-terminal": "TEST_WATCH=1 meteor test --driver-package dispatch:mocha-phantomjs",
+    "test-app-watch-terminal": "TEST_WATCH=1 meteor test --full-app --driver-package dispatch:mocha-phantomjs",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "autoprefixer": "^6.3.1",
+    "autoprefixer": "^6.3.7",
     "faker": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^2.3.0",
-    "eslint-config-airbnb": "^6.1.0",
-    "eslint-plugin-meteor": "^3.0.1",
-    "eslint-plugin-react": "^4.0.0"
+    "babel-eslint": "^6.1.0",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-import-resolver-meteor": "^0.2.4",
+    "eslint-plugin-import": "^1.10.3",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-meteor": "^3.6.0",
+    "eslint-plugin-react": "^5.2.2",
+    "shell-source": "^1.1.0"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module"
+      "allowImportExportEverywhere": true
     },
     "plugins": [
       "meteor"
     ],
     "extends": [
-      "airbnb/base",
+      "airbnb",
       "plugin:meteor/recommended"
     ],
     "rules": {
+      "no-underscore-dangle": "off",
       "meteor/eventmap-params": [
-        2,
+        "error",
         {
           "eventParamName": "event",
           "templateInstanceParamName": "instance"
         }
       ],
       "meteor/template-names": [
-        0
+        "off"
       ]
+    },
+    "settings": {
+      "import/resolver": "meteor"
     }
   },
   "postcss": {

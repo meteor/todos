@@ -33,7 +33,7 @@ mdg:validated-method
 mdg:validation-error
 
 # routing
-kadira:flow-router@2.11.0
+kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
 zimme:active-route
@@ -43,6 +43,7 @@ tap:i18n
 
 # accounts
 accounts-password
+useraccounts:core
 useraccounts:unstyled
 useraccounts:flow-routing
 softwarerero:accounts-t9n
@@ -53,7 +54,7 @@ mobile-experience
 chriswessels:hammer
 
 # production
-juliancwirko:postcss@1.0.0-beta.11
+juliancwirko:postcss
 standard-minifier-js
 ddp-rate-limiter
 app-prod-security
@@ -64,11 +65,10 @@ simple:rest
 
 # testing
 factory
-publication-collector
-stub-collections
 xolvio:cleaner
 dispatch:mocha-phantomjs
-practicalmeteor:mocha@2.1.1-rc.1
-
-# and of course . . . CoffeeScript!
-coffeescript
+practicalmeteor:chai
+practicalmeteor:sinon
+practicalmeteor:mocha
+hwillson:stub-collections
+johanbrook:publication-collector
