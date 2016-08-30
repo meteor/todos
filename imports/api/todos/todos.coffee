@@ -2,7 +2,7 @@
 { Factory } = require 'meteor/factory'
 faker = require 'faker'
 
-incompleteCountDenormalizer = require './incompleteCountDenormalizer.coffee'
+incompleteCountDenormalizerModule = require './incompleteCountDenormalizer.coffee'
 { SimpleSchema } = require 'meteor/aldeed:simple-schema'
 
 # lists.coffee includes todos.coffee, and vice versa: a circular reference
@@ -17,20 +17,20 @@ class TodosCollection extends Mongo.Collection
     ourDoc = doc
     ourDoc.createdAt = ourDoc.createdAt or new Date()
     result = super ourDoc, callback
-    incompleteCountDenormalizer.afterInsertTodo ourDoc
+    incompleteCountDenormalizerModule.incompleteCountDenormalizer.afterInsertTodo ourDoc
     result
 
 
   update: (selector, modifier) ->
     result = super selector, modifier
-    incompleteCountDenormalizer.afterUpdateTodo selector, modifier
+    incompleteCountDenormalizerModule.incompleteCountDenormalizer.afterUpdateTodo selector, modifier
     result
 
 
   remove: (selector) ->
     todos = @find(selector).fetch()
     result = super selector
-    incompleteCountDenormalizer.afterRemoveTodos todos
+    incompleteCountDenormalizerModule.incompleteCountDenormalizer.afterRemoveTodos todos
     result
 
 Todos = exports.Todos = new TodosCollection 'Todos'
@@ -95,6 +95,7 @@ Factory.define 'todo', Todos,
 
 Todos.helpers
   list: ->
+    ListsModule = require('../lists/lists.coffee') unless ListsModule.Lists?
     ListsModule.Lists.findOne @listId
 
 
