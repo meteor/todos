@@ -11,9 +11,10 @@ ListsModule = require '../lists/lists.coffee'
 
 
 LIST_ID_ONLY = new SimpleSchema
-	listId:
-		type: String
-.validator()
+  listId: ListsModule.Lists.simpleSchema().schema('_id')
+.validator
+  clean: yes
+  filter: no
 
 
 module.exports.insert = new ValidatedMethod
@@ -61,8 +62,10 @@ module.exports.makePublic = new ValidatedMethod
 module.exports.updateName = new ValidatedMethod
   name: 'lists.updateName'
   validate: new SimpleSchema(
-    listId: type: String
-    newName: type: String).validator()
+    listId: ListsModule.Lists.simpleSchema().schema('_id')
+    newName: ListsModule.Lists.simpleSchema().schema('name')).validator
+      clean: yes
+      filter: no
   run: ({ listId, newName }) ->
     list = ListsModule.Lists.findOne listId
 

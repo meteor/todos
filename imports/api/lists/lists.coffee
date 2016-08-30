@@ -42,6 +42,9 @@ Lists.deny
 
 
 Lists.schema = new SimpleSchema
+  _id:
+    type: String
+    regEx: SimpleSchema.RegEx.Id
   name:
     type: String
   incompleteCount:

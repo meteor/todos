@@ -1,6 +1,5 @@
 { FlowRouter } = require 'meteor/kadira:flow-router'
 { BlazeLayout } = require 'meteor/kadira:blaze-layout'
-{ AccountsTemplates } = require 'meteor/useraccounts:core'
 
 # Import to load these templates
 require '../../ui/layouts/app-body.coffee'
@@ -24,17 +23,3 @@ FlowRouter.route '/',
 # the App_notFound template is used for unknown routes and missing lists
 FlowRouter.notFound = action: ->
   BlazeLayout.render 'App_body', main: 'App_notFound'
-
-AccountsTemplates.configureRoute 'signIn',
-  name: 'signin'
-  path: '/signin'
-
-AccountsTemplates.configureRoute 'signUp',
-  name: 'join'
-  path: '/join'
-
-AccountsTemplates.configureRoute 'forgotPwd'
-
-AccountsTemplates.configureRoute 'resetPwd',
-  name: 'resetPwd'
-  path: '/reset-password'

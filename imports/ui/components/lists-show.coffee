@@ -41,10 +41,12 @@ Template.Lists_show.onCreated ->
   @saveList = =>
     @state.set 'editing', no
 
-    updateName.call
-      listId: @data.list()._id
-      newName: @$('[name=name]').val()
-    , displayError
+    newName = @$('[name=name]').val().trim()
+    if newName
+      updateName.call
+        listId: @data.list()._id
+        newName: newName
+      , displayError
 
 
   @editList = =>
@@ -52,10 +54,11 @@ Template.Lists_show.onCreated ->
 
     # force the template to redraw based on the reactive change
     Tracker.flush()
-    # TODO -- I think velocity introduces a timeout before actually setting opacity on the
-    #   element, so I can't focus it for a moment.
-    Meteor.defer =>
+    # We need to wait for the fade in animation to complete to reliably focus the input
+    Meteor.setTimeout =>
       @$('.js-edit-form input[type=text]').focus()
+      return
+    , 400
 
 
   @deleteList = =>
@@ -85,6 +88,10 @@ Template.Lists_show.helpers
       editing: instance.state.equals 'editingTodo', todo._id
       onEditingChange: (editing) ->
         instance.state.set 'editingTodo', if editing then todo._id else no
+
+  editing: ->
+    instance = Template.instance()
+    instance.state.get 'editing'
 
 
 Template.Lists_show.events
@@ -144,11 +151,13 @@ Template.Lists_show.events
 
   'submit .js-todo-new': (event) ->
     event.preventDefault()
-    $input = $(event.target).find('[type=text]')
-    if $input.val()
-      insert.call
-        listId: @list()._id
-        text: $input.val()
-      , displayError
 
-      $input.val ''
+    $input = $(event.target).find '[type=text]'
+    return unless $input.val()
+
+    insert.call
+      listId: @list()._id
+      text: $input.val()
+    , displayError
+
+    $input.val ''

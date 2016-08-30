@@ -1,0 +1,1 @@
+require './useraccounts-configuration.coffee'

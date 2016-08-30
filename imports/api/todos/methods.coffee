@@ -10,12 +10,12 @@ ListsModule = require '../lists/lists.coffee'
 
 module.exports.insert = new ValidatedMethod
   name: 'todos.insert'
-  validate: new SimpleSchema
-    listId:
-      type: String
-    text:
-      type: String
-  .validator()
+  validate: TodosModule.Todos.simpleSchema().pick([
+    'listId'
+    'text'
+  ]).validator
+    clean: yes
+    filter: no
   run: ({ listId, text }) ->
     list = ListsModule.Lists.findOne listId
 
@@ -34,11 +34,11 @@ module.exports.insert = new ValidatedMethod
 module.exports.setCheckedStatus = new ValidatedMethod
   name: 'todos.makeChecked'
   validate: new SimpleSchema
-    todoId:
-      type: String
-    newCheckedStatus:
-      type: Boolean
-  .validator()
+    todoId: TodosModule.Todos.simpleSchema().schema('_id')
+    newCheckedStatus: TodosModule.Todos.simpleSchema().schema('checked')
+  .validator
+    clean: yes
+    filter: no
   run: ({ todoId, newCheckedStatus }) ->
     todo = TodosModule.Todos.findOne todoId
 
@@ -56,9 +56,12 @@ module.exports.setCheckedStatus = new ValidatedMethod
 
 module.exports.updateText = new ValidatedMethod
   name: 'todos.updateText'
-  validate: new SimpleSchema(
-    todoId: type: String
-    newText: type: String).validator()
+  validate: new SimpleSchema
+    todoId: TodosModule.Todos.simpleSchema().schema('_id')
+    newText: TodosModule.Todos.simpleSchema().schema('text')
+  .validator
+    clean: yes
+    filter: no
   run: ({ todoId, newText }) ->
     # This is complex auth stuff - perhaps denormalizing a userId onto todos
     # would be correct here?
@@ -75,9 +78,10 @@ module.exports.updateText = new ValidatedMethod
 module.exports.remove = new ValidatedMethod
   name: 'todos.remove'
   validate: new SimpleSchema
-    todoId:
-      type: String
-  .validator()
+    todoId: TodosModule.Todos.simpleSchema().schema('_id')
+  .validator
+    clean: yes
+    filter: no
   run: ({ todoId }) ->
     todo = TodosModule.Todos.findOne todoId
 

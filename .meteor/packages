@@ -72,3 +72,5 @@ practicalmeteor:sinon
 practicalmeteor:mocha
 hwillson:stub-collections
 johanbrook:publication-collector
+modules
+coffeescript
