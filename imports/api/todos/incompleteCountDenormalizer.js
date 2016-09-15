@@ -23,7 +23,7 @@ const incompleteCountDenormalizer = {
 
     // We can only deal with $set modifiers, but that's all we do in this app
     if (_.has(modifier.$set, 'checked')) {
-      Todos.find(selector, { fields: { listId: 1 } }).forEach(todo => {
+      Todos.find(selector, { fields: { listId: 1 } }).forEach((todo) => {
         this._updateList(todo.listId);
       });
     }
