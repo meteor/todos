@@ -1,3 +1,5 @@
+/* global document */
+
 // TODO -- this should probably be some kind of test package that people use
 
 import { _ } from 'meteor/underscore';

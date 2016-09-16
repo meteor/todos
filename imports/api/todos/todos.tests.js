@@ -11,6 +11,7 @@ import { _ } from 'meteor/underscore';
 import { Todos } from './todos.js';
 
 if (Meteor.isServer) {
+  // eslint-disable-next-line import/no-unresolved
   import './server/publications.js';
 
   describe('todos', function () {
