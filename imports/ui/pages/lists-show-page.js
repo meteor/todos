@@ -14,7 +14,7 @@ Template.Lists_show_page.onCreated(function listsShowPageOnCreated() {
   this.getListId = () => FlowRouter.getParam('_id');
 
   this.autorun(() => {
-    this.subscribe('todos.inList', this.getListId());
+    this.subscribe('todos.inList', { listId: this.getListId() });
   });
 });
 
