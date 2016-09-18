@@ -73,3 +73,6 @@ practicalmeteor:mocha
 hwillson:stub-collections
 johanbrook:publication-collector
 shell-server
+
+# security
+audit-argument-checks
