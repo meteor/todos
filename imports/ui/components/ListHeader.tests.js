@@ -24,6 +24,7 @@ if (Meteor.isClient) {
     let list = null;
     let header = null;
     let router = null;
+
     beforeEach(() => {
       list = Factory.create('list', { userId: Random.id(), name: 'testing' });
       router = { push: sinon.stub() };
@@ -31,11 +32,12 @@ if (Meteor.isClient) {
         context: { router },
       });
     });
+
     describe('any state', () => {
       it('should create a new todo when user submits', () => {
         sinon.stub(insert, 'call');
 
-        header.instance().refs.newTodoInput.value = 'new todo';
+        header.instance().newTodoInput.value = 'new todo';
         header.find('.todo-new').simulate('submit');
 
         sinon.assert.calledWith(insert.call, { listId: list._id, text: 'new todo' });
@@ -79,7 +81,7 @@ if (Meteor.isClient) {
       it('should rename the list when user edits', () => {
         sinon.stub(updateName, 'call');
 
-        header.instance().refs.listNameInput.value = 'renamed';
+        header.instance().listNameInput.value = 'renamed';
         header.find('.list-edit-form').simulate('submit');
         sinon.assert.calledWith(updateName.call, {
           listId: list._id,

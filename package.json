@@ -4,7 +4,7 @@
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
-    "lint": "eslint .",
+    "lint": "eslint --ext .js,.jsx .",
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "dependencies": {
@@ -51,6 +51,8 @@
       "import/no-extraneous-dependencies": "off",
       "import/prefer-default-export": "off",
       "no-underscore-dangle": "off",
+      "class-methods-use-this": "off",
+      "meteor/no-session": "off",
       "object-shorthand": [
         "error",
         "always",
@@ -76,7 +78,9 @@
             ".jsx"
           ]
         }
-      ]
+      ],
+      "react/forbid-prop-types": "off",
+      "jsx-a11y/no-static-element-interactions": "off"
     },
     "settings": {
       "import/resolver": "meteor"

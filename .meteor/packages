@@ -61,3 +61,6 @@ practicalmeteor:chai
 practicalmeteor:sinon
 hwillson:stub-collections
 shell-server
+
+# security
+audit-argument-checks

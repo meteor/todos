@@ -1,3 +1,5 @@
+/* global alert */
+
 import React from 'react';
 import { Link } from 'react-router';
 import { insert } from '../../api/lists/methods.js';
@@ -18,7 +20,7 @@ export default class ListList extends React.Component {
         alert('Could not create list.');
       }
     });
-    router.push(`/lists/${ listId }`);
+    router.push(`/lists/${listId}`);
   }
 
   render() {
@@ -26,19 +28,19 @@ export default class ListList extends React.Component {
     return (
       <div className="list-todos">
         <a className="link-list-new" onClick={this.createNewList}>
-          <span className="icon-plus"></span>
+          <span className="icon-plus" />
           New List
         </a>
         {lists.map(list => (
           <Link
-            to={`/lists/${ list._id }`}
+            to={`/lists/${list._id}`}
             key={list._id}
             title={list.name}
             className="list-todo"
             activeClassName="active"
           >
             {list.userId
-              ? <span className="icon-lock"></span>
+              ? <span className="icon-lock" />
               : null}
             {list.incompleteCount
               ? <span className="count-list">{list.incompleteCount}</span>

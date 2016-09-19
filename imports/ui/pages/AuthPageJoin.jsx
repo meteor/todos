@@ -1,7 +1,8 @@
 import React from 'react';
-import AuthPage from './AuthPage.jsx';
 import { Link } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
+
+import AuthPage from './AuthPage.jsx';
 
 export default class JoinPage extends React.Component {
   constructor(props) {
@@ -12,9 +13,9 @@ export default class JoinPage extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-    const confirm = this.refs.confirm.value;
+    const email = this.email.value;
+    const password = this.password.value;
+    const confirm = this.confirm.value;
     const errors = {};
 
     if (!email) {
@@ -35,7 +36,7 @@ export default class JoinPage extends React.Component {
     Accounts.createUser({
       email,
       password,
-    }, err => {
+    }, (err) => {
       if (err) {
         this.setState({
           errors: { none: err.reason },
@@ -61,16 +62,31 @@ export default class JoinPage extends React.Component {
             ))}
           </div>
           <div className={`input-symbol ${errorClass('email')}`}>
-            <input type="email" name="email" ref="email" placeholder="Your Email"/>
-            <span className="icon-email" title="Your Email"></span>
+            <input
+              type="email"
+              name="email"
+              ref={(c) => { this.email = c; }}
+              placeholder="Your Email"
+            />
+            <span className="icon-email" title="Your Email" />
           </div>
           <div className={`input-symbol ${errorClass('password')}`}>
-            <input type="password" name="password" ref="password" placeholder="Password"/>
-            <span className="icon-lock" title="Password"></span>
+            <input
+              type="password"
+              name="password"
+              ref={(c) => { this.password = c; }}
+              placeholder="Password"
+            />
+            <span className="icon-lock" title="Password" />
           </div>
           <div className={`input-symbol ${errorClass('confirm')}`}>
-            <input type="password" name="confirm" ref="confirm" placeholder="Confirm Password"/>
-            <span className="icon-lock" title="Confirm Password"></span>
+            <input
+              type="password"
+              name="confirm"
+              ref={(c) => { this.confirm = c; }}
+              placeholder="Confirm Password"
+            />
+            <span className="icon-lock" title="Confirm Password" />
           </div>
           <button type="submit" className="btn-primary">Join Now</button>
         </form>
@@ -79,7 +95,7 @@ export default class JoinPage extends React.Component {
 
     const link = <Link to="/signin" className="link-auth-alt">Have an account? Sign in</Link>;
 
-    return <AuthPage content={content} link={link}/>;
+    return <AuthPage content={content} link={link} />;
   }
 }
 

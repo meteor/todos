@@ -32,7 +32,7 @@ export default class App extends React.Component {
     // redirect / to a list once lists are ready
     if (!loading && !children) {
       const list = Lists.findOne();
-      this.context.router.replace(`/lists/${ list._id }`);
+      this.context.router.replace(`/lists/${list._id}`);
     }
   }
 
@@ -48,7 +48,7 @@ export default class App extends React.Component {
       const list = Lists.findOne(this.props.params.id);
       if (list.userId) {
         const publicList = Lists.findOne({ userId: { $exists: false } });
-        this.context.router.push(`/lists/${ publicList._id }`);
+        this.context.router.push(`/lists/${publicList._id}`);
       }
     }
   }
@@ -65,6 +65,7 @@ export default class App extends React.Component {
       location,
     } = this.props;
 
+    // eslint-disable-next-line react/jsx-no-bind
     const closeMenu = this.toggleMenu.bind(this, false);
 
     // clone route components with keys so that they can
@@ -76,13 +77,13 @@ export default class App extends React.Component {
     return (
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
         <section id="menu">
-          <UserMenu user={user} logout={this.logout}/>
-          <ListList lists={lists}/>
+          <UserMenu user={user} logout={this.logout} />
+          <ListList lists={lists} />
         </section>
         {showConnectionIssue && !connected
-          ? <ConnectionNotification/>
+          ? <ConnectionNotification />
           : null}
-        <div className="content-overlay" onClick={closeMenu}></div>
+        <div className="content-overlay" onClick={closeMenu} />
         <div id="content-container">
           <ReactCSSTransitionGroup
             transitionName="fade"
@@ -90,7 +91,7 @@ export default class App extends React.Component {
             transitionLeaveTimeout={200}
           >
             {loading
-              ? <Loading key="loading"/>
+              ? <Loading key="loading" />
               : clonedChildren}
           </ReactCSSTransitionGroup>
         </div>

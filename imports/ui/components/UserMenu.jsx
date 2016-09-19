@@ -25,10 +25,10 @@ export default class UserMenu extends React.Component {
 
     return (
       <div className="user-menu vertical">
-        <a href="#" className="btn-secondary" onClick={this.toggle}>
+        <a href="#toggle" className="btn-secondary" onClick={this.toggle}>
           {open
-            ? <span className="icon-arrow-up"></span>
-            : <span className="icon-arrow-down"></span>}
+            ? <span className="icon-arrow-up" />
+            : <span className="icon-arrow-down" />}
           {emailLocalPart}
         </a>
         {open

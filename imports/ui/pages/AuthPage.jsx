@@ -5,7 +5,7 @@ import MobileMenu from '../components/MobileMenu.jsx';
 const AuthPage = ({ content, link }) => (
   <div className="page auth">
     <nav>
-      <MobileMenu/>
+      <MobileMenu />
     </nav>
     <div className="content-scrollable">
       {content}
