@@ -8,28 +8,37 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "dependencies": {
-    "autoprefixer": "^6.3.1",
-    "classnames": "^2.2.3",
-    "faker": "^3.0.1",
-    "react": "^15.0.0",
-    "react-addons-css-transition-group": "^15.0.0",
-    "react-addons-pure-render-mixin": "^15.0.0",
-    "react-addons-test-utils": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "react-router": "^2.0.0"
+    "autoprefixer": "^6.4.1",
+    "classnames": "^2.2.5",
+    "faker": "^3.1.0",
+    "react": "^15.3.1",
+    "react-addons-css-transition-group": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-router": "^2.8.1"
   },
   "devDependencies": {
-    "enzyme": "^2.3.0",
-    "eslint": "^2.3.0",
-    "eslint-config-airbnb": "^6.1.0",
-    "eslint-plugin-meteor": "^3.0.1",
-    "eslint-plugin-react": "^4.0.0",
-    "meteor-node-stubs": "^0.2.3"
+    "babel-eslint": "^6.1.2",
+    "enzyme": "^2.4.1",
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-import-resolver-meteor": "^0.3.3",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-meteor": "^4.0.0",
+    "eslint-plugin-react": "^6.2.2",
+    "meteor-node-stubs": "^0.2.3",
+    "react-addons-test-utils": "^15.3.1"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 6,
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "allowImportExportEverywhere": true
     },
     "plugins": [
       "meteor"
@@ -39,16 +48,38 @@
       "plugin:meteor/recommended"
     ],
     "rules": {
+      "import/no-extraneous-dependencies": "off",
+      "import/prefer-default-export": "off",
+      "no-underscore-dangle": "off",
+      "object-shorthand": [
+        "error",
+        "always",
+        {
+          "avoidQuotes": false
+        }
+      ],
       "meteor/eventmap-params": [
-        2,
+        "error",
         {
           "eventParamName": "event",
           "templateInstanceParamName": "instance"
         }
       ],
       "meteor/template-names": [
-        0
+        "off"
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
       ]
+    },
+    "settings": {
+      "import/resolver": "meteor"
     }
   },
   "postcss": {

@@ -1,3 +1,4 @@
+/* global window */
 /* eslint-env mocha */
 
 import { Meteor } from 'meteor/meteor';
@@ -6,8 +7,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
-import ListHeader from './ListHeader.jsx';
 import { Random } from 'meteor/random';
+import ListHeader from './ListHeader.jsx';
 
 import {
   updateName,

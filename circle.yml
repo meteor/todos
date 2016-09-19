@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 0.10.40
+    version: 4.5.0
 dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
@@ -8,4 +8,3 @@ dependencies:
 checkout:
   post:
     - git submodule update --init
-   

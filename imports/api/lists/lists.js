@@ -10,7 +10,7 @@ class ListsCollection extends Mongo.Collection {
       let nextLetter = 'A';
       ourList.name = `List ${nextLetter}`;
 
-      while (!!this.findOne({ name: ourList.name })) {
+      while (this.findOne({ name: ourList.name })) {
         // not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
         ourList.name = `List ${nextLetter}`;
