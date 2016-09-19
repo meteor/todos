@@ -1,9 +1,6 @@
 /* eslint-env mocha */
 
 import { Factory } from 'meteor/factory';
-import { Lists } from './lists.js';
-import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
-import { Todos } from '../todos/todos.js';
 import { PublicationCollector } from 'meteor/publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
@@ -11,8 +8,13 @@ import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
 
+import { Lists } from './lists.js';
+import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
+import { Todos } from '../todos/todos.js';
+
 if (Meteor.isServer) {
-  require('./server/publications.js');
+  // eslint-disable-next-line import/no-unresolved
+  import './server/publications.js';
 
   describe('lists', () => {
     describe('mutators', () => {

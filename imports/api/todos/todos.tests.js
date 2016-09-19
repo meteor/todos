@@ -10,7 +10,8 @@ import { _ } from 'meteor/underscore';
 import { Todos } from './todos.js';
 
 if (Meteor.isServer) {
-  require('./server/publications.js');
+  // eslint-disable-next-line import/no-unresolved
+  import './server/publications.js';
 
   describe('todos', () => {
     describe('mutators', () => {

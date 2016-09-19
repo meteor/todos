@@ -36,5 +36,6 @@ if (Meteor.isClient) {
   });
 }
 
+const generateDataExport = generateData;
 
-export { generateData };
+export { generateDataExport };
