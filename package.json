@@ -19,17 +19,25 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
+    "enzyme": "^2.4.1",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.15.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-meteor": "^4.0.0",
-    "eslint-plugin-react": "^6.2.2"
+    "eslint-plugin-react": "^6.2.2",
+    "meteor-node-stubs": "^0.2.3",
+    "react-addons-test-utils": "^15.3.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
     "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      },
       "allowImportExportEverywhere": true
     },
     "plugins": [
@@ -59,6 +67,15 @@
       ],
       "meteor/template-names": [
         "off"
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
       ]
     },
     "settings": {
