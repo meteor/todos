@@ -12,7 +12,7 @@ import {
 export default class TodoItem extends React.Component {
   constructor(props) {
     super(props);
-    this.throttledUpdate = _.throttle(value => {
+    this.throttledUpdate = _.throttle((value) => {
       if (value) {
         updateText.call({
           todoId: this.props.todo._id,
@@ -61,16 +61,18 @@ export default class TodoItem extends React.Component {
 
     return (
       <div className={todoClass}>
-        <label className="checkbox">
+        <label className="checkbox" htmlFor={this.props.todo._id}>
           <input
+            id={this.props.todo._id}
             type="checkbox"
             checked={todo.checked}
             name="checked"
             onChange={this.setTodoCheckStatus}
           />
-          <span className="checkbox-custom"></span>
+          <span className="checkbox-custom" />
         </label>
         <input
+
           type="text"
           defaultValue={todo.text}
           placeholder="Task name"
@@ -80,11 +82,11 @@ export default class TodoItem extends React.Component {
         />
         <a
           className="delete-item"
-          href="#"
+          href="#delete"
           onClick={this.deleteTodo}
           onMouseDown={this.deleteTodo}
         >
-          <span className="icon-trash"></span>
+          <span className="icon-trash" />
         </a>
       </div>
     );

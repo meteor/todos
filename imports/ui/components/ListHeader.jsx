@@ -1,3 +1,5 @@
+/* global confirm */
+
 import React from 'react';
 import MobileMenu from './MobileMenu.jsx';
 import { displayError } from '../helpers/errors.js';
@@ -58,7 +60,7 @@ export default class ListHeader extends React.Component {
 
   editList() {
     this.setState({ editing: true }, () => {
-      this.refs.listNameInput.focus();
+      this.listNameInput.focus();
     });
   }
 
@@ -70,7 +72,7 @@ export default class ListHeader extends React.Component {
     this.setState({ editing: false });
     updateName.call({
       listId: this.props.list._id,
-      newName: this.refs.listNameInput.value,
+      newName: this.listNameInput.value,
     }, displayError);
   }
 
@@ -95,7 +97,7 @@ export default class ListHeader extends React.Component {
 
   createTodo(event) {
     event.preventDefault();
-    const input = this.refs.newTodoInput;
+    const input = this.newTodoInput;
     if (input.value.trim()) {
       insert.call({
         listId: this.props.list._id,
@@ -106,21 +108,22 @@ export default class ListHeader extends React.Component {
   }
 
   focusTodoInput() {
-    this.refs.newTodoInput.focus();
+    this.newTodoInput.focus();
   }
 
   renderDefaultHeader() {
     const { list } = this.props;
     return (
       <div>
-        <MobileMenu/>
+        <MobileMenu />
         <h1 className="title-page" onClick={this.editList}>
           <span className="title-wrapper">{list.name}</span>
           <span className="count-list">{list.incompleteCount}</span>
         </h1>
         <div className="nav-group right">
           <div className="nav-item options-mobile">
-            <select className="list-edit"
+            <select
+              className="list-edit"
               defaultValue="default"
               onChange={this.onListDropdownAction}
             >
@@ -130,16 +133,16 @@ export default class ListHeader extends React.Component {
                 : <option value="private">Make Private</option>}
               <option value="delete">Delete</option>
             </select>
-            <span className="icon-cog"></span>
+            <span className="icon-cog" />
           </div>
           <div className="options-web">
             <a className="nav-item" onClick={this.toggleListPrivacy}>
               {list.userId
-                ? <span className="icon-lock" title="Make list public"></span>
-                : <span className="icon-unlock" title="Make list private"></span>}
+                ? <span className="icon-lock" title="Make list public" />
+                : <span className="icon-unlock" title="Make list private" />}
             </a>
             <a className="nav-item trash" onClick={this.deleteList}>
-              <span className="icon-trash" title="Delete list"></span>
+              <span className="icon-trash" title="Delete list" />
             </a>
           </div>
         </div>
@@ -151,20 +154,22 @@ export default class ListHeader extends React.Component {
     const { list } = this.props;
     return (
       <form className="list-edit-form" onSubmit={this.onListFormSubmit}>
-        <input type="text"
+        <input
+          type="text"
           name="name"
           autoComplete="off"
-          ref="listNameInput"
+          ref={(c) => { this.listNameInput = c; }}
           defaultValue={list.name}
           onKeyUp={this.onListInputKeyUp}
           onBlur={this.onListInputBlur}
         />
         <div className="nav-group right">
-          <a className="nav-item"
+          <a
+            className="nav-item"
             onMouseDown={this.cancelEdit}
             onClick={this.cancelEdit}
           >
-            <span className="icon-close" title="Cancel"></span>
+            <span className="icon-close" title="Cancel" />
           </a>
         </div>
       </form>
@@ -177,8 +182,12 @@ export default class ListHeader extends React.Component {
       <nav className="list-header">
         {editing ? this.renderEditingHeader() : this.renderDefaultHeader()}
         <form className="todo-new input-symbol" onSubmit={this.createTodo}>
-          <input type="text" ref="newTodoInput" placeholder="Type to add new tasks"/>
-          <span className="icon-add" onClick={this.focusTodoInput}></span>
+          <input
+            type="text"
+            ref={(c) => { this.newTodoInput = c; }}
+            placeholder="Type to add new tasks"
+          />
+          <span className="icon-add" onClick={this.focusTodoInput} />
         </form>
       </nav>
     );

@@ -54,42 +54,62 @@ if (Meteor.isServer) {
       describe('todos.inList', () => {
         it('sends all todos for a public list', (done) => {
           const collector = new PublicationCollector();
-          collector.collect('todos.inList', publicList._id, (collections) => {
-            chai.assert.equal(collections.Todos.length, 3);
-            done();
-          });
+          collector.collect(
+            'todos.inList',
+            { listId: publicList._id },
+            (collections) => {
+              chai.assert.equal(collections.Todos.length, 3);
+              done();
+            }
+          );
         });
 
         it('sends all todos for a public list when logged in', (done) => {
           const collector = new PublicationCollector({ userId });
-          collector.collect('todos.inList', publicList._id, (collections) => {
-            chai.assert.equal(collections.Todos.length, 3);
-            done();
-          });
+          collector.collect(
+            'todos.inList',
+            { listId: publicList._id },
+            (collections) => {
+              chai.assert.equal(collections.Todos.length, 3);
+              done();
+            }
+          );
         });
 
         it('sends all todos for a private list when logged in as owner', (done) => {
           const collector = new PublicationCollector({ userId });
-          collector.collect('todos.inList', privateList._id, (collections) => {
-            chai.assert.equal(collections.Todos.length, 3);
-            done();
-          });
+          collector.collect(
+            'todos.inList',
+            { listId: privateList._id },
+            (collections) => {
+              chai.assert.equal(collections.Todos.length, 3);
+              done();
+            }
+          );
         });
 
         it('sends no todos for a private list when not logged in', (done) => {
           const collector = new PublicationCollector();
-          collector.collect('todos.inList', privateList._id, (collections) => {
-            chai.assert.isUndefined(collections.Todos);
-            done();
-          });
+          collector.collect(
+            'todos.inList',
+            { listId: privateList._id },
+            (collections) => {
+              chai.assert.isUndefined(collections.Todos);
+              done();
+            }
+          );
         });
 
         it('sends no todos for a private list when logged in as another user', (done) => {
           const collector = new PublicationCollector({ userId: Random.id() });
-          collector.collect('todos.inList', privateList._id, (collections) => {
-            chai.assert.isUndefined(collections.Todos);
-            done();
-          });
+          collector.collect(
+            'todos.inList',
+            { listId: privateList._id },
+            (collections) => {
+              chai.assert.isUndefined(collections.Todos);
+              done();
+            }
+          );
         });
       });
     });

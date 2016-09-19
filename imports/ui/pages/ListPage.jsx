@@ -24,7 +24,7 @@ export default class ListPage extends React.Component {
     const { editingTodo } = this.state;
 
     if (!listExists) {
-      return <NotFoundPage/>;
+      return <NotFoundPage />;
     }
 
     let Todos;
@@ -48,9 +48,9 @@ export default class ListPage extends React.Component {
 
     return (
       <div className="page lists-show">
-        <ListHeader list={list}/>
+        <ListHeader list={list} />
         <div className="content-scrollable list-items">
-          {loading ? <Message title="Loading tasks..."/> : Todos}
+          {loading ? <Message title="Loading tasks..." /> : Todos}
         </div>
       </div>
     );

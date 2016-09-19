@@ -7,7 +7,7 @@ This branch (`react`) implements the UI in [React](https://facebook.github.io/re
 ### Running the app
 
 ```bash
-npm install
+meteor npm install
 meteor
 ```
 
@@ -16,5 +16,5 @@ meteor
 To lint:
 
 ```bash
-npm run lint
+meteor npm run lint
 ```

@@ -6,11 +6,12 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Todos } from '../todos.js';
 import { Lists } from '../../lists/lists.js';
 
-Meteor.publishComposite('todos.inList', function todosInList(listId) {
+Meteor.publishComposite('todos.inList', function todosInList(params) {
   new SimpleSchema({
     listId: { type: String },
-  }).validate({ listId });
+  }).validate(params);
 
+  const { listId } = params;
   const userId = this.userId;
 
   return {
