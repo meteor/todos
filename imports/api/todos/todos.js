@@ -49,6 +49,7 @@ Todos.schema = new SimpleSchema({
   text: {
     type: String,
     max: 100,
+    optional: true,
   },
   createdAt: {
     type: Date,
