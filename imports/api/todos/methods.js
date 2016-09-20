@@ -71,7 +71,9 @@ export const updateText = new ValidatedMethod({
     }
 
     Todos.update(todoId, {
-      $set: { text: newText },
+      $set: {
+        text: (_.isUndefined(newText) ? null : newText),
+      },
     });
   },
 });
