@@ -68,7 +68,7 @@ Template.Lists_show.onCreated(function listShowOnCreated() {
 
   this.deleteList = () => {
     const list = this.data.list();
-    const message = `${TAPi18n.__('Are you sure you want to delete the list')} ${list.name}?`;
+    const message = `${TAPi18n.__('lists.remove.confirm')} "${list.name}"?`;
 
     if (confirm(message)) { // eslint-disable-line no-alert
       remove.call({

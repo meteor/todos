@@ -4,9 +4,20 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
+  .language-toggle {
+    text-align: center;
+    margin-top: 1em;
+    font-size: .8rem;
+    .active {
+      border-bottom: 1px solid;
+      padding-bottom: 1px;
+      color: @color-secondary;
+    }
+  }
+
   .btns-group,
   .btns-group-vertical {
-    margin: 2em auto 2em;
+    margin: 1em auto 2em;
     width: 80%;
 
     .btn-secondary {

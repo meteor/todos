@@ -7,14 +7,20 @@
             <input type="text" name="name" value="{{name}}">
             <div class="nav-group right">
               <a href="#" class="js-cancel nav-item">
-                <span class="icon-close js-cancel" title={{_ 'Cancel'}}></span>
+                <span
+                  class="icon-close js-cancel"
+                  title={{_ 'lists.show.cancel'}}>
+                </span>
               </a>
             </div>
           </form>
         {{else}}
           <div class="nav-group">
             <a href="#" class="js-menu nav-item">
-              <span class="icon-list-unordered" title={{_ 'Show Menu'}}></span>
+              <span
+                class="icon-list-unordered"
+                title={{_ 'lists.show.showMenu'}}>
+              </span>
             </a>
           </div>
 
@@ -26,27 +32,38 @@
           <div class="nav-group right">
             <div class="nav-item options-mobile">
               <select class="list-edit">
-                <option disabled selected>{{_ 'Select an action'}}</option>
+                <option disabled selected>
+                  {{_ 'lists.show.selectAction'}}
+                </option>
                 {{#if list.userId}}
-                  <option value="public">{{_ 'Make Public'}}</option>
+                  <option value="public">{{_ 'lists.show.makePublic'}}</option>
                 {{else}}
-                  <option value="private">{{_ 'Make Private'}}</option>
+                  <option value="private">{{_ 'lists.show.makePrivate'}}</option>
                 {{/if}}
-                <option value="delete">{{_ 'Delete'}}</option>
+                <option value="delete">{{_ 'lists.show.delete'}}</option>
               </select>
               <span class="icon-cog"></span>
             </div>
             <div class="options-web">
               <a class="js-toggle-list-privacy nav-item">
                 {{#if list.userId}}
-                  <span class="icon-lock" title={{_ 'Make list public'}}></span>
+                  <span
+                    class="icon-lock"
+                    title={{_ 'lists.show.makeListPublic'}}>
+                  </span>
                 {{else}}
-                  <span class="icon-unlock" title={{_ 'Make list private'}}></span>
+                  <span
+                    class="icon-unlock"
+                    title={{_ 'lists.show.makeListPrivate'}}>
+                  </span>
                 {{/if}}
               </a>
 
               <a class="js-delete-list nav-item">
-                <span class="icon-trash" title={{_ 'Delete list'}}></span>
+                <span
+                  class="icon-trash"
+                  title={{_ 'lists.show.deleteList'}}>
+                </span>
               </a>
             </div>
           </div>
@@ -54,11 +71,13 @@
       {{/momentum}}
 
       <form class="js-todo-new todo-new input-symbol">
-        <input type="text" placeholder={{_ 'Type to add new tasks'}}>
+        <input
+          type="text"
+          placeholder={{_ 'lists.show.typeToAdd'}}
+        />
         <span class="icon-add js-todo-add"></span>
       </form>
     </nav>
-
 
     <div class="content-scrollable list-items">
       {{#if todosReady}}
@@ -66,14 +85,14 @@
           {{> Todos_item (todoArgs todo)}}
         {{else}}
           <div class="wrapper-message">
-            <div class="title-message">{{_ 'No tasks here'}}</div>
-            <div class="subtitle-message">{{_ 'Add new tasks using the field above'}}</div>
+            <div class="title-message">{{_ 'lists.show.noTasks'}}</div>
+            <div class="subtitle-message">{{_ 'lists.show.addAbove'}}</div>
           </div>
         {{/each}}
       {{else}}
-          <div class="wrapper-message">
-            <div class="title-message">{{_ 'Loading tasks...'}}</div>
-          </div>
+        <div class="wrapper-message">
+          <div class="title-message">{{_ 'lists.show.loading'}}</div>
+        </div>
       {{/if}}
     </div>
   </div>

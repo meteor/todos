@@ -2,6 +2,15 @@
   {{#HammerTouchArea gestureMap=templateGestures}}
     <div id="container" class="{{menuOpen}} {{cordova}}">
       <section id="menu">
+        <div class="language-toggle">
+          {{#each language in languages}}
+            {{#if isActiveLanguage language}}
+              <span class="active">{{language}}</span>
+            {{else}}
+              <a href="#" class="js-toggle-language">{{language}}</a>
+            {{/if}}
+          {{/each}}
+        </div>
         {{#if currentUser}}
           <div class="btns-group-vertical">
             <a href="#" class="js-user-menu btn-secondary">
@@ -14,20 +23,26 @@
               {{emailLocalPart}}
             </a>
             {{#if userMenuOpen}}
-              <a class="js-logout btn-secondary">{{_ 'Logout'}}</a>
+              <a class="js-logout btn-secondary">
+                {{_ 'layouts.appBody.logout'}}
+              </a>
             {{/if}}
           </div>
         {{else}}
           <div class="btns-group">
-            <a href="{{pathFor 'signin'}}" class="btn-secondary">{{_ 'Sign In'}}</a>
-            <a href="{{pathFor 'join'}}" class="btn-secondary">{{_ 'Join'}}</a>
+            <a href="{{pathFor 'signin'}}" class="btn-secondary">
+              {{_ 'layouts.appBody.login'}}
+            </a>
+            <a href="{{pathFor 'join'}}" class="btn-secondary">
+              {{_ 'layouts.appBody.join'}}
+            </a>
           </div>
         {{/if}}
 
         <div class="list-todos">
           <a class="js-new-list link-list-new">
             <span class="icon-plus"></span>
-            {{_ "New List"}}
+            {{_ 'layouts.appBody.newList'}}
           </a>
 
           {{#each list in lists}}
@@ -52,8 +67,12 @@
           <div class="notification">
             <span class="icon-sync"></span>
             <div class="meta">
-              <div class="title-notification">Trying to connect</div>
-              <div class="description">There seems to be a connection issue</div>
+              <div class="title-notification">
+                {{_ 'layouts.appBody.tryingToConnect'}}
+              </div>
+              <div class="description">
+                {{_ 'layouts.appBody.connectionIssue'}}
+              </div>
             </div>
           </div>
         </div>
