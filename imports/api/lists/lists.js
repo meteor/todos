@@ -9,7 +9,6 @@ class ListsCollection extends Mongo.Collection {
   insert(list, callback, language = 'en') {
     const ourList = list;
     if (!ourList.name) {
-console.log(TAPi18n);
       const defaultName = TAPi18n.__('lists.insert.list', null, language);
       let nextLetter = 'A';
       ourList.name = `${defaultName} ${nextLetter}`;
