@@ -13,7 +13,26 @@
     },
     "remove": {
       "accessDenied": "'You don't have permission to remove this list.'",
-      "lastPublicList": "Cannot delete the last public list."
+      "lastPublicList": "Cannot delete the last public list.",
+      "confirm": "Are you sure you want to delete the list"
+    },
+    "show": {
+      "cancel": "Cancel",
+      "showMenu": "Show Menu",
+      "selectAction": "Select an action",
+      "makePublic": "Make Public",
+      "makePrivate": "Make Private",
+      "delete": "Delete",
+      "makeListPublic": "Make list public",
+      "makeListPrivate": "Make list private",
+      "deleteList": "Delete list",
+      "typeToAdd": "Type to add new tasks",
+      "noTasks": "No tasks here",
+      "addAbove": "Add new tasks using the field above",
+      "loading": "Loading tasks..."
+    },
+    "insert": {
+      "list": "List"
     }
   },
   "todos": {
@@ -28,6 +47,30 @@
     },
     "remove": {
       "accessDenied": "Cannot remove todos in a private list that is not yours"
+    },
+    "item": {
+      "taskName": "Task name"
+    }
+  },
+  "useraccounts": {
+    "atTitle": {
+      "subtitle": "Signing in allows you to have private lists"
+    }
+  },
+  "layouts": {
+    "appBody": {
+      "logout": "Logout",
+      "login": "Sign In",
+      "join": "Join",
+      "newList": "New List",
+      "newListError": "Could not create list.",
+      "tryingToConnect": "Trying to connect",
+      "connectionIssue": "There seems to be a connection issue"
+    }
+  },
+  "pages": {
+    "appNotFound": {
+      "pageNotFound": "Page not found"
     }
   }
 }

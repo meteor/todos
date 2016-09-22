@@ -7,6 +7,9 @@ import { Template } from 'meteor/templating';
 import { ActiveRoute } from 'meteor/zimme:active-route';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { T9n } from 'meteor/softwarerero:accounts-t9n';
+import { _ } from 'meteor/underscore';
+import { $ } from 'meteor/jquery';
 
 import { Lists } from '../../api/lists/lists.js';
 import { insert } from '../../api/lists/methods.js';
@@ -86,6 +89,12 @@ Template.App_body.helpers({
       instance.state.set('menuOpen', true);
     },
   },
+  languages() {
+    return _.keys(TAPi18n.getLanguages());
+  },
+  isActiveLanguage(language) {
+    return (TAPi18n.getLanguage() === language);
+  },
 });
 
 Template.App_body.events({
@@ -122,16 +131,22 @@ Template.App_body.events({
   },
 
   'click .js-new-list'() {
-    const listId = insert.call((err) => {
+    const listId = insert.call({ language: TAPi18n.getLanguage() }, (err) => {
       if (err) {
         // At this point, we have already redirected to the new list page, but
         // for some reason the list didn't get created. This should almost never
         // happen, but it's good to handle it anyway.
         FlowRouter.go('App.home');
-        alert(TAPi18n.__('Could not create list.')); // eslint-disable-line no-alert
+        alert(TAPi18n.__('layouts.appBody.newListError')); // eslint-disable-line no-alert
       }
     });
 
     FlowRouter.go('Lists.show', { _id: listId });
+  },
+
+  'click .js-toggle-language'(event) {
+    const language = $(event.target).html().trim();
+    T9n.setLanguage(language);
+    TAPi18n.setLanguage(language);
   },
 });
