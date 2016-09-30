@@ -1,4 +1,85 @@
 {
+  "components": {
+    "userMenu": {
+      "logout": "Logout",
+      "login": "Sign In",
+      "join": "Join"
+    },
+    "connectionNotification": {
+      "tryingToConnect": "Trying to connect",
+      "connectionIssue": "There seems to be a connection issue"
+    },
+    "listHeader": {
+      "deleteConfirm": "Are you sure you want to delete the list",
+      "selectAction": "Select an action",
+      "makePublic": "Make Public",
+      "makePrivate": "Make Private",
+      "delete": "Delete",
+      "makeListPublic": "Make list public",
+      "makeListPrivate": "Make list private",
+      "deleteList": "Delete list",
+      "cancel": "Cancel",
+      "typeToAdd": "Type to add new tasks"
+    },
+    "listList": {
+      "newList": "New List",
+      "newListError": "Could not create list."
+    },
+    "loading": {
+      "loading": "Loading"
+    },
+    "mobileMenu": {
+      "showMenu": "Show Menu"
+    },
+    "todoItem": {
+      "taskName": "Task name"
+    }
+  },
+  "pages": {
+    "authPageJoin": {
+      "emailRequired": "Email required",
+      "passwordRequired": "Password required",
+      "passwordConfirm": "Please confirm your password",
+      "join": "Join.",
+      "joinReason": "Joining allows you to make private lists",
+      "yourEmail": "Your Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "joinNow": "Join Now",
+      "haveAccountSignIn": "Have an account? Sign in"
+    },
+    "authPageSignIn": {
+      "emailRequired": "Email required",
+      "passwordRequired": "Password required",
+      "signIn": "Sign In.",
+      "signInReason": "Signing in allows you to view private lists",
+      "yourEmail": "Your Email",
+      "password": "Password",
+      "signInButton": "Sign in",
+      "needAccount": "Need an account? Join Now."
+    },
+    "listPage": {
+      "noTasks": "No tasks here",
+      "addAbove": "Add new tasks using the field above",
+      "loading": "Loading tasks..."
+    },
+    "notFoundPage": {
+      "pageNotFound": "Page not found"
+    }
+  },
+  "api": {
+    "lists": {
+      "insert": {
+        "list": "List"
+      }
+    }
+  },
+
+
+
+
+
+
   "lists": {
     "makePrivate": {
       "notLoggedIn": "Must be logged in to make private lists.",
@@ -13,7 +94,26 @@
     },
     "remove": {
       "accessDenied": "'You don't have permission to remove this list.'",
-      "lastPublicList": "Cannot delete the last public list."
+      "lastPublicList": "Cannot delete the last public list.",
+      "confirm": "Are you sure you want to delete the list"
+    },
+    "show": {
+      "cancel": "Cancel",
+      "showMenu": "Show Menu",
+      "selectAction": "Select an action",
+      "makePublic": "Make Public",
+      "makePrivate": "Make Private",
+      "delete": "Delete",
+      "makeListPublic": "Make list public",
+      "makeListPrivate": "Make list private",
+      "deleteList": "Delete list",
+      "typeToAdd": "Type to add new tasks",
+      "noTasks": "No tasks here",
+      "addAbove": "Add new tasks using the field above",
+      "loading": "Loading tasks..."
+    },
+    "insert": {
+      "list": "List"
     }
   },
   "todos": {
@@ -28,6 +128,25 @@
     },
     "remove": {
       "accessDenied": "Cannot remove todos in a private list that is not yours"
+    },
+    "item": {
+      "taskName": "Task name"
+    }
+  },
+  "useraccounts": {
+    "atTitle": {
+      "subtitle": "Signing in allows you to have private lists"
+    }
+  },
+  "layouts": {
+    "appBody": {
+      "logout": "Logout",
+      "login": "Sign In",
+      "join": "Join",
+      "newList": "New List",
+      "newListError": "Could not create list.",
+      "tryingToConnect": "Trying to connect",
+      "connectionIssue": "There seems to be a connection issue"
     }
   }
 }

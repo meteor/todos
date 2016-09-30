@@ -12,9 +12,13 @@ const LIST_ID_ONLY = new SimpleSchema({
 
 export const insert = new ValidatedMethod({
   name: 'lists.insert',
-  validate: new SimpleSchema({}).validator(),
-  run() {
-    return Lists.insert({});
+  validate: new SimpleSchema({
+    locale: {
+      type: String,
+    },
+  }).validator(),
+  run({ locale }) {
+    return Lists.insert({}, null, locale);
   },
 });
 

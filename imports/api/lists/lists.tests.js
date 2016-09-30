@@ -11,6 +11,7 @@ import { DDP } from 'meteor/ddp-client';
 import { Lists } from './lists.js';
 import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
 import { Todos } from '../todos/todos.js';
+import '../../../i18n/en.i18n.json';
 
 if (Meteor.isServer) {
   // eslint-disable-next-line import/no-unresolved
@@ -232,7 +233,7 @@ if (Meteor.isServer) {
           const connection = DDP.connect(Meteor.absoluteUrl());
 
           _.times(5, () => {
-            connection.call(insert.name, {});
+            connection.call(insert.name, { locale: 'en' });
           });
 
           assert.throws(() => {

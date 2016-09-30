@@ -2,22 +2,23 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from './BaseComponent.jsx';
 import { insert } from '../../api/lists/methods.js';
 
-export default class ListList extends React.Component {
+export default class ListList extends BaseComponent {
   constructor(props) {
     super(props);
-
     this.createNewList = this.createNewList.bind(this);
   }
 
   createNewList() {
     const { router } = this.context;
-    const listId = insert.call((err) => {
+    const listId = insert.call({ locale: i18n.getLocale() }, (err) => {
       if (err) {
         router.push('/');
         /* eslint-disable no-alert */
-        alert('Could not create list.');
+        alert(i18n.__('components.listList.newListError'));
       }
     });
     router.push(`/lists/${listId}`);
@@ -29,7 +30,7 @@ export default class ListList extends React.Component {
       <div className="list-todos">
         <a className="link-list-new" onClick={this.createNewList}>
           <span className="icon-plus" />
-          New List
+          {i18n.__('components.listList.newList')}
         </a>
         {lists.map(list => (
           <Link

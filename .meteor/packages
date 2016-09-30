@@ -31,7 +31,7 @@ mdg:validated-method
 mdg:validation-error
 
 # i18n
-tap:i18n
+universe:i18n
 
 # accounts
 accounts-password@1.3.0

@@ -1,19 +1,25 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/factory';
+import i18n from 'meteor/universe:i18n';
 import { Todos } from '../todos/todos.js';
 
 class ListsCollection extends Mongo.Collection {
-  insert(list, callback) {
+  insert(list, callback, locale = 'en') {
     const ourList = list;
     if (!ourList.name) {
+      const defaultName = i18n.__(
+        'api.lists.insert.list',
+        null,
+        { _locale: locale }
+      );
       let nextLetter = 'A';
-      ourList.name = `List ${nextLetter}`;
+      ourList.name = `${defaultName} ${nextLetter}`;
 
       while (this.findOne({ name: ourList.name })) {
         // not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
-        ourList.name = `List ${nextLetter}`;
+        ourList.name = `${defaultName} ${nextLetter}`;
       }
     }
 

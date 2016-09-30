@@ -1,6 +1,8 @@
 import React from 'react';
 import { _ } from 'meteor/underscore';
 import classnames from 'classnames';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from './BaseComponent.jsx';
 import { displayError } from '../helpers/errors.js';
 
 import {
@@ -9,7 +11,7 @@ import {
   remove,
 } from '../../api/todos/methods.js';
 
-export default class TodoItem extends React.Component {
+export default class TodoItem extends BaseComponent {
   constructor(props) {
     super(props);
     this.throttledUpdate = _.throttle((value) => {
@@ -75,7 +77,7 @@ export default class TodoItem extends React.Component {
 
           type="text"
           defaultValue={todo.text}
-          placeholder="Task name"
+          placeholder={i18n.__('components.todoItem.taskName')}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           onChange={this.updateTodo}

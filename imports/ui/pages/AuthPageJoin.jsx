@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from '../components/BaseComponent.jsx';
 
 import AuthPage from './AuthPage.jsx';
 
-export default class JoinPage extends React.Component {
+export default class JoinPage extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = { errors: {} };
+    this.state = Object.assign(this.state, { errors: {} });
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -19,13 +21,13 @@ export default class JoinPage extends React.Component {
     const errors = {};
 
     if (!email) {
-      errors.email = 'Email required';
+      errors.email = i18n.__('pages.authPageJoin.emailRequired');
     }
     if (!password) {
-      errors.password = 'Password required';
+      errors.password = i18n.__('pages.authPageJoin.passwordRequired');
     }
     if (confirm !== password) {
-      errors.confirm = 'Please confirm your password';
+      errors.confirm = i18n.__('pages.authPageJoin.passwordConfirm');
     }
 
     this.setState({ errors });
@@ -53,8 +55,12 @@ export default class JoinPage extends React.Component {
 
     const content = (
       <div className="wrapper-auth">
-        <h1 className="title-auth">Join.</h1>
-        <p className="subtitle-auth" >Joining allows you to make private lists</p>
+        <h1 className="title-auth">
+          {i18n.__('pages.authPageJoin.join')}
+        </h1>
+        <p className="subtitle-auth">
+          {i18n.__('pages.authPageJoin.joinReason')}
+        </p>
         <form onSubmit={this.onSubmit}>
           <div className="list-errors">
             {errorMessages.map(msg => (
@@ -66,34 +72,49 @@ export default class JoinPage extends React.Component {
               type="email"
               name="email"
               ref={(c) => { this.email = c; }}
-              placeholder="Your Email"
+              placeholder={i18n.__('pages.authPageJoin.yourEmail')}
             />
-            <span className="icon-email" title="Your Email" />
+            <span
+              className="icon-email"
+              title={i18n.__('pages.authPageJoin.yourEmail')}
+            />
           </div>
           <div className={`input-symbol ${errorClass('password')}`}>
             <input
               type="password"
               name="password"
               ref={(c) => { this.password = c; }}
-              placeholder="Password"
+              placeholder={i18n.__('pages.authPageJoin.password')}
             />
-            <span className="icon-lock" title="Password" />
+            <span
+              className="icon-lock"
+              title={i18n.__('pages.authPageJoin.password')}
+            />
           </div>
           <div className={`input-symbol ${errorClass('confirm')}`}>
             <input
               type="password"
               name="confirm"
               ref={(c) => { this.confirm = c; }}
-              placeholder="Confirm Password"
+              placeholder={i18n.__('pages.authPageJoin.confirmPassword')}
             />
-            <span className="icon-lock" title="Confirm Password" />
+            <span
+              className="icon-lock"
+              title={i18n.__('pages.authPageJoin.confirmPassword')}
+            />
           </div>
-          <button type="submit" className="btn-primary">Join Now</button>
+          <button type="submit" className="btn-primary">
+            {i18n.__('pages.authPageJoin.joinNow')}
+          </button>
         </form>
       </div>
     );
 
-    const link = <Link to="/signin" className="link-auth-alt">Have an account? Sign in</Link>;
+    const link = (
+      <Link to="/signin" className="link-auth-alt">
+        {i18n.__('pages.authPageJoin.haveAccountSignIn')}
+      </Link>
+    );
 
     return <AuthPage content={content} link={link} />;
   }

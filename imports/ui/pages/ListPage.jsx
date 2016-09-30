@@ -1,15 +1,15 @@
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from '../components/BaseComponent.jsx';
 import ListHeader from '../components/ListHeader.jsx';
 import TodoItem from '../components/TodoItem.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import Message from '../components/Message.jsx';
 
-export default class ListPage extends React.Component {
+export default class ListPage extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      editingTodo: null,
-    };
+    this.state = Object.assign(this.state, { editingTodo: null });
     this.onEditingChange = this.onEditingChange.bind(this);
   }
 
@@ -31,8 +31,8 @@ export default class ListPage extends React.Component {
     if (!todos || !todos.length) {
       Todos = (
         <Message
-          title="No tasks here"
-          subtitle="Add new tasks using the field above"
+          title={i18n.__('pages.listPage.noTasks')}
+          subtitle={i18n.__('pages.listPage.addAbove')}
         />
       );
     } else {
@@ -50,7 +50,9 @@ export default class ListPage extends React.Component {
       <div className="page lists-show">
         <ListHeader list={list} />
         <div className="content-scrollable list-items">
-          {loading ? <Message title="Loading tasks..." /> : Todos}
+          {loading
+            ? <Message title={i18n.__('pages.listPage.loading')} />
+            : Todos}
         </div>
       </div>
     );

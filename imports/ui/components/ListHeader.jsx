@@ -1,6 +1,8 @@
 /* global confirm */
 
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from './BaseComponent.jsx';
 import MobileMenu from './MobileMenu.jsx';
 import { displayError } from '../helpers/errors.js';
 
@@ -15,11 +17,10 @@ import {
   insert,
 } from '../../api/todos/methods.js';
 
-export default class ListHeader extends React.Component {
+export default class ListHeader extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = { editing: false };
-
+    this.state = Object.assign(this.state, { editing: false });
     this.onListFormSubmit = this.onListFormSubmit.bind(this);
     this.onListInputKeyUp = this.onListInputKeyUp.bind(this);
     this.onListInputBlur = this.onListInputBlur.bind(this);
@@ -78,7 +79,8 @@ export default class ListHeader extends React.Component {
 
   deleteList() {
     const list = this.props.list;
-    const message = `Are you sure you want to delete the list ${list.name}?`;
+    const message =
+      `${i18n.__('components.listHeader.deleteConfirm')} ${list.name}?`;
 
     if (confirm(message)) { // eslint-disable-line no-alert
       remove.call({ listId: list._id }, displayError);
@@ -127,22 +129,39 @@ export default class ListHeader extends React.Component {
               defaultValue="default"
               onChange={this.onListDropdownAction}
             >
-              <option disabled value="default">Select an action</option>
+              <option disabled value="default">
+                {i18n.__('components.listHeader.selectAction')}
+              </option>
               {list.userId
-                ? <option value="public">Make Public</option>
-                : <option value="private">Make Private</option>}
-              <option value="delete">Delete</option>
+                ? <option value="public">
+                  {i18n.__('components.listHeader.makePublic')}
+                </option>
+                : <option value="private">
+                  {i18n.__('components.listHeader.makePrivate')}
+                </option>}
+              <option value="delete">
+                {i18n.__('components.listHeader.delete')}
+              </option>
             </select>
             <span className="icon-cog" />
           </div>
           <div className="options-web">
             <a className="nav-item" onClick={this.toggleListPrivacy}>
               {list.userId
-                ? <span className="icon-lock" title="Make list public" />
-                : <span className="icon-unlock" title="Make list private" />}
+                ? <span
+                  className="icon-lock"
+                  title={i18n.__('components.listHeader.makeListPublic')}
+                />
+                : <span
+                  className="icon-unlock"
+                  title={i18n.__('components.listHeader.makeListPrivate')}
+                />}
             </a>
             <a className="nav-item trash" onClick={this.deleteList}>
-              <span className="icon-trash" title="Delete list" />
+              <span
+                className="icon-trash"
+                title={i18n.__('components.listHeader.deleteList')}
+              />
             </a>
           </div>
         </div>
@@ -169,7 +188,10 @@ export default class ListHeader extends React.Component {
             onMouseDown={this.cancelEdit}
             onClick={this.cancelEdit}
           >
-            <span className="icon-close" title="Cancel" />
+            <span
+              className="icon-close"
+              title={i18n.__('components.listHeader.cancel')}
+            />
           </a>
         </div>
       </form>
@@ -185,7 +207,7 @@ export default class ListHeader extends React.Component {
           <input
             type="text"
             ref={(c) => { this.newTodoInput = c; }}
-            placeholder="Type to add new tasks"
+            placeholder={i18n.__('components.listHeader.typeToAdd')}
           />
           <span className="icon-add" onClick={this.focusTodoInput} />
         </form>
