@@ -5,6 +5,7 @@ import { Session } from 'meteor/session'; // XXX: SESSION
 import { Lists } from '../../api/lists/lists.js';
 import UserMenu from '../components/UserMenu.jsx';
 import ListList from '../components/ListList.jsx';
+import LanguageToggle from '../components/LanguageToggle.jsx';
 import ConnectionNotification from '../components/ConnectionNotification.jsx';
 import Loading from '../components/Loading.jsx';
 
@@ -77,6 +78,7 @@ export default class App extends React.Component {
     return (
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
         <section id="menu">
+          <LanguageToggle />
           <UserMenu user={user} logout={this.logout} />
           <ListList lists={lists} />
         </section>

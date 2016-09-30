@@ -1,13 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { Link } from 'react-router';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from '../components/BaseComponent.jsx';
 
 import AuthPage from './AuthPage.jsx';
 
-export default class SignInPage extends React.Component {
+export default class SignInPage extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = { errors: {} };
+    this.state = Object.assign(this.state, { errors: {} });
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -18,10 +20,10 @@ export default class SignInPage extends React.Component {
     const errors = {};
 
     if (!email) {
-      errors.email = 'Email required';
+      errors.email = i18n.__('pages.authPageSignIn.emailRequired');
     }
     if (!password) {
-      errors.password = 'Password required';
+      errors.password = i18n.__('pages.authPageSignIn.passwordRequired');
     }
 
     this.setState({ errors });
@@ -46,8 +48,12 @@ export default class SignInPage extends React.Component {
 
     const content = (
       <div className="wrapper-auth">
-        <h1 className="title-auth">Sign In.</h1>
-        <p className="subtitle-auth" >Signing in allows you to view private lists</p>
+        <h1 className="title-auth">
+          {i18n.__('pages.authPageSignIn.signIn')}
+        </h1>
+        <p className="subtitle-auth">
+          {i18n.__('pages.authPageSignIn.signInReason')}
+        </p>
         <form onSubmit={this.onSubmit}>
           <div className="list-errors">
             {errorMessages.map(msg => (
@@ -59,25 +65,37 @@ export default class SignInPage extends React.Component {
               type="email"
               name="email"
               ref={(c) => { this.email = c; }}
-              placeholder="Your Email"
+              placeholder={i18n.__('pages.authPageSignIn.yourEmail')}
             />
-            <span className="icon-email" title="Your Email" />
+            <span
+              className="icon-email"
+              title={i18n.__('pages.authPageSignIn.yourEmail')}
+            />
           </div>
           <div className={`input-symbol ${errorClass('password')}`}>
             <input
               type="password"
               name="password"
               ref={(c) => { this.password = c; }}
-              placeholder="Password"
+              placeholder={i18n.__('pages.authPageSignIn.password')}
             />
-            <span className="icon-lock" title="Password" />
+            <span
+              className="icon-lock"
+              title={i18n.__('pages.authPageSignIn.password')}
+            />
           </div>
-          <button type="submit" className="btn-primary">Sign in</button>
+          <button type="submit" className="btn-primary">
+            {i18n.__('pages.authPageSignIn.signInButton')}
+          </button>
         </form>
       </div>
     );
 
-    const link = <Link to="/join" className="link-auth-alt">Need an account? Join Now.</Link>;
+    const link = (
+      <Link to="/join" className="link-auth-alt">
+        {i18n.__('pages.authPageSignIn.needAccount')}
+      </Link>
+    );
 
     return <AuthPage content={content} link={link} />;
   }

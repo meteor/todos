@@ -1,33 +1,109 @@
 {
-  "lists": {
-    "makePrivate": {
-      "notLoggedIn": "Must be logged in to make private lists.",
-      "lastPublicList": "Cannot make the last public list private."
+  "components": {
+    "userMenu": {
+      "logout": "Logout",
+      "login": "Sign In",
+      "join": "Join"
     },
-    "makePublic": {
-      "notLoggedIn": "Must be logged in.",
-      "accessDenied": "You don't have permission to edit this list."
+    "connectionNotification": {
+      "tryingToConnect": "Trying to connect",
+      "connectionIssue": "There seems to be a connection issue"
     },
-    "updateName": {
-      "accessDenied": "You don't have permission to edit this list."
+    "listHeader": {
+      "deleteConfirm": "Are you sure you want to delete the list",
+      "selectAction": "Select an action",
+      "makePublic": "Make Public",
+      "makePrivate": "Make Private",
+      "delete": "Delete",
+      "makeListPublic": "Make list public",
+      "makeListPrivate": "Make list private",
+      "deleteList": "Delete list",
+      "cancel": "Cancel",
+      "typeToAdd": "Type to add new tasks"
     },
-    "remove": {
-      "accessDenied": "'You don't have permission to remove this list.'",
-      "lastPublicList": "Cannot delete the last public list."
+    "listList": {
+      "newList": "New List",
+      "newListError": "Could not create list."
+    },
+    "loading": {
+      "loading": "Loading"
+    },
+    "mobileMenu": {
+      "showMenu": "Show Menu"
+    },
+    "todoItem": {
+      "taskName": "Task name"
     }
   },
-  "todos": {
-    "insert": {
-      "accessDenied": "Cannot add todos to a private list that is not yours"
+  "pages": {
+    "authPageJoin": {
+      "emailRequired": "Email required",
+      "passwordRequired": "Password required",
+      "passwordConfirm": "Please confirm your password",
+      "join": "Join.",
+      "joinReason": "Joining allows you to make private lists",
+      "yourEmail": "Your Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "joinNow": "Join Now",
+      "haveAccountSignIn": "Have an account? Sign in"
     },
-    "setCheckedStatus": {
-      "accessDenied": "Cannot edit todos in a private list that is not yours"
+    "authPageSignIn": {
+      "emailRequired": "Email required",
+      "passwordRequired": "Password required",
+      "signIn": "Sign In.",
+      "signInReason": "Signing in allows you to view private lists",
+      "yourEmail": "Your Email",
+      "password": "Password",
+      "signInButton": "Sign in",
+      "needAccount": "Need an account? Join Now."
     },
-    "updateText": {
-      "accessDenied": "Cannot edit todos in a private list that is not yours"
+    "listPage": {
+      "noTasks": "No tasks here",
+      "addAbove": "Add new tasks using the field above",
+      "loading": "Loading tasks..."
     },
-    "remove": {
-      "accessDenied": "Cannot remove todos in a private list that is not yours"
+    "notFoundPage": {
+      "pageNotFound": "Page not found"
+    }
+  },
+  "api": {
+    "lists": {
+      "insert": {
+        "list": "List"
+      },
+      "makePrivate": {
+        "notLoggedIn": "Must be logged in to make private lists.",
+        "lastPublicList": "Cannot make the last public list private."
+      },
+      "makePublic": {
+        "notLoggedIn": "Must be logged in.",
+        "accessDenied": "You don't have permission to edit this list."
+      },
+      "updateName": {
+        "accessDenied": "You don't have permission to edit this list."
+      },
+      "remove": {
+        "accessDenied": "'You don't have permission to remove this list.'",
+        "lastPublicList": "Cannot delete the last public list."
+      }
+    },
+    "todos": {
+      "insert": {
+        "accessDenied": "Cannot add todos to a private list that is not yours"
+      },
+      "setCheckedStatus": {
+        "accessDenied": "Cannot edit todos in a private list that is not yours"
+      },
+      "updateText": {
+        "accessDenied": "Cannot edit todos in a private list that is not yours"
+      },
+      "remove": {
+        "accessDenied": "Cannot remove todos in a private list that is not yours"
+      },
+      "item": {
+        "taskName": "Task name"
+      }
     }
   }
 }

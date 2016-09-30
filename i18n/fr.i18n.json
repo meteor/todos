@@ -1,0 +1,109 @@
+{
+  "components": {
+    "userMenu": {
+      "logout": "Se déconnecter",
+      "login": "Connecter",
+      "join": "Joindre"
+    },
+    "connectionNotification": {
+      "tryingToConnect": "Tentative de connexion",
+      "connectionIssue": "Il semble y avoir un problème de connexion"
+    },
+    "listHeader": {
+      "deleteConfirm": "Etes-vous sûr de vouloir supprimer la liste",
+      "selectAction": "Sélectionnez une action",
+      "makePublic": "Rendre publique",
+      "makePrivate": "Rendre privé",
+      "delete": "Effacer",
+      "makeListPublic": "Ouvrir la liste pour le public",
+      "makeListPrivate": "Fermer la liste au public",
+      "deleteList": "Effacer la liste",
+      "cancel": "Annuler",
+      "typeToAdd": "Tapez pour ajouter de nouvelles tâches"
+    },
+    "listList": {
+      "newList": "Nouvelle liste",
+      "newListError": "La liste ne peut être créé."
+    },
+    "loading": {
+      "loading": "Chargement"
+    },
+    "mobileMenu": {
+      "showMenu": "Afficher le menu"
+    },
+    "todoItem": {
+      "taskName": "Nom de la tâche"
+    }
+  },
+  "pages": {
+    "authPageJoin": {
+      "emailRequired": "Email est obligatoire",
+      "passwordRequired": "Mot de passe est obligatoire",
+      "passwordConfirm": "S'il vous plaît confirmer votre mot de passe",
+      "join": "Joindre.",
+      "joinReason": "Rejoindre vous permet de faire des listes privées",
+      "yourEmail": "Votre email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmez le mot de passe",
+      "joinNow": "Joindre",
+      "haveAccountSignIn": "Avoir un compte? Se connecter"
+    },
+    "authPageSignIn": {
+      "emailRequired": "Email est obligatoire",
+      "passwordRequired": "Mot de passe est obligatoire",
+      "signIn": "Se connecter.",
+      "signInReason": "Connectez-vous pour afficher les listes privées",
+      "yourEmail": "Votre email",
+      "password": "Mot de passe",
+      "signInButton": "Se connecter",
+      "needAccount": "Besoin d'un compte? S'inscrire maintenant."
+    },
+    "listPage": {
+      "noTasks": "Aucune tâche ici",
+      "addAbove": "Ajouter de nouvelles tâches ci-dessus",
+      "loading": "Chargement sauvé tâches..."
+    },
+    "notFoundPage": {
+      "pageNotFound": "Page non trouvée"
+    }
+  },
+  "api": {
+    "lists": {
+      "insert": {
+        "list": "Liste"
+      },
+      "makePrivate": {
+        "notLoggedIn": "Doit être connecté pour réaliser des listes privées.",
+        "lastPublicList": "Vous ne pouvez pas faire la dernière liste publique privée."
+      },
+      "makePublic": {
+        "notLoggedIn": "Doit être connecté.",
+        "accessDenied": "Vous n'êtes pas autorisé à modifier cette liste."
+      },
+      "updateName": {
+        "accessDenied": "Vous n'êtes pas autorisé à modifier cette liste."
+      },
+      "remove": {
+        "accessDenied": "'Vous n'êtes pas autorisé à supprimer cette liste.'",
+        "lastPublicList": "Vous ne pouvez pas supprimer la dernière liste publique."
+      }
+    },
+    "todos": {
+      "insert": {
+        "accessDenied": "Vous ne pouvez pas ajouter todo à une liste privée qui ne vous appartient pas"
+      },
+      "setCheckedStatus": {
+        "accessDenied": "Vous ne pouvez pas modifier todos dans une liste privée qui ne vous appartient pas"
+      },
+      "updateText": {
+        "accessDenied": "Vous ne pouvez pas modifier todos dans une liste privée qui ne vous appartient pas"
+      },
+      "remove": {
+        "accessDenied": "Vous ne pouvez pas supprimer todos dans une liste privée qui ne vous appartient pas"
+      },
+      "item": {
+        "taskName": "Nom de la tâche"
+      }
+    }
+  }
+}

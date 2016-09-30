@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
+import i18n from 'meteor/universe:i18n';
+import BaseComponent from './BaseComponent.jsx';
 
-export default class UserMenu extends React.Component {
+export default class UserMenu extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-    };
+    this.state = Object.assign(this.state, { open: false });
     this.toggle = this.toggle.bind(this);
   }
 
@@ -32,7 +32,9 @@ export default class UserMenu extends React.Component {
           {emailLocalPart}
         </a>
         {open
-          ? <a className="btn-secondary" onClick={logout}>Logout</a>
+          ? <a className="btn-secondary" onClick={logout}>
+            {i18n.__('components.userMenu.logout')}
+          </a>
           : null}
       </div>
     );
@@ -41,8 +43,12 @@ export default class UserMenu extends React.Component {
   renderLoggedOut() {
     return (
       <div className="user-menu">
-        <Link to="/signin" className="btn-secondary">Sign In</Link>
-        <Link to="/join" className="btn-secondary">Join</Link>
+        <Link to="/signin" className="btn-secondary">
+          {i18n.__('components.userMenu.login')}
+        </Link>
+        <Link to="/join" className="btn-secondary">
+          {i18n.__('components.userMenu.join')}
+        </Link>
       </div>
     );
   }
