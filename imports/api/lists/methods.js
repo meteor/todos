@@ -27,14 +27,14 @@ export const makePrivate = new ValidatedMethod({
   validate: LIST_ID_ONLY,
   run({ listId }) {
     if (!this.userId) {
-      throw new Meteor.Error('lists.makePrivate.notLoggedIn',
+      throw new Meteor.Error('api.lists.makePrivate.notLoggedIn',
         'Must be logged in to make private lists.');
     }
 
     const list = Lists.findOne(listId);
 
     if (list.isLastPublicList()) {
-      throw new Meteor.Error('lists.makePrivate.lastPublicList',
+      throw new Meteor.Error('api.lists.makePrivate.lastPublicList',
         'Cannot make the last public list private.');
     }
 
@@ -49,14 +49,14 @@ export const makePublic = new ValidatedMethod({
   validate: LIST_ID_ONLY,
   run({ listId }) {
     if (!this.userId) {
-      throw new Meteor.Error('lists.makePublic.notLoggedIn',
+      throw new Meteor.Error('api.lists.makePublic.notLoggedIn',
         'Must be logged in.');
     }
 
     const list = Lists.findOne(listId);
 
     if (!list.editableBy(this.userId)) {
-      throw new Meteor.Error('lists.makePublic.accessDenied',
+      throw new Meteor.Error('api.lists.makePublic.accessDenied',
         'You don\'t have permission to edit this list.');
     }
 
@@ -78,7 +78,7 @@ export const updateName = new ValidatedMethod({
     const list = Lists.findOne(listId);
 
     if (!list.editableBy(this.userId)) {
-      throw new Meteor.Error('lists.updateName.accessDenied',
+      throw new Meteor.Error('api.lists.updateName.accessDenied',
         'You don\'t have permission to edit this list.');
     }
 
@@ -98,7 +98,7 @@ export const remove = new ValidatedMethod({
     const list = Lists.findOne(listId);
 
     if (!list.editableBy(this.userId)) {
-      throw new Meteor.Error('lists.remove.accessDenied',
+      throw new Meteor.Error('api.lists.remove.accessDenied',
         'You don\'t have permission to remove this list.');
     }
 
@@ -106,7 +106,7 @@ export const remove = new ValidatedMethod({
     // result in exposing private data
 
     if (list.isLastPublicList()) {
-      throw new Meteor.Error('lists.remove.lastPublicList',
+      throw new Meteor.Error('api.lists.remove.lastPublicList',
         'Cannot delete the last public list.');
     }
 

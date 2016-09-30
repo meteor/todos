@@ -17,7 +17,7 @@ export const insert = new ValidatedMethod({
     const list = Lists.findOne(listId);
 
     if (list.isPrivate() && list.userId !== this.userId) {
-      throw new Meteor.Error('todos.insert.accessDenied',
+      throw new Meteor.Error('api.todos.insert.accessDenied',
         'Cannot add todos to a private list that is not yours');
     }
 
@@ -47,7 +47,7 @@ export const setCheckedStatus = new ValidatedMethod({
     }
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('todos.setCheckedStatus.accessDenied',
+      throw new Meteor.Error('api.todos.setCheckedStatus.accessDenied',
         'Cannot edit checked status in a private list that is not yours');
     }
 
@@ -69,7 +69,7 @@ export const updateText = new ValidatedMethod({
     const todo = Todos.findOne(todoId);
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('todos.updateText.accessDenied',
+      throw new Meteor.Error('api.todos.updateText.accessDenied',
         'Cannot edit todos in a private list that is not yours');
     }
 
@@ -88,7 +88,7 @@ export const remove = new ValidatedMethod({
     const todo = Todos.findOne(todoId);
 
     if (!todo.editableBy(this.userId)) {
-      throw new Meteor.Error('todos.remove.accessDenied',
+      throw new Meteor.Error('api.todos.remove.accessDenied',
         'Cannot remove todos in a private list that is not yours');
     }
 
