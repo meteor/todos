@@ -23,7 +23,8 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-meteor": "^4.0.0",
     "eslint-plugin-react": "^6.2.2",
-    "shell-source": "^1.1.0"
+    "shell-source": "^1.1.0",
+    "shelljs": "^0.7.4"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
