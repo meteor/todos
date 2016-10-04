@@ -18,4 +18,3 @@ To lint:
 ```bash
 meteor npm run lint
 ```
-
