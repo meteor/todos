@@ -5,6 +5,8 @@ dependencies:
   override:
     - curl https://install.meteor.com | /bin/sh
     - npm install
+  post:
+    - rm -r ~/.gradle
 checkout:
   post:
     - git submodule update --init
