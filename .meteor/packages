@@ -6,25 +6,25 @@
 
 # meteor libraries
 meteor-base@1.0.4
-ecmascript@0.5.8
-es5-shim@4.6.14
-check@1.2.3
-tracker@1.1.0
+ecmascript@0.5.9
+es5-shim@4.6.15
+check@1.2.4
+tracker@1.1.1
 
 # standard libraries
-jquery@1.11.9
-underscore@1.0.9
-less@2.7.5
+jquery@1.11.10
+underscore@1.0.10
+less@2.7.7
 
 # ui
 blaze-html-templates@1.0.4
 reactive-dict@1.1.8
-reactive-var@1.0.10
+reactive-var@1.0.11
 aldeed:template-extension
 percolate:momentum
 
 # data
-mongo@1.1.12
+mongo@1.1.14
 aldeed:simple-schema
 aldeed:collection2
 dburles:collection-helpers
@@ -42,21 +42,21 @@ zimme:active-route
 tap:i18n
 
 # accounts
-accounts-password@1.3.0
+accounts-password@1.3.2
 useraccounts:core
 useraccounts:unstyled
 useraccounts:flow-routing
 softwarerero:accounts-t9n
 
 # mobile
-crosswalk@1.6.2
+crosswalk@1.7.0
 mobile-experience@1.0.4
 chriswessels:hammer
 
 # production
 juliancwirko:postcss
-standard-minifier-js@1.2.0
-ddp-rate-limiter@1.0.5
+standard-minifier-js@1.2.1
+ddp-rate-limiter@1.0.6
 app-prod-security
 
 # rest apis
@@ -72,7 +72,7 @@ practicalmeteor:sinon
 practicalmeteor:mocha
 hwillson:stub-collections
 johanbrook:publication-collector
-shell-server
+shell-server@0.2.1
 
 # security
-audit-argument-checks
+audit-argument-checks@1.0.7
