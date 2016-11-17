@@ -6,23 +6,23 @@
 
 # meteor libraries
 meteor-base@1.0.4
-ecmascript@0.5.8
-es5-shim@4.6.14
-check@1.2.3
-tracker@1.1.0
-session
+ecmascript@0.5.9
+es5-shim@4.6.15
+check@1.2.4
+tracker@1.1.1
+session@1.1.7
 
 # standard libraries
-jquery@1.11.9
-underscore@1.0.9
-less@2.7.5
+jquery@1.11.10
+underscore@1.0.10
+less@2.7.7
 
 # ui
-static-html@1.1.12
+static-html@1.1.12_1
 react-meteor-data
 
 # data
-mongo@1.1.12
+mongo@1.1.14
 aldeed:simple-schema
 aldeed:collection2
 dburles:collection-helpers
@@ -34,17 +34,17 @@ mdg:validation-error
 universe:i18n
 
 # accounts
-accounts-password@1.3.0
+accounts-password@1.3.2
 
 # mobile
-crosswalk@1.6.2
+crosswalk@1.7.0
 mobile-experience@1.0.4
 chriswessels:hammer
 
 # production
 juliancwirko:postcss@1.0.0-beta.11
-standard-minifier-js@1.2.0
-ddp-rate-limiter@1.0.5
+standard-minifier-js@1.2.1
+ddp-rate-limiter@1.0.6
 app-prod-security
 
 # rest apis
@@ -60,7 +60,7 @@ practicalmeteor:mocha
 practicalmeteor:chai
 practicalmeteor:sinon
 hwillson:stub-collections
-shell-server
+shell-server@0.2.1
 
 # security
-audit-argument-checks
+audit-argument-checks@1.0.7
