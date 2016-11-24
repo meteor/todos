@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import { Factory } from 'meteor/factory';
+import { Factory } from 'meteor/dburles:factory';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import faker from 'faker';
 import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';

@@ -64,7 +64,6 @@ simple:rest-accounts-password
 simple:rest
 
 # testing
-factory
 xolvio:cleaner
 dispatch:mocha-phantomjs
 practicalmeteor:chai
@@ -76,3 +75,4 @@ shell-server@0.2.1
 
 # security
 audit-argument-checks@1.0.7
+dburles:factory
