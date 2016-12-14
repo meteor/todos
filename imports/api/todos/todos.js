@@ -1,5 +1,5 @@
 import { Mongo } from 'meteor/mongo';
-import { Factory } from 'meteor/factory';
+import { Factory } from 'meteor/dburles:factory';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import faker from 'faker';
 import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
@@ -27,7 +27,7 @@ class TodosCollection extends Mongo.Collection {
   }
 }
 
-export const Todos = new TodosCollection('Todos');
+export const Todos = new TodosCollection('todos');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({

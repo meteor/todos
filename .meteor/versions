@@ -32,6 +32,7 @@ chriswessels:hammer@4.0.2
 coffeescript@1.11.1_4
 crosswalk@1.7.0
 dburles:collection-helpers@1.1.0
+dburles:factory@1.1.0
 ddp@1.2.5
 ddp-client@1.2.9
 ddp-common@1.2.8
@@ -46,7 +47,6 @@ ecmascript-runtime@0.3.15
 ejson@1.0.13
 email@1.1.18
 es5-shim@4.6.15
-factory@1.0.0
 fastclick@1.0.13
 force-ssl@1.0.13
 geojson-utils@1.0.10
