@@ -28,7 +28,7 @@ class ListsCollection extends Mongo.Collection {
   }
 }
 
-export const Lists = new ListsCollection('Lists');
+export const Lists = new ListsCollection('lists');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny({

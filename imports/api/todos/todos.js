@@ -27,7 +27,7 @@ class TodosCollection extends Mongo.Collection {
   }
 }
 
-export const Todos = new TodosCollection('Todos');
+export const Todos = new TodosCollection('todos');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny({
