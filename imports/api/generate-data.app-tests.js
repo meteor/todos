@@ -23,6 +23,8 @@ Meteor.methods({
 
     // create 3 private lists
     _.times(3, () => createList(Random.id()));
+
+    console.log('created fixtures');
   },
 });
 
