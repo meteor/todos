@@ -1,3 +1,3 @@
-{ LaunchScreen } = require 'meteor/launch-screen'
+import { LaunchScreen } from 'meteor/launch-screen'
 
-module.exports.listRenderHold = LaunchScreen.hold()
+export listRenderHold = LaunchScreen.hold()

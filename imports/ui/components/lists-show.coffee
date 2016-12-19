@@ -1,24 +1,24 @@
-{ Meteor } = require 'meteor/meteor'
-{ Template } = require 'meteor/templating'
-{ Mongo } = require 'meteor/mongo'
-{ ReactiveDict } = require 'meteor/reactive-dict'
-{ Tracker } = require 'meteor/tracker'
-{ $ } = require 'meteor/jquery'
+import { Meteor } from 'meteor/meteor'
+import { Template } from 'meteor/templating'
+import { Mongo } from 'meteor/mongo'
+import { ReactiveDict } from 'meteor/reactive-dict'
+import { Tracker } from 'meteor/tracker'
+import { $ } from 'meteor/jquery'
 
-require './lists-show.html'
+import './lists-show.html'
 
 # Component used in the template
-require './todos-item.coffee'
+import './todos-item.coffee'
 
-{ updateName, makePublic, makePrivate, remove } = require '../../api/lists/methods.coffee'
+import { updateName, makePublic, makePrivate, remove } from '../../api/lists/methods.coffee'
 
-{ insert } = require '../../api/todos/methods.coffee'
+import { insert } from '../../api/todos/methods.coffee'
 
-{ displayError } = require '../lib/errors.coffee'
+import { displayError } from '../lib/errors.coffee'
 
-{ FlowRouter } = require 'meteor/kadira:flow-router'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ TAPi18n } = require 'meteor/tap:i18n'
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { TAPi18n } from 'meteor/tap:i18n'
 
 
 Template.Lists_show.onCreated ->

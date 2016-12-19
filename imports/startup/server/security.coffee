@@ -1,6 +1,6 @@
-{ Meteor } = require 'meteor/meteor'
-{ DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
-{ _ } = require 'meteor/underscore'
+import { Meteor } from 'meteor/meteor'
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
+import { _ } from 'meteor/underscore'
 
 
 # Don't let people write arbitrary data to their 'profile' field from the client

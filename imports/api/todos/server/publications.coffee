@@ -1,8 +1,8 @@
-{ Meteor } = require 'meteor/meteor'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
+import { Meteor } from 'meteor/meteor'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
-TodosModule = require '../todos.coffee'
-ListsModule = require '../../lists/lists.coffee'
+import TodosModule from '../todos.coffee'
+import ListsModule from '../../lists/lists.coffee'
 
 
 Meteor.publishComposite 'todos.inList', (listId) ->

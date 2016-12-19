@@ -1,13 +1,13 @@
-{ Meteor } = require 'meteor/meteor'
-{ ValidatedMethod } = require 'meteor/mdg:validated-method'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
-{ _ } = require 'meteor/underscore'
+import { Meteor } from 'meteor/meteor'
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
+import { _ } from 'meteor/underscore'
 
 # lists.coffee includes todos.coffee, and vice versa: a circular reference
 # CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
 # Learn more at https://github.com/meteor/meteor/issues/6381
-ListsModule = require '../lists/lists.coffee'
+import ListsModule from '../lists/lists.coffee'
 
 
 LIST_ID_ONLY = new SimpleSchema
@@ -17,14 +17,14 @@ LIST_ID_ONLY = new SimpleSchema
   filter: no
 
 
-module.exports.insert = new ValidatedMethod
+export insert = new ValidatedMethod
   name: 'lists.insert'
   validate: new SimpleSchema({}).validator()
   run: ->
     ListsModule.Lists.insert {}
 
 
-module.exports.makePrivate = new ValidatedMethod
+export makePrivate = new ValidatedMethod
   name: 'lists.makePrivate'
   validate: LIST_ID_ONLY
   run: ({ listId }) ->
@@ -41,7 +41,7 @@ module.exports.makePrivate = new ValidatedMethod
     		userId: @userId
 
 
-module.exports.makePublic = new ValidatedMethod
+export makePublic = new ValidatedMethod
   name: 'lists.makePublic'
   validate: LIST_ID_ONLY
   run: ({ listId }) ->
@@ -59,7 +59,7 @@ module.exports.makePublic = new ValidatedMethod
     		userId: yes
 
 
-module.exports.updateName = new ValidatedMethod
+export updateName = new ValidatedMethod
   name: 'lists.updateName'
   validate: new SimpleSchema(
     listId: ListsModule.Lists.simpleSchema().schema('_id')
@@ -80,7 +80,7 @@ module.exports.updateName = new ValidatedMethod
     		name: newName
 
 
-module.exports.remove = new ValidatedMethod
+export remove = new ValidatedMethod
   name: 'lists.remove'
   validate: LIST_ID_ONLY
   run: ({ listId }) ->
@@ -100,11 +100,11 @@ module.exports.remove = new ValidatedMethod
 
 # Get list of all method names on Lists
 LISTS_METHODS = _.pluck [
-  module.exports.insert
-  module.exports.makePublic
-  module.exports.makePrivate
-  module.exports.updateName
-  module.exports.remove
+  insert
+  makePublic
+  makePrivate
+  updateName
+  remove
 ], 'name'
 
 if Meteor.isServer

@@ -1,7 +1,7 @@
-{ TAPi18n } = require 'meteor/tap:i18n'
+import { TAPi18n } from 'meteor/tap:i18n'
 
 
-module.exports.displayError = (error) ->
+export displayError = (error) ->
   if error?
     # It would be better to not alert the error here but inform the user in some
     # more subtle way

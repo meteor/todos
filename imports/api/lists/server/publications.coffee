@@ -1,6 +1,6 @@
-{ Meteor } = require 'meteor/meteor'
+import { Meteor } from 'meteor/meteor'
 
-{ Lists } = require '../lists.coffee'
+import { Lists } from '../lists.coffee'
 
 
 Meteor.publish 'lists.public', ->

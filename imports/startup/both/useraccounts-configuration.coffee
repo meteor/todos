@@ -1,5 +1,5 @@
-{ AccountsTemplates } = require 'meteor/useraccounts:core'
-{ TAPi18n } = require 'meteor/tap:i18n'
+import { AccountsTemplates } from 'meteor/useraccounts:core'
+import { TAPi18n } from 'meteor/tap:i18n'
 
 
 # The useraccounts package must be configured for both client and server to work properly.

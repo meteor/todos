@@ -1,11 +1,11 @@
-{ _ } = require 'meteor/underscore'
-{ check } = require 'meteor/check'
+import { _ } from 'meteor/underscore'
+import { check } from 'meteor/check'
 
-TodosModule = require './todos.coffee'
-ListsModule = require '../lists/lists.coffee'
+import TodosModule from './todos.coffee'
+import ListsModule from '../lists/lists.coffee'
 
 
-incompleteCountDenormalizer =
+export default incompleteCountDenormalizer =
   _updateList: (listId) ->
     # Recalculate the correct incomplete count direct from MongoDB
     incompleteCount = TodosModule.Todos.find
@@ -33,6 +33,3 @@ incompleteCountDenormalizer =
   afterRemoveTodos: (todos) ->
     todos.forEach (todo) =>
       @_updateList todo.listId
-
-
-module.exports = incompleteCountDenormalizer

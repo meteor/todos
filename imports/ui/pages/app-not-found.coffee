@@ -1,1 +1,1 @@
-require './app-not-found.html'
+import './app-not-found.html'

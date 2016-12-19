@@ -1,14 +1,14 @@
-{ Meteor } = require 'meteor/meteor'
-{ _ } = require 'meteor/underscore'
-{ ValidatedMethod } = require 'meteor/mdg:validated-method'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ DDPRateLimiter } = require 'meteor/ddp-rate-limiter'
+import { Meteor } from 'meteor/meteor'
+import { _ } from 'meteor/underscore'
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter'
 
-TodosModule = require './todos.coffee'
-ListsModule = require '../lists/lists.coffee'
+import TodosModule from './todos.coffee'
+import ListsModule from '../lists/lists.coffee'
 
 
-module.exports.insert = new ValidatedMethod
+export insert = new ValidatedMethod
   name: 'todos.insert'
   validate: TodosModule.Todos.simpleSchema().pick([
     'listId'
@@ -31,7 +31,7 @@ module.exports.insert = new ValidatedMethod
     TodosModule.Todos.insert todo
 
 
-module.exports.setCheckedStatus = new ValidatedMethod
+export setCheckedStatus = new ValidatedMethod
   name: 'todos.makeChecked'
   validate: new SimpleSchema
     todoId: TodosModule.Todos.simpleSchema().schema('_id')
@@ -54,7 +54,7 @@ module.exports.setCheckedStatus = new ValidatedMethod
         checked: newCheckedStatus
 
 
-module.exports.updateText = new ValidatedMethod
+export updateText = new ValidatedMethod
   name: 'todos.updateText'
   validate: new SimpleSchema
     todoId: TodosModule.Todos.simpleSchema().schema('_id')
@@ -75,7 +75,7 @@ module.exports.updateText = new ValidatedMethod
         text: newText
 
 
-module.exports.remove = new ValidatedMethod
+export remove = new ValidatedMethod
   name: 'todos.remove'
   validate: new SimpleSchema
     todoId: TodosModule.Todos.simpleSchema().schema('_id')
@@ -93,10 +93,10 @@ module.exports.remove = new ValidatedMethod
 
 # Get list of all method names on Todos
 TODOS_METHODS = _.pluck([
-  module.exports.insert
-  module.exports.setCheckedStatus
-  module.exports.updateText
-  module.exports.remove
+  insert
+  setCheckedStatus
+  updateText
+  remove
 ], 'name')
 
 if Meteor.isServer

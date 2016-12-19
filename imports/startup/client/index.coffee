@@ -1,1 +1,1 @@
-require './routes.coffee'
+import './routes.coffee'

@@ -1,15 +1,15 @@
-{ Mongo } = require 'meteor/mongo'
-{ Factory } = require 'meteor/factory'
-faker = require 'faker'
+import { Mongo } from 'meteor/mongo'
+import { Factory } from 'meteor/factory'
+import faker from 'faker'
 
-incompleteCountDenormalizer = require './incompleteCountDenormalizer.coffee'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
+import incompleteCountDenormalizer from './incompleteCountDenormalizer.coffee'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
 # lists.coffee includes todos.coffee, and vice versa: a circular reference
 # CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
 # Learn more at https://github.com/meteor/meteor/issues/6381
 # and http://benjamn.github.io/empirenode-2015/#/31
-ListsModule = require '../lists/lists.coffee'
+import ListsModule from '../lists/lists.coffee'
 
 
 class TodosCollection extends Mongo.Collection
@@ -33,7 +33,7 @@ class TodosCollection extends Mongo.Collection
     incompleteCountDenormalizer.afterRemoveTodos todos
     result
 
-Todos = exports.Todos = new TodosCollection 'Todos'
+export Todos = new TodosCollection 'Todos'
 
 
 # Deny all client-side updates since we will be using methods to manage this collection
@@ -100,6 +100,3 @@ Todos.helpers
 
   editableBy: (userId) ->
     @list().editableBy userId
-
-
-module.exports = Todos: Todos
