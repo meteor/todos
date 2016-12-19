@@ -17,7 +17,6 @@ module.exports.insert = new ValidatedMethod
     clean: yes
     filter: no
   run: ({ listId, text }) ->
-    ListsModule = require('../lists/lists.coffee') unless ListsModule.Lists?
     list = ListsModule.Lists.findOne listId
 
     if list.isPrivate() and list.userId isnt @userId
@@ -29,7 +28,6 @@ module.exports.insert = new ValidatedMethod
       checked: no
       createdAt: new Date()
 
-    TodosModule = require('./todos.coffee') unless TodosModule.Todos?
     TodosModule.Todos.insert todo
 
 
@@ -42,7 +40,6 @@ module.exports.setCheckedStatus = new ValidatedMethod
     clean: yes
     filter: no
   run: ({ todoId, newCheckedStatus }) ->
-    TodosModule = require('./todos.coffee') unless TodosModule.Todos?
     todo = TodosModule.Todos.findOne todoId
 
     if todo.checked is newCheckedStatus
@@ -68,7 +65,6 @@ module.exports.updateText = new ValidatedMethod
   run: ({ todoId, newText }) ->
     # This is complex auth stuff - perhaps denormalizing a userId onto todos
     # would be correct here?
-    TodosModule = require('./todos.coffee') unless TodosModule.Todos?
     todo = TodosModule.Todos.findOne todoId
 
     unless todo.editableBy(@userId)
@@ -87,7 +83,6 @@ module.exports.remove = new ValidatedMethod
     clean: yes
     filter: no
   run: ({ todoId }) ->
-    TodosModule = require('./todos.coffee') unless TodosModule.Todos?
     todo = TodosModule.Todos.findOne todoId
 
     unless todo.editableBy(@userId)
