@@ -1,14 +1,14 @@
-{ Template } = require 'meteor/templating'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ $ } = require 'meteor/jquery'
-{ _ } = require 'meteor/underscore'
+import { Template } from 'meteor/templating'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { $ } from 'meteor/jquery'
+import { _ } from 'meteor/underscore'
 
-require './todos-item.html'
-TodosModule = require '../../api/todos/todos.coffee'
+import './todos-item.html'
+import TodosModule from '../../api/todos/todos.coffee'
 
-{ setCheckedStatus, updateText, remove } = require '../../api/todos/methods.coffee'
+import { setCheckedStatus, updateText, remove } from '../../api/todos/methods.coffee'
 
-{ displayError } = require '../lib/errors.coffee'
+import { displayError } from '../lib/errors.coffee'
 
 
 Template.Todos_item.onCreated ->

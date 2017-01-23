@@ -1,1 +1,1 @@
-require './loading.html'
+import './loading.html'

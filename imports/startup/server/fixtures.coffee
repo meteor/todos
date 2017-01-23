@@ -1,6 +1,6 @@
-{ Meteor } = require 'meteor/meteor'
-ListsModule = require '../../api/lists/lists.coffee'
-TodosModule = require '../../api/todos/todos.coffee'
+import { Meteor } from 'meteor/meteor'
+import ListsModule from '../../api/lists/lists.coffee'
+import TodosModule from '../../api/todos/todos.coffee'
 
 
 # if the database is empty on server start, create some sample data.

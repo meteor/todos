@@ -1,4 +1,4 @@
-require '../../api/lists/methods.coffee'
-require '../../api/lists/server/publications.coffee'
-require '../../api/todos/methods.coffee'
-require '../../api/todos/server/publications.coffee'
+import '../../api/lists/methods.coffee'
+import '../../api/lists/server/publications.coffee'
+import '../../api/todos/methods.coffee'
+import '../../api/todos/server/publications.coffee'

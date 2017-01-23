@@ -1,12 +1,12 @@
-{ Mongo } = require 'meteor/mongo'
-{ SimpleSchema } = require 'meteor/aldeed:simple-schema'
-{ Factory } = require 'meteor/factory'
+import { Mongo } from 'meteor/mongo'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { Factory } from 'meteor/factory'
 
 # todos.coffee includes lists.coffee, and vice versa: a circular reference
 # CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
 # Learn more at https://github.com/meteor/meteor/issues/6381
 # and http://benjamn.github.io/empirenode-2015/#/31
-TodosModule = require '../todos/todos.coffee'
+import TodosModule from '../todos/todos.coffee'
 
 class ListsCollection extends Mongo.Collection
   insert: (list, callback) ->
@@ -26,7 +26,7 @@ class ListsCollection extends Mongo.Collection
     TodosModule.Todos.remove {listId: selector}
     super selector, callback
 
-Lists = exports.Lists = new ListsCollection 'Lists'
+export Lists = new ListsCollection 'Lists'
 
 
 # Deny all client-side updates since we will be using methods to manage this collection

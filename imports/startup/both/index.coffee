@@ -1,1 +1,1 @@
-require './useraccounts-configuration.coffee'
+import './useraccounts-configuration.coffee'

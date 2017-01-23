@@ -1,14 +1,14 @@
-{ Template } = require 'meteor/templating'
-{ FlowRouter } = require 'meteor/kadira:flow-router'
+import { Template } from 'meteor/templating'
+import { FlowRouter } from 'meteor/kadira:flow-router'
 
-{ Lists } = require '../../api/lists/lists.coffee'
+import { Lists } from '../../api/lists/lists.coffee'
 
-{ listRenderHold } = require '../launch-screen.coffee'
-require './lists-show-page.html'
+import { listRenderHold } from '../launch-screen.coffee'
+import './lists-show-page.html'
 
 # Components used inside the template
-require './app-not-found.coffee'
-require '../components/lists-show.coffee'
+import './app-not-found.coffee'
+import '../components/lists-show.coffee'
 
 
 Template.Lists_show_page.onCreated ->

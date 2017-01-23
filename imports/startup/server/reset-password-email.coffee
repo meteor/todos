@@ -1,4 +1,4 @@
-{ Accounts } = require 'meteor/accounts-base'
+import { Accounts } from 'meteor/accounts-base'
 
 
 Accounts.emailTemplates.siteName = 'Meteor Guide Todos Example'

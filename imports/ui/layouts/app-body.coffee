@@ -1,17 +1,17 @@
-require './app-body.html'
+import './app-body.html'
 
-{ Meteor } = require 'meteor/meteor'
-{ ReactiveVar } = require 'meteor/reactive-var'
-{ ReactiveDict } = require 'meteor/reactive-dict'
-{ Lists } = require '../../api/lists/lists.coffee'
-{ Template } = require 'meteor/templating'
-{ ActiveRoute } = require 'meteor/zimme:active-route'
-{ FlowRouter } = require 'meteor/kadira:flow-router'
-{ TAPi18n } = require 'meteor/tap:i18n'
+import { Meteor } from 'meteor/meteor'
+import { ReactiveVar } from 'meteor/reactive-var'
+import { ReactiveDict } from 'meteor/reactive-dict'
+import { Lists } from '../../api/lists/lists.coffee'
+import { Template } from 'meteor/templating'
+import { ActiveRoute } from 'meteor/zimme:active-route'
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import { TAPi18n } from 'meteor/tap:i18n'
 
-{ insert } = require '../../api/lists/methods.coffee'
+import { insert } from '../../api/lists/methods.coffee'
 
-require '../components/loading.coffee'
+import '../components/loading.coffee'
 
 
 CONNECTION_ISSUE_TIMEOUT = 5000
