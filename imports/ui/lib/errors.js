@@ -1,3 +1,5 @@
+/* global alert */
+
 import { TAPi18n } from 'meteor/tap:i18n';
 
 export const displayError = (error) => {

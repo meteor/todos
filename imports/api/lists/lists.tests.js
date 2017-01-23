@@ -1,18 +1,20 @@
 /* eslint-env mocha */
 /* eslint-disable func-names, prefer-arrow-callback */
 
-import { Factory } from 'meteor/factory';
-import { Lists } from './lists.js';
-import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
-import { Todos } from '../todos/todos.js';
+import { Factory } from 'meteor/dburles:factory';
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
+import { Lists } from './lists.js';
+import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
+import { Todos } from '../todos/todos.js';
+import '../../../i18n/en.i18n.json';
 
 if (Meteor.isServer) {
+  // eslint-disable-next-line import/no-unresolved
   import './server/publications.js';
 
   describe('lists', function () {
@@ -231,11 +233,11 @@ if (Meteor.isServer) {
           const connection = DDP.connect(Meteor.absoluteUrl());
 
           _.times(5, () => {
-            connection.call(insert.name, {});
+            connection.call(insert.name, { language: 'en' });
           });
 
           assert.throws(() => {
-            connection.call(insert.name, {});
+            connection.call(insert.name, { language: 'en' });
           }, Meteor.Error, /too-many-requests/);
 
           connection.disconnect();

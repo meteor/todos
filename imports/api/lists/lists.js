@@ -1,19 +1,22 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Factory } from 'meteor/factory';
+import { Factory } from 'meteor/dburles:factory';
+import { TAPi18n } from 'meteor/tap:i18n';
+
 import { Todos } from '../todos/todos.js';
 
 class ListsCollection extends Mongo.Collection {
-  insert(list, callback) {
+  insert(list, callback, language = 'en') {
     const ourList = list;
     if (!ourList.name) {
+      const defaultName = TAPi18n.__('lists.insert.list', null, language);
       let nextLetter = 'A';
-      ourList.name = `List ${nextLetter}`;
+      ourList.name = `${defaultName} ${nextLetter}`;
 
-      while (!!this.findOne({ name: ourList.name })) {
+      while (this.findOne({ name: ourList.name })) {
         // not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1);
-        ourList.name = `List ${nextLetter}`;
+        ourList.name = `${defaultName} ${nextLetter}`;
       }
     }
 
@@ -25,7 +28,7 @@ class ListsCollection extends Mongo.Collection {
   }
 }
 
-export const Lists = new ListsCollection('Lists');
+export const Lists = new ListsCollection('lists');
 
 // Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny({

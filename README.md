@@ -1,6 +1,6 @@
 [![Circle CI](https://circleci.com/gh/meteor/todos.svg?style=svg)](https://circleci.com/gh/meteor/todos)
 
-This is a Todos example app built on the principles described in the [Meteor Guide](http://guide.meteor.com/structure.html). This branch (`coffeescript`) is a port of the app into [CoffeeScript](http://docs.meteor.com/#/full/coffeescript). The point of this port is to demonstrate how to use ES2015 modules and classes, introduced in Meteor 1.3, with CoffeeScript. There are many examples across the app for how to translate various ES2015 `import` and `export` and `class ... extends` statements into CoffeeScript equivalents without backticks.
+This is a Todos example app built on the principles described in the [Meteor Guide](http://guide.meteor.com/structure.html). This branch (`coffeescript`) is a port of the app into [CoffeeScript](http://docs.meteor.com/#/full/coffeescript). It uses the latest features of CoffeeScript, including native support for `import` and `export` and classes.
 
 ### Running the app
 

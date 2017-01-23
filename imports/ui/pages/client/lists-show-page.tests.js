@@ -2,7 +2,7 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 
 import { Meteor } from 'meteor/meteor';
-import { Factory } from 'meteor/factory';
+import { Factory } from 'meteor/dburles:factory';
 import { Random } from 'meteor/random';
 import { chai } from 'meteor/practicalmeteor:chai';
 import StubCollections from 'meteor/hwillson:stub-collections';
@@ -47,7 +47,7 @@ describe('Lists_show_page', function () {
       createdAt: new Date(timestamp - (3 - i)),
     }));
 
-    withRenderedTemplate('Lists_show_page', {}, el => {
+    withRenderedTemplate('Lists_show_page', {}, (el) => {
       const todosText = todos.map(t => t.text).reverse();
       const renderedText = $(el).find('.list-items input[type=text]')
         .map((i, e) => $(e).val())

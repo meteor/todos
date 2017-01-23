@@ -15,7 +15,7 @@ import { Todos } from '../../api/todos/todos.js';
 
 
 // Utility -- returns a promise which resolves when all subscriptions are done
-const waitForSubscriptions = () => new Promise(resolve => {
+const waitForSubscriptions = () => new Promise((resolve) => {
   const poll = Meteor.setInterval(() => {
     if (DDP._allSubscriptionsReady()) {
       Meteor.clearInterval(poll);

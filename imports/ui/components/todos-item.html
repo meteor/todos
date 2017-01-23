@@ -4,8 +4,10 @@
       <input type="checkbox" checked="{{todo.checked}}" name="checked">
       <span class="checkbox-custom"></span>
     </label>
-
-    <input type="text" value="{{todo.text}}" placeholder={{_ 'Task name'}}>
+    <input
+      type="text"
+      value="{{todo.text}}"
+      placeholder={{_ 'todos.item.taskName'}}>
     <a class="js-delete-item delete-item" href="#">
       <span class="icon-trash"></span>
     </a>

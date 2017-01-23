@@ -11,19 +11,21 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "autoprefixer": "^6.3.7",
+    "autoprefixer": "^6.4.1",
+    "babel-runtime": "^6.18.0",
     "faker": "^3.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.0",
-    "eslint": "^2.13.1",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-import-resolver-meteor": "^0.2.4",
-    "eslint-plugin-import": "^1.10.3",
-    "eslint-plugin-jsx-a11y": "^1.5.3",
-    "eslint-plugin-meteor": "^3.6.0",
-    "eslint-plugin-react": "^5.2.2",
-    "shell-source": "^1.1.0"
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-import-resolver-meteor": "^0.3.3",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-meteor": "^4.0.0",
+    "eslint-plugin-react": "^6.2.2",
+    "shell-source": "^1.1.0",
+    "shelljs": "^0.7.4"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -38,7 +40,16 @@
       "plugin:meteor/recommended"
     ],
     "rules": {
+      "import/no-extraneous-dependencies": "off",
+      "import/prefer-default-export": "off",
       "no-underscore-dangle": "off",
+      "object-shorthand": [
+        "error",
+        "always",
+        {
+          "avoidQuotes": false
+        }
+      ],
       "meteor/eventmap-params": [
         "error",
         {
