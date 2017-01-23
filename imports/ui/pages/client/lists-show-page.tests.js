@@ -14,10 +14,10 @@ import { sinon } from 'meteor/practicalmeteor:sinon';
 
 
 import { withRenderedTemplate } from '../../test-helpers.js';
-import '../lists-show-page.js';
+import '../lists-show-page.coffee';
 
-import { Todos } from '../../../api/todos/todos.js';
-import { Lists } from '../../../api/lists/lists.js';
+import { Todos } from '../../../api/todos/todos.coffee';
+import { Lists } from '../../../api/lists/lists.coffee';
 
 describe('Lists_show_page', function () {
   const listId = Random.id();

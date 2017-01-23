@@ -9,7 +9,7 @@ import { Todos } from '../../../api/todos/todos';
 
 
 import { withRenderedTemplate } from '../../test-helpers.js';
-import '../todos-item.js';
+import '../todos-item.coffee';
 
 describe('Todos_item', function () {
   beforeEach(function () {

@@ -8,14 +8,14 @@ import { Random } from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
-import { Lists } from './lists.js';
-import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
-import { Todos } from '../todos/todos.js';
+import { Lists } from './lists.coffee';
+import { insert, makePublic, makePrivate, updateName, remove } from './methods.coffee';
+import { Todos } from '../todos/todos.coffee';
 import '../../../i18n/en.i18n.json';
 
 if (Meteor.isServer) {
   // eslint-disable-next-line import/no-unresolved
-  import './server/publications.js';
+  import './server/publications.coffee';
 
   describe('lists', function () {
     describe('mutators', function () {
