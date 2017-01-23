@@ -4,7 +4,7 @@ import { $ } from 'meteor/jquery'
 import { _ } from 'meteor/underscore'
 
 import './todos-item.html'
-import TodosModule from '../../api/todos/todos.coffee'
+import { Todos } from '../../api/todos/todos.coffee'
 
 import { setCheckedStatus, updateText, remove } from '../../api/todos/methods.coffee'
 
@@ -15,7 +15,7 @@ Template.Todos_item.onCreated ->
   @autorun ->
     new SimpleSchema
       todo:
-      	type: TodosModule.Todos._helpers
+      	type: Todos._helpers
       editing:
         type: Boolean
         optional: yes

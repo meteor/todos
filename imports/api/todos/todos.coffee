@@ -1,15 +1,10 @@
 import { Mongo } from 'meteor/mongo'
-import { Factory } from 'meteor/factory'
-import faker from 'faker'
-
-import incompleteCountDenormalizer from './incompleteCountDenormalizer.coffee'
+import { Factory } from 'meteor/dburles:factory'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import faker from 'faker'
+import incompleteCountDenormalizer from './incompleteCountDenormalizer.coffee'
 
-# lists.coffee includes todos.coffee, and vice versa: a circular reference
-# CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
-# Learn more at https://github.com/meteor/meteor/issues/6381
-# and http://benjamn.github.io/empirenode-2015/#/31
-import ListsModule from '../lists/lists.coffee'
+import { Lists } from '../lists/lists.coffee'
 
 
 class TodosCollection extends Mongo.Collection
@@ -33,19 +28,14 @@ class TodosCollection extends Mongo.Collection
     incompleteCountDenormalizer.afterRemoveTodos todos
     result
 
-export Todos = new TodosCollection 'Todos'
+export Todos = new TodosCollection 'todos'
 
 
 # Deny all client-side updates since we will be using methods to manage this collection
 Todos.deny
-  insert: ->
-    yes
-
-  update: ->
-    yes
-
-  remove: ->
-    yes
+  insert: -> yes
+  update: -> yes
+  remove: -> yes
 
 
 Todos.schema = new SimpleSchema
@@ -59,6 +49,7 @@ Todos.schema = new SimpleSchema
   text:
     type: String
     max: 100
+    optional: yes
   createdAt:
     type: Date
     denyUpdate: yes
@@ -95,7 +86,7 @@ Factory.define 'todo', Todos,
 
 Todos.helpers
   list: ->
-    ListsModule.Lists.findOne @listId
+    Lists.findOne @listId
 
 
   editableBy: (userId) ->

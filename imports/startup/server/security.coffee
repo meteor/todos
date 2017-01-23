@@ -26,14 +26,11 @@ AUTH_METHODS = [
   'ATResendVerificationEmail'
 ]
 
-if Meteor.isServer
-  # Only allow 2 login attempts per connection per 5 seconds
-  DDPRateLimiter.addRule
-    name: (name) ->
-      _.contains AUTH_METHODS, name
+# Only allow 2 login attempts per connection per 5 seconds
+DDPRateLimiter.addRule
+  name: (name) ->
+    _.contains AUTH_METHODS, name
 
-    # Rate limit per connection ID
-    connectionId: ->
-      yes
-
-  , 2, 5000
+  # Rate limit per connection ID
+  connectionId: -> yes
+, 2, 5000

@@ -1,16 +1,17 @@
 import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
-import TodosModule from '../todos.coffee'
-import ListsModule from '../../lists/lists.coffee'
+import { Todos } from '../todos.coffee'
+import { Lists } from '../../lists/lists.coffee'
 
 
-Meteor.publishComposite 'todos.inList', (listId) ->
+Meteor.publishComposite 'todos.inList', (params) ->
   new SimpleSchema
   	listId:
   		type: String
-  .validate listId: listId
+  .validate params
 
+  { listId } = params
   userId = @userId
 
   ret =
@@ -28,9 +29,9 @@ Meteor.publishComposite 'todos.inList', (listId) ->
       	fields:
       		_id: 1
 
-      ListsModule.Lists.find query, options
+      Lists.find query, options
 
     children: [
     	find: (list) ->
-      	TodosModule.Todos.find { listId: list._id }, fields: TodosModule.Todos.publicFields
+      	Todos.find { listId: list._id }, fields: Todos.publicFields
  		]

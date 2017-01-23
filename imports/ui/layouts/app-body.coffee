@@ -1,17 +1,19 @@
-import './app-body.html'
-
 import { Meteor } from 'meteor/meteor'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { ReactiveDict } from 'meteor/reactive-dict'
-import { Lists } from '../../api/lists/lists.coffee'
 import { Template } from 'meteor/templating'
 import { ActiveRoute } from 'meteor/zimme:active-route'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 import { TAPi18n } from 'meteor/tap:i18n'
+import { T9n } from 'meteor/softwarerero:accounts-t9n'
+import { _ } from 'meteor/underscore'
+import { $ } from 'meteor/jquery'
 
+import { Lists } from '../../api/lists/lists.coffee'
 import { insert } from '../../api/lists/methods.coffee'
 
 import '../components/loading.coffee'
+import './app-body.html'
 
 
 CONNECTION_ISSUE_TIMEOUT = 5000
@@ -81,6 +83,12 @@ Template.App_body.helpers
     'swiperight .cordova': (event, instance) ->
       instance.state.set 'menuOpen', yes
 
+  languages: ->
+    _.keys TAPi18n.getLanguages()
+
+  isActiveLanguage: (language) ->
+    TAPi18n.getLanguage() is language
+
 
 Template.App_body.events
   'click .js-menu': (event, instance) ->
@@ -108,13 +116,18 @@ Template.App_body.events
         FlowRouter.go 'Lists.show', Lists.findOne(userId: $exists: no)
 
   'click .js-new-list': ->
-    listId = insert.call((err) ->
+    listId = insert.call { language: TAPi18n.getLanguage() }, (err) ->
       if err
         # At this point, we have already redirected to the new list page, but
         # for some reason the list didn't get created. This should almost never
         # happen, but it's good to handle it anyway.
         FlowRouter.go 'App.home'
-        alert TAPi18n.__ 'Could not create list.'
+        alert TAPi18n.__ 'layouts.appBody.newListError'
 
-      )
     FlowRouter.go 'Lists.show', _id: listId
+
+  'click .js-toggle-language': (event) ->
+    language = $(event.target).html().trim()
+    T9n.setLanguage language
+    TAPi18n.setLanguage language
+

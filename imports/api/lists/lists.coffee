@@ -1,44 +1,37 @@
 import { Mongo } from 'meteor/mongo'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
-import { Factory } from 'meteor/factory'
+import { Factory } from 'meteor/dburles:factory'
+import { TAPi18n } from 'meteor/tap:i18n'
 
-# todos.coffee includes lists.coffee, and vice versa: a circular reference
-# CommonJS doesn’t resolve this as we would like, so save a reference to the top-level module rather than destructuring it
-# Learn more at https://github.com/meteor/meteor/issues/6381
-# and http://benjamn.github.io/empirenode-2015/#/31
-import TodosModule from '../todos/todos.coffee'
+import { Todos } from '../todos/todos.coffee'
 
 class ListsCollection extends Mongo.Collection
-  insert: (list, callback) ->
+  insert: (list, callback, language = 'en') ->
     ourList = list
     unless ourList.name?
+      defaultName = TAPi18n.__ 'lists.insert.list', null, language
       nextLetter = 'A'
-      ourList.name = "List #{nextLetter}"
+      ourList.name = "#{defaultName} #{nextLetter}"
 
       while this.findOne({name: ourList.name})?
         # not going to be too smart here, can go past Z
         nextLetter = String.fromCharCode(nextLetter.charCodeAt(0) + 1)
-        ourList.name = "List #{nextLetter}"
+        ourList.name = "#{defaultName} #{nextLetter}"
 
     super ourList, callback
 
   remove: (selector, callback) ->
-    TodosModule.Todos.remove {listId: selector}
+    Todos.remove {listId: selector}
     super selector, callback
 
-export Lists = new ListsCollection 'Lists'
+export Lists = new ListsCollection 'lists'
 
 
 # Deny all client-side updates since we will be using methods to manage this collection
 Lists.deny
-  insert: ->
-    yes
-
-  update: ->
-    yes
-
-  remove: ->
-    yes
+  insert: -> yes
+  update: -> yes
+  remove: -> yes
 
 
 Lists.schema = new SimpleSchema
@@ -86,4 +79,4 @@ Lists.helpers
 
 
   todos: ->
-    TodosModule.Todos.find { listId: @_id }, sort: createdAt: -1
+    Todos.find { listId: @_id }, sort: createdAt: -1

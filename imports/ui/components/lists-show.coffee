@@ -4,6 +4,9 @@ import { Mongo } from 'meteor/mongo'
 import { ReactiveDict } from 'meteor/reactive-dict'
 import { Tracker } from 'meteor/tracker'
 import { $ } from 'meteor/jquery'
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { TAPi18n } from 'meteor/tap:i18n'
 
 import './lists-show.html'
 
@@ -15,10 +18,6 @@ import { updateName, makePublic, makePrivate, remove } from '../../api/lists/met
 import { insert } from '../../api/todos/methods.coffee'
 
 import { displayError } from '../lib/errors.coffee'
-
-import { FlowRouter } from 'meteor/kadira:flow-router'
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
-import { TAPi18n } from 'meteor/tap:i18n'
 
 
 Template.Lists_show.onCreated ->
@@ -63,7 +62,7 @@ Template.Lists_show.onCreated ->
 
   @deleteList = =>
     list = @data.list()
-    message = "#{TAPi18n.__('Are you sure you want to delete the list')} #{list.name}?"
+    message = "#{TAPi18n.__('lists.remove.confirm')} “#{list.name}”?"
     if confirm(message)
       remove.call { listId: list._id }, displayError
 

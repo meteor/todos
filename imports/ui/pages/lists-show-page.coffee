@@ -16,7 +16,7 @@ Template.Lists_show_page.onCreated ->
     FlowRouter.getParam '_id'
 
   @autorun =>
-    @subscribe 'todos.inList', @getListId()
+    @subscribe 'todos.inList', { listId: @getListId() }
 
 
 Template.Lists_show_page.onRendered ->
