@@ -57,7 +57,7 @@ export const makePublic = new ValidatedMethod({
 
     if (!list.editableBy(this.userId)) {
       throw new Meteor.Error('lists.makePublic.accessDenied',
-        'You don\'t have permission to edit this list.');
+        'You don’t have permission to edit this list.');
     }
 
     // XXX the security check above is not atomic, so in theory a race condition could
@@ -79,7 +79,7 @@ export const updateName = new ValidatedMethod({
 
     if (!list.editableBy(this.userId)) {
       throw new Meteor.Error('lists.updateName.accessDenied',
-        'You don\'t have permission to edit this list.');
+        'You don’t have permission to edit this list.');
     }
 
     // XXX the security check above is not atomic, so in theory a race condition could
@@ -99,7 +99,7 @@ export const remove = new ValidatedMethod({
 
     if (!list.editableBy(this.userId)) {
       throw new Meteor.Error('lists.remove.accessDenied',
-        'You don\'t have permission to remove this list.');
+        'You don’t have permission to remove this list.');
     }
 
     // XXX the security check above is not atomic, so in theory a race condition could

@@ -50,7 +50,7 @@ export makePublic = new ValidatedMethod
     list = Lists.findOne listId
 
     unless list.editableBy @userId
-      throw new Meteor.Error 'lists.makePublic.accessDenied', 'You don\'t have permission to edit this list.'
+      throw new Meteor.Error 'lists.makePublic.accessDenied', 'You don’t have permission to edit this list.'
 
     # XXX the security check above is not atomic, so in theory a race condition could
     # result in exposing private data
@@ -61,17 +61,17 @@ export makePublic = new ValidatedMethod
 
 export updateName = new ValidatedMethod
   name: 'lists.updateName'
-  validate: new SimpleSchema(
-      listId: Lists.simpleSchema().schema('_id')
-      newName: Lists.simpleSchema().schema('name')
-    ).validator
-      clean: yes
-      filter: no
+  validate: new SimpleSchema
+    listId: Lists.simpleSchema().schema('_id')
+    newName: Lists.simpleSchema().schema('name')
+  .validator
+    clean: yes
+    filter: no
   run: ({ listId, newName }) ->
     list = Lists.findOne listId
 
     unless list.editableBy @userId
-      throw new Meteor.Error 'lists.updateName.accessDenied', 'You don\'t have permission to edit this list.'
+      throw new Meteor.Error 'lists.updateName.accessDenied', 'You don’t have permission to edit this list.'
 
     # XXX the security check above is not atomic, so in theory a race condition could
     # result in exposing private data
@@ -88,7 +88,7 @@ export remove = new ValidatedMethod
     list = Lists.findOne listId
 
     unless list.editableBy @userId
-      throw new Meteor.Error 'lists.remove.accessDenied', 'You don\'t have permission to remove this list.'
+      throw new Meteor.Error 'lists.remove.accessDenied', 'You don’t have permission to remove this list.'
 
     # XXX the security check above is not atomic, so in theory a race condition could
     # result in exposing private data

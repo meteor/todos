@@ -38,7 +38,9 @@ Template.Lists_show_page.helpers
     instance = Template.instance()
     # By finding the list with only the `_id` field set, we don't create a dependency on the
     # `list.incompleteCount`, and avoid re-rendering the todos when it changes
-    list = Lists.findOne(listId, fields: _id: yes)
+    list = Lists.findOne listId,
+      fields:
+        _id: yes
     todos = list.todos() if list?
 
     ret =

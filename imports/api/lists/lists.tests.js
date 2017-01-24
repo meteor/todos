@@ -161,7 +161,7 @@ if (Meteor.isServer) {
       });
 
       describe('updateName', () => {
-        it('changes the name, but not if you don\'t have permission', function () {
+        it('changes the name, but not if you don’t have permission', function () {
           updateName._execute({}, {
             listId,
             newName: 'new name',
@@ -213,7 +213,7 @@ if (Meteor.isServer) {
           }, Meteor.Error, /lists.remove.lastPublicList/);
         });
 
-        it('does not delete a private list you don\'t own', function () {
+        it('does not delete a private list you don’t own', function () {
           // Make the list private
           makePrivate._execute({ userId }, { listId });
 
