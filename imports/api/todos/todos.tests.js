@@ -59,7 +59,7 @@ if (Meteor.isServer) {
             'todos.inList',
             { listId: publicList._id },
             (collections) => {
-              chai.assert.equal(collections.Todos.length, 3);
+              chai.assert.equal(collections.todos.length, 3);
               done();
             }
           );
@@ -71,7 +71,7 @@ if (Meteor.isServer) {
             'todos.inList',
             { listId: publicList._id },
             (collections) => {
-              chai.assert.equal(collections.Todos.length, 3);
+              chai.assert.equal(collections.todos.length, 3);
               done();
             }
           );
@@ -83,7 +83,7 @@ if (Meteor.isServer) {
             'todos.inList',
             { listId: privateList._id },
             (collections) => {
-              chai.assert.equal(collections.Todos.length, 3);
+              chai.assert.equal(collections.todos.length, 3);
               done();
             }
           );
@@ -95,7 +95,7 @@ if (Meteor.isServer) {
             'todos.inList',
             { listId: privateList._id },
             (collections) => {
-              chai.assert.isUndefined(collections.Todos);
+              chai.assert.isUndefined(collections.todos);
               done();
             }
           );
@@ -107,7 +107,7 @@ if (Meteor.isServer) {
             'todos.inList',
             { listId: privateList._id },
             (collections) => {
-              chai.assert.isUndefined(collections.Todos);
+              chai.assert.isUndefined(collections.todos);
               done();
             }
           );
