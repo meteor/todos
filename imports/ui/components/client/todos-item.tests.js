@@ -5,11 +5,11 @@ import { Factory } from 'meteor/dburles:factory';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
-import { Todos } from '../../../api/todos/todos';
+import { Todos } from '/imports/api/todos/todos';
 
 
-import { withRenderedTemplate } from '../../test-helpers.js';
-import '../todos-item.js';
+import { withRenderedTemplate } from '/imports/ui/test-helpers.js';
+import '/imports/ui/components/todos-item.js';
 
 describe('Todos_item', function () {
   beforeEach(function () {

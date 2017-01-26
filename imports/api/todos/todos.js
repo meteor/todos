@@ -4,7 +4,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import faker from 'faker';
 import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 
-import { Lists } from '../lists/lists.js';
+import { Lists } from '/imports/api/lists/lists.js';
 
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {

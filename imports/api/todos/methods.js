@@ -5,7 +5,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
 import { Todos } from './todos.js';
-import { Lists } from '../lists/lists.js';
+import { Lists } from '/imports/api/lists/lists.js';
 
 export const insert = new ValidatedMethod({
   name: 'todos.insert',
