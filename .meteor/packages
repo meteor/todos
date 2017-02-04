@@ -42,7 +42,7 @@ zimme:active-route
 tap:i18n
 
 # accounts
-accounts-password@1.3.5
+accounts-password
 useraccounts:core
 useraccounts:unstyled
 useraccounts:flow-routing
@@ -76,3 +76,6 @@ dburles:factory
 # security
 audit-argument-checks@1.0.7
 dispatch:mocha
+accounts-ui
+accounts-google
+service-configuration
