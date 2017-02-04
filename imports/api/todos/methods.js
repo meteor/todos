@@ -4,8 +4,8 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
+import { Lists } from '/imports/api/lists/lists.js';
 import { Todos } from './todos.js';
-import { Lists } from '../lists/lists.js';
 
 export const insert = new ValidatedMethod({
   name: 'todos.insert',

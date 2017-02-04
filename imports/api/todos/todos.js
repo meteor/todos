@@ -2,9 +2,9 @@ import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/dburles:factory';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import faker from 'faker';
-import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 
-import { Lists } from '../lists/lists.js';
+import { Lists } from '/imports/api/lists/lists.js';
+import incompleteCountDenormalizer from './incompleteCountDenormalizer.js';
 
 class TodosCollection extends Mongo.Collection {
   insert(doc, callback) {
