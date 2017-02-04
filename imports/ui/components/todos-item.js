@@ -4,15 +4,15 @@ import { $ } from 'meteor/jquery';
 import { _ } from 'meteor/underscore';
 
 import './todos-item.html';
-import { Todos } from '../../api/todos/todos.js';
+import { Todos } from '/imports/api/todos/todos.js';
 
 import {
   setCheckedStatus,
   updateText,
   remove,
-} from '../../api/todos/methods.js';
+} from '/imports/api/todos/methods.js';
 
-import { displayError } from '../lib/errors.js';
+import { displayError } from '/imports/ui/lib/errors.js';
 
 Template.Todos_item.onCreated(function todosItemOnCreated() {
   this.autorun(() => {
