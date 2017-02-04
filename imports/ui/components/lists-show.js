@@ -20,13 +20,13 @@ import {
   makePublic,
   makePrivate,
   remove,
-} from '../../api/lists/methods.js';
+} from '/imports/api/lists/methods.js';
 
 import {
   insert,
-} from '../../api/todos/methods.js';
+} from '/imports/api/todos/methods.js';
 
-import { displayError } from '../lib/errors.js';
+import { displayError } from '/imports/ui/lib/errors.js';
 
 Template.Lists_show.onCreated(function listShowOnCreated() {
   this.autorun(() => {

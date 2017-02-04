@@ -10,8 +10,8 @@ import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
 import { Lists } from './lists.js';
 import { insert, makePublic, makePrivate, updateName, remove } from './methods.js';
-import { Todos } from '../todos/todos.js';
-import '../../../i18n/en.i18n.json';
+import { Todos } from '/imports/api/todos/todos.js';
+import '/i18n/en.i18n.json';
 
 if (Meteor.isServer) {
   // eslint-disable-next-line import/no-unresolved

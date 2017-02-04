@@ -11,10 +11,10 @@ import { T9n } from 'meteor/softwarerero:accounts-t9n';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
 
-import { Lists } from '../../api/lists/lists.js';
-import { insert } from '../../api/lists/methods.js';
+import { Lists } from '/imports/api/lists/lists.js';
+import { insert } from '/imports/api/lists/methods.js';
 
-import '../components/loading.js';
+import '/imports/ui/components/loading.js';
 import './app-body.html';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;

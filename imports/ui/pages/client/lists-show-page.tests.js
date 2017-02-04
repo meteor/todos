@@ -18,7 +18,7 @@ import { withRenderedTemplate } from '/imports/ui/test-helpers.js';
 import { Todos } from '/imports/api/todos/todos.js';
 import { Lists } from '/imports/api/lists/lists.js';
 
-import '../lists-show-page.js';
+import '/imports/ui/lists-show-page.js';
 
 describe('Lists_show_page', function () {
   const listId = Random.id();

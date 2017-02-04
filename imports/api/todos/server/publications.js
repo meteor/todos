@@ -3,8 +3,8 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-import { Todos } from '../todos.js';
-import { Lists } from '../../lists/lists.js';
+import { Todos } from '/imports/api/todos/todos.js';
+import { Lists } from '/imports/api/lists/lists.js';
 
 Meteor.publishComposite('todos.inList', function todosInList(params) {
   new SimpleSchema({
