@@ -64,3 +64,4 @@ shell-server@0.2.3
 
 # security
 audit-argument-checks@1.0.7
+dynamic-import
