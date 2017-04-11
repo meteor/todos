@@ -36,8 +36,9 @@ export default class SignInPage extends BaseComponent {
         this.setState({
           errors: { none: err.reason },
         });
+      } else {
+          this.context.router.push('/');
       }
-      this.context.router.push('/');
     });
   }
 
