@@ -55,7 +55,6 @@ simple:rest
 factory
 publication-collector
 xolvio:cleaner
-dispatch:mocha-phantomjs
 practicalmeteor:mocha
 practicalmeteor:chai
 practicalmeteor:sinon
@@ -64,3 +63,4 @@ shell-server@0.2.3
 
 # security
 audit-argument-checks@1.0.7
+dispatch:mocha

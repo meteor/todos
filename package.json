@@ -1,9 +1,12 @@
 {
   "scripts": {
     "pretest": "npm run lint --silent",
-    "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
+    "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
+    "test-app": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
+    "test-watch-terminal": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --driver-package dispatch:mocha",
+    "test-app-watch-terminal": "TEST_WATCH=1 TEST_BROWSER_DRIVER=nightmare meteor test --full-app --driver-package dispatch:mocha",
     "lint": "eslint --ext .js,.jsx .",
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
@@ -20,7 +23,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "enzyme": "^2.4.1",
+    "enzyme": "=2.4.1",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-import-resolver-meteor": "^0.3.3",
