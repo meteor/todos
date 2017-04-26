@@ -58,12 +58,14 @@ juliancwirko:postcss@1.2.0
 launch-screen@1.1.1
 less@2.7.9
 livedata@1.0.18
+lmieulet:meteor-coverage@1.1.4
 localstorage@1.0.12
 logging@1.1.17
 mdg:validated-method@1.1.0
 mdg:validation-error@0.5.1
 meteor@1.6.1
 meteor-base@1.0.4
+meteorhacks:picker@1.0.3
 minifier-css@1.2.16
 minifier-js@2.0.0
 minimongo@1.0.21
@@ -80,6 +82,7 @@ ordered-dict@1.0.9
 practicalmeteor:chai@2.1.0_1
 practicalmeteor:loglevel@1.2.0_2
 practicalmeteor:mocha@2.4.5_6
+practicalmeteor:mocha-console-runner@0.2.1
 practicalmeteor:mocha-core@1.0.1
 practicalmeteor:sinon@1.14.1_2
 promise@0.8.8
