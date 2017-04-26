@@ -7,4 +7,26 @@ dependencies:
     - npm install
 checkout:
   post:
-    - git submodule update --init
+    - "git submodule update --init"
+dependencies:
+  cache_directories:
+    - ~/.npm
+    - ~/.meteor
+    - node_modules
+    - ./.meteor/local/build
+    - ./.meteor/local/bundler-cache
+    - ./.meteor/local/isopacks
+    - ./.meteor/local/plugin-cache
+    - /home/ubuntu/nvm/versions/node/v5.2.0/bin
+    - /home/ubuntu/nvm/versions/node/v5.2.0/lib/node_modules
+  override:
+    - "curl https://install.meteor.com | /bin/sh"
+    - "meteor npm install"
+    - "meteor npm update"
+test:
+  override:
+  pre:
+    - "meteor npm run test"
+    - "meteor npm run test-app-unit"
+    - "meteor npm run test-app-full"
+    - "meteor npm run test-packages"
