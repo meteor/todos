@@ -65,7 +65,6 @@ simple:rest
 
 # testing
 xolvio:cleaner
-dispatch:mocha-phantomjs
 practicalmeteor:chai
 practicalmeteor:sinon
 practicalmeteor:mocha
@@ -76,3 +75,4 @@ dburles:factory
 
 # security
 audit-argument-checks@1.0.7
+dispatch:mocha
