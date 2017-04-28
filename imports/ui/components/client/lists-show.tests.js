@@ -8,9 +8,9 @@ import { Template } from 'meteor/templating';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
 
-import { withRenderedTemplate } from '../../test-helpers.js';
-import '../lists-show.js';
-import { Todos } from '../../../api/todos/todos.js';
+import { withRenderedTemplate } from '/imports/ui/test-helpers.js';
+import '/imports/ui/components/lists-show.js';
+import { Todos } from '/imports/api/todos/todos.js';
 
 
 describe('Lists_show', function () {
