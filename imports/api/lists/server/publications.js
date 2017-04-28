@@ -2,7 +2,7 @@
 
 import { Meteor } from 'meteor/meteor';
 
-import { Lists } from '../lists.js';
+import { Lists } from '/imports/api/lists/lists.js';
 
 Meteor.publish('lists.public', function listsPublic() {
   return Lists.find({

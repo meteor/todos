@@ -8,10 +8,10 @@ import { Random } from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
 import { DDP } from 'meteor/ddp-client';
-import { Lists } from '../lists.js';
-import { insert, makePublic, makePrivate, updateName, remove } from '../methods.js';
-import { Todos } from '../../todos/todos.js';
-import '../../../../i18n/en.i18n.json';
+import { Lists } from '/imports/api/lists/lists.js';
+import { insert, makePublic, makePrivate, updateName, remove } from '/imports/api/lists/methods.js';
+import { Todos } from '/imports/api/todos/todos.js';
+import '/i18n/en.i18n.json';
 import './publications.js';
 
 describe('lists', function () {

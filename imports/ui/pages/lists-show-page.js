@@ -1,14 +1,14 @@
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { Lists } from '../../api/lists/lists.js';
-
-import { listRenderHold } from '../launch-screen.js';
-import './lists-show-page.html';
+import { Lists } from '/imports/api/lists/lists.js';
+import { listRenderHold } from '/imports/ui/launch-screen.js';
 
 // Components used inside the template
+import '/imports/ui/components/lists-show.js';
+
+import './lists-show-page.html';
 import './app-not-found.js';
-import '../components/lists-show.js';
 
 Template.Lists_show_page.onCreated(function listsShowPageOnCreated() {
   this.getListId = () => FlowRouter.getParam('_id');

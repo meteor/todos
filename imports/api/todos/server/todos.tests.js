@@ -6,7 +6,7 @@ import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import { chai, assert } from 'meteor/practicalmeteor:chai';
 import { Random } from 'meteor/random';
 import { _ } from 'meteor/underscore';
-import { Todos } from '../todos.js';
+import { Todos } from '/imports/api/todos/todos.js';
 import './publications.js';
 
 describe('todos', function () {

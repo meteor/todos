@@ -8,10 +8,10 @@ import { assert } from 'meteor/practicalmeteor:chai';
 import { Promise } from 'meteor/promise';
 import { $ } from 'meteor/jquery';
 
-import { denodeify } from '../../utils/denodeify';
-import { generateData } from './../../api/generate-data.app-tests.js';
-import { Lists } from '../../api/lists/lists.js';
-import { Todos } from '../../api/todos/todos.js';
+import { denodeify } from '/imports/utils/denodeify';
+import { generateData } from '/imports/api/generate-data.app-tests.js';
+import { Lists } from '/imports/api/lists/lists.js';
+import { Todos } from '/imports/api/todos/todos.js';
 
 
 // Utility -- returns a promise which resolves when all subscriptions are done
