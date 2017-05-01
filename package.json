@@ -1,7 +1,8 @@
 {
   "scripts": {
+    "start": "meteor run",
     "pretest": "npm run lint --silent",
-    "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --driver-package dispatch:mocha",
+    "test": "TEST_BROWSER_DRIVER=nightmare meteor test --once --settings settings.coverage.json --driver-package practicalmeteor:mocha",
     "test-app": "TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package dispatch:mocha",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
@@ -13,6 +14,8 @@
   "dependencies": {
     "autoprefixer": "^6.4.1",
     "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3",
     "classnames": "^2.2.5",
     "faker": "^3.1.0",
     "react": "^15.3.1",
@@ -34,7 +37,16 @@
     "meteor-node-stubs": "^0.2.3",
     "nightmare": "^2.10.0",
     "react-addons-test-utils": "^15.3.1",
-    "shelljs": "^0.7.4"
+    "shelljs": "^0.7.4",
+    "bcrypt-nodejs": "0.0.3",
+    "buffer": "^5.0.0",
+    "chai": "^3.5.0",
+    "codacy-coverage": "^2.0.0",
+    "codecov.io": "^0.1.6",
+    "coveralls": "^2.11.11",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-mocha": "^4.5.1",
+    "spacejam": "https://github.com/serut/spacejam/tarball/windows-suppport-rc4"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

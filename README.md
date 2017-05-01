@@ -18,3 +18,17 @@ To lint:
 ```bash
 meteor npm run lint
 ```
+
+### Testing
+
+Create a code coverage settings file called "settings.coverage.json"
+
+```bash
+{
+    "coverage": {
+        "coverage_app_folder": "/Users/USERNAME/path/to/meteor-react-base",
+        "is_coverage_active": true,
+        "verbose": true
+    }
+}
+```

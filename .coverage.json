@@ -1,0 +1,7 @@
+{
+    "include": [
+        "**/*.tests.js"
+     ],
+     "remapFormat": ["html", "cobertura", "clover", "json", "json-summary", "lcovonly", "teamcity", "text", "text-summary"],
+     "output": "./.coverage"
+}

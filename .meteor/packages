@@ -60,9 +60,9 @@ practicalmeteor:chai
 practicalmeteor:sinon
 hwillson:stub-collections
 shell-server@0.2.3
+lmieulet:meteor-coverage
+practicalmeteor:mocha-console-runner
 
 # security
 audit-argument-checks@1.0.7
 dispatch:mocha
-lmieulet:meteor-coverage
-practicalmeteor:mocha-console-runner
