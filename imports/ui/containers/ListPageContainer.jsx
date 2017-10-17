@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Lists } from '../../api/lists/lists.js';
 import ListPage from '../pages/ListPage.jsx';
 
-const ListPageContainer = createContainer(({ params: { id } }) => {
+const ListPageContainer = withTracker(({ params: { id } }) => {
   const todosHandle = Meteor.subscribe('todos.inList', { listId: id });
   const loading = !todosHandle.ready();
   const list = Lists.findOne(id);
@@ -14,6 +14,6 @@ const ListPageContainer = createContainer(({ params: { id } }) => {
     listExists,
     todos: listExists ? list.todos().fetch() : [],
   };
-}, ListPage);
+})(ListPage);
 
 export default ListPageContainer;
