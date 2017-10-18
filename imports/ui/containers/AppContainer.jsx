@@ -1,12 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 // XXX: Session
 import { Session } from 'meteor/session';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 
 import { Lists } from '../../api/lists/lists.js';
 import App from '../layouts/App.jsx';
 
-export default createContainer(() => {
+export default withTracker(() => {
   const publicHandle = Meteor.subscribe('lists.public');
   const privateHandle = Meteor.subscribe('lists.private');
   return {
@@ -19,4 +19,4 @@ export default createContainer(() => {
       { userId: Meteor.userId() },
     ] }).fetch(),
   };
-}, App);
+})(App);
