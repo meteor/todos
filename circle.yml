@@ -10,8 +10,6 @@ dependencies:
     - "./.meteor/local/bundler-cache"
     - "./.meteor/local/isopacks"
     - "./.meteor/local/plugin-cache"
-    - "/home/ubuntu/nvm/versions/node/v8.9.3/bin"
-    - "/home/ubuntu/nvm/versions/node/v8.9.3/lib/node_modules"
   override:
     - ./.testing/upgrade_chrome_version.sh
     - ./.testing/cache_meteor.sh
