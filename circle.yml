@@ -25,4 +25,5 @@ test:
   pre:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
   override:
+    - echo "done"
     #- ./tests/acceptance_run
