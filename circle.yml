@@ -15,9 +15,9 @@ dependencies:
   override:
     - ./.testing/upgrade_chrome_version.sh
     - ./.testing/cache_meteor.sh
-    - ./.testing/cache_npm_dependencies.sh
-    - ./.testing/cache_build_and_dependencies.sh
-    - chimp --path=features # Cache chimp deps by running it without any tests
+    #- ./.testing/cache_npm_dependencies.sh
+    #- ./.testing/cache_build_and_dependencies.sh
+    #- chimp --path=features # Cache chimp deps by running it without any tests
 checkout:
   post:
     - git submodule update --init
@@ -25,4 +25,4 @@ test:
   pre:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
   override:
-    - ./tests/acceptance_run
+    #- ./tests/acceptance_run
