@@ -10,6 +10,8 @@ dependencies:
     - "./.meteor/local/bundler-cache"
     - "./.meteor/local/isopacks"
     - "./.meteor/local/plugin-cache"
+    - "/opt/circleci/nodejs/v8.9.3/bin"
+    - "/opt/circleci/nodejs/v8.9.3/lib/node_modules"
   override:
     - ./.testing/upgrade_chrome_version.sh
     - ./.testing/cache_meteor.sh
