@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 4.6.2
+    version: 8.9.3
 dependencies:
   cache_directories:
     - "~/.npm"
@@ -10,8 +10,8 @@ dependencies:
     - "./.meteor/local/bundler-cache"
     - "./.meteor/local/isopacks"
     - "./.meteor/local/plugin-cache"
-    - "/home/ubuntu/nvm/versions/node/v4.6.2/bin"
-    - "/home/ubuntu/nvm/versions/node/v4.6.2/lib/node_modules"
+    - "/home/ubuntu/nvm/versions/node/v8.9.3/bin"
+    - "/home/ubuntu/nvm/versions/node/v8.9.3/lib/node_modules"
   override:
     - ./.testing/upgrade_chrome_version.sh
     - ./.testing/cache_meteor.sh
