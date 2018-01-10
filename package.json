@@ -13,6 +13,7 @@
   "dependencies": {
     "autoprefixer": "^6.4.1",
     "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.3",
     "faker": "^3.0.1"
   },
   "devDependencies": {
