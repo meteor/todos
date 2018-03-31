@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTransitionGroup from 'react-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Lists } from '../../api/lists/lists.js';
@@ -88,7 +88,7 @@ export default class App extends React.Component {
           : null}
         <div className="content-overlay" onClick={closeMenu} />
         <div id="content-container">
-          <ReactTransitionGroup
+          <CSSTransitionGroup
             transitionName="fade"
             transitionEnterTimeout={200}
             transitionLeaveTimeout={200}
@@ -96,7 +96,7 @@ export default class App extends React.Component {
             {loading
               ? <Loading key="loading" />
               : clonedChildren}
-          </ReactTransitionGroup>
+          </CSSTransitionGroup>
         </div>
       </div>
     );
