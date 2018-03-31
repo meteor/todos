@@ -13,24 +13,24 @@
     "bcrypt": "^1.0.3",
     "classnames": "^2.2.5",
     "faker": "^3.1.0",
-    "react": "^15.3.1",
-    "react-addons-css-transition-group": "^15.3.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.0",
     "react-addons-pure-render-mixin": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-router": "^2.8.1"
+    "react-dom": "^16.3.0",
+    "react-router": "^3.2.1",
+    "react-transition-group": "^1.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "enzyme": "^2.4.1",
+    "enzyme": "^3.3.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-import-resolver-meteor": "^0.3.3",
     "eslint-plugin-import": "^1.15.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-meteor": "^4.0.0",
+    "eslint-plugin-meteor": "^4.2.1",
     "eslint-plugin-react": "^6.2.2",
     "meteor-node-stubs": "^0.2.3",
-    "react-addons-test-utils": "^15.3.1",
     "shelljs": "^0.7.4"
   },
   "eslintConfig": {
