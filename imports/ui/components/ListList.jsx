@@ -1,6 +1,7 @@
 /* global alert */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from './BaseComponent.jsx';
@@ -55,9 +56,9 @@ export default class ListList extends BaseComponent {
 }
 
 ListList.propTypes = {
-  lists: React.PropTypes.array,
+  lists: PropTypes.array,
 };
 
 ListList.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };

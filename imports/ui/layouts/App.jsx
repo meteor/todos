@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import PropTypes from 'prop-types';
+import ReactTransitionGroup from 'react-transition-group';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
 import { Lists } from '../../api/lists/lists.js';
@@ -87,7 +88,7 @@ export default class App extends React.Component {
           : null}
         <div className="content-overlay" onClick={closeMenu} />
         <div id="content-container">
-          <ReactCSSTransitionGroup
+          <ReactTransitionGroup
             transitionName="fade"
             transitionEnterTimeout={200}
             transitionLeaveTimeout={200}
@@ -95,7 +96,7 @@ export default class App extends React.Component {
             {loading
               ? <Loading key="loading" />
               : clonedChildren}
-          </ReactCSSTransitionGroup>
+          </ReactTransitionGroup>
         </div>
       </div>
     );
@@ -103,16 +104,16 @@ export default class App extends React.Component {
 }
 
 App.propTypes = {
-  user: React.PropTypes.object,      // current meteor user
-  connected: React.PropTypes.bool,   // server connection status
-  loading: React.PropTypes.bool,     // subscription status
-  menuOpen: React.PropTypes.bool,    // is side menu open?
-  lists: React.PropTypes.array,      // all lists visible to the current user
-  children: React.PropTypes.element, // matched child route component
-  location: React.PropTypes.object,  // current router location
-  params: React.PropTypes.object,    // parameters of the current route
+  user: PropTypes.object,      // current meteor user
+  connected: PropTypes.bool,   // server connection status
+  loading: PropTypes.bool,     // subscription status
+  menuOpen: PropTypes.bool,    // is side menu open?
+  lists: PropTypes.array,      // all lists visible to the current user
+  children: PropTypes.element, // matched child route component
+  location: PropTypes.object,  // current router location
+  params: PropTypes.object,    // parameters of the current route
 };
 
 App.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };

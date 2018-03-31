@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MobileMenu from '../components/MobileMenu.jsx';
 
 // a common layout wrapper for auth pages
@@ -15,8 +16,8 @@ const AuthPage = ({ content, link }) => (
 );
 
 AuthPage.propTypes = {
-  content: React.PropTypes.element,
-  link: React.PropTypes.element,
+  content: PropTypes.element,
+  link: PropTypes.element,
 };
 
 export default AuthPage;

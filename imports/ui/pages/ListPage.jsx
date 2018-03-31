@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from '../components/BaseComponent.jsx';
 import ListHeader from '../components/ListHeader.jsx';
@@ -60,8 +61,8 @@ export default class ListPage extends BaseComponent {
 }
 
 ListPage.propTypes = {
-  list: React.PropTypes.object,
-  todos: React.PropTypes.array,
-  loading: React.PropTypes.bool,
-  listExists: React.PropTypes.bool,
+  list: PropTypes.object,
+  todos: PropTypes.array,
+  loading: PropTypes.bool,
+  listExists: PropTypes.bool,
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
 import i18n from 'meteor/universe:i18n';
@@ -121,5 +122,5 @@ export default class JoinPage extends BaseComponent {
 }
 
 JoinPage.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
