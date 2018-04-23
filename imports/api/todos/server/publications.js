@@ -16,9 +16,13 @@ Meteor.publishComposite('todos.inList', function todosInList(params) {
 
   return {
     find() {
+      const orSelectors = [{ userId: { $exists: false } }];
+      if (userId) {
+        orSelectors.push({ userId });
+      }
       const query = {
         _id: listId,
-        $or: [{ userId: { $exists: false } }, { userId }],
+        $or: orSelectors,
       };
 
       // We only need the _id field in this query, since it's only
