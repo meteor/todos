@@ -16,7 +16,6 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false,
       showConnectionIssue: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -104,14 +103,29 @@ export default class App extends React.Component {
 }
 
 App.propTypes = {
-  user: PropTypes.object,      // current meteor user
-  connected: PropTypes.bool,   // server connection status
-  loading: PropTypes.bool,     // subscription status
-  menuOpen: PropTypes.bool,    // is side menu open?
-  lists: PropTypes.array,      // all lists visible to the current user
-  children: PropTypes.element, // matched child route component
-  location: PropTypes.object,  // current router location
-  params: PropTypes.object,    // parameters of the current route
+  // current meteor user
+  user: PropTypes.object,
+  // server connection status
+  connected: PropTypes.bool.isRequired,
+  // subscription status
+  loading: PropTypes.bool.isRequired,
+  // is side menu open?
+  menuOpen: PropTypes.bool.isRequired,
+  // all lists visible to the current user
+  lists: PropTypes.array,
+  // matched child route component
+  children: PropTypes.element,
+  // current router location
+  location: PropTypes.object.isRequired,
+  // parameters of the current route
+  params: PropTypes.object,
+};
+
+App.defaultProps = {
+  user: null,
+  lists: [],
+  children: null,
+  params: null,
 };
 
 App.contextTypes = {

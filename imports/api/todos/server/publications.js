@@ -12,7 +12,7 @@ Meteor.publishComposite('todos.inList', function todosInList(params) {
   }).validate(params);
 
   const { listId } = params;
-  const userId = this.userId;
+  const { userId } = this;
 
   return {
     find() {

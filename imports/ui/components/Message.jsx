@@ -9,8 +9,12 @@ const Message = ({ title, subtitle }) => (
 );
 
 Message.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
+};
+
+Message.defaultProps = {
+  subtitle: '',
 };
 
 export default Message;

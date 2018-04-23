@@ -21,7 +21,12 @@ export default class ListPage extends BaseComponent {
   }
 
   render() {
-    const { list, listExists, loading, todos } = this.props;
+    const {
+      list,
+      listExists,
+      loading,
+      todos,
+    } = this.props;
     const { editingTodo } = this.state;
 
     if (!listExists) {

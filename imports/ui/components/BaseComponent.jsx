@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-state */
+
 import { Component } from 'react';
 import i18n from 'meteor/universe:i18n';
 

@@ -14,9 +14,11 @@ export default withTracker(() => {
     loading: !(publicHandle.ready() && privateHandle.ready()),
     connected: Meteor.status().connected,
     menuOpen: Session.get('menuOpen'),
-    lists: Lists.find({ $or: [
-      { userId: { $exists: false } },
-      { userId: Meteor.userId() },
-    ] }).fetch(),
+    lists: Lists.find({
+      $or: [
+        { userId: { $exists: false } },
+        { userId: Meteor.userId() },
+      ],
+    }).fetch(),
   };
 })(App);

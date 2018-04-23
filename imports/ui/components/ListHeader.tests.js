@@ -4,20 +4,20 @@
 import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import React from 'react';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Random } from 'meteor/random';
-import ListHeader from './ListHeader.jsx';
 
+import ListHeader from './ListHeader.jsx';
 import {
   updateName,
   remove,
 } from '../../api/lists/methods.js';
+import { insert } from '../../api/todos/methods.js';
 
-import {
-  insert,
-} from '../../api/todos/methods.js';
+configure({ adapter: new Adapter() });
 
 if (Meteor.isClient) {
   describe('ListHeader', () => {

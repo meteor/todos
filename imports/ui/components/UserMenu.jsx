@@ -32,11 +32,11 @@ export default class UserMenu extends BaseComponent {
             : <span className="icon-arrow-down" />}
           {emailLocalPart}
         </a>
-        {open
-          ? <a className="btn-secondary" onClick={logout}>
+        {open ?
+          <a className="btn-secondary" onClick={logout}>
             {i18n.__('components.userMenu.logout')}
-          </a>
-          : null}
+          </a> :
+          null}
       </div>
     );
   }

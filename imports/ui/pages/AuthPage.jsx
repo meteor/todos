@@ -16,8 +16,8 @@ const AuthPage = ({ content, link }) => (
 );
 
 AuthPage.propTypes = {
-  content: PropTypes.element,
-  link: PropTypes.element,
+  content: PropTypes.element.isRequired,
+  link: PropTypes.element.isRequired,
 };
 
 export default AuthPage;
