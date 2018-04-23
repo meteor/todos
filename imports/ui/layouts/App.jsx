@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'; // XXX: SESSION
@@ -103,16 +104,16 @@ export default class App extends React.Component {
 }
 
 App.propTypes = {
-  user: React.PropTypes.object,      // current meteor user
-  connected: React.PropTypes.bool,   // server connection status
-  loading: React.PropTypes.bool,     // subscription status
-  menuOpen: React.PropTypes.bool,    // is side menu open?
-  lists: React.PropTypes.array,      // all lists visible to the current user
-  children: React.PropTypes.element, // matched child route component
-  location: React.PropTypes.object,  // current router location
-  params: React.PropTypes.object,    // parameters of the current route
+  user: PropTypes.object,      // current meteor user
+  connected: PropTypes.bool,   // server connection status
+  loading: PropTypes.bool,     // subscription status
+  menuOpen: PropTypes.bool,    // is side menu open?
+  lists: PropTypes.array,      // all lists visible to the current user
+  children: PropTypes.element, // matched child route component
+  location: PropTypes.object,  // current router location
+  params: PropTypes.object,    // parameters of the current route
 };
 
 App.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };

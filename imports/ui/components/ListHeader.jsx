@@ -1,6 +1,7 @@
 /* global confirm */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from './BaseComponent.jsx';
 import MobileMenu from './MobileMenu.jsx';
@@ -217,9 +218,9 @@ export default class ListHeader extends BaseComponent {
 }
 
 ListHeader.propTypes = {
-  list: React.PropTypes.object,
+  list: PropTypes.object,
 };
 
 ListHeader.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
