@@ -59,7 +59,6 @@
       "import/prefer-default-export": "off",
       "no-underscore-dangle": "off",
       "class-methods-use-this": "off",
-      "meteor/no-session": "off",
       "object-shorthand": [
         "error",
         "always",

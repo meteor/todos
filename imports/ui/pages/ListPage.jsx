@@ -31,7 +31,7 @@ export default class ListPage extends BaseComponent {
     const { editingTodo } = this.state;
 
     if (!listExists) {
-      return <NotFoundPage />;
+      return <NotFoundPage menuOpen={this.props.menuOpen} />;
     }
 
     let Todos;
@@ -55,7 +55,7 @@ export default class ListPage extends BaseComponent {
 
     return (
       <div className="page lists-show">
-        <ListHeader list={list} />
+        <ListHeader list={list} menuOpen={this.props.menuOpen} />
         <div className="content-scrollable list-items">
           {loading
             ? <Message title={i18n.__('pages.listPage.loading')} />
@@ -71,4 +71,5 @@ ListPage.propTypes = {
   todos: PropTypes.array,
   loading: PropTypes.bool,
   listExists: PropTypes.bool,
+  menuOpen: PropTypes.object.isRequired,
 };

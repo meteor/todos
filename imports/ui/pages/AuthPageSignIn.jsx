@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from '../components/BaseComponent.jsx';
 
 import AuthPage from './AuthPage.jsx';
 
-export default class SignInPage extends BaseComponent {
+class SignInPage extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = Object.assign(this.state, { errors: {} });
@@ -98,6 +99,13 @@ export default class SignInPage extends BaseComponent {
       </Link>
     );
 
-    return this.renderRedirect() || <AuthPage content={content} link={link} />;
+    return this.renderRedirect() ||
+      <AuthPage content={content} link={link} menuOpen={this.props.menuOpen} />;
   }
 }
+
+SignInPage.propTypes = {
+  menuOpen: PropTypes.object.isRequired,
+};
+
+export default SignInPage;

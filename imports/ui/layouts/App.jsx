@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session';
 
 import { Lists } from '../../api/lists/lists.js';
 import UserMenu from '../components/UserMenu.jsx';
@@ -48,8 +47,8 @@ export default class App extends Component {
     }, CONNECTION_ISSUE_TIMEOUT);
   }
 
-  toggleMenu(menuOpen = !Session.get('menuOpen')) {
-    Session.set({ menuOpen });
+  toggleMenu() {
+    this.props.menuOpen.set(!this.props.menuOpen.get());
   }
 
   logout() {
@@ -74,6 +73,10 @@ export default class App extends Component {
       loading,
     } = this.props;
     const { showConnectionIssue } = this.state;
+
+    const commonChildProps = {
+      menuOpen: this.props.menuOpen,
+    };
 
     return (
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
@@ -106,10 +109,24 @@ export default class App extends Component {
                         : null
                     )}
                   />
-                  <Route path="/lists/:id" component={ListPageContainer} />
-                  <Route path="/signin" component={AuthPageSignIn} />
-                  <Route path="/join" component={AuthPageJoin} />
-                  <Route exact path="/*" component={NotFoundPage} />
+                  <Route
+                    path="/lists/:id"
+                    render={({ match }) => (
+                      <ListPageContainer match={match} {...commonChildProps} />
+                    )}
+                  />
+                  <Route
+                    path="/signin"
+                    render={() => <AuthPageSignIn {...commonChildProps} />}
+                  />
+                  <Route
+                    path="/join"
+                    render={() => <AuthPageJoin {...commonChildProps} />}
+                  />
+                  <Route
+                    path="/*"
+                    render={() => <NotFoundPage {...commonChildProps} />}
+                  />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
@@ -140,13 +157,12 @@ App.propTypes = {
   // subscription status
   loading: PropTypes.bool.isRequired,
   // is side menu open?
-  menuOpen: PropTypes.bool,
+  menuOpen: PropTypes.object.isRequired,
   // all lists visible to the current user
   lists: PropTypes.array,
 };
 
 App.defaultProps = {
   user: null,
-  menuOpen: null,
   lists: [],
 };
