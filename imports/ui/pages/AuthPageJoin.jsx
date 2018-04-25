@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from '../components/BaseComponent.jsx';
@@ -45,7 +44,7 @@ export default class JoinPage extends BaseComponent {
           errors: { none: err.reason },
         });
       }
-      this.context.router.push('/');
+      this.redirectTo('/');
     });
   }
 
@@ -117,10 +116,6 @@ export default class JoinPage extends BaseComponent {
       </Link>
     );
 
-    return <AuthPage content={content} link={link} />;
+    return this.renderRedirect() || <AuthPage content={content} link={link} />;
   }
 }
-
-JoinPage.contextTypes = {
-  router: PropTypes.object,
-};

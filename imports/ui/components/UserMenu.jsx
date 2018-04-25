@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from './BaseComponent.jsx';
 
@@ -12,6 +12,7 @@ export default class UserMenu extends BaseComponent {
   }
 
   toggle(e) {
+    e.preventDefault();
     e.stopPropagation();
     this.setState({
       open: !this.state.open,

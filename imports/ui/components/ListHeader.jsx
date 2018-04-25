@@ -83,7 +83,7 @@ export default class ListHeader extends BaseComponent {
 
     if (confirm(message)) {
       remove.call({ listId: list._id }, displayError);
-      this.context.router.push('/');
+      this.redirectTo('/');
     }
   }
 
@@ -199,7 +199,7 @@ export default class ListHeader extends BaseComponent {
 
   render() {
     const { editing } = this.state;
-    return (
+    return this.renderRedirect() || (
       <nav className="list-header">
         {editing ? this.renderEditingHeader() : this.renderDefaultHeader()}
         <form className="todo-new input-symbol" onSubmit={this.createTodo}>
@@ -217,8 +217,4 @@ export default class ListHeader extends BaseComponent {
 
 ListHeader.propTypes = {
   list: PropTypes.object,
-};
-
-ListHeader.contextTypes = {
-  router: PropTypes.object,
 };

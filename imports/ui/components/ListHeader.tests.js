@@ -23,14 +23,14 @@ if (Meteor.isClient) {
   describe('ListHeader', () => {
     let list = null;
     let header = null;
-    let router = null;
+    let redirectToStub = null;
 
     beforeEach(() => {
       list = Factory.create('list', { userId: Random.id(), name: 'testing' });
-      router = { push: sinon.stub() };
-      header = mount(<ListHeader list={list} />, {
-        context: { router },
-      });
+      header = mount(<ListHeader list={list} />);
+      const headerWrapper = header.instance();
+      redirectToStub = sinon.stub(headerWrapper, 'redirectTo', () => {});
+      headerWrapper.componentDidMount();
     });
 
     describe('any state', () => {
@@ -52,7 +52,7 @@ if (Meteor.isClient) {
         header.find('.trash').simulate('click');
 
         sinon.assert.calledWith(remove.call, { listId: list._id });
-        sinon.assert.calledWith(router.push, '/');
+        sinon.assert.calledWith(redirectToStub, '/');
 
         remove.call.restore();
         window.confirm.restore();

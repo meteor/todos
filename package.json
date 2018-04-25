@@ -16,10 +16,10 @@
     "faker": "^4.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
-    "react-addons-css-transition-group": "^15.6.2",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-dom": "^16.3.2",
-    "react-router": "^4.2.0"
+    "react-router-dom": "^4.2.2",
+    "react-transition-group": "^2.3.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
@@ -87,7 +87,6 @@
         }
       ],
       "react/forbid-prop-types": "off",
-      "react/jsx-no-bind": "off",
       "jsx-a11y/no-static-element-interactions": "off",
       "jsx-a11y/click-events-have-key-events": "off",
       "jsx-a11y/no-noninteractive-element-interactions": "off",

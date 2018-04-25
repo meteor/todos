@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-// XXX: Session
 import { Session } from 'meteor/session';
 import { withTracker } from 'meteor/react-meteor-data';
 
