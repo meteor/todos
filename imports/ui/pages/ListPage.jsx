@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
+
 import BaseComponent from '../components/BaseComponent.jsx';
 import ListHeader from '../components/ListHeader.jsx';
 import TodoItem from '../components/TodoItem.jsx';
@@ -20,11 +22,16 @@ export default class ListPage extends BaseComponent {
   }
 
   render() {
-    const { list, listExists, loading, todos } = this.props;
+    const {
+      list,
+      listExists,
+      loading,
+      todos,
+    } = this.props;
     const { editingTodo } = this.state;
 
     if (!listExists) {
-      return <NotFoundPage />;
+      return <NotFoundPage menuOpen={this.props.menuOpen} />;
     }
 
     let Todos;
@@ -48,7 +55,7 @@ export default class ListPage extends BaseComponent {
 
     return (
       <div className="page lists-show">
-        <ListHeader list={list} />
+        <ListHeader list={list} menuOpen={this.props.menuOpen} />
         <div className="content-scrollable list-items">
           {loading
             ? <Message title={i18n.__('pages.listPage.loading')} />
@@ -60,8 +67,9 @@ export default class ListPage extends BaseComponent {
 }
 
 ListPage.propTypes = {
-  list: React.PropTypes.object,
-  todos: React.PropTypes.array,
-  loading: React.PropTypes.bool,
-  listExists: React.PropTypes.bool,
+  list: PropTypes.object,
+  todos: PropTypes.array,
+  loading: PropTypes.bool,
+  listExists: PropTypes.bool,
+  menuOpen: PropTypes.object.isRequired,
 };

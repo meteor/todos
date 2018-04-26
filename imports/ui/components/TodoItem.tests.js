@@ -3,16 +3,19 @@
 import { Meteor } from 'meteor/meteor';
 import { Factory } from 'meteor/factory';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import { chai } from 'meteor/practicalmeteor:chai';
 import { sinon } from 'meteor/practicalmeteor:sinon';
-import TodoItem from './TodoItem.jsx';
+import Adapter from 'enzyme-adapter-react-16';
 
+import TodoItem from './TodoItem.jsx';
 import {
   setCheckedStatus,
   updateText,
   remove,
 } from '../../api/todos/methods.js';
+
+configure({ adapter: new Adapter() });
 
 if (Meteor.isClient) {
   describe('TodoItem', () => {

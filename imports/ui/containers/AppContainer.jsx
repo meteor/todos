@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-// XXX: Session
-import { Session } from 'meteor/session';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import { Lists } from '../../api/lists/lists.js';
 import App from '../layouts/App.jsx';
+
+const menuOpen = new ReactiveVar(false);
 
 export default withTracker(() => {
   const publicHandle = Meteor.subscribe('lists.public');
@@ -13,10 +14,12 @@ export default withTracker(() => {
     user: Meteor.user(),
     loading: !(publicHandle.ready() && privateHandle.ready()),
     connected: Meteor.status().connected,
-    menuOpen: Session.get('menuOpen'),
-    lists: Lists.find({ $or: [
-      { userId: { $exists: false } },
-      { userId: Meteor.userId() },
-    ] }).fetch(),
+    menuOpen,
+    lists: Lists.find({
+      $or: [
+        { userId: { $exists: false } },
+        { userId: Meteor.userId() },
+      ],
+    }).fetch(),
   };
 })(App);

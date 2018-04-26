@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from '../components/BaseComponent.jsx';
 import MobileMenu from '../components/MobileMenu.jsx';
@@ -9,7 +10,7 @@ class NotFoundPage extends BaseComponent {
     return (
       <div className="page not-found">
         <nav>
-          <MobileMenu />
+          <MobileMenu menuOpen={this.props.menuOpen} />
         </nav>
         <div className="content-scrollable">
           <Message title={i18n.__('pages.notFoundPage.pageNotFound')} />
@@ -18,5 +19,9 @@ class NotFoundPage extends BaseComponent {
     );
   }
 }
+
+NotFoundPage.propTypes = {
+  menuOpen: PropTypes.object.isRequired,
+};
 
 export default NotFoundPage;

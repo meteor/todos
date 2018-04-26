@@ -11,7 +11,7 @@ class ListsCollection extends Mongo.Collection {
       const defaultName = i18n.__(
         'api.lists.insert.list',
         null,
-        { _locale: locale }
+        { _locale: locale },
       );
       let nextLetter = 'A';
       ourList.name = `${defaultName} ${nextLetter}`;

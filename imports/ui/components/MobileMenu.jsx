@@ -1,6 +1,5 @@
 import React from 'react';
-// XXX: no session!
-import { Session } from 'meteor/session';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from './BaseComponent.jsx';
 
@@ -11,7 +10,7 @@ class MobileMenu extends BaseComponent {
   }
 
   toggleMenu() {
-    Session.set('menuOpen', !Session.get('menuOpen'));
+    this.props.menuOpen.set(!this.props.menuOpen.get());
   }
 
   render() {
@@ -27,5 +26,9 @@ class MobileMenu extends BaseComponent {
     );
   }
 }
+
+MobileMenu.propTypes = {
+  menuOpen: PropTypes.object.isRequired,
+};
 
 export default MobileMenu;

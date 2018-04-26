@@ -1,6 +1,8 @@
 /* global confirm */
+/* eslint-disable no-alert, no-restricted-globals */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from './BaseComponent.jsx';
 import MobileMenu from './MobileMenu.jsx';
@@ -12,10 +14,7 @@ import {
   makePrivate,
   remove,
 } from '../../api/lists/methods.js';
-
-import {
-  insert,
-} from '../../api/todos/methods.js';
+import { insert } from '../../api/todos/methods.js';
 
 export default class ListHeader extends BaseComponent {
   constructor(props) {
@@ -78,18 +77,18 @@ export default class ListHeader extends BaseComponent {
   }
 
   deleteList() {
-    const list = this.props.list;
+    const { list } = this.props;
     const message =
       `${i18n.__('components.listHeader.deleteConfirm')} ${list.name}?`;
 
-    if (confirm(message)) { // eslint-disable-line no-alert
+    if (confirm(message)) {
       remove.call({ listId: list._id }, displayError);
-      this.context.router.push('/');
+      this.redirectTo('/');
     }
   }
 
   toggleListPrivacy() {
-    const list = this.props.list;
+    const { list } = this.props;
     if (list.userId) {
       makePublic.call({ listId: list._id }, displayError);
     } else {
@@ -117,7 +116,7 @@ export default class ListHeader extends BaseComponent {
     const { list } = this.props;
     return (
       <div>
-        <MobileMenu />
+        <MobileMenu menuOpen={this.props.menuOpen} />
         <h1 className="title-page" onClick={this.editList}>
           <span className="title-wrapper">{list.name}</span>
           <span className="count-list">{list.incompleteCount}</span>
@@ -132,11 +131,11 @@ export default class ListHeader extends BaseComponent {
               <option disabled value="default">
                 {i18n.__('components.listHeader.selectAction')}
               </option>
-              {list.userId
-                ? <option value="public">
+              {list.userId ?
+                <option value="public">
                   {i18n.__('components.listHeader.makePublic')}
-                </option>
-                : <option value="private">
+                </option> :
+                <option value="private">
                   {i18n.__('components.listHeader.makePrivate')}
                 </option>}
               <option value="delete">
@@ -200,7 +199,7 @@ export default class ListHeader extends BaseComponent {
 
   render() {
     const { editing } = this.state;
-    return (
+    return this.renderRedirect() || (
       <nav className="list-header">
         {editing ? this.renderEditingHeader() : this.renderDefaultHeader()}
         <form className="todo-new input-symbol" onSubmit={this.createTodo}>
@@ -217,9 +216,6 @@ export default class ListHeader extends BaseComponent {
 }
 
 ListHeader.propTypes = {
-  list: React.PropTypes.object,
-};
-
-ListHeader.contextTypes = {
-  router: React.PropTypes.object,
+  list: PropTypes.object,
+  menuOpen: PropTypes.object.isRequired,
 };

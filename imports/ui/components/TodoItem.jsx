@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import classnames from 'classnames';
 import i18n from 'meteor/universe:i18n';
@@ -96,7 +97,7 @@ export default class TodoItem extends BaseComponent {
 }
 
 TodoItem.propTypes = {
-  todo: React.PropTypes.object,
-  editing: React.PropTypes.bool,
-  onEditingChange: React.PropTypes.func,
+  todo: PropTypes.object,
+  editing: PropTypes.bool,
+  onEditingChange: PropTypes.func,
 };

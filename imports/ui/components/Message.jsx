@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Message = ({ title, subtitle }) => (
   <div className="wrapper-message">
@@ -8,8 +9,12 @@ const Message = ({ title, subtitle }) => (
 );
 
 Message.propTypes = {
-  title: React.PropTypes.string,
-  subtitle: React.PropTypes.string,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+};
+
+Message.defaultProps = {
+  subtitle: '',
 };
 
 export default Message;

@@ -1,24 +1,43 @@
-import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Meteor } from 'meteor/meteor';
-import { Session } from 'meteor/session'; // XXX: SESSION
+
 import { Lists } from '../../api/lists/lists.js';
 import UserMenu from '../components/UserMenu.jsx';
 import ListList from '../components/ListList.jsx';
 import LanguageToggle from '../components/LanguageToggle.jsx';
 import ConnectionNotification from '../components/ConnectionNotification.jsx';
 import Loading from '../components/Loading.jsx';
+import ListPageContainer from '../containers/ListPageContainer.jsx';
+import AuthPageSignIn from '../pages/AuthPageSignIn.jsx';
+import AuthPageJoin from '../pages/AuthPageJoin.jsx';
+import NotFoundPage from '../pages/NotFoundPage.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
-export default class App extends React.Component {
+export default class App extends Component {
+  static getDerivedStateFromProps(nextProps) {
+    // Store a default list path that can be redirected to from "/" when
+    // the list is ready.
+    const newState = { defaultList: null, redirectTo: null };
+    if (!nextProps.loading) {
+      const list = Lists.findOne();
+      newState.defaultList = `/lists/${list._id}`;
+    }
+    return newState;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      menuOpen: false,
       showConnectionIssue: false,
+      defaultList: null,
+      redirectTo: null,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.toggleMenu.bind(this, false);
     this.logout = this.logout.bind(this);
   }
 
@@ -29,51 +48,42 @@ export default class App extends React.Component {
     }, CONNECTION_ISSUE_TIMEOUT);
   }
 
-  componentWillReceiveProps({ loading, children }) {
-    // redirect / to a list once lists are ready
-    if (!loading && !children) {
-      const list = Lists.findOne();
-      this.context.router.replace(`/lists/${list._id}`);
-    }
-  }
-
-  toggleMenu(menuOpen = !Session.get('menuOpen')) {
-    Session.set({ menuOpen });
+  toggleMenu() {
+    this.props.menuOpen.set(!this.props.menuOpen.get());
   }
 
   logout() {
     Meteor.logout();
-
-    // if we are on a private list, we'll need to go to a public one
-    if (this.props.params.id) {
-      const list = Lists.findOne(this.props.params.id);
-      if (list.userId) {
-        const publicList = Lists.findOne({ userId: { $exists: false } });
-        this.context.router.push(`/lists/${publicList._id}`);
-      }
-    }
+    this.setState({
+      redirectTo: this.state.defaultList,
+    });
   }
 
-  render() {
-    const { showConnectionIssue } = this.state;
+  renderRedirect(location) {
+    const { redirectTo, defaultList } = this.state;
+    const { pathname } = location;
+    let redirect = null;
+    if (redirectTo && redirectTo !== pathname) {
+      redirect = <Redirect to={redirectTo} />;
+    } else if (pathname === '/' && defaultList) {
+      redirect = <Redirect to={defaultList} />;
+    }
+    return redirect;
+  }
+
+  renderContent(location) {
     const {
       user,
       connected,
-      loading,
       lists,
       menuOpen,
-      children,
-      location,
+      loading,
     } = this.props;
+    const { showConnectionIssue } = this.state;
 
-    // eslint-disable-next-line react/jsx-no-bind
-    const closeMenu = this.toggleMenu.bind(this, false);
-
-    // clone route components with keys so that they can
-    // have transitions
-    const clonedChildren = children && React.cloneElement(children, {
-      key: location.pathname,
-    });
+    const commonChildProps = {
+      menuOpen: this.props.menuOpen,
+    };
 
     return (
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
@@ -85,34 +95,72 @@ export default class App extends React.Component {
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
           : null}
-        <div className="content-overlay" onClick={closeMenu} />
+        <div className="content-overlay" onClick={this.closeMenu} />
         <div id="content-container">
-          <ReactCSSTransitionGroup
-            transitionName="fade"
-            transitionEnterTimeout={200}
-            transitionLeaveTimeout={200}
-          >
-            {loading
-              ? <Loading key="loading" />
-              : clonedChildren}
-          </ReactCSSTransitionGroup>
+          {loading ? (
+            <Loading key="loading" />
+          ) : (
+            <TransitionGroup>
+              <CSSTransition
+                key={location.key}
+                classNames="fade"
+                timeout={200}
+              >
+                <Switch location={location}>
+                  <Route
+                    path="/lists/:id"
+                    render={({ match }) => (
+                      <ListPageContainer match={match} {...commonChildProps} />
+                    )}
+                  />
+                  <Route
+                    path="/signin"
+                    render={() => <AuthPageSignIn {...commonChildProps} />}
+                  />
+                  <Route
+                    path="/join"
+                    render={() => <AuthPageJoin {...commonChildProps} />}
+                  />
+                  <Route
+                    path="/*"
+                    render={() => <NotFoundPage {...commonChildProps} />}
+                  />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          )}
         </div>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Route
+          render={({ location }) => (
+            this.renderRedirect(location) || this.renderContent(location)
+          )}
+        />
+      </BrowserRouter>
     );
   }
 }
 
 App.propTypes = {
-  user: React.PropTypes.object,      // current meteor user
-  connected: React.PropTypes.bool,   // server connection status
-  loading: React.PropTypes.bool,     // subscription status
-  menuOpen: React.PropTypes.bool,    // is side menu open?
-  lists: React.PropTypes.array,      // all lists visible to the current user
-  children: React.PropTypes.element, // matched child route component
-  location: React.PropTypes.object,  // current router location
-  params: React.PropTypes.object,    // parameters of the current route
+  // current meteor user
+  user: PropTypes.object,
+  // server connection status
+  connected: PropTypes.bool.isRequired,
+  // subscription status
+  loading: PropTypes.bool.isRequired,
+  // is side menu open?
+  menuOpen: PropTypes.object.isRequired,
+  // all lists visible to the current user
+  lists: PropTypes.array,
 };
 
-App.contextTypes = {
-  router: React.PropTypes.object,
+App.defaultProps = {
+  user: null,
+  lists: [],
 };

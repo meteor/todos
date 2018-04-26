@@ -60,7 +60,7 @@ if (Meteor.isServer) {
             (collections) => {
               chai.assert.equal(collections.Todos.length, 3);
               done();
-            }
+            },
           );
         });
 
@@ -72,7 +72,7 @@ if (Meteor.isServer) {
             (collections) => {
               chai.assert.equal(collections.Todos.length, 3);
               done();
-            }
+            },
           );
         });
 
@@ -84,7 +84,7 @@ if (Meteor.isServer) {
             (collections) => {
               chai.assert.equal(collections.Todos.length, 3);
               done();
-            }
+            },
           );
         });
 
@@ -96,7 +96,7 @@ if (Meteor.isServer) {
             (collections) => {
               chai.assert.isUndefined(collections.Todos);
               done();
-            }
+            },
           );
         });
 
@@ -108,7 +108,7 @@ if (Meteor.isServer) {
             (collections) => {
               chai.assert.isUndefined(collections.Todos);
               done();
-            }
+            },
           );
         });
       });

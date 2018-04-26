@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import i18n from 'meteor/universe:i18n';
 import BaseComponent from './BaseComponent.jsx';
 
@@ -11,6 +12,7 @@ export default class UserMenu extends BaseComponent {
   }
 
   toggle(e) {
+    e.preventDefault();
     e.stopPropagation();
     this.setState({
       open: !this.state.open,
@@ -31,11 +33,11 @@ export default class UserMenu extends BaseComponent {
             : <span className="icon-arrow-down" />}
           {emailLocalPart}
         </a>
-        {open
-          ? <a className="btn-secondary" onClick={logout}>
+        {open ?
+          <a className="btn-secondary" onClick={logout}>
             {i18n.__('components.userMenu.logout')}
-          </a>
-          : null}
+          </a> :
+          null}
       </div>
     );
   }
@@ -61,6 +63,6 @@ export default class UserMenu extends BaseComponent {
 }
 
 UserMenu.propTypes = {
-  user: React.PropTypes.object,
-  logout: React.PropTypes.func,
+  user: PropTypes.object,
+  logout: PropTypes.func,
 };
