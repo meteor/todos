@@ -19,7 +19,8 @@ const CONNECTION_ISSUE_TIMEOUT = 5000;
 
 export default class App extends Component {
   static getDerivedStateFromProps(nextProps) {
-    // Redirect / to a list once lists are ready
+    // Store a default list path that can be redirected to from "/" when
+    // the list is ready.
     const newState = { defaultList: null, redirectTo: null };
     if (!nextProps.loading) {
       const list = Lists.findOne();
@@ -58,10 +59,16 @@ export default class App extends Component {
     });
   }
 
-  renderRedirect() {
-    return this.state.redirectTo
-      ? <Redirect to={this.state.redirectTo} />
-      : null;
+  renderRedirect(location) {
+    const { redirectTo, defaultList } = this.state;
+    const { pathname } = location;
+    let redirect = null;
+    if (redirectTo && redirectTo !== pathname) {
+      redirect = <Redirect to={redirectTo} />;
+    } else if (pathname === '/' && defaultList) {
+      redirect = <Redirect to={defaultList} />;
+    }
+    return redirect;
   }
 
   renderContent(location) {
@@ -100,15 +107,6 @@ export default class App extends Component {
                 timeout={200}
               >
                 <Switch location={location}>
-                  <Route
-                    exact
-                    path="/"
-                    render={() => (
-                      this.state.defaultList
-                        ? <Redirect to={this.state.defaultList} />
-                        : null
-                    )}
-                  />
                   <Route
                     path="/lists/:id"
                     render={({ match }) => (
