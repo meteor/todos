@@ -27,7 +27,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-meteor": "^4.0.0",
     "eslint-plugin-react": "^6.2.2",
-    "nightmare": "^2.9.1",
+    "nightmare": "^3.0.1",
     "shell-source": "^1.1.0",
     "shelljs": "^0.7.4"
   },
