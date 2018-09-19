@@ -13,7 +13,16 @@ module.exports = {
   start: function(opts, callback) {
     var proc = exec(
        opts.command,
-       opts.options
+       opts.options,
+       // catch errors that might otherwise NOT be shown in console
+       (error, stdout, stderr) => {
+         if (error) {
+           console.error(`exec error: ${error}`);
+           return;
+         }
+         console.log(`stdout: ${stdout}`);
+         console.log(`stderr: ${stderr}`);
+       },      
     );
     if (opts.waitForMessage) {
       proc.stdout.on('data', function waitForMessage(data) {
