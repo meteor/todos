@@ -7,7 +7,7 @@ import App from '../layouts/App.jsx';
 
 const menuOpen = new ReactiveVar(false);
 
-export default withTracker(() => {
+const AppContainer = withTracker(() => {
   const publicHandle = Meteor.subscribe('lists.public');
   const privateHandle = Meteor.subscribe('lists.private');
   return {
@@ -23,3 +23,5 @@ export default withTracker(() => {
     }).fetch(),
   };
 })(App);
+
+export default AppContainer;
