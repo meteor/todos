@@ -1,0 +1,11 @@
+image:
+  file: Dockerfile
+tasks:
+- before: export ROOT_URL=$(gp url 3000)
+  init: meteor npm install && meteor lint
+  command: meteor
+ports:
+- port: 3000
+  onOpen: open-preview
+- port: 3001 # mongo db
+  onOpen: ignore

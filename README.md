@@ -1,6 +1,10 @@
 [![Circle CI](https://circleci.com/gh/meteor/todos.svg?style=svg)](https://circleci.com/gh/meteor/todos)
 
-This is a Todos example app built on the principles described in the [Meteor Guide](http://guide.meteor.com/structure.html). 
+This is a Todos example app built on the principles described in the [Meteor Guide](http://guide.meteor.com/structure.html).
+
+Start coding on this project in Gitpod an online dev environment.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/meteor/todos)
 
 ## Versions
 
