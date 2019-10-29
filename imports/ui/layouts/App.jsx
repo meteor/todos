@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -17,50 +17,45 @@ import NotFoundPage from '../pages/NotFoundPage.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
-export default class App extends Component {
-  static getDerivedStateFromProps(nextProps) {
-    // Store a default list path that can be redirected to from "/" when
-    // the list is ready.
-    const newState = { defaultList: null, redirectTo: null };
-    if (!nextProps.loading) {
-      const list = Lists.findOne();
-      newState.defaultList = `/lists/${list._id}`;
-    }
-    return newState;
-  }
+export const App = ({
+  // current meteor user
+  user,
+  // server connection status
+  connected,
+  // subscription status
+  loading,
+  // is side menu open?
+  menuOpen,
+  // all lists visible to the current user
+  lists,
+}) => {
+  const [showConnectionIssue, setShowConnectionIssue] = useState(false);
+  const [defaultList, setDefaultList] = useState(null);
+  const [redirectTo, setRedirectTo] = useState(null);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showConnectionIssue: false,
-      defaultList: null,
-      redirectTo: null,
-    };
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.closeMenu = this.toggleMenu.bind(this, false);
-    this.logout = this.logout.bind(this);
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     setTimeout(() => {
-      /* eslint-disable react/no-did-mount-set-state */
-      this.setState({ showConnectionIssue: true });
+      setShowConnectionIssue(true);
     }, CONNECTION_ISSUE_TIMEOUT);
-  }
+  }, []);
 
-  toggleMenu() {
-    this.props.menuOpen.set(!this.props.menuOpen.get());
-  }
+  useEffect(() => {
+    if (!loading) {
+      const list = Lists.findOne();
+      setDefaultList(`/lists/${list._id}`);
+    }
+  }, [loading]);
 
-  logout() {
+  const closeMenu = () => {
+    menuOpen.set(false);
+  };
+
+  const logout = () => {
     Meteor.logout();
-    this.setState({
-      redirectTo: this.state.defaultList,
-    });
-  }
+    setRedirectTo(defaultList);
+  };
 
-  renderRedirect(location) {
-    const { redirectTo, defaultList } = this.state;
+  const renderRedirect = (location) => {
     const { pathname } = location;
     let redirect = null;
     if (redirectTo && redirectTo !== pathname) {
@@ -68,34 +63,30 @@ export default class App extends Component {
     } else if (pathname === '/' && defaultList) {
       redirect = <Redirect to={defaultList} />;
     }
+    setRedirectTo(null);
     return redirect;
-  }
+  };
 
-  renderContent(location) {
-    const {
-      user,
-      connected,
-      lists,
-      menuOpen,
-      loading,
-    } = this.props;
-    const { showConnectionIssue } = this.state;
+  renderRedirect.propTypes = {
+    pathname: PropTypes.string.isRequired,
+  };
 
+  const renderContent = (location) => {
     const commonChildProps = {
-      menuOpen: this.props.menuOpen,
+      menuOpen,
     };
 
     return (
       <div id="container" className={menuOpen ? 'menu-open' : ''}>
         <section id="menu">
           <LanguageToggle />
-          <UserMenu user={user} logout={this.logout} />
+          <UserMenu user={user} logout={logout} />
           <ListList lists={lists} />
         </section>
         {showConnectionIssue && !connected
           ? <ConnectionNotification />
           : null}
-        <div className="content-overlay" onClick={this.closeMenu} />
+        <div className="content-overlay" onClick={closeMenu} />
         <div id="content-container">
           {loading ? (
             <Loading key="loading" />
@@ -128,35 +119,28 @@ export default class App extends Component {
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
-          )}
+            )}
         </div>
       </div>
     );
-  }
+  };
 
-  render() {
-    return (
-      <BrowserRouter>
-        <Route
-          render={({ location }) => (
-            this.renderRedirect(location) || this.renderContent(location)
-          )}
-        />
-      </BrowserRouter>
-    );
-  }
-}
+  return (
+    <BrowserRouter>
+      <Route
+        render={({ location }) => (
+          renderRedirect(location) || renderContent(location)
+        )}
+      />
+    </BrowserRouter>
+  );
+};
 
 App.propTypes = {
-  // current meteor user
   user: PropTypes.object,
-  // server connection status
   connected: PropTypes.bool.isRequired,
-  // subscription status
   loading: PropTypes.bool.isRequired,
-  // is side menu open?
   menuOpen: PropTypes.object.isRequired,
-  // all lists visible to the current user
   lists: PropTypes.array,
 };
 
@@ -164,3 +148,5 @@ App.defaultProps = {
   user: null,
   lists: [],
 };
+
+export default App;
