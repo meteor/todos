@@ -1,21 +1,17 @@
+import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import i18n from 'meteor/universe:i18n';
-import BaseComponent from '../components/BaseComponent.jsx';
 
 import AuthPage from './AuthPage.jsx';
 
-class SignInPage extends BaseComponent {
-  constructor(props) {
-    super(props);
-    this.state = Object.assign(this.state, { errors: {} });
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+export const SignInPage = () => {
+  const [errors, setErrors] = useState({});
+  const [redirectTo, setRedirectTo] = useState(null);
 
-  onSubmit(event) {
+  const onSubmit = (event) => {
     event.preventDefault();
+
     const email = this.email.value;
     const password = this.password.value;
     const errors = {};
@@ -27,28 +23,34 @@ class SignInPage extends BaseComponent {
       errors.password = i18n.__('pages.authPageSignIn.passwordRequired');
     }
 
-    this.setState({ errors });
+    setErrors(errors);
     if (Object.keys(errors).length) {
       return;
     }
 
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
-        this.setState({
-          errors: { none: err.reason },
-        });
+        if (err) {
+          setErrors({ none: err.reason });
+        }
       } else {
-        this.redirectTo('/');
+        setRedirectTo('/');
       }
     });
-  }
+  };
 
-  render() {
-    const { errors } = this.state;
-    const errorMessages = Object.keys(errors).map(key => errors[key]);
-    const errorClass = key => errors[key] && 'error';
+  const errorMessages = Object.values(errors);
+  const errorClass = (key) => errors[key] && 'error';
 
-    const content = (
+  const link = (
+    <Link to="/join" className="link-auth-alt">
+      {i18n.__('pages.authPageSignIn.needAccount')}
+    </Link>
+  );
+
+  return redirectTo
+    ? <Redirect to={redirectTo} />
+    : <AuthPage link={link}>
       <div className="wrapper-auth">
         <h1 className="title-auth">
           {i18n.__('pages.authPageSignIn.signIn')}
@@ -56,7 +58,7 @@ class SignInPage extends BaseComponent {
         <p className="subtitle-auth">
           {i18n.__('pages.authPageSignIn.signInReason')}
         </p>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="list-errors">
             {errorMessages.map(msg => (
               <div className="list-item" key={msg}>{msg}</div>
@@ -91,21 +93,7 @@ class SignInPage extends BaseComponent {
           </button>
         </form>
       </div>
-    );
-
-    const link = (
-      <Link to="/join" className="link-auth-alt">
-        {i18n.__('pages.authPageSignIn.needAccount')}
-      </Link>
-    );
-
-    return this.renderRedirect() ||
-      <AuthPage content={content} link={link} menuOpen={this.props.menuOpen} />;
-  }
-}
-
-SignInPage.propTypes = {
-  menuOpen: PropTypes.object.isRequired,
+    </AuthPage>;
 };
 
 export default SignInPage;

@@ -1,26 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MobileMenu from '../components/MobileMenu.jsx';
-import { useMenuOpen } from '../state/MenuOpenState.jsx';
 
 // a common layout wrapper for auth pages
-const AuthPage = ({ content, link }) => {
-  const [menuOpen] = useMenuOpen();
-
-  return (
+const AuthPage = ({ children, link }) => (
     <div className="page auth">
       <nav>
-        <MobileMenu menuOpen={menuOpen} />
+        <MobileMenu />
       </nav>
       <div className="content-scrollable">
-        {content}
+        {children}
         {link}
       </div>
     </div>
-  );
-}
+);
+
 AuthPage.propTypes = {
-  content: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
   link: PropTypes.element.isRequired,
 };
 
