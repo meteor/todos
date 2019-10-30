@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import i18n from 'meteor/universe:i18n';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import UserMenu from '../components/UserMenu.jsx';
 import ListList from '../components/ListList.jsx';
@@ -12,6 +13,7 @@ import AuthPageSignIn from '../pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../pages/AuthPageJoin.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import { useMenuOpen } from '../state/MenuOpenState.jsx';
+import { useLocale } from '../state/LocaleState.jsx';
 
 export const AppContent = ({
   connexionNotification,
@@ -22,6 +24,19 @@ export const AppContent = ({
   user,
 }) => {
   const [menuOpen, setMenuOpen] = useMenuOpen();
+  const [_locale, setLocale] = useLocale();
+
+  const handleLocaleChange = (newLocale) => {
+    setLocale(newLocale);
+  };
+
+  useEffect(() => {
+    i18n.onChangeLocale(handleLocaleChange);
+    return () => {
+      i18n.offChangeLocale(handleLocaleChange);
+    }
+  }, []);
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
