@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
-import getLanguages from '../../api/languages/methods';
+import getLanguages from '../../api/languages/methods.js';
 import { useLocale } from '../state/LocaleState.jsx';
 
 const LanguageToggle = () => {

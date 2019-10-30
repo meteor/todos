@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LocaleProvider } from './LocaleState';
-import { MenuOpenProvider } from './MenuOpenState';
+import { LocaleProvider } from './LocaleState.jsx';
+import { MenuOpenProvider } from './MenuOpenState.jsx';
 
 export const GlobalStateProvider = ({
   menuOpen,
-  ...props,
+  ...props
 }) => (
   <LocaleProvider>
     <MenuOpenProvider menuOpen={menuOpen} {...props} />

@@ -6,7 +6,7 @@ import ListHeader from '../components/ListHeader.jsx';
 import TodoItem from '../components/TodoItem.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import Message from '../components/Message.jsx';
-import { useMenuOpen } from '../state/MenuOpenState';
+import { useMenuOpen } from '../state/MenuOpenState.jsx';
 
 const ListPage = ({
   list,

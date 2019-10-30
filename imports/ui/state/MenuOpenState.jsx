@@ -20,7 +20,7 @@ const useMenuOpen = () => {
 
 const MenuOpenProvider = ({
   menuOpen: initMenuOpen,
-  ...props,
+  ...props
 }) => {
   const [menuOpen, setMenuOpen] = useState(initMenuOpen);
   const value = useMemo(() => [menuOpen, setMenuOpen], [menuOpen]);
