@@ -1,61 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import i18n from 'meteor/universe:i18n';
-import BaseComponent from './BaseComponent.jsx';
 import getLanguages from '../../api/languages/methods';
+import { useLocale } from '../state/LocaleState.jsx';
 
-class LanguageToggle extends BaseComponent {
-  constructor(props) {
-    super(props);
-    this.state = Object.assign(this.state, { languages: [] });
-  }
+const LanguageToggle = () => {
+  const [languages, setLanguages] = useState([]);
+  const [locale] = useLocale();
 
-  componentDidMount() {
-    getLanguages.call((error, languages) => {
+  useEffect(() => {
+    getLanguages.call((error, newLanguages) => {
       if (!error) {
-        this.setState({
-          languages,
-        });
+        setLanguages(newLanguages);
       }
     });
-  }
+  }, []);
 
-  setLocale(event, language) {
+  const setI18nLocale = (event, language) => {
     event.preventDefault();
     if (language) {
       i18n.setLocale(language);
     }
-  }
+  };
 
-  renderLanguages() {
-    return this.state.languages.map((language) => {
-      let content;
-      if (language === this.state.locale) {
-        content = (
-          <span key={language} className="language active">{language}</span>
-        );
-      } else {
-        content = (
-          <a
-            key={language}
-            href="#toggle-language"
-            className="language"
-            onClick={event => this.setLocale(event, language)}
-          >
-            {language}
-          </a>
-        );
-      }
-      return content;
-    });
-  }
-
-  render() {
-    return (
-      <div className="language-toggle">
-        {this.renderLanguages()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="language-toggle">
+      {languages.map((language) => {
+        let content;
+        if (language === locale) {
+          content = (
+            <span key={language} className="language active">{language}</span>
+          );
+        } else {
+          content = (
+            <a
+              key={language}
+              href="#toggle-language"
+              className="language"
+              onClick={event => setI18nLocale(event, language)}
+            >
+              {language}
+            </a>
+          );
+        }
+        return content;
+      })}
+    </div>
+  );
+};
 
 export default LanguageToggle;
