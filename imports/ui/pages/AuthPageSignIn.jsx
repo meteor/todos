@@ -14,17 +14,17 @@ const SignInPage = () => {
 
     const email = this.email.value;
     const password = this.password.value;
-    const errors = {};
+    const newErrors = {};
 
     if (!email) {
-      errors.email = i18n.__('pages.authPageSignIn.emailRequired');
+      newErrors.email = i18n.__('pages.authPageSignIn.emailRequired');
     }
     if (!password) {
-      errors.password = i18n.__('pages.authPageSignIn.passwordRequired');
+      newErrors.password = i18n.__('pages.authPageSignIn.passwordRequired');
     }
 
-    setErrors(errors);
-    if (Object.keys(errors).length) {
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length) {
       return;
     }
 
@@ -50,50 +50,52 @@ const SignInPage = () => {
 
   return redirectTo
     ? <Redirect to={redirectTo} />
-    : <AuthPage link={link}>
-      <div className="wrapper-auth">
-        <h1 className="title-auth">
-          {i18n.__('pages.authPageSignIn.signIn')}
-        </h1>
-        <p className="subtitle-auth">
-          {i18n.__('pages.authPageSignIn.signInReason')}
-        </p>
-        <form onSubmit={onSubmit}>
-          <div className="list-errors">
-            {errorMessages.map(msg => (
-              <div className="list-item" key={msg}>{msg}</div>
-            ))}
-          </div>
-          <div className={`input-symbol ${errorClass('email')}`}>
-            <input
-              type="email"
-              name="email"
-              ref={(c) => { this.email = c; }}
-              placeholder={i18n.__('pages.authPageSignIn.yourEmail')}
-            />
-            <span
-              className="icon-email"
-              title={i18n.__('pages.authPageSignIn.yourEmail')}
-            />
-          </div>
-          <div className={`input-symbol ${errorClass('password')}`}>
-            <input
-              type="password"
-              name="password"
-              ref={(c) => { this.password = c; }}
-              placeholder={i18n.__('pages.authPageSignIn.password')}
-            />
-            <span
-              className="icon-lock"
-              title={i18n.__('pages.authPageSignIn.password')}
-            />
-          </div>
-          <button type="submit" className="btn-primary">
-            {i18n.__('pages.authPageSignIn.signInButton')}
-          </button>
-        </form>
-      </div>
-      </AuthPage>;
+    : (
+      <AuthPage link={link}>
+        <div className="wrapper-auth">
+          <h1 className="title-auth">
+            {i18n.__('pages.authPageSignIn.signIn')}
+          </h1>
+          <p className="subtitle-auth">
+            {i18n.__('pages.authPageSignIn.signInReason')}
+          </p>
+          <form onSubmit={onSubmit}>
+            <div className="list-errors">
+              {errorMessages.map(msg => (
+                <div className="list-item" key={msg}>{msg}</div>
+              ))}
+            </div>
+            <div className={`input-symbol ${errorClass('email')}`}>
+              <input
+                type="email"
+                name="email"
+                ref={(c) => { this.email = c; }}
+                placeholder={i18n.__('pages.authPageSignIn.yourEmail')}
+              />
+              <span
+                className="icon-email"
+                title={i18n.__('pages.authPageSignIn.yourEmail')}
+              />
+            </div>
+            <div className={`input-symbol ${errorClass('password')}`}>
+              <input
+                type="password"
+                name="password"
+                ref={(c) => { this.password = c; }}
+                placeholder={i18n.__('pages.authPageSignIn.password')}
+              />
+              <span
+                className="icon-lock"
+                title={i18n.__('pages.authPageSignIn.password')}
+              />
+            </div>
+            <button type="submit" className="btn-primary">
+              {i18n.__('pages.authPageSignIn.signInButton')}
+            </button>
+          </form>
+        </div>
+      </AuthPage>
+    );
 };
 
 export default SignInPage;
