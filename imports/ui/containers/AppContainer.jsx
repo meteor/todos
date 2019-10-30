@@ -5,8 +5,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Lists } from '../../api/lists/lists.js';
 import App from '../layouts/App.jsx';
 
-const menuOpen = new ReactiveVar(false);
-
 const AppContainer = withTracker(() => {
   const publicHandle = Meteor.subscribe('lists.public');
   const privateHandle = Meteor.subscribe('lists.private');
@@ -14,7 +12,6 @@ const AppContainer = withTracker(() => {
     user: Meteor.user(),
     loading: !(publicHandle.ready() && privateHandle.ready()),
     connected: Meteor.status().connected,
-    menuOpen,
     lists: Lists.find({
       $or: [
         { userId: { $exists: false } },

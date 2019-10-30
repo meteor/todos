@@ -3,7 +3,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Lists } from '../../api/lists/lists.js';
 import ListPage from '../pages/ListPage.jsx';
 
-const ListPageContainer = withTracker(({ match, menuOpen }) => {
+const ListPageContainer = withTracker(({ match }) => {
   const { id } = match.params;
   const todosHandle = Meteor.subscribe('todos.inList', { listId: id });
   const loading = !todosHandle.ready();
@@ -14,7 +14,6 @@ const ListPageContainer = withTracker(({ match, menuOpen }) => {
     list,
     listExists,
     todos: listExists ? list.todos().fetch() : [],
-    menuOpen,
   };
 })(ListPage);
 
