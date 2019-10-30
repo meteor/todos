@@ -56,65 +56,7 @@ const App = ({
   renderRedirect.propTypes = {
     pathname: PropTypes.string.isRequired,
   };
-  /*
-  const renderContent = (location) => {
-    const [menuOpen, setMenuOpen] = useMenuOpen();
-    const commonChildProps = {
-      menuOpen,
-    };
-    const closeMenu = () => {
-      setMenuOpen(false);
-    };
 
-    return (
-      <div id="container" className={menuOpen ? 'menu-open' : ''}>
-        <section id="menu">
-          <LanguageToggle />
-          <UserMenu user={user} logout={logout} />
-          <ListList lists={lists} />
-        </section>
-        {showConnectionIssue && !connected
-          ? <ConnectionNotification />
-          : null}
-        <div className="content-overlay" onClick={closeMenu} />
-        <div id="content-container">
-          {loading ? (
-            <Loading key="loading" />
-          ) : (
-              <TransitionGroup>
-                <CSSTransition
-                  key={location.key}
-                  classNames="fade"
-                  timeout={200}
-                >
-                  <Switch location={location}>
-                    <Route
-                      path="/lists/:id"
-                      render={({ match }) => (
-                        <ListPageContainer match={match} {...commonChildProps} />
-                      )}
-                    />
-                    <Route
-                      path="/signin"
-                      render={() => <AuthPageSignIn {...commonChildProps} />}
-                    />
-                    <Route
-                      path="/join"
-                      render={() => <AuthPageJoin {...commonChildProps} />}
-                    />
-                    <Route
-                      path="/*"
-                      render={() => <NotFoundPage {...commonChildProps} />}
-                    />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
-            )}
-        </div>
-      </div>
-    );
-  };
- */
   return (
     <GlobalStateProvider>
       <BrowserRouter>
