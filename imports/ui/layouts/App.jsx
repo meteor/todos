@@ -14,6 +14,7 @@ import ListPageContainer from '../containers/ListPageContainer.jsx';
 import AuthPageSignIn from '../pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../pages/AuthPageJoin.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
+import { GlobalStateProvider } from '../state/GlobalStateProvider.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -91,34 +92,34 @@ export const App = ({
           {loading ? (
             <Loading key="loading" />
           ) : (
-            <TransitionGroup>
-              <CSSTransition
-                key={location.key}
-                classNames="fade"
-                timeout={200}
-              >
-                <Switch location={location}>
-                  <Route
-                    path="/lists/:id"
-                    render={({ match }) => (
-                      <ListPageContainer match={match} {...commonChildProps} />
-                    )}
-                  />
-                  <Route
-                    path="/signin"
-                    render={() => <AuthPageSignIn {...commonChildProps} />}
-                  />
-                  <Route
-                    path="/join"
-                    render={() => <AuthPageJoin {...commonChildProps} />}
-                  />
-                  <Route
-                    path="/*"
-                    render={() => <NotFoundPage {...commonChildProps} />}
-                  />
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
+              <TransitionGroup>
+                <CSSTransition
+                  key={location.key}
+                  classNames="fade"
+                  timeout={200}
+                >
+                  <Switch location={location}>
+                    <Route
+                      path="/lists/:id"
+                      render={({ match }) => (
+                        <ListPageContainer match={match} {...commonChildProps} />
+                      )}
+                    />
+                    <Route
+                      path="/signin"
+                      render={() => <AuthPageSignIn {...commonChildProps} />}
+                    />
+                    <Route
+                      path="/join"
+                      render={() => <AuthPageJoin {...commonChildProps} />}
+                    />
+                    <Route
+                      path="/*"
+                      render={() => <NotFoundPage {...commonChildProps} />}
+                    />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
             )}
         </div>
       </div>
@@ -126,13 +127,15 @@ export const App = ({
   };
 
   return (
-    <BrowserRouter>
-      <Route
-        render={({ location }) => (
-          renderRedirect(location) || renderContent(location)
-        )}
-      />
-    </BrowserRouter>
+    <GlobalStateProvider>
+      <BrowserRouter>
+        <Route
+          render={({ location }) => (
+            renderRedirect(location) || renderContent(location)
+          )}
+        />
+      </BrowserRouter>
+    </GlobalStateProvider>
   );
 };
 
