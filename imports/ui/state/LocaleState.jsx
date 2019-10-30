@@ -19,7 +19,7 @@ const useLocale = () => {
 };
 
 const LocaleProvider = (props) => {
-  const [locale, setLocale] = useState(i18n.getLocale());
+  const [locale, setLocale] = useState(i18n.getLocale().substr(0, 2));
   const value = useMemo(() => [locale, setLocale], [locale]);
 
   return <LocaleContext.Provider value={value} {...props} />;
