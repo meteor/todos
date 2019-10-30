@@ -57,10 +57,19 @@ const ListPage = ({
 };
 
 ListPage.propTypes = {
-  list: PropTypes.object,
-  todos: PropTypes.array,
-  loading: PropTypes.bool,
-  listExists: PropTypes.bool,
+  list: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    incompleteCount: PropTypes.number.isRequired,
+  }),
+  todos: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  listExists: PropTypes.bool.isRequired,
+};
+
+ListPage.defaultProps = {
+  list: {},
 };
 
 export default ListPage;
