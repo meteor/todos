@@ -1,34 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
-import BaseComponent from './BaseComponent.jsx';
+import { useMenuOpen } from '../state/MenuOpenState.jsx';
 
-class MobileMenu extends BaseComponent {
-  constructor(props) {
-    super(props);
-    this.toggleMenu = this.toggleMenu.bind(this);
-  }
+export const MobileMenu = () => {
+  const [menuOpen, setMenuOpen] = useMenuOpen();
 
-  toggleMenu() {
-    this.props.menuOpen.set(!this.props.menuOpen.get());
-  }
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
-  render() {
-    return (
-      <div className="nav-group">
-        <a href="#toggle-menu" className="nav-item" onClick={this.toggleMenu}>
-          <span
-            className="icon-list-unordered"
-            title={i18n.__('components.mobileMenu.showMenu')}
-          />
-        </a>
-      </div>
-    );
-  }
-}
-
-MobileMenu.propTypes = {
-  menuOpen: PropTypes.object.isRequired,
+  return (
+    <div className="nav-group">
+      <a href="#toggle-menu" className="nav-item" onClick={toggleMenu}>
+        <span
+          className="icon-list-unordered"
+          title={i18n.__('components.mobileMenu.showMenu')}
+        />
+      </a>
+    </div>
+  );
 };
 
 export default MobileMenu;
