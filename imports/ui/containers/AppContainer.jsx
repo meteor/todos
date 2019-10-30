@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { withTracker } from 'meteor/react-meteor-data';
 
 import { Lists } from '../../api/lists/lists.js';
