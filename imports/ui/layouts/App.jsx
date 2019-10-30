@@ -15,6 +15,8 @@ import AuthPageSignIn from '../pages/AuthPageSignIn.jsx';
 import AuthPageJoin from '../pages/AuthPageJoin.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import { GlobalStateProvider } from '../state/GlobalStateProvider.jsx';
+import { useMenuOpen } from '../state/MenuOpenState.jsx';
+import AppContent from './AppContent.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
@@ -25,8 +27,6 @@ export const App = ({
   connected,
   // subscription status
   loading,
-  // is side menu open?
-  menuOpen,
   // all lists visible to the current user
   lists,
 }) => {
@@ -46,10 +46,6 @@ export const App = ({
       setDefaultList(`/lists/${list._id}`);
     }
   }, [loading]);
-
-  const closeMenu = () => {
-    menuOpen.set(false);
-  };
 
   const logout = () => {
     Meteor.logout();
@@ -71,10 +67,14 @@ export const App = ({
   renderRedirect.propTypes = {
     pathname: PropTypes.string.isRequired,
   };
-
+/* 
   const renderContent = (location) => {
+    const [menuOpen, setMenuOpen] = useMenuOpen();
     const commonChildProps = {
       menuOpen,
+    };
+    const closeMenu = () => {
+      setMenuOpen(false);
     };
 
     return (
@@ -125,13 +125,22 @@ export const App = ({
       </div>
     );
   };
-
+ */
   return (
     <GlobalStateProvider>
       <BrowserRouter>
         <Route
           render={({ location }) => (
-            renderRedirect(location) || renderContent(location)
+            renderRedirect(location) || (
+              <AppContent
+                connexionNotification={showConnectionIssue && !connected}
+                lists={lists}
+                loading={loading}
+                location={location}
+                logout={logout}
+                user={user}
+              />
+            )
           )}
         />
       </BrowserRouter>

@@ -9,7 +9,7 @@ import i18n from 'meteor/universe:i18n';
 const LocaleContext = createContext(undefined);
 
 const useLocale = () => {
-  const context = useContext(localeContext);
+  const context = useContext(LocaleContext);
 
   if (!context) {
     throw new Error('useLocale must be used within a LocaleProvider');

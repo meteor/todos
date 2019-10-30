@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const MenuOpenContext = createContext(undefined);
 
 const useMenuOpen = () => {
-  const context = useContext(menuOpenContext);
+  const context = useContext(MenuOpenContext);
 
   if (!context) {
     throw new Error('useMenuOpen must be used within a MenuOpenProvider');
