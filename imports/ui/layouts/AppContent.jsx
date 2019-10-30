@@ -24,7 +24,7 @@ const AppContent = ({
   user,
 }) => {
   const [menuOpen, setMenuOpen] = useMenuOpen();
-  const [_locale, setLocale] = useLocale();
+  const [, setLocale] = useLocale();
 
   const handleLocaleChange = (newLocale) => {
     setLocale(newLocale);
@@ -64,34 +64,34 @@ const AppContent = ({
           <Loading key="loading" />
         ) : (
           <TransitionGroup>
-              <CSSTransition
-                key={location.key}
-                classNames="fade"
-                timeout={200}
-              >
-                <Switch location={location}>
-                  <Route
-                    path="/lists/:id"
-                    render={({ match }) => (
-                      <ListPageContainer match={match} {...commonChildProps} />
-                    )}
-                  />
-                  <Route
-                    path="/signin"
-                    render={() => <AuthPageSignIn {...commonChildProps} />}
-                  />
-                  <Route
-                    path="/join"
-                    render={() => <AuthPageJoin {...commonChildProps} />}
-                  />
-                  <Route
-                    path="/*"
-                    render={() => <NotFoundPage {...commonChildProps} />}
-                  />
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
-          )}
+            <CSSTransition
+              key={location.key}
+              classNames="fade"
+              timeout={200}
+            >
+              <Switch location={location}>
+                <Route
+                  path="/lists/:id"
+                  render={({ match }) => (
+                    <ListPageContainer match={match} {...commonChildProps} />
+                  )}
+                />
+                <Route
+                  path="/signin"
+                  render={() => <AuthPageSignIn {...commonChildProps} />}
+                />
+                <Route
+                  path="/join"
+                  render={() => <AuthPageJoin {...commonChildProps} />}
+                />
+                <Route
+                  path="/*"
+                  render={() => <NotFoundPage {...commonChildProps} />}
+                />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        )}
       </div>
     </div>
   );
@@ -99,13 +99,14 @@ const AppContent = ({
 
 AppContent.propTypes = {
   connexionNotification: PropTypes.bool,
-  lists: PropTypes.array,
+  lists: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
   }).isRequired,
   logout: PropTypes.func.isRequired,
-  user: PropTypes.object,
+  user: PropTypes.object.isRequired,
 };
 
 AppContent.defaultProps = {

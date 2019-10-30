@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Meteor } from 'meteor/meteor';
 
 import { Lists } from '../../api/lists/lists.js';
-import UserMenu from '../components/UserMenu.jsx';
-import ListList from '../components/ListList.jsx';
-import LanguageToggle from '../components/LanguageToggle.jsx';
-import ConnectionNotification from '../components/ConnectionNotification.jsx';
-import Loading from '../components/Loading.jsx';
-import ListPageContainer from '../containers/ListPageContainer.jsx';
-import AuthPageSignIn from '../pages/AuthPageSignIn.jsx';
-import AuthPageJoin from '../pages/AuthPageJoin.jsx';
-import NotFoundPage from '../pages/NotFoundPage.jsx';
 import { GlobalStateProvider } from '../state/GlobalStateProvider.jsx';
-import { useMenuOpen } from '../state/MenuOpenState.jsx';
 import AppContent from './AppContent.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
@@ -152,7 +141,6 @@ App.propTypes = {
   user: PropTypes.object,
   connected: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
-  menuOpen: PropTypes.object.isRequired,
   lists: PropTypes.array,
 };
 
