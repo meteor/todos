@@ -3,7 +3,7 @@ import i18n from 'meteor/universe:i18n';
 import MobileMenu from '../components/MobileMenu.jsx';
 import Message from '../components/Message.jsx';
 
-export const NotFoundPage = () => (
+const NotFoundPage = () => (
   <div className="page not-found">
     <nav>
       <MobileMenu />

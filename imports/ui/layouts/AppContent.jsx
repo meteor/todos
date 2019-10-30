@@ -15,7 +15,7 @@ import NotFoundPage from '../pages/NotFoundPage.jsx';
 import { useMenuOpen } from '../state/MenuOpenState.jsx';
 import { useLocale } from '../state/LocaleState.jsx';
 
-export const AppContent = ({
+const AppContent = ({
   connexionNotification,
   lists,
   loading,
@@ -34,7 +34,7 @@ export const AppContent = ({
     i18n.onChangeLocale(handleLocaleChange);
     return () => {
       i18n.offChangeLocale(handleLocaleChange);
-    }
+    };
   }, []);
 
   const closeMenu = () => {
@@ -42,7 +42,7 @@ export const AppContent = ({
   };
   const transitionMenuOpen = {
     get: () => menuOpen,
-    set: (newMenuOpen) => setMenuOpen(newMenuOpen),
+    set: newMenuOpen => setMenuOpen(newMenuOpen),
   };
   const commonChildProps = {
     menuOpen: transitionMenuOpen,
@@ -63,7 +63,7 @@ export const AppContent = ({
         {loading ? (
           <Loading key="loading" />
         ) : (
-            <TransitionGroup>
+          <TransitionGroup>
               <CSSTransition
                 key={location.key}
                 classNames="fade"

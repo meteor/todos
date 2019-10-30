@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.6.3",
     "autoprefixer": "^8.6.5",
+    "babel-helpers": "^6.24.1",
     "bcrypt": "^2.0.1",
     "classnames": "^2.2.6",
     "faker": "^4.1.0",

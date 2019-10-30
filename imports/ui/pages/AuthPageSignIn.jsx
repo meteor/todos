@@ -5,7 +5,7 @@ import i18n from 'meteor/universe:i18n';
 
 import AuthPage from './AuthPage.jsx';
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const [errors, setErrors] = useState({});
   const [redirectTo, setRedirectTo] = useState(null);
 
@@ -40,7 +40,7 @@ export const SignInPage = () => {
   };
 
   const errorMessages = Object.values(errors);
-  const errorClass = (key) => errors[key] && 'error';
+  const errorClass = key => errors[key] && 'error';
 
   const link = (
     <Link to="/join" className="link-auth-alt">
@@ -93,7 +93,7 @@ export const SignInPage = () => {
           </button>
         </form>
       </div>
-    </AuthPage>;
+      </AuthPage>;
 };
 
 export default SignInPage;

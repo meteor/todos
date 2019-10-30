@@ -20,7 +20,7 @@ import AppContent from './AppContent.jsx';
 
 const CONNECTION_ISSUE_TIMEOUT = 5000;
 
-export const App = ({
+const App = ({
   // current meteor user
   user,
   // server connection status
@@ -67,7 +67,7 @@ export const App = ({
   renderRedirect.propTypes = {
     pathname: PropTypes.string.isRequired,
   };
-/* 
+  /*
   const renderContent = (location) => {
     const [menuOpen, setMenuOpen] = useMenuOpen();
     const commonChildProps = {

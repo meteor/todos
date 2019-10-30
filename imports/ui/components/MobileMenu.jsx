@@ -2,7 +2,7 @@ import React from 'react';
 import i18n from 'meteor/universe:i18n';
 import { useMenuOpen } from '../state/MenuOpenState.jsx';
 
-export const MobileMenu = () => {
+const MobileMenu = () => {
   const [menuOpen, setMenuOpen] = useMenuOpen();
 
   const toggleMenu = () => {

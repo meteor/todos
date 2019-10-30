@@ -8,7 +8,7 @@ import NotFoundPage from '../pages/NotFoundPage.jsx';
 import Message from '../components/Message.jsx';
 import { useMenuOpen } from '../state/MenuOpenState';
 
-export const ListPage = ({
+const ListPage = ({
   list,
   todos,
   loading,
