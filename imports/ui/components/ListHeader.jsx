@@ -1,7 +1,7 @@
 /* global confirm */
 /* eslint-disable no-alert, no-restricted-globals */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
@@ -21,6 +21,10 @@ const ListHeader = ({ list }) => {
   const [editing, setEditing] = useState(false);
   const [redirectTo, setRedirectTo] = useState(null);
   const menuOpen = useMenuOpen();
+
+  useEffect(() => {
+    setRedirectTo(null);
+  }, [redirectTo]);
 
   const editList = () => {
     this.setState({ editing: true }, () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import i18n from 'meteor/universe:i18n';
@@ -8,6 +8,10 @@ import AuthPage from './AuthPage.jsx';
 const SignInPage = () => {
   const [errors, setErrors] = useState({});
   const [redirectTo, setRedirectTo] = useState(null);
+
+  useEffect(() => {
+    setRedirectTo(null);
+  }, [redirectTo]);
 
   const onSubmit = (event) => {
     event.preventDefault();
