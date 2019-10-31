@@ -7,6 +7,7 @@ import TodoItem from '../components/TodoItem.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import Message from '../components/Message.jsx';
 import { useMenuOpen } from '../state/MenuOpenState.jsx';
+import Loading from '../components/Loading.jsx';
 
 const ListPage = ({
   list,
@@ -22,6 +23,9 @@ const ListPage = ({
   };
 
   if (!listExists) {
+    if (loading) {
+      return <Loading />;
+    }
     return <NotFoundPage />;
   }
 
