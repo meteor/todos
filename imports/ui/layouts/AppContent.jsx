@@ -103,14 +103,15 @@ AppContent.propTypes = {
   loading: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    key: PropTypes.string,
   }).isRequired,
   logout: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
 };
 
 AppContent.defaultProps = {
   connexionNotification: false,
+  user: null,
 };
 
 export default AppContent;

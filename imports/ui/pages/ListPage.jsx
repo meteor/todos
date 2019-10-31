@@ -59,7 +59,7 @@ const ListPage = ({
 ListPage.propTypes = {
   list: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
     name: PropTypes.string.isRequired,
     incompleteCount: PropTypes.number.isRequired,
   }),
