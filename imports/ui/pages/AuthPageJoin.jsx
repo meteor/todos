@@ -14,7 +14,7 @@ const JoinPage = () => {
 
     const email = this.email.value;
     const password = this.password.value;
-    const confirm = this.confirm.value;
+    const confirmPassword = this.confirmPassword.value;
     const newErrors = {};
 
     if (!email) {
@@ -23,8 +23,8 @@ const JoinPage = () => {
     if (!password) {
       newErrors.password = i18n.__('pages.authPageJoin.passwordRequired');
     }
-    if (confirm !== password) {
-      newErrors.confirm = i18n.__('pages.authPageJoin.passwordConfirm');
+    if (confirmPassword !== password) {
+      newErrors.confirmPassword = i18n.__('pages.authPageJoin.passwordConfirm');
     }
 
     setErrors(newErrors);
@@ -93,11 +93,11 @@ const JoinPage = () => {
                 title={i18n.__('pages.authPageJoin.password')}
               />
             </div>
-            <div className={`input-symbol ${errorClass('confirm')}`}>
+            <div className={`input-symbol ${errorClass('confirmPassword')}`}>
               <input
                 type="password"
-                name="confirm"
-                ref={(c) => { this.confirm = c; }}
+                name="confirmPassword"
+                ref={(c) => { this.confirmPassword = c; }}
                 placeholder={i18n.__('pages.authPageJoin.confirmPassword')}
               />
               <span
