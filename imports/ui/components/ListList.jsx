@@ -1,34 +1,34 @@
 /* global alert */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { NavLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 import i18n from 'meteor/universe:i18n';
-import BaseComponent from './BaseComponent.jsx';
 import { insert } from '../../api/lists/methods.js';
 
-export default class ListList extends BaseComponent {
-  constructor(props) {
-    super(props);
-    this.createNewList = this.createNewList.bind(this);
-  }
+const ListList = ({ lists }) => {
+  const [redirectTo, setRedirectTo] = useState(null);
 
-  createNewList() {
+  useEffect(() => {
+    setRedirectTo(null);
+  }, [redirectTo]);
+
+  const createNewList = () => {
     const listId = insert.call({ locale: i18n.getLocale() }, (err) => {
       if (err) {
-        this.redirectTo('/');
+        setRedirectTo('/');
         /* eslint-disable no-alert */
         alert(i18n.__('components.listList.newListError'));
       }
     });
-    this.redirectTo(`/lists/${listId}`);
-  }
+    setRedirectTo(`/lists/${listId}`);
+  };
 
-  render() {
-    const { lists } = this.props;
-    return this.renderRedirect() || (
+  return redirectTo
+    ? <Redirect to={redirectTo} />
+    : (
       <div className="list-todos">
-        <a className="link-list-new" onClick={this.createNewList}>
+        <a className="link-list-new" onClick={createNewList}>
           <span className="icon-plus" />
           {i18n.__('components.listList.newList')}
         </a>
@@ -51,9 +51,14 @@ export default class ListList extends BaseComponent {
         ))}
       </div>
     );
-  }
-}
+};
 
 ListList.propTypes = {
   lists: PropTypes.array,
 };
+
+ListList.defaultProps = {
+  lists: [],
+};
+
+export default ListList;
