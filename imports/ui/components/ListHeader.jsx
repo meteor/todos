@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import MobileMenu from './MobileMenu.jsx';
-import { useMenuOpen } from '../state/MenuOpenState.jsx';
 import { displayError } from '../helpers/errors.js';
 
 import {
@@ -20,7 +19,6 @@ import { insert } from '../../api/todos/methods.js';
 const ListHeader = ({ list }) => {
   const [editing, setEditing] = useState(false);
   const [redirectTo, setRedirectTo] = useState(null);
-  const menuOpen = useMenuOpen();
 
   useEffect(() => {
     setRedirectTo(null);
@@ -105,7 +103,7 @@ const ListHeader = ({ list }) => {
 
   const renderDefaultHeader = () => (
     <div>
-      <MobileMenu menuOpen={menuOpen} />
+      <MobileMenu />
       <h1 className="title-page" onClick={editList}>
         <span className="title-wrapper">{list.name}</span>
         <span className="count-list">{list.incompleteCount}</span>

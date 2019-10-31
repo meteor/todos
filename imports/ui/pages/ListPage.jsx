@@ -6,7 +6,6 @@ import ListHeader from '../components/ListHeader.jsx';
 import TodoItem from '../components/TodoItem.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import Message from '../components/Message.jsx';
-import { useMenuOpen } from '../state/MenuOpenState.jsx';
 import Loading from '../components/Loading.jsx';
 
 const ListPage = ({
@@ -15,7 +14,6 @@ const ListPage = ({
   loading,
   listExists,
 }) => {
-  const [menuOpen] = useMenuOpen();
   const [editingTodo, setEditingTodo] = useState(null);
 
   const onEditingChange = (id, editing) => {
@@ -50,7 +48,7 @@ const ListPage = ({
 
   return (
     <div className="page lists-show">
-      <ListHeader list={list} menuOpen={menuOpen} />
+      <ListHeader list={list} />
       <div className="content-scrollable list-items">
         {loading
           ? <Message title={i18n.__('pages.listPage.loading')} />
