@@ -9,17 +9,17 @@
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.44",
+    "@babel/runtime": "^7.7.2",
     "autoprefixer": "^8.3.0",
     "bcrypt": "^2.0.1",
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
     "faker": "^4.1.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
     "react-addons-pure-render-mixin": "^15.6.2",
-    "react-dom": "^16.3.2",
-    "react-router-dom": "^4.2.2",
-    "react-transition-group": "^2.3.1"
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.9.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
