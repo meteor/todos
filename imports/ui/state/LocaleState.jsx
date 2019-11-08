@@ -1,10 +1,11 @@
 import React, {
   createContext,
   useContext,
-  useMemo,
   useState,
 } from 'react';
 import i18n from 'meteor/universe:i18n';
+
+const defaultLocale = i18n.getLocale().substr(0, 2);
 
 const LocaleContext = createContext(undefined);
 
@@ -19,8 +20,7 @@ const useLocale = () => {
 };
 
 const LocaleProvider = (props) => {
-  const [locale, setLocale] = useState(i18n.getLocale().substr(0, 2));
-  const value = useMemo(() => [locale, setLocale], [locale]);
+  const value = useState(defaultLocale);
 
   return <LocaleContext.Provider value={value} {...props} />;
 };

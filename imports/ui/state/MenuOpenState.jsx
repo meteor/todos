@@ -1,7 +1,6 @@
 import React, {
   createContext,
   useContext,
-  useMemo,
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -22,8 +21,7 @@ const MenuOpenProvider = ({
   menuOpen: initMenuOpen,
   ...props
 }) => {
-  const [menuOpen, setMenuOpen] = useState(initMenuOpen);
-  const value = useMemo(() => [menuOpen, setMenuOpen], [menuOpen]);
+  const value = useState(initMenuOpen);
 
   return <MenuOpenContext.Provider value={value} {...props} />;
 };
