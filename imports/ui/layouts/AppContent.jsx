@@ -40,13 +40,6 @@ const AppContent = ({
   const closeMenu = () => {
     setMenuOpen(false);
   };
-  const transitionMenuOpen = {
-    get: () => menuOpen,
-    set: newMenuOpen => setMenuOpen(newMenuOpen),
-  };
-  const commonChildProps = {
-    menuOpen: transitionMenuOpen,
-  };
 
   return (
     <div id="container" className={menuOpen ? 'menu-open' : ''}>
@@ -72,21 +65,19 @@ const AppContent = ({
               <Switch location={location}>
                 <Route
                   path="/lists/:id"
-                  render={({ match }) => (
-                    <ListPageContainer match={match} {...commonChildProps} />
-                  )}
+                  component={ListPageContainer}
                 />
                 <Route
                   path="/signin"
-                  render={() => <AuthPageSignIn {...commonChildProps} />}
+                  component={AuthPageSignIn}
                 />
                 <Route
                   path="/join"
-                  render={() => <AuthPageJoin {...commonChildProps} />}
+                  component={AuthPageJoin}
                 />
                 <Route
                   path="/*"
-                  render={() => <NotFoundPage {...commonChildProps} />}
+                  component={NotFoundPage}
                 />
               </Switch>
             </CSSTransition>
