@@ -1,5 +1,11 @@
-import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+import React, { useEffect, useState } from 'react';
+import {
+  Switch,
+  Route,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -14,20 +20,38 @@ import AuthPageJoin from '../pages/AuthPageJoin.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import { useMenuOpen } from '../state/MenuOpenState.jsx';
 import { useLocale } from '../state/LocaleState.jsx';
+import { Lists } from '../../api/lists/lists.js';
 
 const AppContent = ({
   connexionNotification,
   lists,
   loading,
-  location,
-  logout,
   user,
 }) => {
+  const history = useHistory();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useMenuOpen();
   const [, setLocale] = useLocale();
+  const [defaultList, setDefaultList] = useState(null);
+
+  if (defaultList && location.pathname === '/') {
+    history.replace(defaultList);
+  }
+
+  useEffect(() => {
+    if (!loading) {
+      const list = Lists.findOne();
+      setDefaultList(`/lists/${list._id}`);
+    }
+  }, [loading]);
 
   const handleLocaleChange = (newLocale) => {
     setLocale(newLocale);
+  };
+
+  const logout = () => {
+    Meteor.logout();
+    history.replace(defaultList || '/');
   };
 
   useEffect(() => {
@@ -54,15 +78,14 @@ const AppContent = ({
       <div className="content-overlay" onClick={closeMenu} />
       <div id="content-container">
         {loading ? (
-          <Loading key="loading" />
+          <Loading />
         ) : (
           <TransitionGroup>
             <CSSTransition
-              key={location.key}
               classNames="fade"
               timeout={200}
             >
-              <Switch location={location}>
+              <Switch>
                 <Route
                   path="/lists/:id"
                   component={ListPageContainer}
@@ -92,11 +115,6 @@ AppContent.propTypes = {
   connexionNotification: PropTypes.bool,
   lists: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-    key: PropTypes.string,
-  }).isRequired,
-  logout: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 

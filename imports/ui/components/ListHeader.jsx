@@ -2,10 +2,10 @@
 /* eslint-disable no-alert, no-restricted-globals */
 
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
-import MobileMenu from './MobileMenu.jsx';
+// import MobileMenu from './MobileMenu.jsx';
 import { displayError } from '../helpers/errors.js';
 
 import {
@@ -17,17 +17,17 @@ import {
 import { insert } from '../../api/todos/methods.js';
 
 const ListHeader = ({ list }) => {
+  const history = useHistory();
   const [editing, setEditing] = useState(false);
-  const [redirectTo, setRedirectTo] = useState(null);
 
   useEffect(() => {
-    setRedirectTo(null);
-  }, [redirectTo]);
+    if (editing) {
+      this.listNameInput.focus();
+    }
+  }, [editing]);
 
   const editList = () => {
-    this.setState({ editing: true }, () => {
-      this.listNameInput.focus();
-    });
+    setEditing(true);
   };
 
   const cancelEdit = () => {
@@ -43,12 +43,11 @@ const ListHeader = ({ list }) => {
   };
 
   const deleteList = () => {
-    const message =
-      `${i18n.__('components.listHeader.deleteConfirm')} ${list.name}?`;
+    const message = `${i18n.__('components.listHeader.deleteConfirm')} ${list.name}?`;
 
     if (confirm(message)) {
       remove.call({ listId: list._id }, displayError);
-      setRedirectTo('/');
+      history.replace('/');
     }
   };
 
@@ -103,7 +102,7 @@ const ListHeader = ({ list }) => {
 
   const renderDefaultHeader = () => (
     <div>
-      <MobileMenu />
+      {/* <MobileMenu /> */}
       <h1 className="title-page" onClick={editList}>
         <span className="title-wrapper">{list.name}</span>
         <span className="count-list">{list.incompleteCount}</span>
@@ -118,13 +117,16 @@ const ListHeader = ({ list }) => {
             <option disabled value="default">
               {i18n.__('components.listHeader.selectAction')}
             </option>
-            {list.userId ?
-              <option value="public">
-                {i18n.__('components.listHeader.makePublic')}
-              </option> :
-              <option value="private">
-                {i18n.__('components.listHeader.makePrivate')}
-              </option>}
+            {list.userId
+              ? (
+                <option value="public">
+                  {i18n.__('components.listHeader.makePublic')}
+                </option>
+              ) : (
+                <option value="private">
+                  {i18n.__('components.listHeader.makePrivate')}
+                </option>
+              )}
             <option value="delete">
               {i18n.__('components.listHeader.delete')}
             </option>
@@ -134,14 +136,17 @@ const ListHeader = ({ list }) => {
         <div className="options-web">
           <a className="nav-item" onClick={toggleListPrivacy}>
             {list.userId
-              ? <span
-                className="icon-lock"
-                title={i18n.__('components.listHeader.makeListPublic')}
-              />
-              : <span
-                className="icon-unlock"
-                title={i18n.__('components.listHeader.makeListPrivate')}
-              />}
+              ? (
+                <span
+                  className="icon-lock"
+                  title={i18n.__('components.listHeader.makeListPublic')}
+                />
+              ) : (
+                <span
+                  className="icon-unlock"
+                  title={i18n.__('components.listHeader.makeListPrivate')}
+                />
+              )}
           </a>
           <a className="nav-item trash" onClick={deleteList}>
             <span
@@ -180,21 +185,20 @@ const ListHeader = ({ list }) => {
     </form>
   );
 
-  return redirectTo
-    ? <Redirect to={redirectTo} />
-    : (
-      <nav className="list-header">
-        {editing ? renderEditingHeader() : renderDefaultHeader()}
-        <form className="todo-new input-symbol" onSubmit={createTodo}>
-          <input
-            type="text"
-            ref={(c) => { this.newTodoInput = c; }}
-            placeholder={i18n.__('components.listHeader.typeToAdd')}
-          />
-          <span className="icon-add" onClick={focusTodoInput} />
-        </form>
-      </nav>
-    );
+  return (
+    <nav className="list-header">
+      {editing ? renderEditingHeader() : renderDefaultHeader()}
+      <form className="todo-new input-symbol" onSubmit={createTodo}>
+        <input
+          className="new-todo-input"
+          type="text"
+          ref={(c) => { this.newTodoInput = c; }}
+          placeholder={i18n.__('components.listHeader.typeToAdd')}
+        />
+        <span className="icon-add" onClick={focusTodoInput} />
+      </form>
+    </nav>
+  );
 };
 
 ListHeader.propTypes = {
