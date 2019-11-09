@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/factory';
 import faker from 'faker';
@@ -14,11 +15,13 @@ class TodosCollection extends Mongo.Collection {
     incompleteCountDenormalizer.afterInsertTodo(ourDoc);
     return result;
   }
+
   update(selector, modifier) {
     const result = super.update(selector, modifier);
     incompleteCountDenormalizer.afterUpdateTodo(selector, modifier);
     return result;
   }
+
   remove(selector) {
     const todos = this.find(selector).fetch();
     const result = super.remove(selector);

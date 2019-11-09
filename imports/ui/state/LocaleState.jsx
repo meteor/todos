@@ -19,10 +19,10 @@ const useLocale = () => {
   return context;
 };
 
-const LocaleProvider = (props) => {
+const LocaleProvider = () => {
   const value = useState(defaultLocale);
 
-  return <LocaleContext.Provider value={value} {...props} />;
+  return <LocaleContext.Provider value={value} />;
 };
 
 export { LocaleProvider, useLocale };

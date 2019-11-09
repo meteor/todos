@@ -17,13 +17,10 @@ const useMenuOpen = () => {
   return context;
 };
 
-const MenuOpenProvider = ({
-  menuOpen: initMenuOpen,
-  ...props
-}) => {
+const MenuOpenProvider = ({ menuOpen: initMenuOpen }) => {
   const value = useState(initMenuOpen);
 
-  return <MenuOpenContext.Provider value={value} {...props} />;
+  return <MenuOpenContext.Provider value={value} />;
 };
 
 MenuOpenProvider.propTypes = {

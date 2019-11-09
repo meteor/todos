@@ -36,7 +36,7 @@ const LanguageToggle = () => {
               key={language}
               href="#toggle-language"
               className="language"
-              onClick={event => setI18nLocale(event, language)}
+              onClick={(event) => setI18nLocale(event, language)}
             >
               {language}
             </a>

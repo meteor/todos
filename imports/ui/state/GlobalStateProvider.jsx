@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import { LocaleProvider } from './LocaleState.jsx';
 import { MenuOpenProvider } from './MenuOpenState.jsx';
 
-export const GlobalStateProvider = ({
-  menuOpen,
-  ...props
-}) => (
+export const GlobalStateProvider = ({ menuOpen }) => (
   <LocaleProvider>
-    <MenuOpenProvider menuOpen={menuOpen} {...props} />
+    <MenuOpenProvider menuOpen={menuOpen} />
   </LocaleProvider>
 );
 

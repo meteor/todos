@@ -26,11 +26,12 @@ const UserMenu = ({
             : <span className="icon-arrow-down" />}
           {emailLocalPart}
         </a>
-        {open ?
-          <a className="btn-secondary" onClick={logout}>
-            {i18n.__('components.userMenu.logout')}
-          </a> :
-          null}
+        {open
+          ? (
+            <a className="btn-secondary" onClick={logout}>
+              {i18n.__('components.userMenu.logout')}
+            </a>
+          ) : null}
       </div>
     );
   };

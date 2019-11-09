@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/factory';
@@ -25,6 +26,7 @@ class ListsCollection extends Mongo.Collection {
 
     return super.insert(ourList, callback);
   }
+
   remove(selector, callback) {
     Todos.remove({ listId: selector });
     return super.remove(selector, callback);

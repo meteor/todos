@@ -4,7 +4,7 @@ import i18n from 'meteor/universe:i18n';
 
 import ListHeader from '../components/ListHeader.jsx';
 import TodoItem from '../components/TodoItem.jsx';
-import NotFoundPage from '../pages/NotFoundPage.jsx';
+import NotFoundPage from './NotFoundPage.jsx';
 import Message from '../components/Message.jsx';
 import Loading from '../components/Loading.jsx';
 
@@ -36,7 +36,7 @@ const ListPage = ({
       />
     );
   } else {
-    Todos = todos.map(todo => (
+    Todos = todos.map((todo) => (
       <TodoItem
         todo={todo}
         key={todo._id}
