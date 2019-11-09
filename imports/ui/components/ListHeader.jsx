@@ -168,6 +168,7 @@ const ListHeader = ({ list }) => {
   const renderEditingHeader = () => (
     <form className="list-edit-form" onSubmit={onListFormSubmit}>
       <input
+        className="list-name-input"
         type="text"
         name="name"
         autoComplete="off"
