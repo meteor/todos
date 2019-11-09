@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import i18n from 'meteor/universe:i18n';
 
+import { useUnmountedRef } from '../hooks/useUnmountedRef.jsx';
 import AuthPage from './AuthPage.jsx';
 
 const SignInPage = () => {
@@ -10,6 +11,7 @@ const SignInPage = () => {
   const [errors, setErrors] = useState({});
   const emailRef = useRef();
   const passwordRef = useRef();
+  const unmountedRef = useUnmountedRef();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -32,6 +34,11 @@ const SignInPage = () => {
 
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
+        if (unmountedRef.current) {
+          // Return to avoid the setState calls
+          return;
+        }
+
         if (err) {
           setErrors({ none: err.reason });
         }

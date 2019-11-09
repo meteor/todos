@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import i18n from 'meteor/universe:i18n';
 
+import { useUnmountedRef } from '../hooks/useUnmountedRef.jsx';
 import AuthPage from './AuthPage.jsx';
 
 const JoinPage = () => {
@@ -11,6 +12,7 @@ const JoinPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmRef = useRef();
+  const unmountedRef = useUnmountedRef();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -39,6 +41,11 @@ const JoinPage = () => {
       email,
       password,
     }, (err) => {
+      if (unmountedRef.current) {
+        // Return to avoid the setState calls
+        return;
+      }
+
       if (err) {
         setErrors({ none: err.reason });
       } else {
