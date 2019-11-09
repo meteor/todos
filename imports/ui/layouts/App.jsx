@@ -32,7 +32,7 @@ const App = ({
     <GlobalStateProvider>
       <BrowserRouter>
         <AppContent
-          connexionNotification={showConnectionIssue && !connected}
+          connectionNotification={showConnectionIssue && !connected}
           lists={lists}
           loading={loading}
           user={user}

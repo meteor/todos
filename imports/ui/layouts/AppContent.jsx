@@ -23,7 +23,7 @@ import { useLocale } from '../state/LocaleState.jsx';
 import { Lists } from '../../api/lists/lists.js';
 
 const AppContent = ({
-  connexionNotification,
+  connectionNotification,
   lists,
   loading,
   user,
@@ -72,7 +72,7 @@ const AppContent = ({
         <UserMenu user={user} logout={logout} />
         <ListList lists={lists} />
       </section>
-      {connexionNotification
+      {connectionNotification
         ? <ConnectionNotification />
         : null}
       <div className="content-overlay" onClick={closeMenu} />
@@ -112,14 +112,14 @@ const AppContent = ({
 };
 
 AppContent.propTypes = {
-  connexionNotification: PropTypes.bool,
+  connectionNotification: PropTypes.bool,
   lists: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object,
 };
 
 AppContent.defaultProps = {
-  connexionNotification: false,
+  connectionNotification: false,
   user: null,
 };
 
