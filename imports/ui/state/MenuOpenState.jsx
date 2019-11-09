@@ -17,14 +17,25 @@ const useMenuOpen = () => {
   return context;
 };
 
-const MenuOpenProvider = ({ menuOpen: initMenuOpen }) => {
+const MenuOpenProvider = ({
+  menuOpen: initMenuOpen,
+  children,
+}) => {
   const value = useState(initMenuOpen);
 
-  return <MenuOpenContext.Provider value={value} />;
+  return (
+    <MenuOpenContext.Provider value={value}>
+      {children}
+    </MenuOpenContext.Provider>
+  );
 };
 
 MenuOpenProvider.propTypes = {
   menuOpen: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export { MenuOpenProvider, useMenuOpen };

@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState,
 } from 'react';
+import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
 
 const defaultLocale = i18n.getLocale().substr(0, 2);
@@ -19,10 +20,21 @@ const useLocale = () => {
   return context;
 };
 
-const LocaleProvider = () => {
+const LocaleProvider = ({ children }) => {
   const value = useState(defaultLocale);
 
-  return <LocaleContext.Provider value={value} />;
+  return (
+    <LocaleContext.Provider value={value}>
+      {children}
+    </LocaleContext.Provider>
+  );
+};
+
+LocaleProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export { LocaleProvider, useLocale };

@@ -1,7 +1,7 @@
 /* global confirm */
 /* eslint-disable no-alert, no-restricted-globals */
 
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import i18n from 'meteor/universe:i18n';
@@ -19,10 +19,12 @@ import { insert } from '../../api/todos/methods.js';
 const ListHeader = ({ list }) => {
   const history = useHistory();
   const [editing, setEditing] = useState(false);
+  const listNameRef = useRef();
+  const newTodoRef = useRef();
 
   useEffect(() => {
-    if (editing) {
-      this.listNameInput.focus();
+    if (editing && listNameRef.current) {
+      listNameRef.current.focus();
     }
   }, [editing]);
 
@@ -35,11 +37,13 @@ const ListHeader = ({ list }) => {
   };
 
   const saveList = () => {
-    setEditing(false);
-    updateName.call({
-      listId: list._id,
-      newName: this.listNameInput.value,
-    }, displayError);
+    if (listNameRef.current && listNameRef.current.value) {
+      setEditing(false);
+      updateName.call({
+        listId: list._id,
+        newName: listNameRef.current.value,
+      }, displayError);
+    }
   };
 
   const deleteList = () => {
@@ -86,8 +90,8 @@ const ListHeader = ({ list }) => {
 
   const createTodo = (event) => {
     event.preventDefault();
-    const input = this.newTodoInput;
-    if (input.value.trim()) {
+    const input = newTodoRef.current;
+    if (input && input.value.trim()) {
       insert.call({
         listId: list._id,
         text: input.value,
@@ -97,7 +101,9 @@ const ListHeader = ({ list }) => {
   };
 
   const focusTodoInput = () => {
-    this.newTodoInput.focus();
+    if (newTodoRef.current) {
+      newTodoRef.current.focus();
+    }
   };
 
   const renderDefaultHeader = () => (
@@ -165,7 +171,7 @@ const ListHeader = ({ list }) => {
         type="text"
         name="name"
         autoComplete="off"
-        ref={(c) => { this.listNameInput = c; }}
+        ref={listNameRef}
         defaultValue={list.name}
         onKeyUp={onListInputKeyUp}
         onBlur={onListInputBlur}
@@ -192,7 +198,7 @@ const ListHeader = ({ list }) => {
         <input
           className="new-todo-input"
           type="text"
-          ref={(c) => { this.newTodoInput = c; }}
+          ref={newTodoRef}
           placeholder={i18n.__('components.listHeader.typeToAdd')}
         />
         <span className="icon-add" onClick={focusTodoInput} />

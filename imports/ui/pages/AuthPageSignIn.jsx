@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import i18n from 'meteor/universe:i18n';
@@ -8,12 +8,14 @@ import AuthPage from './AuthPage.jsx';
 const SignInPage = () => {
   const history = useHistory();
   const [errors, setErrors] = useState({});
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    const email = this.email.value;
-    const password = this.password.value;
+    const email = emailRef.current ? emailRef.current.value : '';
+    const password = passwordRef.current ? passwordRef.current.value : '';
     const newErrors = {};
 
     if (!email) {
@@ -67,7 +69,7 @@ const SignInPage = () => {
             <input
               type="email"
               name="email"
-              ref={(c) => { this.email = c; }}
+              ref={emailRef}
               placeholder={i18n.__('pages.authPageSignIn.yourEmail')}
             />
             <span
@@ -79,7 +81,7 @@ const SignInPage = () => {
             <input
               type="password"
               name="password"
-              ref={(c) => { this.password = c; }}
+              ref={passwordRef}
               placeholder={i18n.__('pages.authPageSignIn.password')}
             />
             <span

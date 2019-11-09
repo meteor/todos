@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import i18n from 'meteor/universe:i18n';
@@ -8,13 +8,16 @@ import AuthPage from './AuthPage.jsx';
 const JoinPage = () => {
   const history = useHistory();
   const [errors, setErrors] = useState({});
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmRef = useRef();
 
   const onSubmit = (event) => {
     event.preventDefault();
 
-    const email = this.email.value;
-    const password = this.password.value;
-    const confirmPassword = this.confirmPassword.value;
+    const email = emailRef.current ? emailRef.current.value : '';
+    const password = passwordRef.current ? passwordRef.current.value : '';
+    const confirmPassword = confirmRef.current ? confirmRef.current.value : '';
     const newErrors = {};
 
     if (!email) {
@@ -72,7 +75,7 @@ const JoinPage = () => {
             <input
               type="email"
               name="email"
-              ref={(c) => { this.email = c; }}
+              ref={emailRef}
               placeholder={i18n.__('pages.authPageJoin.yourEmail')}
             />
             <span
@@ -84,7 +87,7 @@ const JoinPage = () => {
             <input
               type="password"
               name="password"
-              ref={(c) => { this.password = c; }}
+              ref={passwordRef}
               placeholder={i18n.__('pages.authPageJoin.password')}
             />
             <span
@@ -96,7 +99,7 @@ const JoinPage = () => {
             <input
               type="password"
               name="confirmPassword"
-              ref={(c) => { this.confirmPassword = c; }}
+              ref={confirmRef}
               placeholder={i18n.__('pages.authPageJoin.confirmPassword')}
             />
             <span
