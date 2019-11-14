@@ -5,8 +5,7 @@
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
-    "lint": "eslint --ext .js,.jsx .",
-    "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
+    "lint": "eslint --ext .js,.jsx ."
   },
   "dependencies": {
     "@babel/runtime": "^7.7.2",
