@@ -5,8 +5,7 @@
     "test": "meteor test --once --driver-package dispatch:mocha-phantomjs",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha",
     "test-app-watch": "meteor test --full-app --driver-package practicalmeteor:mocha",
-    "lint": "eslint --ext .js,.jsx .",
-    "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests"
+    "lint": "eslint --ext .js,.jsx ."
   },
   "dependencies": {
     "@babel/runtime": "^7.7.2",
@@ -24,8 +23,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-import-resolver-meteor": "^0.4.0",
@@ -91,7 +88,8 @@
       "jsx-a11y/no-static-element-interactions": "off",
       "jsx-a11y/click-events-have-key-events": "off",
       "jsx-a11y/no-noninteractive-element-interactions": "off",
-      "jsx-a11y/anchor-is-valid": "off"
+      "jsx-a11y/anchor-is-valid": "off",
+      "import/no-cycle": "off"
     },
     "settings": {
       "import/resolver": "meteor"
