@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { _ } from 'meteor/underscore';
 import { check } from 'meteor/check';
 

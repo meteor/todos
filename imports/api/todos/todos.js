@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import { Mongo } from 'meteor/mongo';
 import { Factory } from 'meteor/factory';
 import faker from 'faker';
