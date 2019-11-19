@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { _ } from 'meteor/underscore';
 import classnames from 'classnames';
 import i18n from 'meteor/universe:i18n';
-import BaseComponent from './BaseComponent.jsx';
 import { displayError } from '../helpers/errors.js';
 
 import {
@@ -12,92 +11,94 @@ import {
   remove,
 } from '../../api/todos/methods.js';
 
-export default class TodoItem extends BaseComponent {
-  constructor(props) {
-    super(props);
-    this.throttledUpdate = _.throttle((value) => {
-      if (value) {
-        updateText.call({
-          todoId: this.props.todo._id,
-          newText: value,
-        }, displayError);
-      }
-    }, 300);
+const TodoItem = ({
+  todo,
+  editing,
+  onEditingChange,
+}) => {
+  const throttledUpdate = _.throttle((value) => {
+    if (value) {
+      updateText.call({
+        todoId: todo._id,
+        newText: value,
+      }, displayError);
+    }
+  }, 300);
 
-    this.setTodoCheckStatus = this.setTodoCheckStatus.bind(this);
-    this.updateTodo = this.updateTodo.bind(this);
-    this.deleteTodo = this.deleteTodo.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-  }
+  const onFocus = () => {
+    onEditingChange(todo._id, true);
+  };
 
-  onFocus() {
-    this.props.onEditingChange(this.props.todo._id, true);
-  }
+  const onBlur = () => {
+    onEditingChange(todo._id, false);
+  };
 
-  onBlur() {
-    this.props.onEditingChange(this.props.todo._id, false);
-  }
-
-  setTodoCheckStatus(event) {
+  const setTodoCheckStatus = (event) => {
     setCheckedStatus.call({
-      todoId: this.props.todo._id,
+      todoId: todo._id,
       newCheckedStatus: event.target.checked,
     });
-  }
+  };
 
-  updateTodo(event) {
-    this.throttledUpdate(event.target.value);
-  }
+  const updateTodo = (event) => {
+    throttledUpdate(event.target.value);
+  };
 
-  deleteTodo() {
-    remove.call({ todoId: this.props.todo._id }, displayError);
-  }
+  const deleteTodo = () => {
+    remove.call({ todoId: todo._id }, displayError);
+  };
 
-  render() {
-    const { todo, editing } = this.props;
-    const todoClass = classnames({
-      'list-item': true,
-      checked: todo.checked,
-      editing,
-    });
-
-    return (
-      <div className={todoClass}>
-        <label className="checkbox" htmlFor={this.props.todo._id}>
-          <input
-            id={this.props.todo._id}
-            type="checkbox"
-            checked={todo.checked}
-            name="checked"
-            onChange={this.setTodoCheckStatus}
-          />
-          <span className="checkbox-custom" />
-        </label>
+  return (
+    <div
+      className={classnames({
+        'list-item': true,
+        checked: todo.checked,
+        editing,
+      })}
+    >
+      <label className="checkbox" htmlFor={todo._id}>
         <input
-
-          type="text"
-          defaultValue={todo.text}
-          placeholder={i18n.__('components.todoItem.taskName')}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          onChange={this.updateTodo}
+          id={todo._id}
+          type="checkbox"
+          checked={todo.checked}
+          name="checked"
+          onChange={setTodoCheckStatus}
         />
-        <a
-          className="delete-item"
-          href="#delete"
-          onClick={this.deleteTodo}
-          onMouseDown={this.deleteTodo}
-        >
-          <span className="icon-trash" />
-        </a>
-      </div>
-    );
-  }
-}
+        <span className="checkbox-custom" />
+      </label>
+      <input
+
+        type="text"
+        defaultValue={todo.text}
+        placeholder={i18n.__('components.todoItem.taskName')}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={updateTodo}
+      />
+      <a
+        className="delete-item"
+        href="#delete"
+        onClick={deleteTodo}
+        onMouseDown={deleteTodo}
+      >
+        <span className="icon-trash" />
+      </a>
+    </div>
+  );
+};
 
 TodoItem.propTypes = {
-  todo: PropTypes.object,
+  todo: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    checked: PropTypes.bool,
+    text: PropTypes.string,
+  }).isRequired,
   editing: PropTypes.bool,
-  onEditingChange: PropTypes.func,
+  onEditingChange: PropTypes.func.isRequired,
 };
+
+TodoItem.defaultProps = {
+  editing: false,
+};
+
+export default TodoItem;

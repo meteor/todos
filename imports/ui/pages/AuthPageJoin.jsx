@@ -1,38 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import i18n from 'meteor/universe:i18n';
-import BaseComponent from '../components/BaseComponent.jsx';
 
+import { useUnmountedRef } from '../hooks/useUnmountedRef.jsx';
 import AuthPage from './AuthPage.jsx';
 
-class JoinPage extends BaseComponent {
-  constructor(props) {
-    super(props);
-    this.state = Object.assign(this.state, { errors: {} });
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+const JoinPage = () => {
+  const history = useHistory();
+  const [errors, setErrors] = useState({});
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmRef = useRef();
+  const unmountedRef = useUnmountedRef();
 
-  onSubmit(event) {
+  const onSubmit = (event) => {
     event.preventDefault();
-    const email = this.email.value;
-    const password = this.password.value;
-    const confirm = this.confirm.value;
-    const errors = {};
+
+    const email = emailRef.current ? emailRef.current.value : '';
+    const password = passwordRef.current ? passwordRef.current.value : '';
+    const confirmPassword = confirmRef.current ? confirmRef.current.value : '';
+    const newErrors = {};
 
     if (!email) {
-      errors.email = i18n.__('pages.authPageJoin.emailRequired');
+      newErrors.email = i18n.__('pages.authPageJoin.emailRequired');
     }
     if (!password) {
-      errors.password = i18n.__('pages.authPageJoin.passwordRequired');
+      newErrors.password = i18n.__('pages.authPageJoin.passwordRequired');
     }
-    if (confirm !== password) {
-      errors.confirm = i18n.__('pages.authPageJoin.passwordConfirm');
+    if (confirmPassword !== password) {
+      newErrors.confirmPassword = i18n.__('pages.authPageJoin.passwordConfirm');
     }
 
-    this.setState({ errors });
-    if (Object.keys(errors).length) {
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length) {
       return;
     }
 
@@ -40,21 +41,30 @@ class JoinPage extends BaseComponent {
       email,
       password,
     }, (err) => {
-      if (err) {
-        this.setState({
-          errors: { none: err.reason },
-        });
+      if (unmountedRef.current) {
+        // Return to avoid the setState calls
+        return;
       }
-      this.redirectTo('/');
+
+      if (err) {
+        setErrors({ none: err.reason });
+      } else {
+        history.replace('/');
+      }
     });
-  }
+  };
 
-  render() {
-    const { errors } = this.state;
-    const errorMessages = Object.keys(errors).map(key => errors[key]);
-    const errorClass = key => errors[key] && 'error';
+  const errorMessages = Object.values(errors);
+  const errorClass = (key) => errors[key] && 'error';
 
-    const content = (
+  const link = (
+    <Link to="/signin" className="link-auth-alt">
+      {i18n.__('pages.authPageJoin.haveAccountSignIn')}
+    </Link>
+  );
+
+  return (
+    <AuthPage link={link}>
       <div className="wrapper-auth">
         <h1 className="title-auth">
           {i18n.__('pages.authPageJoin.join')}
@@ -62,9 +72,9 @@ class JoinPage extends BaseComponent {
         <p className="subtitle-auth">
           {i18n.__('pages.authPageJoin.joinReason')}
         </p>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="list-errors">
-            {errorMessages.map(msg => (
+            {errorMessages.map((msg) => (
               <div className="list-item" key={msg}>{msg}</div>
             ))}
           </div>
@@ -72,7 +82,7 @@ class JoinPage extends BaseComponent {
             <input
               type="email"
               name="email"
-              ref={(c) => { this.email = c; }}
+              ref={emailRef}
               placeholder={i18n.__('pages.authPageJoin.yourEmail')}
             />
             <span
@@ -84,7 +94,7 @@ class JoinPage extends BaseComponent {
             <input
               type="password"
               name="password"
-              ref={(c) => { this.password = c; }}
+              ref={passwordRef}
               placeholder={i18n.__('pages.authPageJoin.password')}
             />
             <span
@@ -92,11 +102,11 @@ class JoinPage extends BaseComponent {
               title={i18n.__('pages.authPageJoin.password')}
             />
           </div>
-          <div className={`input-symbol ${errorClass('confirm')}`}>
+          <div className={`input-symbol ${errorClass('confirmPassword')}`}>
             <input
               type="password"
-              name="confirm"
-              ref={(c) => { this.confirm = c; }}
+              name="confirmPassword"
+              ref={confirmRef}
               placeholder={i18n.__('pages.authPageJoin.confirmPassword')}
             />
             <span
@@ -109,21 +119,8 @@ class JoinPage extends BaseComponent {
           </button>
         </form>
       </div>
-    );
-
-    const link = (
-      <Link to="/signin" className="link-auth-alt">
-        {i18n.__('pages.authPageJoin.haveAccountSignIn')}
-      </Link>
-    );
-
-    return this.renderRedirect() ||
-      <AuthPage content={content} link={link} menuOpen={this.props.menuOpen} />;
-  }
-}
-
-JoinPage.propTypes = {
-  menuOpen: PropTypes.object.isRequired,
+    </AuthPage>
+  );
 };
 
 export default JoinPage;

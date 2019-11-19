@@ -25,6 +25,7 @@ class ListsCollection extends Mongo.Collection {
 
     return super.insert(ourList, callback);
   }
+
   remove(selector, callback) {
     Todos.remove({ listId: selector });
     return super.remove(selector, callback);
