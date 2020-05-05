@@ -33,10 +33,7 @@ mdg:validated-method
 mdg:validation-error
 
 # routing
-kadira:flow-router
-kadira:blaze-layout
-arillo:flow-router-helpers
-zimme:active-route
+ostrio:flow-router-extra
 
 # i18n
 tap:i18n
@@ -45,7 +42,8 @@ tap:i18n
 accounts-password@1.6.0
 useraccounts:core
 useraccounts:unstyled
-useraccounts:flow-routing
+mealsunite:flow-routing-extra # useraccounts routes for flow-routing-extra
+kadira:blaze-layout           # needed by mealsunite:flow-routing-extra
 softwarerero:accounts-t9n
 
 # mobile
