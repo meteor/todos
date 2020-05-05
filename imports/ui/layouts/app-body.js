@@ -4,8 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Template } from 'meteor/templating';
-import { ActiveRoute } from 'meteor/zimme:active-route';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { T9n } from 'meteor/softwarerero:accounts-t9n';
 import { _ } from 'meteor/underscore';
@@ -69,7 +68,7 @@ Template.App_body.helpers({
     ] });
   },
   activeListClass(list) {
-    const active = ActiveRoute.name('Lists.show')
+    const active = FlowRouter.current().route.name === 'Lists.show'
       && FlowRouter.getParam('_id') === list._id;
 
     return active && 'active';
@@ -121,7 +120,7 @@ Template.App_body.events({
     Meteor.logout();
 
     // if we are on a private list, we'll need to go to a public one
-    if (ActiveRoute.name('Lists.show')) {
+    if (FlowRouter.current().route.name === 'Lists.show') {
       // TODO -- test this code path
       const list = Lists.findOne(FlowRouter.getParam('_id'));
       if (list.userId) {

@@ -11,7 +11,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.44",
+    "@babel/runtime": "^7.9.6",
     "autoprefixer": "^6.4.1",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^1.0.3",
