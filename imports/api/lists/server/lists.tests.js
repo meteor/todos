@@ -185,6 +185,7 @@ describe('lists', function () {
       });
     });
     describe('rate limiting', function () {
+      this.timeout(3000);
       it('does not allow more than 5 operations rapidly', function () {
         const connection = DDP.connect(Meteor.absoluteUrl());
         _.times(5, () => {
