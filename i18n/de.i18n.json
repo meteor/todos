@@ -1,0 +1,76 @@
+{
+  "lists": {
+    "makePrivate": {
+      "notLoggedIn": "Du musst eingeloggt sein um Listen zu erstellen.",
+      "lastPublicList": "Du kannst die letzte öffentliche Liste nicht auf privat änderne."
+    },
+    "makePublic": {
+      "notLoggedIn": "Du musst eingeloggt sein.",
+      "accessDenied": "Du hast keine Berechtigung um diese Liste zu bearbeitent."
+    },
+    "updateName": {
+      "accessDenied": "Du hast keine Berechtigung um diese Liste zu bearbeitent."
+    },
+    "remove": {
+      "accessDenied": "'Du hast keine Berechtigung um diese Liste zu löschen.'",
+      "lastPublicList": "du kannst die letzte öffentliche Liste nicht löschen.",
+      "confirm": "Bist du sicher diese Liste löschen zu wollen?"
+    },
+    "show": {
+      "cancel": "Abbrechen",
+      "showMenu": "Menü anzeigen",
+      "selectAction": "Aktion wählen",
+      "makePublic": "Öffentlich machen",
+      "makePrivate": "Privat machen",
+      "delete": "Löschen",
+      "makeListPublic": "Liste öffentlich machen",
+      "makeListPrivate": "Liste privat machen",
+      "deleteList": "Liste löschen",
+      "typeToAdd": "Text einfügen um eine neue Aufgabe zu erstellen",
+      "noTasks": "Keine Aufgaben",
+      "addAbove": "Um eine neue Aufgabe zu erstellen benutze das obere Feld",
+      "loading": "Loading tasks..."
+    },
+    "insert": {
+      "list": "Liste"
+    }
+  },
+  "todos": {
+    "insert": {
+      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+    },
+    "setCheckedStatus": {
+      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+    },
+    "updateText": {
+      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+    },
+    "remove": {
+      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+    },
+    "item": {
+      "taskName": "Bezeichnung der Aufgabe"
+    }
+  },
+  "useraccounts": {
+    "atTitle": {
+      "subtitle": "Nur eingeloggte User können private Listen erstellen"
+    }
+  },
+  "layouts": {
+    "appBody": {
+      "logout": "Ausloggen",
+      "login": "Einloggen",
+      "join": "Registrieren",
+      "newList": "Neue Liste",
+      "newListError": "Liste konnte nicht erstellt werden.",
+      "tryingToConnect": "Verbindung wird hergestelltt",
+      "connectionIssue": "Verbindungsprobleme"
+    }
+  },
+  "pages": {
+    "appNotFound": {
+      "pageNotFound": "Seite konnte nicht gefunden werden"
+    }
+  }
+}
