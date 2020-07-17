@@ -1,20 +1,20 @@
 {
   "lists": {
     "makePrivate": {
-      "notLoggedIn": "Du musst eingeloggt sein um Listen zu erstellen.",
-      "lastPublicList": "Du kannst die letzte öffentliche Liste nicht auf privat änderne."
+      "notLoggedIn": "Du musst eingeloggt sein, um Listen zu erstellen.",
+      "lastPublicList": "Du kannst die letzte öffentliche Liste nicht auf privat ändern."
     },
     "makePublic": {
       "notLoggedIn": "Du musst eingeloggt sein.",
-      "accessDenied": "Du hast keine Berechtigung um diese Liste zu bearbeitent."
+      "accessDenied": "Du hast keine Berechtigung, um diese Liste zu bearbeiten."
     },
     "updateName": {
-      "accessDenied": "Du hast keine Berechtigung um diese Liste zu bearbeitent."
+      "accessDenied": "Du hast keine Berechtigung, um diese Liste zu bearbeiten."
     },
     "remove": {
-      "accessDenied": "'Du hast keine Berechtigung um diese Liste zu löschen.'",
-      "lastPublicList": "du kannst die letzte öffentliche Liste nicht löschen.",
-      "confirm": "Bist du sicher diese Liste löschen zu wollen?"
+      "accessDenied": "Du hast keine Berechtigung, um diese Liste zu löschen.",
+      "lastPublicList": "Du kannst die letzte öffentliche Liste nicht löschen.",
+      "confirm": "Bist du sicher, dass du diese Liste löschen willst?"
     },
     "show": {
       "cancel": "Abbrechen",
@@ -26,10 +26,10 @@
       "makeListPublic": "Liste öffentlich machen",
       "makeListPrivate": "Liste privat machen",
       "deleteList": "Liste löschen",
-      "typeToAdd": "Text einfügen um eine neue Aufgabe zu erstellen",
+      "typeToAdd": "Text einfügen, um eine neue Aufgabe zu erstellen",
       "noTasks": "Keine Aufgaben",
-      "addAbove": "Um eine neue Aufgabe zu erstellen benutze das obere Feld",
-      "loading": "Loading tasks..."
+      "addAbove": "Um eine neue Aufgabe zu erstellen, benutze das obere Feld",
+      "loading": "Lade Aufgaben…"
     },
     "insert": {
       "list": "Liste"
@@ -40,13 +40,13 @@
       "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
     },
     "setCheckedStatus": {
-      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+      "accessDenied": "Du kannst keine Aufgaben in einer privaten Liste ändern, die nicht dir gehört"
     },
     "updateText": {
-      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+      "accessDenied": "Du kannst keine Aufgaben in einer privaten Liste ändern, die nicht dir gehört"
     },
     "remove": {
-      "accessDenied": "Du kannst keine Aufgaben zu einer privaten Liste hinzufügen, die nicht dir gehört"
+      "accessDenied": "Du kannst keine Aufgaben von einer privaten Liste löschen, die nicht dir gehört"
     },
     "item": {
       "taskName": "Bezeichnung der Aufgabe"
@@ -54,7 +54,7 @@
   },
   "useraccounts": {
     "atTitle": {
-      "subtitle": "Nur eingeloggte User können private Listen erstellen"
+      "subtitle": "Nur eingeloggte Benutzer können private Listen erstellen"
     }
   },
   "layouts": {
@@ -64,7 +64,7 @@
       "join": "Registrieren",
       "newList": "Neue Liste",
       "newListError": "Liste konnte nicht erstellt werden.",
-      "tryingToConnect": "Verbindung wird hergestelltt",
+      "tryingToConnect": "Verbindung wird hergestellt",
       "connectionIssue": "Verbindungsprobleme"
     }
   },
