@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "eslint": "^3.7.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb": "^11.2.0",
     "eslint-import-resolver-meteor": "^0.3.4",
     "eslint-plugin-import": "^1.16.0",
