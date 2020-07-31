@@ -9,15 +9,17 @@ var source = require(srcDir + '/node_modules/shell-source');
 var processes = require('./processes.js');
 var isCi = process.argv[2] === '--ci';
 
+const maxBuffer = 100*1024*1024  // 100 mb buffer (overwrite default of 200*1024)
 var startTestApp = function(onStarted, options) {
   return processes.start({
     name: 'Test App',
     command: 'meteor --port=3100',
     waitForMessage: 'App running at: http://localhost:3100',
     options: {
+      maxBuffer,
       cwd: srcDir,
-      env: extend(process.env, options)
-    }
+      env: extend(process.env, options),
+    },
   }, function() {
     console.log("Test app is running …");
     onStarted();
@@ -28,7 +30,10 @@ var startChimpWatch = function() {
   processes.start({
     name: 'Chimp Watch',
     command: 'chimp --ddp=http://localhost:3100 --watch --path=tests --mocha --chai --browser=chrome',
-    options: { cwd: baseDir }
+    options: {
+      maxBuffer,
+      cwd: baseDir,
+    },
   });
 };
 
@@ -37,7 +42,10 @@ var startChimpCi = function() {
   processes.start({
     name: 'Chimp CI',
     command: command,
-    options: { cwd: baseDir }
+    options: { 
+      maxBuffer,
+      cwd: baseDir,
+    },
   });
 };
 
