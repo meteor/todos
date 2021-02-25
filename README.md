@@ -1,3 +1,9 @@
+## DEPRECATED
+This repository is not used anymore as an example for Meteor projects. 
+
+Look for Meteor examples [here](https://github.com/meteor/examples)
+
+## OLD README
 [![Circle CI](https://circleci.com/gh/meteor/todos.svg?style=svg)](https://circleci.com/gh/meteor/todos)
 
 This is a Todos example app built on the principles described in the [Meteor Guide](http://guide.meteor.com/structure.html). 
